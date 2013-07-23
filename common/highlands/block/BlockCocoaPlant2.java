@@ -29,6 +29,7 @@ public class BlockCocoaPlant2 extends BlockCocoa
     public BlockCocoaPlant2(int par1)
     {
         super(par1);
+        this.func_111022_d("cocoa");
     }
     
     /**

@@ -65,6 +65,9 @@ public class Config
     public static Property berriesID;
     public static Property hlplanksID;
     public static Property hlPlankStairs0ID;
+    public static Property hlPlankStairs1ID;
+    public static Property hlPlankStairs2ID;
+    public static Property hlPlankStairs3ID;
     public static Property hlPlankHalfID;
     public static Property hlPlankHalfDoubleID;
 	
@@ -352,8 +355,10 @@ public class Config
 		thornbushID = config.getBlock(CATEGORY_BLOCK_ID, "Thornbush ID", 757);
 		cottonID = config.getBlock(CATEGORY_BLOCK_ID, "Cotton ID", 758);
 		hlplanksID = config.getBlock(CATEGORY_BLOCK_ID, "Highlands Planks ID", 759);
-		hlPlankStairs0ID = config.getBlock(CATEGORY_BLOCK_ID, "Highlands Planks Stairs ID", 760);
-		hlPlankStairs0ID.comment = "This takes up four block IDs: the one listed and the three after it";
+		hlPlankStairs0ID = config.getBlock(CATEGORY_BLOCK_ID, "Yellow Wood Stairs ID", 760);
+		hlPlankStairs1ID = config.getBlock(CATEGORY_BLOCK_ID, "White Wood Stairs ID", 761);
+		hlPlankStairs2ID = config.getBlock(CATEGORY_BLOCK_ID, "Red Wood Stairs ID", 762);
+		hlPlankStairs3ID = config.getBlock(CATEGORY_BLOCK_ID, "Grey Wood Stairs ID", 763);
 		hlPlankHalfID = config.getBlock(CATEGORY_BLOCK_ID, "Highlands Planks Halfblock ID", 764);
 		hlPlankHalfDoubleID = config.getBlock(CATEGORY_BLOCK_ID, "Highlands Planks Double Halfblock ID", 765);
 		berriesID = config.getBlock(CATEGORY_BLOCK_ID, "Berries ID", 766);

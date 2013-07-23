@@ -53,7 +53,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 
-@Mod(modid="Highlands", name="Highlands", version="2.1.0")
+@Mod(modid="Highlands", name="Highlands", version="2.1.1")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class HighlandsMain {
 
@@ -145,6 +145,15 @@ public class HighlandsMain {
 		//set up sub-biomes
 		setUpAllSubBiomes();
 		
+		//construct ore generators
+		HLsand = new WorldGenMinable(Block.sand.blockID, 32);
+		HLice = new WorldGenMinable(Block.ice.blockID, 16);
+		HLwater = new WorldGenUnderground2(Block.waterStill.blockID, 4);
+		HLlava = new WorldGenUnderground2(Block.lavaStill.blockID, 8);
+		HLdirt = new WorldGenUnderground2(Block.dirt.blockID, 72, Block.sand.blockID);
+		HLrock = new WorldGenUnderground2(Block.stone.blockID, 72, Block.dirt.blockID);
+		HLobsidian = new WorldGenMinable(Block.obsidian.blockID, 8);
+		
 		// DEBUG - COMMENT OUT IN RELEASE
 		//debug();
 	}
@@ -179,7 +188,6 @@ public class HighlandsMain {
 		});
 		
 		defaultvillagebiomes = MapGenVillage.villageSpawnBiomes;
-		
 		
 		
 		//BiomeDictionary PostInit
@@ -570,13 +578,13 @@ public class HighlandsMain {
     }
 	
 	//Ore Generators
-	public static WorldGenerator HLsand = new WorldGenMinable(Block.sand.blockID, 32);
-	public static WorldGenerator HLice = new WorldGenMinable(Block.ice.blockID, 16);
-	public static WorldGenerator HLwater = new WorldGenUnderground2(Block.waterStill.blockID, 4);
-	public static WorldGenerator HLlava = new WorldGenUnderground2(Block.lavaStill.blockID, 8);
-	public static WorldGenerator HLdirt = new WorldGenUnderground2(Block.dirt.blockID, 72, Block.sand.blockID);
-	public static WorldGenerator HLrock = new WorldGenUnderground2(Block.stone.blockID, 72, Block.dirt.blockID);
-	public static WorldGenerator HLobsidian = new WorldGenMinable(Block.obsidian.blockID, 8);
+	public static WorldGenerator HLsand;
+	public static WorldGenerator HLice;
+	public static WorldGenerator HLwater;
+	public static WorldGenerator HLlava;
+	public static WorldGenerator HLdirt;
+	public static WorldGenerator HLrock;
+	public static WorldGenerator HLobsidian;
 	
 	
 	//sets up sub-biome lists after all biomes are initialized.

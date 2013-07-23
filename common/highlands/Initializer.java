@@ -170,11 +170,11 @@ public class Initializer
 				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodPlanks");
 		HighlandsBlocks.hlplankstairs0 = new BlockHighlandsStairs(Config.hlPlankStairs0ID.getInt(), HighlandsBlocks.hlplanks, 0).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodStairs0");
-		HighlandsBlocks.hlplankstairs1 = new BlockHighlandsStairs(Config.hlPlankStairs0ID.getInt()+1, HighlandsBlocks.hlplanks, 1).setHardness(2.0F).setResistance(5.0F)
+		HighlandsBlocks.hlplankstairs1 = new BlockHighlandsStairs(Config.hlPlankStairs1ID.getInt(), HighlandsBlocks.hlplanks, 1).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodStairs1");
-		HighlandsBlocks.hlplankstairs2 = new BlockHighlandsStairs(Config.hlPlankStairs0ID.getInt()+2, HighlandsBlocks.hlplanks, 2).setHardness(2.0F).setResistance(5.0F)
+		HighlandsBlocks.hlplankstairs2 = new BlockHighlandsStairs(Config.hlPlankStairs2ID.getInt(), HighlandsBlocks.hlplanks, 2).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodStairs2");
-		HighlandsBlocks.hlplankstairs3 = new BlockHighlandsStairs(Config.hlPlankStairs0ID.getInt()+3, HighlandsBlocks.hlplanks, 3).setHardness(2.0F).setResistance(5.0F)
+		HighlandsBlocks.hlplankstairs3 = new BlockHighlandsStairs(Config.hlPlankStairs3ID.getInt(), HighlandsBlocks.hlplanks, 3).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodStairs3");
 		HighlandsBlocks.hlplankhalf = new BlockHLPlankSlab(Config.hlPlankHalfID.getInt(), false, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodSlab");
