@@ -413,6 +413,7 @@ public class HighlandsMain {
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 1), "White Wood Slab");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 2), "Red Wood Slab");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 3), "Grey Wood Slab");
+			GameRegistry.registerBlock(HighlandsBlocks.hlplankhalfdouble, ItemBlockMetadata.class, "hl_woodSlabDouble");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 0), "Yellow Wood Double Slab");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 1), "White Wood Double Slab");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 2), "Red Wood Double Slab");
@@ -484,13 +485,13 @@ public class HighlandsMain {
 		if(HighlandsBlocks.palmLeaves != null){
 			registerBlock(HighlandsBlocks.palmLeaves, "Palm Leaves");
 		}
-		//Orange Leaves
-		if(HighlandsBlocks.autumnOrangeLeaves != null){
-			registerBlock(HighlandsBlocks.autumnOrangeLeaves, "Orange Autumn Leaves");
-		}
 		//Yellow Leaves
+		if(HighlandsBlocks.autumnOrangeLeaves != null){
+			registerBlock(HighlandsBlocks.autumnOrangeLeaves, "Yellow Autumn Leaves");
+		}
+		//Orange Leaves
 		if(HighlandsBlocks.autumnYellowLeaves != null){
-			registerBlock(HighlandsBlocks.autumnYellowLeaves, "Yellow Autumn Leaves");
+			registerBlock(HighlandsBlocks.autumnYellowLeaves, "Orange Autumn Leaves");
 		}
 		
 		//PLANTS

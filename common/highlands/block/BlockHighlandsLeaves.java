@@ -64,6 +64,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     public BlockHighlandsLeaves(int id, int type)
     {
         super(id, Material.leaves, false);
+        this.setTickRandomly(true);
         this.treeType = type;
         setLightOpacity(1);
         this.setCreativeTab(CreativeTabs.tabDecorations);
