@@ -7,7 +7,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenHighlandsBigTree extends WorldGenerator
+public class WorldGenAutumnBigTree extends WorldGenerator
 {
     /**
      * Contains three sets of two values that provide complimentary indices for a given 'major' index - 1 and 2 for 0, 0
@@ -49,16 +49,25 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
     
     int leafMeta;
     int woodMeta;
+    int leafID;
+    int woodID;
+    
     boolean hasLeaves;
 
-    public WorldGenHighlandsBigTree(boolean par1, boolean placeLeaves, int wmd, int lmd, int trunkDiameter, int treeHeightLim)
+    public WorldGenAutumnBigTree(boolean par1, boolean placeLeaves, int wmd, int lmd, int wid, int lid, int trunkDiameter, int treeHeightLim)
     {
         super(par1);
         hasLeaves = placeLeaves;
         leafMeta = lmd;
         woodMeta = wmd;
+        leafID = lid;
+        woodID = wid;
         trunkSize = trunkDiameter;
         heightLimit = treeHeightLim;
+    }
+    
+    public WorldGenAutumnBigTree(boolean notify, int wid, int lid){
+    	this(notify, true, 0, 0, wid, lid, 1, 0);
     }
 
     /**
@@ -175,7 +184,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
                     var11[var9] = var10[var9] + var13;
                     int var14 = this.worldObj.getBlockId(var11[0], var11[1], var11[2]);
 
-                    if (var14 != 0 && var14 != Block.leaves.blockID)
+                    if (var14 != 0 && var14 != leafID)
                     {
                         ++var13;
                     }
@@ -237,7 +246,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         for (int var5 = par2 + this.leafDistanceLimit; var4 < var5; ++var4)
         {
             float var6 = this.leafSize(var4 - par2);
-            this.genTreeLayer(par1, var4, par3, var6, (byte)1, Block.leaves.blockID);
+            this.genTreeLayer(par1, var4, par3, var6, (byte)1, leafID);
         }
     }
 
@@ -342,19 +351,19 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         int var4 = this.basePos[2];
         int[] var5 = new int[] {var1, var2, var4};
         int[] var6 = new int[] {var1, var3, var4};
-        this.placeBlockLine(var5, var6, Block.wood.blockID);
+        this.placeBlockLine(var5, var6, woodID);
 
         if (this.trunkSize == 2)
         {
             ++var5[0];
             ++var6[0];
-            this.placeBlockLine(var5, var6, Block.wood.blockID);
+            this.placeBlockLine(var5, var6, woodID);
             ++var5[2];
             ++var6[2];
-            this.placeBlockLine(var5, var6, Block.wood.blockID);
+            this.placeBlockLine(var5, var6, woodID);
             var5[0] += -1;
             var6[0] += -1;
-            this.placeBlockLine(var5, var6, Block.wood.blockID);
+            this.placeBlockLine(var5, var6, woodID);
         }
         
     }
@@ -376,7 +385,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
 
             if (this.leafNodeNeedsBase(var6))
             {
-                this.placeBlockLine(var3, var5, (byte)Block.wood.blockID);
+                this.placeBlockLine(var3, var5, woodID);
             }
         }
     }
@@ -433,7 +442,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
                 int var16 = this.worldObj.getBlockId(var13[0], var13[1], var13[2]);
 
-                if (var16 != 0 && var16 != Block.leaves.blockID)
+                if (var16 != 0 && var16 != leafID)
                 {
                     break;
                 }
@@ -453,39 +462,27 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
         int var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
 
-        if(!hasLeaves)System.out.println(var3);
-        
-        
-        if (var3 != Block.grass.blockID && var3 != Block.dirt.blockID)
-        {
-            if(hasLeaves)return false;
-        }
-        if(!hasLeaves && var3 == Block.waterStill.blockID){
-        	if((var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]))
-        			== Block.waterStill.blockID){
-        		basePos[1]--;
-        	}
-        	if((var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]))
-        			== Block.waterStill.blockID){
-        		basePos[1]--;
-        	}
-        	if (var3 != Block.grass.blockID && var3 != Block.dirt.blockID && var3 != Block.sand.blockID)return false;
-        }
-        
-        int var4 = this.checkBlockLine(var1, var2);
-
-        if (var4 == -1)
-        {
-            return true;
-        }
-        else if (var4 < 6)
+        if (var3 != 2 && var3 != 3)
         {
             return false;
         }
         else
         {
-            this.heightLimit = var4;
-            return true;
+            int var4 = this.checkBlockLine(var1, var2);
+
+            if (var4 == -1)
+            {
+                return true;
+            }
+            else if (var4 < 6)
+            {
+                return false;
+            }
+            else
+            {
+                this.heightLimit = var4;
+                return true;
+            }
         }
     }
 

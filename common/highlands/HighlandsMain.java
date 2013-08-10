@@ -413,6 +413,10 @@ public class HighlandsMain {
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 1), "White Wood Slab");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 2), "Red Wood Slab");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 3), "Grey Wood Slab");
+			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 0), "Yellow Wood Double Slab");
+			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 1), "White Wood Double Slab");
+			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 2), "Red Wood Double Slab");
+			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 3), "Grey Wood Double Slab");
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 0), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 1), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 2), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));

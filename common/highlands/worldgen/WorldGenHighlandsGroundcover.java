@@ -11,6 +11,8 @@ public class WorldGenHighlandsGroundcover extends WorldGenerator
     /** Stores ID for WorldGenTallGrass */
     private int tallGrassID;
     private int tallGrassMetadata;
+    
+    //Type 1 is Cliff (tall grass + cobble boulders), Type 2 is Outback (tall grass + grass blocks underneath on sand)
     private int type;
 
     public WorldGenHighlandsGroundcover(int par1, int par2, int type)
