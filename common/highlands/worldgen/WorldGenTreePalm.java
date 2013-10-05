@@ -52,7 +52,7 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
     	locY = findTopBlock(locX, locZ);
         
         if(!(world.getBlockId(locX, locY, locZ) == Block.grass.blockID || world.getBlockId(locX, locY, locZ) == Block.dirt.blockID
-        		|| (world.getBlockId(locX, locY, locZ) == Block.sand.blockID && world.getBiomeGenForCoords(locX, locZ) != HighlandsBiomes.dunes)))return false;
+        		|| world.getBlockId(locX, locY, locZ) == Block.sand.blockID))return false;
         if(!isCubeClear(locX, locY+3, locZ, 1, 4))return false;
         
         //generates trunk

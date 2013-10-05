@@ -60,7 +60,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
 		};
 	
 	private int[] growTimes = {
-			4, 3, 3, 7, 5, 4, 2, 1, 1, 2, 2, 11, 2, 6, 2, 2, 0
+			5, 3, 3, 10, 6, 5, 2, 1, 1, 1, 2, 15, 2, 8, 2, 2, 0
 	};
 	
 	
@@ -105,6 +105,24 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     }
     
     /**
+     * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
+     */
+    public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+    {
+        Block soil = blocksList[par1World.getBlockId(par2, par3 - 1, par4)];
+        return (par1World.getFullBlockLightValue(par2, par3, par4) >= 8 || par1World.canBlockSeeTheSky(par2, par3, par4)) && 
+                (soil != null && isSoilGoodForSaplingType(soil, par1World, par2, par3, par4));
+    }
+    
+    private boolean isSoilGoodForSaplingType(Block soil, World par1World, int par2, int par3, int par4) {
+    	if(soil.canSustainPlant(par1World, par2, par3 - 1, par4, ForgeDirection.UP, this))return true;
+    	if(treeType == 0 && soil.blockID == Block.blockSnow.blockID)return true;
+    	if(treeType == 10 && soil.blockID == Block.sand.blockID)return true;
+    	if(treeType == 12 && soil.blockID == Block.waterStill.blockID)return true;
+		return false;
+	}
+
+	/**
      * Ticks the block if it's been scheduled
      */
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
@@ -115,7 +133,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
 
             if (par1World.getBlockLightValue(par2, par3 + 1, par4) >= 9 && par5Random.nextInt(7) == 0)
             {
-            	if(growTimes[treeType] < 4 && par1World.getBlockMetadata(par2, par3, par4) > growTimes[treeType])
+            	if(par1World.getBlockMetadata(par2, par3, par4) > growTimes[treeType])
             		growTree(par1World,par2,par3,par4,par5Random);
             	else if(par1World.getBlockMetadata(par2, par3, par4) < 15)
             		par1World.setBlock(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4)+1, 2);

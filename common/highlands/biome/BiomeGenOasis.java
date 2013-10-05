@@ -31,6 +31,7 @@ public class BiomeGenOasis extends BiomeGenBaseHighlands
 	    int flowers = 4;
 	    int plants = 4;
 	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers, plants);
+	    biomedec.cactiPerChunk = 10;
         
         this.topBlock = (byte)Block.grass.blockID;
         this.fillerBlock = (byte)Block.dirt.blockID;
