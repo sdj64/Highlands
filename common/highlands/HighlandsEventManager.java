@@ -116,24 +116,30 @@ public class HighlandsEventManager {
 	
 	@ForgeSubscribe
 	public void onVillageSelectBlock(GetVillageBlockID e){
-		if (e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
-        {
-			if (e.original == Block.wood.blockID)e.replacement = Block.wood.blockID;
-            if (e.original == Block.cobblestone.blockID)e.replacement = Block.sandStone.blockID;
-            if (e.original == Block.planks.blockID)e.replacement = Block.planks.blockID;
-            if (e.original == Block.stairsWoodOak.blockID)e.replacement = Block.stairsWoodOak.blockID;
-            if (e.original == Block.stairsCobblestone.blockID)e.replacement = Block.stairsSandStone.blockID;
-            if (e.original == Block.gravel.blockID)e.replacement = Block.gravel.blockID;
-        }
-		if (e.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
-        {
-            if (e.original == Block.wood.blockID)e.replacement = Block.wood.blockID;
-            if (e.original == Block.cobblestone.blockID)e.replacement = Block.cobblestone.blockID;
-            if (e.original == Block.planks.blockID)e.replacement = Block.blockSnow.blockID;
-            if (e.original == Block.stairsWoodOak.blockID)e.replacement = Block.stairsWoodOak.blockID;
-            if (e.original == Block.stairsCobblestone.blockID)e.replacement = Block.stairsCobblestone.blockID;
-            if (e.original == Block.gravel.blockID)e.replacement = Block.gravel.blockID;
-        }
+		try{
+			if (e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
+	        {
+				if (e.original == Block.wood.blockID)e.replacement = Block.wood.blockID;
+	            if (e.original == Block.cobblestone.blockID)e.replacement = Block.sandStone.blockID;
+	            if (e.original == Block.planks.blockID)e.replacement = Block.planks.blockID;
+	            if (e.original == Block.stairsWoodOak.blockID)e.replacement = Block.stairsWoodOak.blockID;
+	            if (e.original == Block.stairsCobblestone.blockID)e.replacement = Block.stairsSandStone.blockID;
+	            if (e.original == Block.gravel.blockID)e.replacement = Block.gravel.blockID;
+	        }
+			if (e.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
+	        {
+	            if (e.original == Block.wood.blockID)e.replacement = Block.wood.blockID;
+	            if (e.original == Block.cobblestone.blockID)e.replacement = Block.cobblestone.blockID;
+	            if (e.original == Block.planks.blockID)e.replacement = Block.blockSnow.blockID;
+	            if (e.original == Block.stairsWoodOak.blockID)e.replacement = Block.stairsWoodOak.blockID;
+	            if (e.original == Block.stairsCobblestone.blockID)e.replacement = Block.stairsCobblestone.blockID;
+	            if (e.original == Block.gravel.blockID)e.replacement = Block.gravel.blockID;
+	        }
+		}
+		catch(NullPointerException ex){
+			ex.printStackTrace();
+			e.replacement = e.original;
+		}
 	}
 }
 

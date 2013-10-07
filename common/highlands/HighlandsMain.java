@@ -53,7 +53,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 
-@Mod(modid="Highlands", name="Highlands", version="2.1.1")
+@Mod(modid="Highlands", name="Highlands", version="2.1.3")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class HighlandsMain {
 
