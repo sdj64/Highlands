@@ -1,12 +1,15 @@
 package highlands;
 
 import java.io.File;
+import java.lang.Exception;
+import java.lang.System;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 //don't need these imports after testing is over
 
+import highlands.HighlandsCompatibilityManager;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
 import highlands.biome.BiomeGenBaseHighlands;
@@ -53,7 +56,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 
-@Mod(modid="Highlands", name="Highlands", version="2.1.3")
+@Mod(modid="Highlands", name="Highlands", version="2.1.3", dependencies = "after:Forestry")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class HighlandsMain {
 
@@ -194,7 +197,15 @@ public class HighlandsMain {
 		HighlandsCompatibilityManager.registerBiomesForgeBiomeDict();
 		
 		//Forestry PostInit
-		HighlandsCompatibilityManager.registerBiomesForestry();
+		try {
+			HighlandsCompatibilityManager.registerBiomesForestry();
+			HighlandsCompatibilityManager.registerBlocksForestry();
+			HighlandsCompatibilityManager.registerRecipesForestry();
+		}
+		catch( Exception e ) {
+			System.err.println("[Highlands] Failed to enable Forestry compatibility because: ");
+			e.printStackTrace();
+		}
 		
 		GameRegistry.registerFuelHandler(new HighlandsFuelHandler());
 		
