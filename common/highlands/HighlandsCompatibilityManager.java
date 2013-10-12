@@ -3,16 +3,23 @@ package highlands;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+import cpw.mods.fml.common.event.FMLInterModComms;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
-*/
 
+import forestry.api.core.GlobalManager;
+import forestry.api.recipes.RecipeManagers;
+import highlands.api.HighlandsBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import highlands.api.HighlandsBiomes;
 import highlands.biome.BiomeGenBaseHighlands;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.liquids.LiquidDictionary;
 
 import static net.minecraftforge.common.BiomeDictionary.Type;
 
@@ -262,7 +269,6 @@ public class HighlandsCompatibilityManager{
 	
 	
 	public static void registerBiomesForestry(){
-		/*
 		for(BiomeGenBaseHighlands a : forestb){
 			if(a != null){
 				EnumTemperature.normalBiomeIds.add(a.biomeID);
@@ -318,8 +324,65 @@ public class HighlandsCompatibilityManager{
 		EnumHumidity.normalBiomeIds.add(HighlandsBiomes.snowIsland.biomeID);
 		EnumTemperature.warmBiomeIds.add(HighlandsBiomes.jungleIsland.biomeID);
 		EnumHumidity.dampBiomeIds.add(HighlandsBiomes.jungleIsland.biomeID);
-		*/
 	}
-	
-	
+
+	public static void registerBlocksForestry(){
+		StringBuilder sb;
+
+		for (Block b : HighlandsBlocks.leaves){
+			if (b!=null)
+				GlobalManager.leafBlockIds.add(b.blockID);
+		}
+
+		sb = new StringBuilder();
+		for (Block b : HighlandsBlocks.saplings){
+			if (b==null)
+				continue;
+
+			FMLInterModComms.sendMessage("Forestry", "add-farmable-sapling", "farmArboreal@" + b.blockID + ".0");
+			sb.append(b.blockID).append(".0;");
+		}
+		FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "forester@" + sb.toString());
+
+		sb = new StringBuilder();
+		for (Block b : HighlandsBlocks.logs){
+			if (b==null)
+				continue;
+			sb.append(b.blockID).append(".0;");
+		}
+		FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "forester@" + sb.toString());
+	}
+
+	public static void registerRecipesForestry(){
+		FluidStack juice = FluidRegistry.getFluidStack("juice", 1);
+
+		if (HighlandsBlocks.berries!=null && juice!=null){
+			FluidStack myjuice = juice.copy();
+			myjuice.amount = 20;
+			RecipeManagers.squeezerManager.addRecipe(
+					10,
+					new ItemStack[] { new ItemStack(HighlandsBlocks.berries) },
+					myjuice);
+		}
+
+		// Forestry GameMode.EASY == 250 by default for Forestry, lets just assume this for now
+		for (Block b : HighlandsBlocks.saplings){
+			if (b==null)
+				continue;
+
+			ItemStack sapling = new ItemStack(b);
+			FluidStack biomass = FluidRegistry.getFluidStack("biomass", 1);
+			FluidStack water = FluidRegistry.getFluidStack("water", 1);
+			FluidStack honey = FluidRegistry.getFluidStack("honey", 1);
+
+			int scalar = ( b.blockID==HighlandsBlocks.ironwoodSapling.blockID ? 2 : 1);
+
+			RecipeManagers.fermenterManager.addRecipe(sapling, 250 * scalar, 1.0F, biomass, water);
+			if (juice!=null)
+				RecipeManagers.fermenterManager.addRecipe(sapling, 250 * scalar, 1.5F, biomass, juice);
+			if (honey!=null)
+				RecipeManagers.fermenterManager.addRecipe(sapling, 250 * scalar, 1.5F, biomass, honey);
+		}
+	}
+
 }

@@ -180,6 +180,51 @@ public class Initializer
 				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodSlab");
 		HighlandsBlocks.hlplankhalfdouble = new BlockHLPlankSlab(Config.hlPlankHalfDoubleID.getInt(), true, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodSlabDouble");
+
+		HighlandsBlocks.saplings = new Block[]{
+				HighlandsBlocks.firSapling,
+				HighlandsBlocks.acaciaSapling,
+				HighlandsBlocks.redwoodSapling,
+				HighlandsBlocks.poplarSapling,
+				HighlandsBlocks.canopySapling,
+				HighlandsBlocks.greatOakSapling,
+				HighlandsBlocks.beechSapling,
+				HighlandsBlocks.deadSapling,
+				HighlandsBlocks.evergreenBushSapling,
+				HighlandsBlocks.deciduousBushSapling,
+				HighlandsBlocks.palmSapling,
+				HighlandsBlocks.ironwoodSapling,
+				HighlandsBlocks.mangroveSapling,
+				HighlandsBlocks.ashSapling,
+				HighlandsBlocks.autumnYellowSapling,
+				HighlandsBlocks.autumnOrangeSapling,
+		};
+
+		HighlandsBlocks.leaves = new Block[]{
+				HighlandsBlocks.firLeaves,
+				HighlandsBlocks.acaciaLeaves,
+				HighlandsBlocks.redwoodLeaves,
+				HighlandsBlocks.poplarLeaves,
+				HighlandsBlocks.canopyLeaves,
+				HighlandsBlocks.palmLeaves,
+				HighlandsBlocks.ironwoodLeaves,
+				HighlandsBlocks.mangroveLeaves,
+				HighlandsBlocks.ashLeaves,
+				HighlandsBlocks.autumnYellowLeaves,
+				HighlandsBlocks.autumnOrangeLeaves,
+		};
+
+		HighlandsBlocks.logs = new Block[]{
+				HighlandsBlocks.firWood,
+				HighlandsBlocks.acaciaWood,
+				HighlandsBlocks.redwoodWood,
+				HighlandsBlocks.poplarWood,
+				HighlandsBlocks.canopyWood,
+				HighlandsBlocks.palmWood,
+				HighlandsBlocks.ironWood,
+				HighlandsBlocks.mangroveWood,
+				HighlandsBlocks.ashWood,
+		};
 	}
 
 	
