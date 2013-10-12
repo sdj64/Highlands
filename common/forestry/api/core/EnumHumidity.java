@@ -44,4 +44,18 @@ public enum EnumHumidity {
 			return normalBiomeIds;
 		}
 	}
+
+	public static EnumHumidity getFromValue(float rawHumidity)
+	{
+		EnumHumidity value = ARID;
+
+		if (rawHumidity >= 0.9F) {
+			value = DAMP;
+		}
+		else if (rawHumidity >= 0.3F) {
+			value = NORMAL;
+		}
+
+		return value;
+	}
 }
