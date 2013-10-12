@@ -57,7 +57,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 
-@Mod(modid="Highlands", name="Highlands", version="2.1.3", dependencies = "after:Forestry")
+@Mod(modid="Highlands", name="Highlands", version="2.1.3", dependencies = "after:Forestry;after:MineFactoryReloaded")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class HighlandsMain {
 
@@ -206,6 +206,17 @@ public class HighlandsMain {
 			}
 			catch( Exception e ) {
 				System.err.println("[Highlands] Failed to enable Forestry compatibility because: ");
+				e.printStackTrace();
+			}
+		}
+
+		//MFR PostInit
+		if (Loader.isModLoaded("MineFactoryReloaded") ){
+			try {
+				HighlandsCompatibilityManager.registerBlocksMFR();
+			}
+			catch( Exception e ) {
+				System.err.println("[Highlands] Failed to enable MFR compatibility because: ");
 				e.printStackTrace();
 			}
 		}

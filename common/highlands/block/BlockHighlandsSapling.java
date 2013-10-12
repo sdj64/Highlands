@@ -2,7 +2,6 @@ package highlands.block;
 
 import java.util.Random;
 
-import highlands.HighlandsMain;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenAutumnTree;
 import highlands.worldgen.WorldGenHighlandsBigTree;
@@ -20,21 +19,21 @@ import highlands.worldgen.WorldGenTreeRedwood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
+import powercrystals.minefactoryreloaded.api.FertilizerType;
+import powercrystals.minefactoryreloaded.api.IFactoryFertilizable;
+import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
 
-public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
+public class BlockHighlandsSapling extends BlockFlower implements IPlantable,IFactoryFertilizable,IFactoryPlantable{
 
 	private int treeType;
 	
@@ -170,7 +169,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
 	    return false;
     }
     
-    public void growTree(World par1World, int i, int j, int k, Random r){
+    public boolean growTree(World par1World, int i, int j, int k, Random r){
     	int meta = par1World.getBlockMetadata(i, j, k);
     	boolean isTreeGrowSuccess = true;
     	int[] treeWideSaplings = new int[4];
@@ -230,6 +229,8 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     		if(par1World.getBlockId(i, j, k) == 0)par1World.setBlock(i, j, k, this.blockID, meta, 2);
     	}
     	*/
+
+	    return isTreeGrowSuccess;
     }
     
     //returns the x,y of the southwest sapling if there are four saplings of the same type
@@ -308,7 +309,61 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     {
         return 0;
     }
-    
+
+	//// MFR : IFactoryFertilizable
+	@Override
+	public int getFertilizableBlockId() {
+		return blockID;
+	}
+
+	@Override
+	public boolean canFertilizeBlock(World world, int x, int y, int z, FertilizerType fertilizerType) {
+		return world.getBlockId(x,y,z) == blockID;
+	}
+
+	@Override
+	public boolean fertilize(World world, Random rand, int x, int y, int z, FertilizerType fertilizerType) {
+		return this.growTree(world, x,y,z, rand);
+	}
+
+	//// MFR : IFactoryPlantable
+	@Override
+	public int getSeedId() {
+		return blockID;
+	}
+
+	@Override
+	public int getPlantedBlockId(World world, int x, int y, int z, ItemStack stack) {
+		return blockID;
+	}
+
+	@Override
+	public int getPlantedBlockMetadata(World world, int x, int y, int z, ItemStack stack) {
+		return 0;
+	}
+
+	@Override
+	public boolean canBePlantedHere(World world, int x, int y, int z, ItemStack stack) {
+		// this crashes MC:
+		// if (!isSoilGoodForSaplingType(block, world, x, y, z))
+
+		if (world.isAirBlock(x,y,z)){
+			int currentBlock = world.getBlockId(x,y-1,z);
+			if(treeType == 0 && currentBlock == Block.blockSnow.blockID)return true;
+			if(treeType == 10 && currentBlock == Block.sand.blockID)return true;
+			if(treeType == 12 && currentBlock == Block.waterStill.blockID)return true;
+			if(currentBlock == Block.grass.blockID || currentBlock == Block.dirt.blockID)return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void prePlant(World world, int x, int y, int z, ItemStack stack) {
+	}
+
+	@Override
+	public void postPlant(World world, int x, int y, int z, ItemStack stack) {
+	}
 }
 
 
