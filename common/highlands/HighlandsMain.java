@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 //don't need these imports after testing is over
 
+import cpw.mods.fml.common.Loader;
 import highlands.HighlandsCompatibilityManager;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
@@ -197,14 +198,16 @@ public class HighlandsMain {
 		HighlandsCompatibilityManager.registerBiomesForgeBiomeDict();
 		
 		//Forestry PostInit
-		try {
-			HighlandsCompatibilityManager.registerBiomesForestry();
-			HighlandsCompatibilityManager.registerBlocksForestry();
-			HighlandsCompatibilityManager.registerRecipesForestry();
-		}
-		catch( Exception e ) {
-			System.err.println("[Highlands] Failed to enable Forestry compatibility because: ");
-			e.printStackTrace();
+		if (Loader.isModLoaded("Forestry") ){
+			try {
+				HighlandsCompatibilityManager.registerBiomesForestry();
+				HighlandsCompatibilityManager.registerBlocksForestry();
+				HighlandsCompatibilityManager.registerRecipesForestry();
+			}
+			catch( Exception e ) {
+				System.err.println("[Highlands] Failed to enable Forestry compatibility because: ");
+				e.printStackTrace();
+			}
 		}
 		
 		GameRegistry.registerFuelHandler(new HighlandsFuelHandler());
