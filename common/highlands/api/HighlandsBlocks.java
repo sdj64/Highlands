@@ -1,5 +1,7 @@
 package highlands.api;
 
+import highlands.block.BlockHighlandsLog;
+import highlands.block.BlockHighlandsSapling;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

@@ -1,12 +1,6 @@
 package highlands;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
