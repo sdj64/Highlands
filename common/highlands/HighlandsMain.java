@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-//don't need these imports after testing is over
 
 import cpw.mods.fml.common.Loader;
+
+
+//don't need these imports after testing is over
+
 import highlands.HighlandsCompatibilityManager;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
@@ -30,8 +33,6 @@ import highlands.worldgen.WorldGenUnderground2;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlockWithMetadata;
-import net.minecraft.item.ItemMultiTextureTile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
@@ -55,9 +56,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.FMLInjectionData;
 
-@Mod(modid="Highlands", name="Highlands", version="2.1.3", dependencies = "after:Forestry;after:MineFactoryReloaded")
+@Mod(modid="Highlands", name="Highlands", version="2.1.3",
+		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class HighlandsMain {
 
@@ -160,6 +161,9 @@ public class HighlandsMain {
 		
 		// DEBUG - COMMENT OUT IN RELEASE
 		//debug();
+
+		// This must NOT be in postInit.
+		HighlandsCompatibilityManager.registerBlocksBuildcraft();
 	}
 	
 	@PostInit
@@ -192,11 +196,15 @@ public class HighlandsMain {
 		});
 		
 		defaultvillagebiomes = MapGenVillage.villageSpawnBiomes;
-		
-		
+
 		//BiomeDictionary PostInit
 		HighlandsCompatibilityManager.registerBiomesForgeBiomeDict();
 		
+		GameRegistry.registerFuelHandler(new HighlandsFuelHandler());
+		
+		Block.blocksList[Block.cocoaPlant.blockID] = null;
+		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2(Block.cocoaPlant.blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("cocoa");
+
 		//Forestry PostInit
 		if (Loader.isModLoaded("Forestry") ){
 			try {
@@ -220,13 +228,17 @@ public class HighlandsMain {
 				e.printStackTrace();
 			}
 		}
-		
-		GameRegistry.registerFuelHandler(new HighlandsFuelHandler());
-		
-		Block.blocksList[Block.cocoaPlant.blockID] = null;
-		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2(Block.cocoaPlant.blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("cocoa");
-		
-		
+
+		//Thaumcraft PostInit
+		if (Loader.isModLoaded("Thaumcraft")){
+			try {
+				HighlandsCompatibilityManager.registerBlocksThaumcraft();
+			}
+			catch( Exception e ) {
+				System.err.println("[Highlands] Failed to enable Thaumcraft compatibility because: ");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	

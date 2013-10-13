@@ -12,6 +12,7 @@ import highlands.block.BlockHighlandsLog;
 import highlands.block.BlockHighlandsSapling;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -20,6 +21,9 @@ import highlands.biome.BiomeGenBaseHighlands;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import powercrystals.minefactoryreloaded.api.FactoryRegistry;
+import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 
 import static net.minecraftforge.common.BiomeDictionary.Type;
 
@@ -164,56 +168,68 @@ public class HighlandsCompatibilityManager{
 		}
 		
 	}
-	
-	/*
-	public static void registerBiomesThaumcraft(){
-		for(BiomeGenBaseHighlands a : forestb){
-			if(a != null){
-				ThaumcraftApi.registerBiomeInfo(a.biomeID, 450, EnumTag.WOOD, true, true);
-			}
+
+	public static void registerBlocksThaumcraft(){
+		for( Block b : HighlandsBlocks.logs ){
+			if (b.blockID == HighlandsBlocks.ironWood.blockID)
+				ThaumcraftApi.registerObjectTag(b.blockID, 0, new AspectList().add(Aspect.TREE, 4).add(Aspect.METAL, 2));
+			else
+				ThaumcraftApi.registerObjectTag(b.blockID, 0, new AspectList().add(Aspect.TREE, 4));
 		}
-		for(BiomeGenBaseHighlands a : taigab){
-			if(a != null){
-				ThaumcraftApi.registerBiomeInfo(a.biomeID, 300, EnumTag.COLD, true, true);
-			}
+
+		for( Block b : HighlandsBlocks.leaves ){
+			if (b.blockID == HighlandsBlocks.ironWood.blockID)
+				ThaumcraftApi.registerObjectTag(b.blockID, 0, new AspectList().add(Aspect.PLANT, 1).add(Aspect.METAL, 1));
+			else
+				ThaumcraftApi.registerObjectTag(b.blockID, 0, new AspectList().add(Aspect.PLANT, 1));
 		}
-		for(BiomeGenBaseHighlands a : snowb){
-			if(a != null){
-				ThaumcraftApi.registerBiomeInfo(a.biomeID, 250, EnumTag.COLD, false, false);
-			}
+
+		for( Block b : HighlandsBlocks.saplings ){
+			if (b.blockID == HighlandsBlocks.ironWood.blockID)
+				ThaumcraftApi.registerObjectTag(b.blockID, 0,
+						new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.SEED, 1).add(Aspect.METAL, 1));
+			else
+				ThaumcraftApi.registerObjectTag(b.blockID, 0,
+					new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.SEED, 1));
 		}
-		for(BiomeGenBaseHighlands a : jungleb){
-			if(a != null){
-				ThaumcraftApi.registerBiomeInfo(a.biomeID, 550, EnumTag.LIFE, true, false);
-			}
-		}
-		for(BiomeGenBaseHighlands a : hillb){
-			if(a != null){
-				ThaumcraftApi.registerBiomeInfo(a.biomeID, 350, EnumTag.EARTH, false, true);
-			}
-		}
-		for(BiomeGenBaseHighlands a : plainsb){
-			if(a != null){
-				ThaumcraftApi.registerBiomeInfo(a.biomeID, 400, EnumTag.WIND, false, false);
-			}
-		}
-		for(BiomeGenBaseHighlands a : desertb){
-			if(a != null){
-				ThaumcraftApi.registerBiomeInfo(a.biomeID, 200, EnumTag.FIRE, false, false);
-			}
-		}
-		for(BiomeGenBaseHighlands a : oceanb){
-			if(a != null){
-				ThaumcraftApi.registerBiomeInfo(a.biomeID, 300, EnumTag.WATER, false, false);
-			}
-		}
-		
-		ThaumcraftApi.registerBiomeInfo(HighlandsBiomes.valley.biomeID, 450, EnumTag.WOOD, false, false);
-		ThaumcraftApi.registerBiomeInfo(HighlandsBiomes.snowIsland.biomeID, 300, EnumTag.COLD, false, false);
-		ThaumcraftApi.registerBiomeInfo(HighlandsBiomes.jungleIsland.biomeID, 550, EnumTag.WOOD, false, false);
-		
+
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplanks.blockID, new int[]{0,1,2,3},
+				new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankhalf.blockID, new int[]{0,1,2,3},
+				new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankstairs0.blockID, 0,
+				new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankstairs1.blockID, 0,
+				new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankstairs2.blockID, 0,
+				new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankstairs3.blockID, 0,
+				new AspectList().add(Aspect.TREE, 1));
+
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.berries.itemID, 0,
+				new AspectList().add(Aspect.SEED, 1));
+		//ThaumcraftApi.registerObjectTag(HighlandsBlocks.cocoa2.blockID, 0,
+		//		new AspectList().add(Aspect.PLANT, 2).add(Aspect.SENSES, 1).add(Aspect.CROP, 1));
+
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.blueFlower.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.blueFlower.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.WATER, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.lavender.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.cattail.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.CLOTH, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.whiteFlower.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.raspberryBush.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.blueberryBush.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.cattail.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.CLOTH, 1));
+		ThaumcraftApi.registerObjectTag(HighlandsBlocks.thornbush.blockID, 0,
+				new AspectList().add(Aspect.PLANT, 2).add(Aspect.DEATH, 1));
 	}
-	*/
 	
 	public static void registerBiomesForgeBiomeDict(){
 		BiomeDictionary.registerBiomeType(HighlandsBiomes.woodsMountains, Type.MOUNTAIN, Type.FOREST);
@@ -381,6 +397,19 @@ public class HighlandsCompatibilityManager{
 				RecipeManagers.fermenterManager.addRecipe(sapling, 250 * scalar, 1.5F, biomass, juice);
 			if (honey!=null)
 				RecipeManagers.fermenterManager.addRecipe(sapling, 250 * scalar, 1.5F, biomass, honey);
+		}
+	}
+
+
+	public static void registerBlocksBuildcraft(){
+		for (Block b : HighlandsBlocks.logs){
+			String str = b.blockID + "@0";
+			FMLInterModComms.sendMessage("BuildCraft|Transport", "add-facade", str);
+		}
+
+		for (int i = 0; i <= 3; i++){
+			String str = HighlandsBlocks.hlplanks.blockID + "@" + i;
+			FMLInterModComms.sendMessage("BuildCraft|Transport", "add-facade", str);
 		}
 	}
 
