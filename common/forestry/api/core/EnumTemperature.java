@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 
 /**
  *  Many things Forestry use temperature and humidity of a biome to determine whether they can or how they can work or spawn at a given location.
@@ -75,5 +77,35 @@ public enum EnumTemperature {
 			return normalBiomeIds;
 		}
 
+	}
+
+	public static boolean isBiomeHellish(BiomeGenBase biomeGen)
+	{
+		return BiomeDictionary.isBiomeOfType(biomeGen, BiomeDictionary.Type.NETHER);
+	}
+
+	public static boolean isBiomeHellish(int biomeID)
+	{
+		return (BiomeDictionary.isBiomeRegistered(biomeID)) && (BiomeDictionary.isBiomeOfType(BiomeGenBase.biomeList[biomeID], BiomeDictionary.Type.NETHER));
+	}
+
+	public static EnumTemperature getFromValue(float rawTemp)
+	{
+		EnumTemperature value = ICY;
+
+		if (rawTemp >= 2.0F) {
+			value = HOT;
+		}
+		else if (rawTemp >= 1.2F) {
+			value = WARM;
+		}
+		else if (rawTemp >= 0.2F) {
+			value = NORMAL;
+		}
+		else if (rawTemp >= 0.05F) {
+			value = COLD;
+		}
+
+		return value;
 	}
 }

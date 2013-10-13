@@ -3,11 +3,11 @@ package highlands.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +16,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import powercrystals.minefactoryreloaded.api.HarvestType;
+import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
 
-public class BlockHighlandsLog extends BlockLog
+public class BlockHighlandsLog extends BlockLog implements IFactoryHarvestable
 {
     /** The type of tree this log came from. */
 	private String[] treeNames = 
@@ -143,4 +145,38 @@ public class BlockHighlandsLog extends BlockLog
         this.tree_top = par1IconRegister.registerIcon("Highlands:log"+treeNames[treeType]+"Top");
         this.tree_side = par1IconRegister.registerIcon("Highlands:log"+treeNames[treeType]+"Side");
     }
+
+	//// MFR : IFactoryHarvestable
+	@Override
+	public int getPlantId() {
+		return blockID;
+	}
+
+	@Override
+	public HarvestType getHarvestType() {
+		return HarvestType.Tree;
+	}
+
+	@Override
+	public boolean breakBlock() {
+		return true;
+	}
+
+	@Override
+	public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
+		return world.getBlockId(x,y,z) == blockID;
+	}
+
+	@Override
+	public List<ItemStack> getDrops(World world, Random rand, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
+		return Block.blocksList[ world.getBlockId(x,y,z) ].getBlockDropped(world, x,y,z, world.getBlockMetadata(x,y,z), 0);
+	}
+
+	@Override
+	public void preHarvest(World world, int x, int y, int z) {
+	}
+
+	@Override
+	public void postHarvest(World world, int x, int y, int z) {
+	}
 }

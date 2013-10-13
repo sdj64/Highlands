@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import highlands.HighlandsMain;
@@ -27,8 +28,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.IShearable;
+import powercrystals.minefactoryreloaded.api.HarvestType;
+import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
 
-public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
+public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,IFactoryHarvestable
 {
 	private String[] treeNames = 
 		{
@@ -461,4 +464,44 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     {
         return true;
     }
+
+	//// MFR : IFactoryHarvestable
+	@Override
+	public int getPlantId() {
+		return blockID;
+	}
+
+	@Override
+	public HarvestType getHarvestType() {
+		return HarvestType.TreeLeaf;
+	}
+
+	@Override
+	public boolean breakBlock() {
+		return true;
+	}
+
+	@Override
+	public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
+		return true;
+	}
+
+	@Override
+	public List<ItemStack> getDrops(World world, Random rand, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
+		List<ItemStack> prod = new ArrayList<ItemStack>();
+
+		if (harvesterSettings.get("silkTouch") != null && harvesterSettings.get("silkTouch")) {
+			prod.add( new ItemStack(blockID, 1, 0) );
+			return prod;
+		}
+		return Block.blocksList[ world.getBlockId(x,y,z) ].getBlockDropped(world, x,y,z, world.getBlockMetadata(x,y,z), 0);
+	}
+
+	@Override
+	public void preHarvest(World world, int x, int y, int z) {
+	}
+
+	@Override
+	public void postHarvest(World world, int x, int y, int z) {
+	}
 }
