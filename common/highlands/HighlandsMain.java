@@ -29,7 +29,6 @@ import highlands.block.BlockHighlandsSapling;
 import highlands.block.ItemBlockMetadata;
 import highlands.block.ItemHighlandsBerries;
 import highlands.worldgen.WorldGenUnderground2;
-
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -45,6 +44,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -100,7 +100,7 @@ public class HighlandsMain {
     public static boolean useOreGens = true;
     public static boolean useGenLayers = true;
     
-	@PreInit
+    @EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		//new settings set-up
 		Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + File.separator + "Highlands.cfg"));
@@ -113,7 +113,7 @@ public class HighlandsMain {
 		MinecraftForge.EVENT_BUS.register(new HighlandsEventManager());
 	}
 	
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		//construct all variables
 		HighlandsBiomes.initBiomeArrays();
@@ -166,7 +166,7 @@ public class HighlandsMain {
 		HighlandsCompatibilityManager.registerBlocksBuildcraft();
 	}
 	
-	@PostInit
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		
 		hlvillagebiomes = Arrays.asList(new BiomeGenBase[] {
