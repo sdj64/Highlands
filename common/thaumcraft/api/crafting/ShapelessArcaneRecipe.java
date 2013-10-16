@@ -78,7 +78,7 @@ public class ShapelessArcaneRecipe implements IArcaneRecipe
     	
         ArrayList required = new ArrayList(input);
         
-        for (int x = 0; x < var1.getSizeInventory(); x++)
+        for (int x = 0; x < 9; x++)
         {
             ItemStack slot = var1.getStackInSlot(x);
 
@@ -119,7 +119,7 @@ public class ShapelessArcaneRecipe implements IArcaneRecipe
                 }
             }
         }
-
+        
         return required.isEmpty();
     }
 
