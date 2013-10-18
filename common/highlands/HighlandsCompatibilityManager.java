@@ -87,6 +87,7 @@ public class HighlandsCompatibilityManager{
 		(BiomeGenBaseHighlands)HighlandsBiomes.volcanoIsland,
 		(BiomeGenBaseHighlands)HighlandsBiomes.desertIsland,
 		(BiomeGenBaseHighlands)HighlandsBiomes.estuary,
+		(BiomeGenBaseHighlands)HighlandsBiomes.flyingMountains,
 	};
 	
 	/** clears the spawn lists from all highlands biomes,

@@ -57,7 +57,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="Highlands", name="Highlands", version="2.1.3",
+@Mod(modid="Highlands", name="Highlands", version="2.1.4",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class HighlandsMain {

@@ -6,11 +6,10 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
+import highlands.block.BlockHighlandsSapling;
 import highlands.worldgen.layer.GenLayerHL;
-
 import net.minecraft.block.Block;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -18,6 +17,7 @@ import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraftforge.event.Event;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID;
@@ -110,13 +110,30 @@ public class HighlandsEventManager {
 		}
 	}
 	
+	@ForgeSubscribe
+    public void bonemealEvent(BonemealEvent e)
+    {
+        if (!e.world.isRemote)
+        {
+        	boolean isHLSapling = false;
+        	for(Block b: HighlandsBlocks.saplings)if(b != null && e.ID == b.blockID)isHLSapling = true;
+            if (isHLSapling)
+            {
+                BlockHighlandsSapling sapling = (BlockHighlandsSapling)Block.blocksList[e.ID];
+                e.setResult(Event.Result.ALLOW);
+                if(e.entityPlayer.capabilities.isCreativeMode)sapling.growTree(e.world, e.X, e.Y, e.Z, rand);
+                else sapling.updateTick(e.world, e.X, e.Y, e.Z, rand);
+            }
+        }
+    }
+	
 	
 	// sets default village blocks
 	@SideOnly(Side.CLIENT)
 	
 	@ForgeSubscribe
 	public void onVillageSelectBlock(GetVillageBlockID e){
-		try{
+		if(e.biome != null && HighlandsBiomes.sahel != null && HighlandsBiomes.outback != null && BiomeGenBase.icePlains != null){
 			if (e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
 	        {
 				if (e.original == Block.wood.blockID)e.replacement = Block.wood.blockID;
@@ -135,10 +152,6 @@ public class HighlandsEventManager {
 	            if (e.original == Block.stairsCobblestone.blockID)e.replacement = Block.stairsCobblestone.blockID;
 	            if (e.original == Block.gravel.blockID)e.replacement = Block.gravel.blockID;
 	        }
-		}
-		catch(NullPointerException ex){
-			ex.printStackTrace();
-			e.replacement = e.original;
 		}
 	}
 }

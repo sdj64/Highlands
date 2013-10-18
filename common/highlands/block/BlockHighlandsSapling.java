@@ -140,7 +140,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable,IFa
         }
     }
     
-    
+    /*
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
     	//System.out.println("Sapling activated!  " + (player.inventory.getCurrentItem().getItemDamage()==15) + "  " + (player.inventory.getCurrentItem().itemID==Item.dyePowder.itemID));
@@ -168,6 +168,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable,IFa
 	    }
 	    return false;
     }
+    */
     
     public boolean growTree(World par1World, int i, int j, int k, Random r){
     	int meta = par1World.getBlockMetadata(i, j, k);
