@@ -1,10 +1,7 @@
 package highlands;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
-import forestry.api.core.EnumHumidity;
-import forestry.api.core.EnumTemperature;
 
-import forestry.api.core.GlobalManager;
 import forestry.api.recipes.RecipeManagers;
 import highlands.api.HighlandsBlocks;
 import highlands.block.BlockHighlandsLeaves;
@@ -284,71 +281,8 @@ public class HighlandsCompatibilityManager{
 		
 	}
 
-	public static void registerBiomesForestry(){
-		for(BiomeGenBaseHighlands a : forestb){
-			if(a != null){
-				EnumTemperature.normalBiomeIds.add(a.biomeID);
-				EnumHumidity.normalBiomeIds.add(a.biomeID);
-			}
-		}
-		for(BiomeGenBaseHighlands a : taigab){
-			if(a != null){
-				EnumTemperature.coldBiomeIds.add(a.biomeID);
-				EnumHumidity.normalBiomeIds.add(a.biomeID);
-			}
-		}
-		for(BiomeGenBaseHighlands a : snowb){
-			if(a != null){
-				EnumTemperature.icyBiomeIds.add(a.biomeID);
-				EnumHumidity.normalBiomeIds.add(a.biomeID);
-			}
-		}
-		for(BiomeGenBaseHighlands a : jungleb){
-			if(a != null){
-				EnumTemperature.warmBiomeIds.add(a.biomeID);
-				EnumHumidity.dampBiomeIds.add(a.biomeID);
-			}
-		}
-		for(BiomeGenBaseHighlands a : hillb){
-			if(a != null){
-				EnumTemperature.normalBiomeIds.add(a.biomeID);
-				EnumHumidity.normalBiomeIds.add(a.biomeID);
-			}
-		}
-		for(BiomeGenBaseHighlands a : plainsb){
-			if(a != null){
-				EnumTemperature.normalBiomeIds.add(a.biomeID);
-				EnumHumidity.normalBiomeIds.add(a.biomeID);
-			}
-		}
-		for(BiomeGenBaseHighlands a : desertb){
-			if(a != null){
-				EnumTemperature.hotBiomeIds.add(a.biomeID);
-				EnumHumidity.aridBiomeIds.add(a.biomeID);
-			}
-		}
-		for(BiomeGenBaseHighlands a : oceanb){
-			if(a != null){
-				EnumTemperature.normalBiomeIds.add(a.biomeID);
-				EnumHumidity.normalBiomeIds.add(a.biomeID);
-			}
-		}
-		
-		EnumTemperature.normalBiomeIds.add(HighlandsBiomes.valley.biomeID);
-		EnumHumidity.normalBiomeIds.add(HighlandsBiomes.valley.biomeID);
-		EnumTemperature.coldBiomeIds.add(HighlandsBiomes.snowIsland.biomeID);
-		EnumHumidity.normalBiomeIds.add(HighlandsBiomes.snowIsland.biomeID);
-		EnumTemperature.warmBiomeIds.add(HighlandsBiomes.jungleIsland.biomeID);
-		EnumHumidity.dampBiomeIds.add(HighlandsBiomes.jungleIsland.biomeID);
-	}
-
 	public static void registerBlocksForestry(){
 		StringBuilder sb;
-
-		for (Block b : HighlandsBlocks.leaves){
-			if (b!=null)
-				GlobalManager.leafBlockIds.add(b.blockID);
-		}
 
 		sb = new StringBuilder();
 		for (Block b : HighlandsBlocks.saplings){
