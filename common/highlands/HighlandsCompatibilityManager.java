@@ -84,6 +84,7 @@ public class HighlandsCompatibilityManager{
 	public static final BiomeGenBaseHighlands[] oceanb = {
 		(BiomeGenBaseHighlands)HighlandsBiomes.lake,
 		(BiomeGenBaseHighlands)HighlandsBiomes.ocean2,
+		(BiomeGenBaseHighlands)HighlandsBiomes.flyingMountains,
 		(BiomeGenBaseHighlands)HighlandsBiomes.volcanoIsland,
 		(BiomeGenBaseHighlands)HighlandsBiomes.desertIsland,
 		(BiomeGenBaseHighlands)HighlandsBiomes.estuary,
