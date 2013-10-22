@@ -208,7 +208,6 @@ public class HighlandsMain {
 		//Forestry PostInit
 		if (Loader.isModLoaded("Forestry") ){
 			try {
-				HighlandsCompatibilityManager.registerBiomesForestry();
 				HighlandsCompatibilityManager.registerBlocksForestry();
 				HighlandsCompatibilityManager.registerRecipesForestry();
 			}
