@@ -2,6 +2,7 @@ package highlands;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
 
+import forestry.api.apiculture.FlowerManager;
 import forestry.api.recipes.RecipeManagers;
 import highlands.api.HighlandsBlocks;
 import highlands.block.BlockHighlandsLeaves;
@@ -301,6 +302,10 @@ public class HighlandsCompatibilityManager{
 			sb.append(b.blockID).append(".0;");
 		}
 		FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "forester@" + sb.toString());
+
+		FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.blueFlower));
+		FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.lavender));
+		FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.whiteFlower));
 	}
 
 	public static void registerRecipesForestry(){
