@@ -238,6 +238,17 @@ public class HighlandsMain {
 				e.printStackTrace();
 			}
 		}
+		
+		//ATG PostInit
+		if (Loader.isModLoaded("ATG")){
+			try {
+				HighlandsCompatibilityManager.registerBiomesATG();
+			}
+			catch( Exception e ) {
+				System.err.println("[Highlands] Failed to enable ATG compatibility because: ");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	
