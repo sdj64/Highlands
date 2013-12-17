@@ -5,16 +5,15 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenTreeFir;
-
+import highlands.worldgen.WorldGenUnderground2;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeGenAlps extends BiomeGenBaseHighlands{
@@ -63,7 +62,7 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands{
             }
         }
         
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.ironGen, 0, 64);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.ironGen, 0, 64);
     }
     
     @SideOnly(Side.CLIENT)

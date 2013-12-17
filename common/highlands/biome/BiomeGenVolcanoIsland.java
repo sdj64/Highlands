@@ -11,7 +11,6 @@ import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBiomes;
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 
 public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
@@ -76,12 +75,12 @@ public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
     		}
     	}
     	
-    	HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.ironGen, 0, 64);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 12, biomedec.redstoneGen, 0, 16);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.lapisGen, 0, 32);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 4, biomedec.goldGen, 0, 32);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.diamondGen, 0, 16);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 12, HighlandsMain.HLlava, 0, 32);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 25, HighlandsMain.HLobsidian, 0, 64);
+    	biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.ironGen, 0, 64);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 12, biomedec.redstoneGen, 0, 16);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.lapisGen, 0, 32);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 4, biomedec.goldGen, 0, 32);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.diamondGen, 0, 16);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 12, biomedec.HLlava, 0, 32);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 25, biomedec.HLobsidian, 0, 64);
     }
 }

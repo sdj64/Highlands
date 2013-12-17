@@ -69,6 +69,14 @@ public class WorldGenAutumnBigTree extends WorldGenerator
     public WorldGenAutumnBigTree(boolean notify, int wid, int lid){
     	this(notify, true, 0, 0, wid, lid, 1, 0);
     }
+    
+    public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){
+    	int id = world.getBlockId(locX, locY, locZ);
+    	int meta = world.getBlockMetadata(locX, locY, locZ);
+    	boolean flag = generate(world, random, locX, locY, locZ);
+    	if(!flag) world.setBlock(locX, locY, locZ, id, meta, 3);
+    	return flag;
+    }
 
     /**
      * Generates a list of leaf nodes for the tree, to be populated by generateLeaves.

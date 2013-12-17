@@ -13,7 +13,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import highlands.api.HighlandsBlocks;
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
 
@@ -77,8 +76,8 @@ public class BiomeGenBadlands extends BiomeGenBaseHighlands
             }
         }
         
-        HighlandsMain.genOreHighlandsNoCheck(par1World, par2Random, par3, par4, 6, HighlandsMain.HLrock, 62, 120);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
+        biomedec.genOreHighlandsNoCheck(par1World, par2Random, par3, par4, 6, biomedec.HLrock, 62, 120);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
     }
     
     

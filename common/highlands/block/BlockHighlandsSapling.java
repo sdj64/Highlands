@@ -10,13 +10,13 @@ import highlands.worldgen.WorldGenShrubbery;
 import highlands.worldgen.WorldGenTreeAcacia;
 import highlands.worldgen.WorldGenTreeAsh;
 import highlands.worldgen.WorldGenTreeCanopy;
+import highlands.worldgen.WorldGenTreeDiamondheart;
 import highlands.worldgen.WorldGenTreeFir;
 import highlands.worldgen.WorldGenTreeIronwood;
 import highlands.worldgen.WorldGenTreeMangrove;
 import highlands.worldgen.WorldGenTreePalm;
 import highlands.worldgen.WorldGenTreePoplar;
 import highlands.worldgen.WorldGenTreeRedwood;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
@@ -190,7 +190,9 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable,IFa
     		par1World.setBlock(xysw[0], j, xysw[1]+1, 0, 0, 2);
     		par1World.setBlock(xysw[0]+1, j, xysw[1]+1, 0, 0, 2);
     	}
-    	par1World.setBlock(i, j, k, 0, 0, 2);
+    	
+    	boolean replaceSapling = ((treeType >= 5 && treeType <= 9) || treeType == 11 || treeType == 14 || treeType == 15);
+    	if(replaceSapling) par1World.setBlock(i, j, k, 0, 0, 2);
     	
     	
     	
@@ -200,6 +202,8 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable,IFa
     		else isTreeGrowSuccess = new WorldGenTreeFir(10, 15, true, false).generate(par1World, r, i, j, k);
     	}
     	if(treeType == 1)isTreeGrowSuccess = new WorldGenTreeAcacia(7, 3, true).generate(par1World, r, i, j, k);
+    	//if(treeType == 1)isTreeGrowSuccess = new WorldGenTreeDiamondheart(70, 20, true).generate(par1World, r, i, j, k);
+    	
     	if(treeType == 2)isTreeGrowSuccess = new WorldGenTreePoplar(10, 4, true).generate(par1World, r, i, j, k);
     	if(treeType == 3)isTreeGrowSuccess = new WorldGenTreeRedwood(35, 10, true).generate(par1World, r, i, j, k);
     	if(treeType == 4){
@@ -230,6 +234,10 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable,IFa
     		if(par1World.getBlockId(i, j, k) == 0)par1World.setBlock(i, j, k, this.blockID, meta, 2);
     	}
     	*/
+    	
+    	else if(!isTreeGrowSuccess && replaceSapling){
+    		if(par1World.getBlockId(i, j, k) == 0)par1World.setBlock(i, j, k, this.blockID, meta, 2);
+    	}
 
 	    return isTreeGrowSuccess;
     }

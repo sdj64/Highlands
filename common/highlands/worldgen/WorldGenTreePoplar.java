@@ -46,13 +46,11 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     	this.random = random;
     	
     	
-    	locY = findTopBlock(locX, locZ);
         
-        if(!(world.getBlockId(locX, locY, locZ) == Block.grass.blockID || world.getBlockId(locX, locY, locZ) == Block.dirt.blockID))return false;
+        if(!isLegalTreePosition(world, locX, locY, locZ))return false;
         if(!isCubeClear(locX, locY+3, locZ, 1, 8))return false;
     	
         //generates the trunk
-    	locY++;
     	int treeHeight = minHeight + random.nextInt(maxHeight);
     	for(int i = 0; i < treeHeight; i++){
     		setBlockInWorld(locX, locY + i, locZ, this.woodID, this.woodMeta);

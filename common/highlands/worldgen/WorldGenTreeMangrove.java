@@ -45,11 +45,12 @@ public class WorldGenTreeMangrove extends WorldGenHighlandsTreeBase
     	this.world = world;
     	this.random = random;
     	
-    	
-    	locY = findTopBlock(locX, locZ);
+    	if(locY < 62 && !notifyFlag) locY = 62;
         
-        if(!(world.getBlockId(locX, locY, locZ) == Block.grass.blockID || world.getBlockId(locX, locY, locZ) == Block.dirt.blockID
-        		|| world.getBlockId(locX, locY, locZ) == Block.sand.blockID || world.getBlockId(locX, locY, locZ) == Block.waterStill.blockID))return false;
+        if(!(world.getBlockId(locX, locY-1, locZ) == Block.grass.blockID 
+        		|| world.getBlockId(locX, locY-1, locZ) == Block.dirt.blockID
+                || world.getBlockId(locX, locY-1, locZ) == Block.sand.blockID 
+                || world.getBlockId(locX, locY-1, locZ) == Block.waterStill.blockID))return false;
         if(!isCubeClear(locX, locY+2, locZ, 0, 3))return false;
     	
         
@@ -61,7 +62,7 @@ public class WorldGenTreeMangrove extends WorldGenHighlandsTreeBase
         
     	//generates trunk
     	int treeHeight = minHeight + random.nextInt(maxHeight) - 2;
-    	locY+= 2;
+    	locY++;
     	for(int i = 0; i < treeHeight; i++){
     		setBlockInWorld(locX, locY + i, locZ, this.woodID, this.woodMeta);
     	}

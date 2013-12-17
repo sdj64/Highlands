@@ -1,6 +1,7 @@
 package highlands.biome;
 
 import java.util.Random;
+
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
@@ -11,7 +12,6 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBlocks;
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
 import highlands.worldgen.WorldGenTreeFir;
@@ -65,6 +65,6 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
     public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
         biomedec.decorate(par1World, par2Random, par3, par4);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.coalGen, 0, 128);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.coalGen, 0, 128);
     }
 }

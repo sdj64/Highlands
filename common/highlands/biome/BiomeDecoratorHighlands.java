@@ -1,12 +1,12 @@
-package highlands.worldgen;
+package highlands.biome;
 
 import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS;
 
 import java.util.Random;
 
 import highlands.HighlandsMain;
-import highlands.biome.BiomeGenBaseHighlands;
-
+import highlands.worldgen.WorldGenUnderground2;
+import highlands.worldgen.WorldGenWatermelon;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
@@ -95,4 +95,49 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
         this.randomGenerator = null;
 		
 	}
+	
+	
+	
+	//Method for ore generators: inside the decorate method in biome classes, call this.
+		//here is the decorate method:
+		/*
+		public void decorate(World par1World, Random par2Random, int par3, int par4){
+			genOreHighlands(par1World, par2Random, par3, par4, timesPerChunk, HLWorldGenerator, minH, maxH)
+		}
+		 */
+		
+		//WorldGenerators are in biomedec.goldGen, for example for gold.
+		public void genOreHighlands(World par1World, Random par2Random, int locX, int locZ, int timesPerChunk, WorldGenerator HLWorldGenerator, int minH, int maxH)
+	    {
+			if(HighlandsMain.useOreGens){
+		        for (int var5 = 0; var5 < timesPerChunk; ++var5)
+		        {
+		            int var6 = locX + par2Random.nextInt(16);
+		            int var7 = par2Random.nextInt(maxH - minH) + minH;
+		            int var8 = locZ + par2Random.nextInt(16);
+		            HLWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
+		        }
+			}
+	    }
+		
+		public void genOreHighlandsNoCheck(World par1World, Random par2Random, int locX, int locZ, int timesPerChunk, WorldGenerator HLWorldGenerator, int minH, int maxH)
+	    {
+	        for (int var5 = 0; var5 < timesPerChunk; ++var5)
+	        {
+	            int var6 = locX + par2Random.nextInt(16);
+	            int var7 = par2Random.nextInt(maxH - minH) + minH;
+	            int var8 = locZ + par2Random.nextInt(16);
+	            HLWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
+	        }
+	    }
+		
+		//Ore Generators
+		public static WorldGenerator HLsand = new WorldGenMinable(Block.sand.blockID, 32);
+		public static WorldGenerator HLice = new WorldGenMinable(Block.sand.blockID, 32);;
+		public static WorldGenerator HLwater = new WorldGenUnderground2(Block.waterStill.blockID, 4);
+		public static WorldGenerator HLlava = new WorldGenUnderground2(Block.lavaStill.blockID, 8);
+		public static WorldGenerator HLdirt = new WorldGenUnderground2(Block.dirt.blockID, 72, Block.sand.blockID);
+		public static WorldGenerator HLrock = new WorldGenUnderground2(Block.stone.blockID, 72, Block.dirt.blockID);
+		public static WorldGenerator HLobsidian = new WorldGenMinable(Block.obsidian.blockID, 8);
+	
 }

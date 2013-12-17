@@ -45,10 +45,8 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
     	this.world = world;
     	this.random = random;
     	
-
-    	locY = findTopBlock(locX, locZ);
         
-        if(!(world.getBlockId(locX, locY, locZ) == Block.grass.blockID || world.getBlockId(locX, locY, locZ) == Block.dirt.blockID))return false;
+        if(!isLegalTreePosition(world, locX, locY, locZ))return false;
         if(!isCubeClear(locX, locY+3, locZ, 4, 20))return false;
     	
         

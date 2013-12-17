@@ -50,13 +50,12 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     	boolean isWide = (random.nextInt(3) == 0);
     	int treeHeight = minHeight + random.nextInt(maxHeight);
     	
-    	locY = findTopBlock(locX, locZ);
         
-        if(!(world.getBlockId(locX, locY, locZ) == Block.grass.blockID || world.getBlockId(locX, locY, locZ) == Block.dirt.blockID || world.getBlockId(locX, locY, locZ) == Block.blockSnow.blockID))return false;
+        if(!isLegalTreePosition(world, locX, locY, locZ) 
+        		&& world.getBlockId(locX, locY-1, locZ) != Block.blockSnow.blockID)return false;
         if(!isCubeClear(locX, locY+3, locZ, 2, 10))return false;
     	
 		//generates the trunk
-    	locY++;
     	genTree(world, random, locX, locY, locZ, treeHeight, isWide);
     	
     	

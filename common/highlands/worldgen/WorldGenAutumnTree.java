@@ -38,6 +38,14 @@ public class WorldGenAutumnTree extends WorldGenerator
         	blockLeaves = Block.leaves.blockID;
         }
     }
+    
+    public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){
+    	int id = world.getBlockId(locX, locY, locZ);
+    	int meta = world.getBlockMetadata(locX, locY, locZ);
+    	boolean flag = generate(world, random, locX, locY, locZ);
+    	if(!flag) world.setBlock(locX, locY, locZ, id, meta, 3);
+    	return flag;
+    }
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {

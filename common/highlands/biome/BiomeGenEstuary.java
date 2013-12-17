@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenTreeMangrove;
 
@@ -60,8 +59,8 @@ public class BiomeGenEstuary extends BiomeGenBaseHighlands
 	    	else biomedec.treesPerChunk = 10;
 	    	
 	        biomedec.decorate(par1World, par2Random, par3, par4);
-	        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);
-	        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 15, HighlandsMain.HLsand, 0, 64);
+	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);
+	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 15, biomedec.HLsand, 0, 64);
 	    }
 	    
 }

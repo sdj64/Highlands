@@ -1,6 +1,7 @@
 package highlands.biome;
 
 import java.util.Random;
+
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.SpawnListEntry;
@@ -9,7 +10,6 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenHighlandsGroundcover;
 import highlands.worldgen.WorldGenHighlandsShrub;
 
@@ -60,8 +60,8 @@ public class BiomeGenOutback extends BiomeGenBaseHighlands
 	    public void decorate(World par1World, Random par2Random, int par3, int par4)
 	    {
 	        biomedec.decorate(par1World, par2Random, par3, par4);
-	        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
-	        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 10, HighlandsMain.HLsand, 0, 64);
+	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
+	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 10, biomedec.HLsand, 0, 64);
 	        
 	        //the code for the random half grass
 	        /*

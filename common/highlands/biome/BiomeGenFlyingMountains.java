@@ -15,7 +15,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenHighlandsBigTree;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
@@ -62,8 +61,8 @@ public class BiomeGenFlyingMountains extends BiomeGenBaseHighlands
     public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
         biomedec.decorate(par1World, par2Random, par3, par4);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 20, HighlandsMain.HLwater, 0, 128);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.HLwater, 0, 128);
         
         //random water sources on top of the mountains
         for(int i = 0; i < 16; i++){

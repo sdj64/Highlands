@@ -46,13 +46,11 @@ public class WorldGenTreeIronwood extends WorldGenHighlandsTreeBase
     	this.world = world;
     	this.random = random;
     	
-    	locY = findTopBlock(locX, locZ);
         
-        if(!(world.getBlockId(locX, locY, locZ) == Block.grass.blockID || world.getBlockId(locX, locY, locZ) == Block.dirt.blockID))return false;
+        if(!isLegalTreePosition(world, locX, locY, locZ))return false;
         if(!isCubeClear(locX, locY+2, locZ, 2, 6))return false;
         
     	//generates the leaf layer
-    	locY++;
     	if(!new WorldGenIronwoodCrown(false, true, 0, 0, 1, maxHeight).generate(world, random, locX, locY, locZ))return false;
     	//generates the trunk
     	generateWorldTreeTrunk(world, random, locX, locY, locZ);

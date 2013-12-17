@@ -10,10 +10,8 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
+public class WorldGenTreeDiamondheart extends WorldGenHighlandsTreeBase
 {
-	
-	private boolean trunk2;
 
     /** Constructor - gets the generator for the correct highlands tree
      * @param lmd leaf meta data
@@ -25,62 +23,53 @@ public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreeCanopy(int lmd, int wmd, int wb, int lb, int minH, int maxH, boolean notify, boolean thickTrunk)
+    public WorldGenTreeDiamondheart(int lmd, int wmd, int wb, int lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
         
         this.minHeight = minH;
         this.maxHeight = maxH;
-        this.trunk2 = thickTrunk;
     }
     
-    public WorldGenTreeCanopy(int minH, int maxH, boolean notify, boolean thickTrunk){
-    	this(0, 0, HighlandsBlocks.canopyWood.blockID, HighlandsBlocks.canopyLeaves.blockID, minH, maxH, notify, thickTrunk);
+    public WorldGenTreeDiamondheart(int minH, int maxH, boolean notify){
+    	this(0, 0, HighlandsBlocks.ironWood.blockID, HighlandsBlocks.acaciaLeaves.blockID, minH, maxH, notify);
     	if(HighlandsMain.vanillaBlocksFlag){
     		this.woodID = Block.wood.blockID;
-    		this.woodMeta = 3;
     		this.leavesID = Block.leaves.blockID;
-    		this.leavesMeta = 3;
     	}
     }
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	
     	this.world = world;
     	this.random = random;
     	
-    	boolean isWide = (random.nextInt(3) == 0);
-    	int treeHeight = minHeight + random.nextInt(maxHeight);
+
         
         if(!isLegalTreePosition(world, locX, locY, locZ))return false;
-        if(!isCubeClear(locX, locY+3, locZ, 2, 15))return false;
+        if(!isCubeClear(locX, locY+3, locZ, 8, 60))return false;
+        
+    	//generates the trunk
+    	int treeHeight = minHeight + random.nextInt(maxHeight);
+    	double primaryRadius = 16;
+    	double finalRadius = 5;
+    	double secondaryRadius = 3.5;
+    	double finalRadius2 = 2;
+    	double angleRad = 0;
     	
-		//generates the trunk
-    	genTree(world, random, locX, locY, locZ, treeHeight, isWide);
-    	
-    	
-    	
-    	if(this.trunk2){
-    		treeHeight+= 3;
-    		genTree(world, random, locX+1, locY, locZ, treeHeight, isWide);
-    		treeHeight+= 3;
-    		genTree(world, random, locX, locY, locZ+1, treeHeight, isWide);
-    		treeHeight+= 3;
-    		genTree(world, random, locX+1, locY, locZ+1, treeHeight, isWide);
-    	}
-    	
-    	return true;
-    }
-    
-    
-    //TREE GENERATORS
-    
-	private boolean genTree(World world, Random random, int locX, int locY, int locZ, int treeHeight, boolean isWide){
     	for(int i = 0; i < treeHeight; i++){
     		setBlockInWorld(locX, locY + i, locZ, this.woodID, this.woodMeta);
+    		for(double j = angleRad; j < angleRad + 2*Math.PI; j += Math.PI/4){
+    			int x = (int)(primaryRadius * Math.cos(j));
+    			int z = (int)(primaryRadius * Math.sin(j));
+    			generateWoodLayerCircle(world, random, secondaryRadius, x+locX, z+locZ, i+locY);
+    		}
+    		angleRad += Math.PI / 40;
+    		primaryRadius -= (primaryRadius - finalRadius)/15.0;
+    		secondaryRadius -= (secondaryRadius - finalRadius2)/15.0;
     	}
     	
+    	/*
     	int h = locY + treeHeight - 1;
     	//generate leaves above trunk
     	generateLeafLayerCircle(world, random, 5.5, locX, locZ, h);
@@ -92,9 +81,9 @@ public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
 		int[] xyz = generateStraightBranch(world, random, 4, locX, h, locZ, random.nextInt(4));
 		generateLeafLayerCircle(world, random, 4.5, xyz[0], xyz[2], xyz[1]);
 		generateLeafLayerCircle(world, random, 3.5, xyz[0], xyz[2], xyz[1]+1);
+		*/
 		return true;
     }
-    	
 }
 
 

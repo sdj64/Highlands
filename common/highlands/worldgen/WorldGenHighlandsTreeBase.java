@@ -1,15 +1,15 @@
 package highlands.worldgen;
 
+import highlands.block.BlockHighlandsSapling;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
-import highlands.HighlandsMain;
-import highlands.block.BlockHighlandsLeaves;
-import highlands.block.BlockHighlandsSapling;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.ForgeDirection;
 
 public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
 {
@@ -26,8 +26,11 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     
     protected World world;
     protected Random random;
+    
+    //this array is the 8 directions of x and y, used for palm trees.
+    protected int[][]directions = {{1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}};
 
-    /** Constructor - gets the generator for the correct highlands tree
+    /** Constructor - sets up tree variables
      * @param lmd leaf meta data
      * @param wmd wood meta data
      * @param wb wood block id
@@ -50,6 +53,23 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
 
     
 	//UTILITY GENERATORS - LEAVES, BRANCHES, TRUNKS
+    
+    //is the position of the tree dirt or grass?
+    public boolean isLegalTreePosition(World world, int x, int y, int z){
+    	//System.out.println("Tree Position " + x + " " + y + " "+ z +" is " + (world.getBlockId(x, y-1, z) == Block.grass.blockID ||
+    	//		world.getBlockId(x, y-1, z) == Block.dirt.blockID));
+    	return (world.getBlockId(x, y-1, z) == Block.grass.blockID ||
+    			world.getBlockId(x, y-1, z) == Block.dirt.blockID);
+    }
+    
+    public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){
+    	int id = world.getBlockId(locX, locY, locZ);
+    	int meta = world.getBlockMetadata(locX, locY, locZ);
+    	boolean flag = generate(world, random, locX, locY, locZ);
+    	if(!flag) world.setBlock(locX, locY, locZ, id, meta, 3);
+    	return flag;
+    }
+    
     
     //generates a circular disk of leaves around a coordinate block, only overwriting air blocks.
     protected void generateLeafLayerCircle(World world, Random random, double radius, int xo, int zo, int h){
@@ -118,7 +138,27 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     	}
     }
     
-    protected void generateSequoiaBranch(World world, Random random, double length, int xo, int zo, int h){
+    //same as GenerateStraightBranch but downward (for Arau tree)
+    protected int[] generateStraightBranchDown(World world, Random random, int length, int locX, int locY, int locZ, int dir){
+    	int direction = -1;
+    	if(dir < 2)
+    		 direction = 1;
+    	if(dir % 2 == 0){
+    		//generates branch
+    		for(int i = 1; i <= length; i++){
+    			setBlockInWorld(locX + i*direction, locY+i, locZ, this.woodID, this.woodMeta+4);
+    		}
+    		return new int[]{locX+length*direction, locY-length, locZ};
+    	}
+    	else{
+    		for(int i = 1; i <= length; i++){
+    			setBlockInWorld(locX, locY+i, locZ + i*direction, this.woodID, this.woodMeta+8);
+    		}
+    		return new int[]{locX, locY-length, locZ+length*direction};
+    	}
+    }
+
+	protected void generateSequoiaBranch(World world, Random random, double length, int xo, int zo, int h){
 		for(int i = 0; i < length; i++){
 			int j = i - 3;
 			//System.out.println("Generating braches");
@@ -172,11 +212,12 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     	
     }
     
+    
     protected void setBlockInWorld(int x, int y, int z, int id, int meta){
     	try{
-			if(id == this.woodID && (world.isAirBlock(x,y,z) || Block.blocksList[world.getBlockId(x, y, z)].isLeaves(world, x, y, z)
-					|| world.getBlockId(x,y,z) == Block.waterStill.blockID || world.getBlockId(x,y,z) == Block.waterMoving.blockID)
-					|| Block.blocksList[world.getBlockId(x, y, z)] instanceof BlockHighlandsSapling){
+    		Block bl = Block.blocksList[world.getBlockId(x, y, z)];
+			if(id == this.woodID && (world.isAirBlock(x,y,z) || bl.blockMaterial.isReplaceable() ||
+					bl.isLeaves(world, x, y, z) || bl instanceof BlockHighlandsSapling)){
 				if(notifyFlag) world.setBlock(x, y, z, id, meta, 3);
 		    	else world.setBlock(x, y, z, id, meta, 2);
 			}
@@ -187,7 +228,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     	}
     	catch(RuntimeException e){
     		if(e.getMessage().equals("Already decorating!!")){
-    			System.out.println("Error: Highlands Tree block couldn't generate!");
+    			System.out.println("Error: Tree block couldn't generate!");
     		}
     		//e.printStackTrace();
     	}
@@ -210,9 +251,8 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     }
     
     //finds top block for the given x,z position (excluding leaves)
-    //only works for terrain below y= 128 (for lag reasons I did not make the number higher)
     protected int findTopBlock(int x, int z){
-    	int y = 128;
+    	int y = 256;
         for (boolean var6 = false; (world.getBlockId(x, y, z) == 0 || Block.blocksList[world.getBlockId(x, y, z)].isLeaves(world, x, y, z)) && y > 0; --y);
         return y;
     }

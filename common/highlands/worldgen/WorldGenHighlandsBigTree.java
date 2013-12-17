@@ -60,6 +60,14 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         trunkSize = trunkDiameter;
         heightLimit = treeHeightLim;
     }
+    
+    public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){
+    	int id = world.getBlockId(locX, locY, locZ);
+    	int meta = world.getBlockMetadata(locX, locY, locZ);
+    	boolean flag = generate(world, random, locX, locY, locZ);
+    	if(!flag) world.setBlock(locX, locY, locZ, id, meta, 3);
+    	return flag;
+    }
 
     /**
      * Generates a list of leaf nodes for the tree, to be populated by generateLeaves.

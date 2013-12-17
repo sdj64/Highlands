@@ -3,7 +3,6 @@ package highlands.biome;
 import java.util.Random;
 
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -53,7 +52,7 @@ public class BiomeGenOcean2 extends BiomeGenBaseHighlands
     	*/
 
         biomedec.decorate(world, par2Random, par3, par4);
-        HighlandsMain.genOreHighlands(world, par2Random, par3, par4, 10, HighlandsMain.HLwater, 0, 64);
-	    HighlandsMain.genOreHighlands(world, par2Random, par3, par4, 10, HighlandsMain.HLsand, 0, 64);
+        biomedec.genOreHighlands(world, par2Random, par3, par4, 10, biomedec.HLwater, 0, 64);
+	    biomedec.genOreHighlands(world, par2Random, par3, par4, 10, biomedec.HLsand, 0, 64);
     }
 }

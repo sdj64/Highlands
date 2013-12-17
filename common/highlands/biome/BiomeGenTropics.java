@@ -1,6 +1,7 @@
 package highlands.biome;
 
 import java.util.Random;
+
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.SpawnListEntry;
@@ -13,7 +14,6 @@ import net.minecraft.world.gen.feature.WorldGenVines;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBlocks;
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
 import highlands.worldgen.WorldGenTreeCanopy;
@@ -85,9 +85,9 @@ public class BiomeGenTropics extends BiomeGenBaseHighlands
             var5.generate(par1World, par2Random, var7, var8, var9);
         }
         
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 8, biomedec.redstoneGen, 0, 16);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.lapisGen, 0, 32);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 10, HighlandsMain.HLsand, 0, 64);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 8, biomedec.redstoneGen, 0, 16);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.lapisGen, 0, 32);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 10, biomedec.HLsand, 0, 64);
     }
     
 }

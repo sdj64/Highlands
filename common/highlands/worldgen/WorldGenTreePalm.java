@@ -49,10 +49,9 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
     	this.random = random;
     	
 
-    	locY = findTopBlock(locX, locZ);
         
-        if(!(world.getBlockId(locX, locY, locZ) == Block.grass.blockID || world.getBlockId(locX, locY, locZ) == Block.dirt.blockID
-        		|| world.getBlockId(locX, locY, locZ) == Block.sand.blockID))return false;
+        if(!isLegalTreePosition(world, locX, locY, locZ)
+        		&& world.getBlockId(locX, locY-1, locZ) != Block.sand.blockID)return false;
         if(!isCubeClear(locX, locY+3, locZ, 1, 4))return false;
         
         //generates trunk

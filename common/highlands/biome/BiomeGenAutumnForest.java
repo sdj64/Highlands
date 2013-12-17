@@ -4,7 +4,6 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
@@ -12,12 +11,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTaiga1;
 import net.minecraft.world.gen.feature.WorldGenTaiga2;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.world.biome.SpawnListEntry;
 import highlands.api.HighlandsBlocks;
 import highlands.HighlandsMain;
-import highlands.worldgen.BiomeDecoratorHighlands;
 import highlands.worldgen.WorldGenAutumnTree;
 import highlands.worldgen.WorldGenHighlandsBigTree;
 import highlands.worldgen.WorldGenAutumnBigTree;
@@ -88,7 +85,7 @@ public class BiomeGenAutumnForest extends BiomeGenBaseHighlands
     public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
         biomedec.decorate(par1World, par2Random, par3, par4);
-        HighlandsMain.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
     }
     
     /*
