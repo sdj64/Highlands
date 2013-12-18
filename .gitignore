@@ -1,0 +1,30 @@
+# gradle
+.gradle
+build
+
+# ForgeGradle
+/run
+
+# eclipse
+assets
+!src/main/resources/assets
+.settings
+.metadata
+.classpath
+.project
+bin
+
+# intellij
+out
+*.idea
+*.iml
+*.iws
+*.ipr
+
+# minecraft
+saves
+mods
+stats
+config
+resourcepacks
+*.log*
