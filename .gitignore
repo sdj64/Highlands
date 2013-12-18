@@ -28,3 +28,4 @@ stats
 config
 resourcepacks
 *.log*
+options.txt

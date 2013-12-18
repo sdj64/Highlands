@@ -13,12 +13,21 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0"
-group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+version = "2.1.5"
+group= "highlands"
+archivesBaseName = "Highlands"
 
 minecraft {
 	version = "1.6.4-9.11.1.964"
+	assetDir = 'run/assets'
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'resources'
+        }
+    }
 }
 
 processResources

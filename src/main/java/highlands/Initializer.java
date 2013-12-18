@@ -31,8 +31,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class Initializer
 {
-	
-
 	private static String biomePrefix = "";
 	
 	public static void constructSettings()
@@ -138,9 +136,9 @@ public class Initializer
 		HighlandsBlocks.ashLeaves = new BlockHighlandsLeaves(Config.ashLeavesID.getInt(), 13).setHardness(0.2F)
 				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_ashLeaves");
 		HighlandsBlocks.autumnYellowLeaves = new BlockHighlandsLeaves(Config.autumnYellowLeavesID.getInt(), 14).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_yellowLeaves");
+				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_autumnYellowLeaves");
 		HighlandsBlocks.autumnOrangeLeaves = new BlockHighlandsLeaves(Config.autumnOrangeLeavesID.getInt(), 15).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_orangeLeaves");
+				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_autumnOrangeLeaves");
 		
 		//Plants
 		HighlandsBlocks.blueFlower = new BlockHighlandsSmallPlants(Config.blueFlowerID.getInt(), 0).setHardness(0.0F)
@@ -755,11 +753,3 @@ public class Initializer
 		}
 	}
 }
-
-
-
-
-
-
-
-

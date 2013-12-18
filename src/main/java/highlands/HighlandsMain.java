@@ -10,7 +10,6 @@ import java.util.Random;
 
 import cpw.mods.fml.common.Loader;
 
-
 //don't need these imports after testing is over
 
 import highlands.HighlandsCompatibilityManager;
@@ -20,8 +19,6 @@ import highlands.biome.BiomeGenBaseHighlands;
 import highlands.biome.BiomeGenDesertMountains;
 import highlands.biome.BiomeGenRockMountains;
 import highlands.biome.BiomeGenSnowMountains;
-//
-
 import highlands.block.BlockCocoaPlant2;
 import highlands.block.BlockHighlandsLeaves;
 import highlands.block.BlockHighlandsLog;
@@ -29,6 +26,7 @@ import highlands.block.BlockHighlandsSapling;
 import highlands.block.ItemBlockMetadata;
 import highlands.block.ItemHighlandsBerries;
 import highlands.worldgen.WorldGenUnderground2;
+
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -40,9 +38,11 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.WorldType;
+
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -54,7 +54,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="Highlands", name="Highlands", version="2.1.4",
+@Mod(modid="Highlands", name="Highlands", version="2.1.5",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class HighlandsMain {
@@ -239,17 +239,7 @@ public class HighlandsMain {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	
-	
-
-	
-
-	
-	
-	
-	
+	}	
 	
 	//method to print debug info
 	public static void debug(){
@@ -270,11 +260,3 @@ public class HighlandsMain {
 		}
 	}
 }
-
-
-
-
-
-
-
-
