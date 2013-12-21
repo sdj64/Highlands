@@ -18,7 +18,7 @@ tile.hl_ashSapling.name=Ash Sapling
 tile.hl_autumnYellowSapling.name=Yellow Autumn Sapling
 tile.hl_autummnOrangeSapling.name=Orange Autumn Sapling
 	
-	<!-- Logs -->
+<!-- Logs -->
 tile.hl_acaciaWood.name=Acacia Wood Log
 tile.hl_beechWood.name=Beech Wood Log
 tile.hl_canopyWood.name=Canopy Wood Log
@@ -28,7 +28,8 @@ tile.hl_redwoodWood.name=Redwood Wood Log
 tile.hl_palmWood.name=Palm Wood Log
 tile.hl_ironwoodWood.name=Ironwood Wood Log
 tile.hl_mangroveWood.name=Mangrove Wood Log
-tile.hl_ashWood.name=Ash Wood Log	
+tile.hl_ashWood.name=Ash Wood Log
+
 <!-- Wood -->
 tile.hl_woodPlanks0.name=Yellow Wood Planks
 tile.hl_woodPlanks1.name=White Wood Planks
