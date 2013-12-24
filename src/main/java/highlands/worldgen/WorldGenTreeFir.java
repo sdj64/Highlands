@@ -79,39 +79,44 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     	}
     	
     	//generates the leaves
+    	double leafRadius = 4.5;
+    	double finalRadius = 2.5;
+    	
     	int h0 = 6;
     	if(treeHeight < 16) h0 = 3;
     	int h;
     	for(h = locY + h0; h < treeHeight + locY; h++){
     		//level 1
     		if(isWide){
-    			generateLeafLayerCircle(world, random, 4.5, locX, locZ, h);
+    			generateLeafLayerCircleNoise(world, random, leafRadius + 1, locX, locZ, h);
     			h++;
     		}
     		//level 2
-    		generateLeafLayerCircle(world, random, 3.5, locX, locZ, h);
+    		generateLeafLayerCircleNoise(world, random, leafRadius, locX, locZ, h);
     		h++;
     		//level 3
-    		generateLeafLayerCircle(world, random, 2.5, locX, locZ, h);
+    		generateLeafLayerCircleNoise(world, random, leafRadius - 1, locX, locZ, h);
     		//if not wide, gen a smaller layer
     		if(!isWide){
     			h++;
-    			generateLeafLayerCircle(world, random, 2, locX, locZ, h);
+    			generateLeafLayerCircleNoise(world, random, leafRadius - 1.5, locX, locZ, h);
     		}
+    		
+    		leafRadius -= (leafRadius - finalRadius)/3.0;
     		
     	}
     	//generate top of tree
     	if(isWide){
-    		generateLeafLayerCircle(world, random, 2, locX, locZ, h);
+    		generateLeafLayerCircleNoise(world, random, 2, locX, locZ, h);
     		h++;
     	}
-    	generateLeafLayerCircle(world, random, 1.5, locX, locZ, h);
+    	generateLeafLayerCircleNoise(world, random, 1.5, locX, locZ, h);
     	h++;
-    	generateLeafLayerCircle(world, random, 1, locX, locZ, h);
+    	generateLeafLayerCircleNoise(world, random, 1, locX, locZ, h);
     	h++;
-    	if(world.getBlockId(locX, h, locZ) == 0)setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+    	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
     	h++;
-    	if(world.getBlockId(locX, h, locZ) == 0)setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+    	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
     	return true;
     }
     

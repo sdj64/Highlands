@@ -69,19 +69,19 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
 		}
 		
 		h = locY + treeHeight - 2;
-		generateLeafLayerCircle(world, random, 3.5, locX, locZ, h);
+		generateLeafLayerCircleNoise(world, random, 3.5, locX, locZ, h);
 		h++;
-		generateLeafLayerCircle(world, random, 2.5, locX, locZ, h);
+		generateLeafLayerCircleNoise(world, random, 2.5, locX, locZ, h);
 		h++;
-		generateLeafLayerCircle(world, random, 2, locX, locZ, h);
+		generateLeafLayerCircleNoise(world, random, 2, locX, locZ, h);
 		h++;
-		generateLeafLayerCircle(world, random, 1.5, locX, locZ, h);
+		generateLeafLayerCircleNoise(world, random, 1.5, locX, locZ, h);
 		h++;
-		generateLeafLayerCircle(world, random, 1, locX, locZ, h);
+		generateLeafLayerCircleNoise(world, random, 1, locX, locZ, h);
 		h++;
-		generateLeafLayerCircle(world, random, 0, locX, locZ, h);
+		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
 		h++;
-		generateLeafLayerCircle(world, random, 0, locX, locZ, h);
+		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
 		return true;
     }
 }

@@ -138,7 +138,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     	}
     }
     
-    //same as GenerateStraightBranch but downward (for Arau tree)
+    //same as GenerateStraightBranch but downward
     protected int[] generateStraightBranchDown(World world, Random random, int length, int locX, int locY, int locZ, int dir){
     	int direction = -1;
     	if(dir < 2)
@@ -161,7 +161,6 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
 	protected void generateSequoiaBranch(World world, Random random, double length, int xo, int zo, int h){
 		for(int i = 0; i < length; i++){
 			int j = i - 3;
-			//System.out.println("Generating braches");
 			//east
 			setBlockInWorld(xo+i, h, zo, this.woodID, this.woodMeta+4);
 			if(length > 3 && j > 0 && i < length - 1){
@@ -191,15 +190,15 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
 			if(i == length - 2){
 				double lr = 3.5;
 				//if(length > 6)lr++;
-				generateLeafLayerCircle(world, random, lr, xo+i, zo, h+1);
-				generateLeafLayerCircle(world, random, lr, xo-i, zo, h+1);
-				generateLeafLayerCircle(world, random, lr, xo, zo+i, h+1);
-				generateLeafLayerCircle(world, random, lr, xo, zo-i, h+1);
+				generateLeafLayerCircleNoise(world, random, lr, xo+i, zo, h+1);
+				generateLeafLayerCircleNoise(world, random, lr, xo-i, zo, h+1);
+				generateLeafLayerCircleNoise(world, random, lr, xo, zo+i, h+1);
+				generateLeafLayerCircleNoise(world, random, lr, xo, zo-i, h+1);
 				lr--;
-				generateLeafLayerCircle(world, random, lr, xo+i, zo, h+2);
-				generateLeafLayerCircle(world, random, lr, xo-i, zo, h+2);
-				generateLeafLayerCircle(world, random, lr, xo, zo+i, h+2);
-				generateLeafLayerCircle(world, random, lr, xo, zo-i, h+2);
+				generateLeafLayerCircleNoise(world, random, lr, xo+i, zo, h+2);
+				generateLeafLayerCircleNoise(world, random, lr, xo-i, zo, h+2);
+				generateLeafLayerCircleNoise(world, random, lr, xo, zo+i, h+2);
+				generateLeafLayerCircleNoise(world, random, lr, xo, zo-i, h+2);
 			}
 		}
 		/*
