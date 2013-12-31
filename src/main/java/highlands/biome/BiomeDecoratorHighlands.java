@@ -132,8 +132,8 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
 	    }
 		
 		//Ore Generators
-		public static WorldGenerator HLsand = new WorldGenMinable(Block.sand.blockID, 32);
-		public static WorldGenerator HLice = new WorldGenMinable(Block.sand.blockID, 32);;
+		public static WorldGenerator HLsand = new WorldGenMinable(Block.sandStone.blockID, 32);
+		public static WorldGenerator HLice = new WorldGenMinable(Block.ice.blockID, 32);
 		public static WorldGenerator HLwater = new WorldGenUnderground2(Block.waterStill.blockID, 4);
 		public static WorldGenerator HLlava = new WorldGenUnderground2(Block.lavaStill.blockID, 8);
 		public static WorldGenerator HLdirt = new WorldGenUnderground2(Block.dirt.blockID, 72, Block.sand.blockID);
