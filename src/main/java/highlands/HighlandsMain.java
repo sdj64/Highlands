@@ -12,7 +12,6 @@ import cpw.mods.fml.common.Loader;
 
 //don't need these imports after testing is over
 
-import highlands.HighlandsCompatibilityManager;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
 import highlands.biome.BiomeGenBaseHighlands;
@@ -25,8 +24,8 @@ import highlands.block.BlockHighlandsLog;
 import highlands.block.BlockHighlandsSapling;
 import highlands.block.ItemBlockMetadata;
 import highlands.block.ItemHighlandsBerries;
+import highlands.integration.HighlandsCompatibilityManager;
 import highlands.worldgen.WorldGenUnderground2;
-
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -38,11 +37,9 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.WorldType;
-
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
 import highlands.block.BlockHighlandsSapling;
+import highlands.integration.HighlandsCompatibilityManager;
 import highlands.worldgen.layer.GenLayerHL;
 import net.minecraft.block.Block;
 import net.minecraft.stats.AchievementList;

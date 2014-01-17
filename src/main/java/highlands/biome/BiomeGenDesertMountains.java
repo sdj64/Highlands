@@ -48,7 +48,7 @@ public class BiomeGenDesertMountains extends BiomeGenBaseHighlands
     
     public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
-    	if(par2Random.nextInt(4) == 0 && !par1World.provider.terrainType.getTranslateName().equals("ATG - Alternate"))
+    	if(par2Random.nextInt(4) == 0)
     		new WorldGenMountain(15, 20, false, 2).generate(par1World, par2Random, par3+par2Random.nextInt(16), 128, par4+par2Random.nextInt(16));
     	
         biomedec.decorate(par1World, par2Random, par3, par4);

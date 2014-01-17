@@ -521,7 +521,7 @@ public class Initializer
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 1), "White Wood Planks");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 2), "Red Wood Planks");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 3), "Grey Wood Planks");
-			//OreDictionary.registerOre("plankWood", new ItemStack(HighlandsBlocks.hlplanks, 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("plankWood", new ItemStack(HighlandsBlocks.hlplanks, 1, OreDictionary.WILDCARD_VALUE));
 		}
 		
 		//Planks - stairs
@@ -686,7 +686,7 @@ public class Initializer
 	
 	public static void registerBlock(Block b, String name){
 		GameRegistry.registerBlock(b, b.getUnlocalizedName());
-		//LanguageRegistry.addName(b, name);
+		LanguageRegistry.addName(b, name);
 	}
 	
 	//sets up sub-biome lists after all biomes are initialized.

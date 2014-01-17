@@ -1,8 +1,9 @@
-package highlands;
+package highlands.integration;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
 import forestry.api.apiculture.FlowerManager;
 import forestry.api.recipes.RecipeManagers;
+import highlands.Config;
 import highlands.api.HighlandsBlocks;
 import highlands.block.BlockHighlandsLeaves;
 import highlands.block.BlockHighlandsLog;
@@ -386,54 +387,103 @@ public class HighlandsCompatibilityManager{
         BiomeType coast = BiomeType.COAST;
         BiomeType sea = BiomeType.SEA;
         
-        ATGBiomes.addBiomeGroup(land, "Mountains", 0.3, 0.5, 1.0, 0.75, 2.5, 10);
+        //ATGBiomes.addBiomeGroup(land, "Mountains", 0.3, 0.5, 1.0, 0.75, 2.5, 10);
         ATGBiomes.addBiomeGroup(land, "Hills", 0.6, 0.3, 1.0, 0.5, 1.5, 0);
-        ATGBiomes.addBiomeGroup(sea, "Island", 0.5, 0.5, 0.3, 0.0, 0.5, 0);
+        ATGBiomes.addBiomeGroup(sea, "Island", 0.5, 0.5, 0.3, -0.5, 0.5, 0);
         
+        GenModIsland genIsland = new GenModIsland();
+    	GenModValley genValley = new GenModValley();
+    	
         ATGBiomes.modGroupSuitability(land, "Hills", .2);
         ATGBiomes.modGroupSuitability(land, "Tropical Shrubland", -.3);
         ATGBiomes.modGroupSuitability(land, "Mountains", .1);
         ATGBiomes.modGroupSuitability(land, "Shrubland", -.1);
+        ATGBiomes.modGroupSuitability(land, "Island", -.3);
         
-        ATGBiomes.addBiome(land, "Taiga", HighlandsBiomes.tallPineForest, 1.0);
-        ATGBiomes.addBiome(land, "Desert", HighlandsBiomes.dunes, 1.0);
+        if(Config.tallPineForestGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Taiga", HighlandsBiomes.tallPineForest, 1.0);
+        if(Config.dunesGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Desert", HighlandsBiomes.dunes, 1.0);
         //ATGBiomes.addBiome(land, "Forest", HighlandsBiomes.woodsMountains, 0.0);  //Woodland Mountains doesn't fit with ATG
-        ATGBiomes.addBiome(land, "Forest", HighlandsBiomes.autumnForest, 1.0);
-        ATGBiomes.addBiome(land, "Forest", HighlandsBiomes.redwoodForest, 1.0);
+        if(Config.autumnForestGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Forest", HighlandsBiomes.autumnForest, 1.0);
+        if(Config.redwoodForestGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Forest", HighlandsBiomes.redwoodForest, 1.0);
         //ATGBiomes.addBiome(land, "Forest", HighlandsBiomes.flyingMountains, 0.0); //Flying Mountains doesn't fit with ATG
-        ATGBiomes.addBiome(land, "Mountains", HighlandsBiomes.cliffs, 1.0);
-        ATGBiomes.addBiome(land, "Taiga", HighlandsBiomes.alps, 1.0);
-        ATGBiomes.addBiome(land, "Mountains", HighlandsBiomes.snowMountains, 1.0);
-        ATGBiomes.addBiome(land, "Ice Plains", HighlandsBiomes.glacier, 1.0);
-        ATGBiomes.addBiome(land, "Jungle", HighlandsBiomes.tropics, 1.0);
-        ATGBiomes.addBiome(land, "Jungle", HighlandsBiomes.rainforest, 1.0);
-        ATGBiomes.addBiome(land, "Desert", HighlandsBiomes.outback, 1.0);
-        ATGBiomes.addBiome(land, "Mesa", HighlandsBiomes.badlands, 1.0);
-        //ATGBiomes.addBiome(land, "Mountains", HighlandsBiomes.desertMountains, 1.0);
-        ATGBiomes.addBiome(land, "Tropical Shrubland", HighlandsBiomes.tropicalIslands, 1.0);
-        ATGBiomes.addBiome(land, "Savanna", HighlandsBiomes.savannah, 1.0);
-        ATGBiomes.addBiome(land, "Savanna", HighlandsBiomes.sahel, 1.0);
-        ATGBiomes.addBiome(land, "Plains", HighlandsBiomes.meadow, 1.0);
-        ATGBiomes.addBiome(land, "Shrubland", HighlandsBiomes.shrubland, 1.0);
-        ATGBiomes.addBiome(land, "Woodland", HighlandsBiomes.highlandsb, 1.0);
-        ATGBiomes.addBiome(land, "Mountains", HighlandsBiomes.rockMountains, 1.0);
-        ATGBiomes.addBiome(land, "Mesa", HighlandsBiomes.steppe, 1.0);
-        ATGBiomes.addBiome(coast, "Swampland", HighlandsBiomes.bog, 0.5);
-        ATGBiomes.addBiome(coast, "Swampland", HighlandsBiomes.estuary, 1.0);
-        ATGBiomes.addBiome(land, "Boreal Forest", HighlandsBiomes.pinelands, 1.0);
-        ATGBiomes.addBiome(land, "Tundra", HighlandsBiomes.tundra, 1.0);
-        ATGBiomes.addBiome(land, "Shrubland", HighlandsBiomes.lowlands, 1.0);
-        ATGBiomes.addBiome(land, "Forest", HighlandsBiomes.woodlands, 1.0);
-        ATGBiomes.addBiome(land, "Woodland", HighlandsBiomes.birchHills, 0.5);
-        ATGBiomes.addBiome(sea, "Deep Ocean", HighlandsBiomes.ocean2, 1.0);
+        if(Config.cliffsGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Hills", HighlandsBiomes.cliffs, 1.0);
+        if(Config.alpsGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Taiga", HighlandsBiomes.alps, 1.0);
+        //ATGBiomes.addBiome(land, "Mountains", HighlandsBiomes.snowMountains, 1.0);
+        if(Config.glacierGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Ice Plains", HighlandsBiomes.glacier, 1.0);
+        if(Config.tropicsGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Jungle", HighlandsBiomes.tropics, 1.0);
         
-        ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.desertIsland, 1.0);
-        ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.forestIsland, 1.0);
-        ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.snowIsland, 1.0);
-        ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.jungleIsland, 1.0);
-        ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.windyIsland, 1.0);
-        ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.rockIsland, 1.0);
+        if(Config.rainforestGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Jungle", HighlandsBiomes.rainforest, 1.0);
+        if(Config.outbackGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Desert", HighlandsBiomes.outback, 1.0);
+        if(Config.badlandsGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(land, "Mesa", HighlandsBiomes.badlands, 1.0);
+        	ATGBiomes.addBiome(land, "Hills", HighlandsBiomes.badlands, 1.0);}
+        //ATGBiomes.addBiome(land, "Mountains", HighlandsBiomes.desertMountains, 1.0);
+        if(Config.tropicalIslandsGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Tropical Shrubland", HighlandsBiomes.tropicalIslands, 1.0);
+        if(Config.savannahGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Savanna", HighlandsBiomes.savannah, 1.0);
+        if(Config.sahelGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Savanna", HighlandsBiomes.sahel, 1.0);
+        if(Config.meadowGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Plains", HighlandsBiomes.meadow, 1.0);
+        if(Config.shrublandGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Shrubland", HighlandsBiomes.shrubland, 1.0);
+        if(Config.highlandsbGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(land, "Hills", HighlandsBiomes.highlandsb, 1.0);
+        	ATGBiomes.addBiome(land, "Woodland", HighlandsBiomes.highlandsb, 1.0);}
+        //ATGBiomes.addBiome(land, "Mountains", HighlandsBiomes.rockMountains, 1.0);
+        if(Config.steppeGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Mesa", HighlandsBiomes.steppe, 1.0);
+        if(Config.bogGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(coast, "Swampland", HighlandsBiomes.bog, 0.5);
+        if(Config.estuaryGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(coast, "Swampland", HighlandsBiomes.estuary, 1.0);
+        if(Config.pinelandsGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(land, "Boreal Forest", HighlandsBiomes.pinelands, 1.0);
+        	ATGBiomes.addBiome(land, "Hills", HighlandsBiomes.pinelands, 1.0);}
+        if(Config.tundraGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Tundra", HighlandsBiomes.tundra, 1.0);
+        if(Config.lowlandsGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(land, "Shrubland", HighlandsBiomes.lowlands, 1.0);
+        	ATGBiomes.addBiome(land, "Woodland", HighlandsBiomes.lowlands, 1.0);}
+        if(Config.woodlandsGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Forest", HighlandsBiomes.woodlands, 1.0);
+        if(Config.birchHillsGenerate.getBoolean(true))
+        	ATGBiomes.addBiome(land, "Woodland", HighlandsBiomes.birchHills, 0.5);
+        if(Config.ocean2Generate.getBoolean(true))
+        	ATGBiomes.addBiome(sea, "Deep Ocean", HighlandsBiomes.ocean2, 1.0);
+        
+        /*
+        if(Config.desertIslandGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.desertIsland, 1.0);
+        	ATGBiomes.addGenMod(HighlandsBiomes.desertIsland, genIsland);}
+        if(Config.forestIslandGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.forestIsland, 1.0);
+        	ATGBiomes.addGenMod(HighlandsBiomes.forestIsland, genIsland);}
+        if(Config.snowIslandGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.snowIsland, 1.0);
+        	ATGBiomes.addGenMod(HighlandsBiomes.snowIsland, genIsland);}
+        if(Config.jungleIslandGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.jungleIsland, 1.0);
+        	ATGBiomes.addGenMod(HighlandsBiomes.jungleIsland, genIsland);}
+        if(Config.windyIslandGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.windyIsland, 1.0);
+        	ATGBiomes.addGenMod(HighlandsBiomes.windyIsland, genIsland);}
+        if(Config.rockIslandGenerate.getBoolean(true)){
+        	ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.rockIsland, 1.0);
+        	ATGBiomes.addGenMod(HighlandsBiomes.rockIsland, genIsland);}
         //ATGBiomes.addBiome(sea, "Island", HighlandsBiomes.volcanoIsland, 1.0);
+        */
         
         /*
         ATGBiomes.addSubBiome(HighlandsBiomes.ocean2, HighlandsBiomes.desertIsland, 1.0);
@@ -444,14 +494,15 @@ public class HighlandsCompatibilityManager{
         ATGBiomes.addSubBiome(HighlandsBiomes.ocean2, HighlandsBiomes.rockIsland, 1.0);
         ATGBiomes.addSubBiome(HighlandsBiomes.ocean2, HighlandsBiomes.volcanoIsland, 1.0);
         */
-        ATGBiomes.addSubBiome(HighlandsBiomes.badlands, HighlandsBiomes.canyon, 1.0);
-        ATGBiomes.addSubBiome(HighlandsBiomes.cliffs, HighlandsBiomes.valley, 1.0);
-        ATGBiomes.addSubBiome(HighlandsBiomes.dunes, HighlandsBiomes.oasis, 0.2);
+        if(Config.valleyGenerate.getBoolean(true) && Config.cliffsGenerate.getBoolean(true))
+        	ATGBiomes.addSubBiome(HighlandsBiomes.cliffs, HighlandsBiomes.valley, 1.0);
+        if(Config.oasisGenerate.getBoolean(true) && Config.dunesGenerate.getBoolean(true))
+        	ATGBiomes.addSubBiome(HighlandsBiomes.dunes, HighlandsBiomes.oasis, 0.2);
         //ATGBiomes.addSubBiome(HighlandsBiomes.savannah, HighlandsBiomes.mesa, 0.5); //modify
         //ATGBiomes.addGenMod(HighlandsBiomes.mesa, new GenModMesa());
-        ATGBiomes.addSubBiome(HighlandsBiomes.woodlands, HighlandsBiomes.baldHill, 0.5); //modify
+        if(Config.baldHillGenerate.getBoolean(true) && Config.woodlandsGenerate.getBoolean(true))
+        	ATGBiomes.addSubBiome(HighlandsBiomes.woodlands, HighlandsBiomes.baldHill, 0.5); //modify
         //ATGBiomes.addGenMod(HighlandsBiomes.baldHill, new GenModMesa());
-        ATGBiomes.addSubBiome(HighlandsBiomes.lowlands, HighlandsBiomes.lake, 1.0);
         
 	}
 
