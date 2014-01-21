@@ -12,6 +12,7 @@ import highlands.worldgen.WorldGenUnderground2;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -29,8 +30,8 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands{
 	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
 	    
 	    this.spawnableCreatureList.clear();
-	    this.topBlock = (byte)Block.blockSnow.blockID;
-	    this.fillerBlock = (byte)Block.blockSnow.blockID;
+	    this.topBlock = (Block)Blocks.snow;
+	    this.fillerBlock = (Block)Blocks.snow;
 	        
 	    this.maxHeight = 1.6F;
 	    this.minHeight = 0.8F;
@@ -54,11 +55,13 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands{
             int var7 = par3 + par2Random.nextInt(16);
             int var8 = par2Random.nextInt(28) + 4;
             int var9 = par4 + par2Random.nextInt(16);
-            int var10 = par1World.getBlockId(var7, var8, var9);
+            //TODO-                 getBlock
+            Block var10 = par1World.func_147439_a(var7, var8, var9);
 
-            if (var10 == Block.stone.blockID)
+            if (var10 == Blocks.stone)
             {
-                par1World.setBlock(var7, var8, var9, Block.oreEmerald.blockID, 0, 2);
+            	//TODO-   setBlock
+                par1World.func_147465_d (var7, var8, var9, Blocks.emerald_ore, 0, 2);
             }
         }
         

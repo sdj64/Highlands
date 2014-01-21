@@ -1,37 +1,31 @@
 package highlands.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import highlands.api.HighlandsBlocks;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import highlands.HighlandsMain;
-import highlands.api.HighlandsBlocks;
+import javax.swing.Icon;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.IShearable;
-import powercrystals.minefactoryreloaded.api.HarvestType;
-import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,IFactoryHarvestable
+public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
 {
 	private String[] treeNames = 
 		{
@@ -57,21 +51,26 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
 			30, 20, 20, 40, 20, 0, 0, 0, 0, 0, 12, 75, 15, 25, 20, 20
 	};
     
-    private Icon textureFast;
-    private Icon textureFancy;
+    private IIcon textureFast;
+    private IIcon textureFancy;
     
     private int treeType;
     
     int[] adjacentTreeBlocks;
 
-    public BlockHighlandsLeaves(int id, int type)
+    public BlockHighlandsLeaves(int type)
     {
-        super(id, Material.leaves, false);
-        this.setTickRandomly(true);
+    	//TODO- Material.leaves
+        super(Material.field_151584_j, false);
+        this.func_149675_a(true);
         this.treeType = type;
-        setLightOpacity(1);
-        this.setCreativeTab(CreativeTabs.tabDecorations);
-        this.setBurnProperties(this.blockID, 30, 60);
+        this.func_149713_g(1);
+        //TODO- setStepSound
+        this.func_149672_a(field_149779_h);
+        //TODO-setCreativeTab
+        this.func_149647_a(CreativeTabs.tabDecorations);
+        //TODO- setBurnProperties (fix this)
+        
     }
 
     @SideOnly(Side.CLIENT)
@@ -102,7 +101,8 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    //TODO-     breakBlock
+    public void func_149749_a(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
         byte b0 = 1;
         int j1 = b0 + 1;
@@ -115,11 +115,12 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
                 {
                     for (int i2 = -b0; i2 <= b0; ++i2)
                     {
-                        int j2 = par1World.getBlockId(par2 + k1, par3 + l1, par4 + i2);
+                    	//TODO- getBlock
+                        Block j2 = par1World.func_147439_a(par2 + k1, par3 + l1, par4 + i2);
 
-                        if (Block.blocksList[j2] != null)
+                        if (j2.isLeaves(par1World, par2 + k1, par3 + l1, par4 + i2))
                         {
-                            Block.blocksList[j2].beginLeavesDecay(par1World, par2 + k1, par3 + l1, par4 + i2);
+                            j2.beginLeavesDecay(par1World, par2 + k1, par3 + l1, par4 + i2);
                         }
                     }
                 }
@@ -130,7 +131,8 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
     /**
      * Ticks the block if it's been scheduled
      */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    //TODO-     updateTick
+    public void func_149674_a(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote)
         {
@@ -163,9 +165,8 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
                         {
                             for (j2 = -b0; j2 <= b0; ++j2)
                             {
-                                k2 = par1World.getBlockId(par2 + l1, par3 + i2, par4 + j2);
-
-                                Block block = Block.blocksList[k2];
+                            	//TODO-                 getBlock
+                                Block block = par1World.func_147439_a(par2 + l1, par3 + i2, par4 + j2);
 
                                 if (block != null && block.canSustainLeaves(par1World, par2 + l1, par3 + i2, par4 + j2))
                                 {
@@ -248,10 +249,12 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
-    public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    //TODO-     randomDisplayTick
+    public void func_149734_b(World par1World, int par2, int par3, int par4, Random par5Random)
     {
-    	super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
-        if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
+    	super.func_149734_b(par1World, par2, par3, par4, par5Random);
+    	//TODO-                                                                doesBlockHaveSolidTopSurface
+        if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !par1World.func_147466_a(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
         {
             double d0 = (double)((float)par2 + par5Random.nextFloat());
             double d1 = (double)par3 - 0.05D;
@@ -262,8 +265,10 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
 
     private void removeLeaves(World par1World, int par2, int par3, int par4)
     {
-        this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-        par1World.setBlockToAir(par2, par3, par4);
+    	//TODO- dropBlockAsItem
+        this.func_149697_b(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+        //TODO-   setBlockToAir
+        par1World.func_147468_f(par2, par3, par4);
     }
 
     /**
@@ -277,30 +282,33 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public int idDropped(int par1, Random par2Random, int par3)
+    //TODO-      idDropped
+    public Item func_149650_a(int par1, Random par2Random, int par3)
     {
-    	if(treeType == 0)return HighlandsBlocks.firSapling.blockID;
-    	if(treeType == 1)return HighlandsBlocks.acaciaSapling.blockID;
-    	if(treeType == 2)return HighlandsBlocks.poplarSapling.blockID;
-    	if(treeType == 3)return HighlandsBlocks.redwoodSapling.blockID;
-    	if(treeType == 4)return HighlandsBlocks.canopySapling.blockID;
-    	if(treeType == 10)return HighlandsBlocks.palmSapling.blockID;
-    	if(treeType == 11)return HighlandsBlocks.ironwoodSapling.blockID;
-    	if(treeType == 12)return HighlandsBlocks.mangroveSapling.blockID;
-    	if(treeType == 13)return HighlandsBlocks.ashSapling.blockID;
-    	if(treeType == 14)return HighlandsBlocks.autumnOrangeSapling.blockID;
-    	if(treeType == 15)return HighlandsBlocks.autumnYellowSapling.blockID;
-        return Block.sapling.blockID;//ADD DIFFERENT SAPLINGS
+    	//TODO-                      magicMumboJumboThatMakesThisWork
+    	if(treeType == 0)return Item.func_150898_a(HighlandsBlocks.firSapling);
+    	if(treeType == 1)return Item.func_150898_a(HighlandsBlocks.acaciaSapling);
+    	if(treeType == 2)return Item.func_150898_a(HighlandsBlocks.poplarSapling);
+    	if(treeType == 3)return Item.func_150898_a(HighlandsBlocks.redwoodSapling);
+    	if(treeType == 4)return Item.func_150898_a(HighlandsBlocks.canopySapling);
+    	if(treeType == 10)return Item.func_150898_a(HighlandsBlocks.palmSapling);
+    	if(treeType == 11)return Item.func_150898_a(HighlandsBlocks.ironwoodSapling);
+    	if(treeType == 12)return Item.func_150898_a(HighlandsBlocks.mangroveSapling);
+    	if(treeType == 13)return Item.func_150898_a(HighlandsBlocks.ashSapling);
+    	if(treeType == 14)return Item.func_150898_a(HighlandsBlocks.autumnOrangeSapling);
+    	if(treeType == 15)return Item.func_150898_a(HighlandsBlocks.autumnYellowSapling);
+        return Item.func_150898_a(Blocks.sapling);//ADD DIFFERENT SAPLINGS
     }
 
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
+    //TODO-     dropBlockAsItemWithChance
+    public void func_149690_a(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
     {
     	if (!par1World.isRemote)
         {
-            ArrayList<ItemStack> items = getBlockDropped(par1World, par2, par3, par4, par5, par7);
+            ArrayList<ItemStack> items = func_149650_a(par5, par1World.rand, par7);;
 
             for (ItemStack item : items)
             {
@@ -503,5 +511,19 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable,
 
 	@Override
 	public void postHarvest(World world, int x, int y, int z) {
+	}
+
+	@Override
+	public boolean isShearable(ItemStack item, IBlockAccess world, int x,
+			int y, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
+			int x, int y, int z, int fortune) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

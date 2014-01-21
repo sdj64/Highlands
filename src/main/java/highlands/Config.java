@@ -1,8 +1,8 @@
 package highlands;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 public class Config
 {
@@ -196,7 +196,6 @@ public class Config
 	public static void setUpConfig(Configuration config)
 	{
 		addBiomeEntries(config);
-		addBlockEntries(config);
 		addSettingsEntries(config);
 	}
 	
@@ -307,63 +306,6 @@ public class Config
 		taigaGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Taiga Generate", true);
 	}
 
-	private static void addBlockEntries(Configuration config) 
-	{
-		acaciaSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Acacia Sapling ID", 714);
-		beechSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Beech Sapling ID", 715);
-		canopySaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Canopy Tree Sapling ID", 716);
-		deadSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Dead Tree Sapling ID", 717);
-		greatOakSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Great Oak Sapling ID", 718);
-		firSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Fir Sapling ID", 719);
-		poplarSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Poplar Sapling ID", 720);
-		redwoodSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Redwood Sapling ID", 721);
-		evergreenBushSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Evergreen Bush Sapling ID", 722);
-		deciduousBushSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Deciduous Bush Sapling ID", 723);
-		palmSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Palm Sapling ID", 724);
-		ironwoodSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Ironwood Sapling ID", 725);
-		mangroveSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Mangrove Sapling ID", 726);
-		ashSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Ash Tree Sapling ID", 727);
-		autumnYellowSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Autumn Yellow Sapling ID", 728);
-		autumnOrangeSaplingID = config.getBlock(CATEGORY_BLOCK_ID, "Autumn Orange Sapling ID", 729);
-		acaciaWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Acacia Log ID", 730);
-		canopyWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Canopy Tree Log ID", 731);
-		firWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Fir Log ID", 732);
-		poplarWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Poplar Log ID", 733);
-		redwoodWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Redwood Log ID", 734);
-		palmWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Palm Log ID", 735);
-		ironWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Ironwood Log ID", 736);
-		mangroveWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Mangrove Log ID", 737);
-		ashWoodID = config.getBlock(CATEGORY_BLOCK_ID, "Ash Tree Log ID", 738);
-		acaciaLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Acacia Leaves ID", 739);
-		canopyLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Canopy Tree Leaves ID", 740);
-		firLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Fir Leaves ID", 741);
-		poplarLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Poplar Leaves ID", 742);
-		redwoodLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Redwood Leaves ID", 743);
-		palmLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Palm Leaves ID", 744);
-		ironwoodLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Ironwood Leaves ID", 745);
-		mangroveLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Mangrove Leaves ID", 746);
-		ashLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Ash Tree Leaves ID", 747);
-		autumnYellowLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Autumn Yellow Leaves ID", 748);
-		autumnOrangeLeavesID = config.getBlock(CATEGORY_BLOCK_ID, "Autumn Orange Leaves ID", 749);
-		blueFlowerID = config.getBlock(CATEGORY_BLOCK_ID, "Blue Flower ID", 750);
-		leafyFernID = config.getBlock(CATEGORY_BLOCK_ID, "Leafy Fern ID", 751);
-		whiteFlowerID = config.getBlock(CATEGORY_BLOCK_ID, "White Flower ID", 752);
-		cattailID = config.getBlock(CATEGORY_BLOCK_ID, "Cattail ID", 753);
-		lavenderID = config.getBlock(CATEGORY_BLOCK_ID, "Lavender ID", 754);
-		raspberryBushID = config.getBlock(CATEGORY_BLOCK_ID, "Raspberry Bush ID", 755);
-		blueberryBushID = config.getBlock(CATEGORY_BLOCK_ID, "Blueberry Bush ID", 756);
-		thornbushID = config.getBlock(CATEGORY_BLOCK_ID, "Thornbush ID", 757);
-		cottonID = config.getBlock(CATEGORY_BLOCK_ID, "Cotton ID", 758);
-		hlplanksID = config.getBlock(CATEGORY_BLOCK_ID, "Highlands Planks ID", 759);
-		hlPlankStairs0ID = config.getBlock(CATEGORY_BLOCK_ID, "Yellow Wood Stairs ID", 760);
-		hlPlankStairs1ID = config.getBlock(CATEGORY_BLOCK_ID, "White Wood Stairs ID", 761);
-		hlPlankStairs2ID = config.getBlock(CATEGORY_BLOCK_ID, "Red Wood Stairs ID", 762);
-		hlPlankStairs3ID = config.getBlock(CATEGORY_BLOCK_ID, "Grey Wood Stairs ID", 763);
-		hlPlankHalfID = config.getBlock(CATEGORY_BLOCK_ID, "Highlands Planks Halfblock ID", 764);
-		hlPlankHalfDoubleID = config.getBlock(CATEGORY_BLOCK_ID, "Highlands Planks Double Halfblock ID", 765);
-		berriesID = config.getBlock(CATEGORY_BLOCK_ID, "Berries ID", 766);
-
-	}
 
 	private static void addSettingsEntries(Configuration config) 
 	{

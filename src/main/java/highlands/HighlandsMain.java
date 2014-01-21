@@ -28,6 +28,7 @@ import highlands.integration.HighlandsCompatibilityManager;
 import highlands.worldgen.WorldGenUnderground2;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.gen.structure.MapGenStronghold;
@@ -37,8 +38,8 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.WorldType;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -47,13 +48,11 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="Highlands", name="Highlands", version="2.1.5",
+@Mod(modid="Highlands", name="Highlands", version="2.2.0",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
-@NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class HighlandsMain {
 
 	public static String modid = "Highlands";
@@ -129,7 +128,7 @@ public class HighlandsMain {
 		//add biomes to spawn strongholds in
 		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
 			if(i != HighlandsBiomes.woodsMountains && i != HighlandsBiomes.flyingMountains && i != HighlandsBiomes.ocean2)
-			MapGenStronghold.allowedBiomes.add(i);
+				addStrongholdBiome(i);
 		}
 		
 		// allow player spawning in biomes
@@ -189,8 +188,8 @@ public class HighlandsMain {
 		
 		GameRegistry.registerFuelHandler(new HighlandsFuelHandler());
 		
-		Block.blocksList[Block.cocoaPlant.blockID] = null;
-		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2(Block.cocoaPlant.blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("cocoa");
+		Blocks.cocoa = null;
+		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2(Blocks.cocoa).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("cocoa");
 
 		//Forestry PostInit
 		if (Loader.isModLoaded("Forestry") ){

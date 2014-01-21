@@ -1,28 +1,30 @@
 package highlands.worldgen;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenSmallPlants extends WorldGenerator
 {
     /** Stores ID for WorldGenTallGrass */
-    private int plantID;
+    private Block plantID;
     
     private int genAmount;
     private int radius;
 
-    public WorldGenSmallPlants(int id)
+    public WorldGenSmallPlants(Block block)
     {
-        this.plantID = id;
+        this.plantID = block;
         this.genAmount = 36;
         this.radius = 8;
     }
     
-    public WorldGenSmallPlants(int id, int amt)
+    public WorldGenSmallPlants(Block blck, int amt)
     {
-        this.plantID = id;
+        this.plantID = blck;
         this.genAmount = amt;
         this.radius = 4;
     }
@@ -34,7 +36,8 @@ public class WorldGenSmallPlants extends WorldGenerator
         Block block = null;
         do 
         {
-            block = Block.blocksList[par1World.getBlockId(par3,  par4, par5)];
+        	//TODO-           getBlock
+            block = par1World.func_147439_a(par3,  par4, par5);
             if (block != null && !block.isLeaves(par1World, par3, par4, par5))
             {
                 break;
@@ -48,9 +51,11 @@ public class WorldGenSmallPlants extends WorldGenerator
             int k1 = par4 + par2Random.nextInt(4) - par2Random.nextInt(4);
             int l1 = par5 + par2Random.nextInt(radius) - par2Random.nextInt(radius);
 
-            if (par1World.isAirBlock(j1, k1, l1) && Block.tallGrass.canBlockStay(par1World, j1, k1, l1))
+            //TODO-                                                     canBlockStay?
+            if (par1World.func_147437_c(j1, k1, l1) && Blocks.tallgrass.func_149718_j(par1World, j1, k1, l1))
             {
-                par1World.setBlock(j1, k1, l1, this.plantID, 0, 2);
+            	//TODO-   setBlock
+                par1World.func_147465_d(j1, k1, l1, this.plantID, 0, 2);
             }
         }
 

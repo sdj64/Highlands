@@ -4,28 +4,29 @@ import java.util.Random;
 
 import net.minecraft.util.MathHelper;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenUnderground2 extends WorldGenerator
 {
     /** The block ID of the ore to be placed using this generator. */
-    private int minableBlockId;
+    private Block minableBlockId;
     private int minableBlockMeta = 0;
 
     /** The number of blocks to generate. */
     private int numberOfBlocks;
     
-    private int IDtoReplace;
+    private Block IDtoReplace;
 
-    public WorldGenUnderground2(int par1, int par2)
+    public WorldGenUnderground2(Block water, int par2)
     {
-        this.minableBlockId = par1;
+        this.minableBlockId = water;
         this.numberOfBlocks = par2;
-        this.IDtoReplace = Block.stone.blockID;
+        this.IDtoReplace = Blocks.stone;
     }
     
-    public WorldGenUnderground2(int par1, int par2, int IDtoReplace)
+    public WorldGenUnderground2(Block par1, int par2, Block IDtoReplace)
     {
         this.minableBlockId = par1;
         this.numberOfBlocks = par2;
@@ -73,13 +74,17 @@ public class WorldGenUnderground2 extends WorldGenerator
                             {
                                 double var45 = ((double)var44 + 0.5D - var24) / (var28 / 2.0D);
 
-                                Block block = Block.blocksList[par1World.getBlockId(var38, var41, var44)];
-                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && (block != null && (block.blockID == IDtoReplace || 
-                                		(IDtoReplace == block.dirt.blockID && block.blockID == Block.grass.blockID))))
+                                Block block = par1World.func_147439_a(var38, var41, var44);
+                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && (block != null && (block == IDtoReplace || 
+                                		(IDtoReplace == Blocks.dirt && block == Blocks.grass))))
                                 {
-                                	if(par1World.getBlockId(var38, var41+1, var44) == 0 && minableBlockId == Block.dirt.blockID)
-                                		par1World.setBlock(var38, var41, var44, Block.grass.blockID, minableBlockMeta, 3);
-                                	else par1World.setBlock(var38, var41, var44, this.minableBlockId, minableBlockMeta, 3);
+                                	//TODO-      getBlock
+                                	if(par1World.func_147439_a(var38, var41+1, var44).isAir(par1World, var38, var41 + 1, var44) 
+                                		&& minableBlockId == Blocks.dirt)
+                                		//TODO-   setBlock
+                                		par1World.func_147465_d(var38, var41, var44, Blocks.grass, minableBlockMeta, 3);
+                                	else 
+                                		par1World.func_147465_d(var38, var41, var44, this.minableBlockId, minableBlockMeta, 3);
                                 }
                             }
                         }

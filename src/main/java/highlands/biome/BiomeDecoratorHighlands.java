@@ -8,6 +8,7 @@ import highlands.worldgen.WorldGenWatermelon;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenCactus;
@@ -31,7 +32,7 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
 	
 	
 	public BiomeDecoratorHighlands(BiomeGenBase par1BiomeGenBase, int trees, int grass, int flowers, int hlPlants) {
-		super(par1BiomeGenBase);
+		super();
 		this.treesPerChunk = trees;
 		this.grassPerChunk = grass;
 		this.flowersPerChunk = flowers;
@@ -44,7 +45,6 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
 	public BiomeDecoratorHighlands(BiomeGenBase par1BiomeGenBase, int trees, int grass, int flowers) {
 		this(par1BiomeGenBase, trees, grass, flowers, 0);
 	}
-	
 	
 	public void decorate(World par1World, Random par2Random, int par3, int par4){
 		super.decorate(par1World, par2Random, par3, par4);
@@ -130,12 +130,12 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
 	    }
 		
 		//Ore Generators
-		public static WorldGenerator HLsand = new WorldGenMinable(Block.sand.blockID, 32);
-		public static WorldGenerator HLice = new WorldGenMinable(Block.ice.blockID, 32);
-		public static WorldGenerator HLwater = new WorldGenUnderground2(Block.waterStill.blockID, 4);
-		public static WorldGenerator HLlava = new WorldGenUnderground2(Block.lavaStill.blockID, 8);
-		public static WorldGenerator HLdirt = new WorldGenUnderground2(Block.dirt.blockID, 72, Block.sand.blockID);
-		public static WorldGenerator HLrock = new WorldGenUnderground2(Block.stone.blockID, 72, Block.dirt.blockID);
-		public static WorldGenerator HLobsidian = new WorldGenMinable(Block.obsidian.blockID, 8);
+		public static WorldGenerator HLsand = new WorldGenMinable(Blocks.sand, 32);
+		public static WorldGenerator HLice = new WorldGenMinable(Blocks.ice, 32);
+		public static WorldGenerator HLwater = new WorldGenUnderground2(Blocks.water, 4);
+		public static WorldGenerator HLlava = new WorldGenUnderground2(Blocks.lava, 8);
+		public static WorldGenerator HLdirt = new WorldGenUnderground2(Blocks.dirt, 72, Blocks.sand);
+		public static WorldGenerator HLrock = new WorldGenUnderground2(Blocks.stone, 72, Blocks.dirt);
+		public static WorldGenerator HLobsidian = new WorldGenMinable(Blocks.obsidian, 8);
 	
 }

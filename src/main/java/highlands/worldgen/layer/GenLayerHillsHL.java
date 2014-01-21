@@ -73,8 +73,9 @@ public class GenLayerHillsHL extends GenLayer
                     
                     
                     //sets sub-biome using the sub-biome lists of BiomeGenBaseHighlands
-                    else if(BiomeGenBase.biomeList[var9] instanceof BiomeGenBaseHighlands){
-                    	BiomeGenBaseHighlands biome = (BiomeGenBaseHighlands)BiomeGenBase.biomeList[var9];
+                    //TODO-              getBiomesList?
+                    else if(BiomeGenBase.func_150565_n()[var9] instanceof BiomeGenBaseHighlands){
+                    	BiomeGenBaseHighlands biome = (BiomeGenBaseHighlands)BiomeGenBase.func_150565_n()[var9];
                     	if(biome.subBiomes.size() > 0){
                     		var10 = biome.subBiomes.get(this.nextInt(biome.subBiomes.size())).biomeID;
                     		//System.out.println("  Sub biome parent: " + biome.biomeName + "  sub: " + BiomeGenBase.biomeList[var10].biomeName);

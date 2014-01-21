@@ -12,12 +12,10 @@ import highlands.block.BlockHighlandsSapling;
 import highlands.integration.HighlandsCompatibilityManager;
 import highlands.worldgen.layer.GenLayerHL;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenVillage;
-import net.minecraftforge.event.Event;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
@@ -35,7 +33,7 @@ public class HighlandsEventManager {
 	//allows get wood achievement for Highlands woods
 	@ForgeSubscribe
 	public void onItemPickupWood(EntityItemPickupEvent e){
-		if (e.item.getEntityItem().itemID == HighlandsBlocks.firWood.blockID
+		if (e.item.getEntityItem() == HighlandsBlocks.firWood
 				|| e.item.getEntityItem().itemID == HighlandsBlocks.acaciaWood.blockID
 				|| e.item.getEntityItem().itemID == HighlandsBlocks.redwoodWood.blockID
 				|| e.item.getEntityItem().itemID == HighlandsBlocks.poplarWood.blockID
@@ -137,7 +135,7 @@ public class HighlandsEventManager {
 		if(e.biome != null && HighlandsBiomes.sahel != null && HighlandsBiomes.outback != null && BiomeGenBase.icePlains != null){
 			if (e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
 	        {
-				if (e.original == Block.wood.blockID)e.replacement = Block.wood.blockID;
+				if (e.original == Blocks.log)e.replacement = Blocks.log;
 	            if (e.original == Block.cobblestone.blockID)e.replacement = Block.sandStone.blockID;
 	            if (e.original == Block.planks.blockID)e.replacement = Block.planks.blockID;
 	            if (e.original == Block.stairsWoodOak.blockID)e.replacement = Block.stairsWoodOak.blockID;

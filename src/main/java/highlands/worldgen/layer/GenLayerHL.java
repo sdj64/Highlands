@@ -13,7 +13,6 @@ import net.minecraft.world.gen.layer.GenLayerRiverInit;
 import net.minecraft.world.gen.layer.GenLayerRiverMix;
 import net.minecraft.world.gen.layer.GenLayerShore;
 import net.minecraft.world.gen.layer.GenLayerSmooth;
-import net.minecraft.world.gen.layer.GenLayerSwampRivers;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 
@@ -88,7 +87,8 @@ public abstract class GenLayerHL
 
             if (var7 == 1)
             {
-                var18 = new GenLayerSwampRivers(1000L, (GenLayer)var18);
+            	//TODO-     right class?
+                var18 = new GenLayerRiver(1000L, (GenLayer)var18);
             }
         }
 
