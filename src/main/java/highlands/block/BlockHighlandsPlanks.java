@@ -1,23 +1,24 @@
 package highlands.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockWood;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockHighlandsPlanks extends Block
 {
     /** The type of tree this block came from. */
     public static final String[] woodType = new String[] {"Yellow", "White", "Red", "Grey"};
     @SideOnly(Side.CLIENT)
-    private Icon[] iconArray;
+    private IIcon[] iconArray;
 
     public BlockHighlandsPlanks(int par1)
     {
@@ -31,7 +32,7 @@ public class BlockHighlandsPlanks extends Block
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public IIcon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
         if (par2 < 0 || par2 >= this.iconArray.length)
         {
@@ -44,7 +45,7 @@ public class BlockHighlandsPlanks extends Block
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getIcon(int par1, int par2)
+    public IIcon getIcon(int par1, int par2)
     {
         if (par2 < 0 || par2 >= this.iconArray.length)
         {
@@ -81,9 +82,9 @@ public class BlockHighlandsPlanks extends Block
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IconRegister par1IconRegister)
+    public void registerIcons(IIconRegister par1IconRegister)
     {
-        this.iconArray = new Icon[woodType.length];
+        this.iconArray = new IIcon[woodType.length];
 
         for (int i = 0; i < this.iconArray.length; ++i)
         {

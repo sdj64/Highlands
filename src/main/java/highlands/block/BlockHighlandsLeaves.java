@@ -7,21 +7,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -304,29 +304,62 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * Drops the block items with a specified chance of dropping the specified items
      */
     //TODO-     dropBlockAsItemWithChance
+    //I dunno if I did this right, we will see once it compiles
     public void func_149690_a(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
     {
     	if (!par1World.isRemote)
         {
-            ArrayList<ItemStack> items = func_149650_a(par5, par1World.rand, par7);;
+            int j1 = this.func_150123_b(par5);
 
-            for (ItemStack item : items)
+            if (par7 > 0)
             {
-                if (par1World.rand.nextFloat() <= par6)
+                j1 -= 2 << par7;
+
+                if (j1 < 10)
                 {
-                    this.dropBlockAsItem_do(par1World, par2, par3, par4, item);
+                    j1 = 10;
                 }
             }
+
+            if (par1World.rand.nextInt(j1) == 0)
+            {
+                Item item = this.func_149650_a(par5, par1World.rand, par7);
+                this.func_149642_a(par1World, par2, par3, par4, new ItemStack(item, 1, this.func_149692_a(par5)));
+            }
+
+            j1 = 200;
+
+            if (par7 > 0)
+            {
+                j1 -= 10 << par7;
+
+                if (j1 < 40)
+                {
+                    j1 = 40;
+                }
+            }
+
+            this.func_150124_c(par1World, par2, par3, par4, par5, j1);
         }
+    }
+    
+    //TODO-        leavesWeirdness
+    protected void func_150124_c(World p_150124_1_, int p_150124_2_, int p_150124_3_, int p_150124_4_, int p_150124_5_, int p_150124_6_) {}
+    
+    //TODO-       getRenderType
+    protected int func_150123_b(int p_150123_1_)
+    {
+        return 20;
     }
     
     /**
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
-    public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
+    //TODO-     harvestBlock
+    public void func_149636_a(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
     {
-        super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
+        super.func_149636_a(par1World, par2EntityPlayer, par3, par4, par5, par6);
     }
 
     /**
@@ -341,18 +374,20 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube()
+    //TODO-        isOpaqueCube
+    public boolean func_149662_c()
     {
-        return !this.graphicsLevel;
+        return !this.field_150121_P;
     }
     
     @SideOnly(Side.CLIENT)
     /**
      * Pass true to draw this block using fancy graphics, or false for fast graphics.
      */
-    public void setGraphicsLevel(boolean par1)
+    //TODO-     setGraphicsLevel
+    public void func_150122_b(boolean par1)
     {
-        this.graphicsLevel = par1;
+        this.field_150121_P = par1;
     }
     
     /**
@@ -361,67 +396,67 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * @param target The full target the player is looking at
      * @return A ItemStack to add to the player's inventory, Null if nothing should be added.
      */
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
-    {
-    	int id = idPicked(world, x, y, z);
-
-        if (id == 0)
-        {
-            return null;
-        }
-
-        Item item = Item.itemsList[id];
-        if (item == null)
-        {
-            return null;
-        }
-
-        return new ItemStack(id, 1, 0);
-        //return new ItemStack(this.blockID, 1, 0);
-    }
+    //TODO- do we even use this anymore?
+//    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+//    {
+//    	//TODO-       idPicked?
+//    	int id = this.func_149643_k(world, x, y, z);
+//
+//        if (id == 0)
+//        {
+//            return null;
+//        }
+//
+//        Item item = Item.itemsList[id];
+//        if (item == null)
+//        {
+//            return null;
+//        }
+//
+//        return new ItemStack(id, 1, 0);
+//        //return new ItemStack(this.blockID, 1, 0);
+//    }
 
     @SideOnly(Side.CLIENT)
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    //TODO-      getBlockTextureFromSideAndMetadata or getIcon
+    public IIcon func_149691_a(int par1, int par2)
     {
-    	this.graphicsLevel = Block.leaves.graphicsLevel;
-    	
-    	if(this.graphicsLevel)return textureFancy;
-    	else return textureFast;
+         if (Minecraft.getMinecraft().gameSettings.fancyGraphics)
+         {
+        	 return textureFancy;
+         }
+         else
+         {
+        	 return textureFast;
+         }
     }
     
-    //BETTER LEAVES METHOD
-    public Icon getIconFallingLeaves(int metadata) {
-        return textureFast/* Your default opaque (fast) texture for the given metadata. */;
-    }
-    
-    //BETTER LEAVES METHOD
-    public float getSpawnChanceFallingLeaves(int metadata) {
-
-    	  // Return you spawn rate
-    	  // (0.0F = 0%; 1.0F = 100%; default is 0.008F)
-    	  return (this.treeType == 14 || this.treeType == 15) ? 0.06F : 0.008F;
-
-    	}
-    
-    @SideOnly(Side.CLIENT)
-    public Icon getIcon(int par1, int par2)
-    {
-    	this.graphicsLevel = Block.leaves.graphicsLevel;
-    	
-    	if(this.graphicsLevel)return textureFancy;
-    	else return textureFast;
-    }
+    //TODO- Better Leaves is not for 1.7.x yet, will update when it is.
+//    //BETTER LEAVES METHOD
+//    public Icon getIconFallingLeaves(int metadata) {
+//        return textureFast/* Your default opaque (fast) texture for the given metadata. */;
+//    }
+//    
+//    //BETTER LEAVES METHOD
+//    public float getSpawnChanceFallingLeaves(int metadata) {
+//
+//    	  // Return you spawn rate
+//    	  // (0.0F = 0%; 1.0F = 100%; default is 0.008F)
+//    	  return (this.treeType == 14 || this.treeType == 15) ? 0.06F : 0.008F;
+//
+//    }
 
     @SideOnly(Side.CLIENT)
 
     /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     * Returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    //TODO-     getSubBlocks
+    public void func_149666_a(Item par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         par3List.add(new ItemStack(par1, 1, 0));
     }
@@ -430,9 +465,10 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    //TODO-   correct fix?
     protected ItemStack createStackedBlock(int par1)
     {
-        return new ItemStack(this.blockID, 1, 0);
+        return new ItemStack(this, 1, 0);
     }
 
     @SideOnly(Side.CLIENT)
@@ -441,20 +477,20 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IconRegister par1IconRegister)
+    public void registerIcons(IIconRegister par1IconRegister)
     {
         textureFancy = par1IconRegister.registerIcon("Highlands:leaves"+treeNames[treeType]);
         textureFast = par1IconRegister.registerIcon("Highlands:leaves"+treeNames[treeType]+"Fast");
     }
     
     @Override
-    public boolean isShearable(ItemStack item, World world, int x, int y, int z)
+    public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
     {
         return true;
     }
 
     @Override
-    public ArrayList<ItemStack> onSheared(ItemStack item, World world, int x, int y, int z, int fortune)
+    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
     {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         ret.add(new ItemStack(this, 1, 0));
@@ -468,62 +504,20 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     }
 
     @Override
-    public boolean isLeaves(World world, int x, int y, int z)
+    public boolean isLeaves(IBlockAccess world, int x, int y, int z)
     {
         return true;
     }
 
-	//// MFR : IFactoryHarvestable
-	@Override
-	public int getPlantId() {
-		return blockID;
-	}
+//	@Override
+//	public List<ItemStack> getDrops(World world, Random rand, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
+//		List<ItemStack> prod = new ArrayList<ItemStack>();
+//
+//		if (harvesterSettings.get("silkTouch") != null && harvesterSettings.get("silkTouch")) {
+//			prod.add( new ItemStack(blockID, 1, 0) );
+//			return prod;
+//		}
+//		return Block.blocksList[ world.getBlockId(x,y,z) ].getBlockDropped(world, x,y,z, world.getBlockMetadata(x,y,z), 0);
+//	}
 
-	@Override
-	public HarvestType getHarvestType() {
-		return HarvestType.TreeLeaf;
-	}
-
-	@Override
-	public boolean breakBlock() {
-		return true;
-	}
-
-	@Override
-	public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
-		return true;
-	}
-
-	@Override
-	public List<ItemStack> getDrops(World world, Random rand, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
-		List<ItemStack> prod = new ArrayList<ItemStack>();
-
-		if (harvesterSettings.get("silkTouch") != null && harvesterSettings.get("silkTouch")) {
-			prod.add( new ItemStack(blockID, 1, 0) );
-			return prod;
-		}
-		return Block.blocksList[ world.getBlockId(x,y,z) ].getBlockDropped(world, x,y,z, world.getBlockMetadata(x,y,z), 0);
-	}
-
-	@Override
-	public void preHarvest(World world, int x, int y, int z) {
-	}
-
-	@Override
-	public void postHarvest(World world, int x, int y, int z) {
-	}
-
-	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x,
-			int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
-			int x, int y, int z, int fortune) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
