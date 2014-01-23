@@ -6,6 +6,6 @@ import net.minecraft.block.BlockStairs;
 public class BlockHighlandsStairs extends BlockStairs{
 
 	public BlockHighlandsStairs(int id, Block modelBlock, int meta){
-		super(id, modelBlock, meta);
+		super(modelBlock, meta);
 	}
 }

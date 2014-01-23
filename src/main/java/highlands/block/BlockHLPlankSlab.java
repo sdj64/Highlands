@@ -1,32 +1,30 @@
 package highlands.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import highlands.api.HighlandsBlocks;
+
 import java.util.List;
 import java.util.Random;
 
-import highlands.HighlandsMain;
-import highlands.api.HighlandsBlocks;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHalfSlab;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
+import net.minecraft.util.IIcon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockHLPlankSlab extends BlockHalfSlab
+public class BlockHLPlankSlab extends BlockSlab
 {
 	private Block modelBlock;
 
-	public BlockHLPlankSlab(int id, boolean isdouble, Block model)
+	public BlockHLPlankSlab(boolean isdouble, Material mat)
     {
-        super(id, isdouble, model.blockMaterial);
-        modelBlock = model;
-        this.setCreativeTab(CreativeTabs.tabBlock);
+		//TODO-                  correct material?
+        super(isdouble, Material.field_151567_E);
+        //TODO- setCreativeTab
+        this.func_149647_a(CreativeTabs.tabBlock);
     }
 
     @SideOnly(Side.CLIENT)
@@ -34,17 +32,19 @@ public class BlockHLPlankSlab extends BlockHalfSlab
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getIcon(int par1, int par2)
+    //TODO-      getIcon
+    public IIcon func_149691_a(int par1, int par2)
     {
-        return modelBlock.getIcon(par1, par2 & 7);
+    	//TODO- modelBlock is suspicious...
+        return modelBlock.func_149691_a(par1, par2 & 7);
     }
 
     /**
      * Returns the ID of the items to drop on destruction.  Unfortunately can't make this use modelblock.
      */
-    public int idDropped(int par1, Random par2Random, int par3)
+    public Block idDropped(int par1, Random par2Random, int par3)
     {
-        return HighlandsBlocks.hlplankhalf.blockID;
+        return HighlandsBlocks.hlplankhalf;
     }
     
     /*
@@ -70,25 +70,28 @@ public class BlockHLPlankSlab extends BlockHalfSlab
      */
     protected ItemStack createStackedBlock(int par1)
     {
-        return new ItemStack(HighlandsBlocks.hlplankhalf.blockID, 2, par1 & 7);
+        return new ItemStack(HighlandsBlocks.hlplankhalf, 2, par1 & 7);
     }
 
     /**
      * Returns the slab block name with step type.
      */
-    public String getFullSlabName(int par1)
-    {
-        return super.getUnlocalizedName() + "." + par1;
-    }
-
+	@Override
+	//TODO-       getFullSlabName
+	public String func_150002_b(int var1) {
+		//TODO-      getUnlocalizedName
+		return super.func_149641_N() + "." + var1;
+	}
+	
     @SideOnly(Side.CLIENT)
 
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    public void getSubBlocks(Block par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-        if (!this.isDoubleSlab)
+    	//TODO-   isDoubleSlab
+        if (!this.field_150004_a)
         {
             for (int j = 0; j < 4; ++j)
             {
@@ -103,5 +106,7 @@ public class BlockHLPlankSlab extends BlockHalfSlab
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IconRegister par1IconRegister) {}
+    public void registerIcons(IIconRegister par1IconRegister) {}
+
+
 }

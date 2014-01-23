@@ -3,6 +3,7 @@ package highlands.worldgen;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -62,10 +63,12 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
     }
     
     public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){
-    	int id = world.getBlockId(locX, locY, locZ);
+    	//TODO-          getBlock
+    	Block block = world.func_147439_a(locX, locY, locZ);
     	int meta = world.getBlockMetadata(locX, locY, locZ);
     	boolean flag = generate(world, random, locX, locY, locZ);
-    	if(!flag) world.setBlock(locX, locY, locZ, id, meta, 3);
+    	//TODO-         setBlock
+    	if(!flag) world.func_147465_d(locX, locY, locZ, block, meta, 3);
     	return flag;
     }
 
@@ -155,7 +158,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         System.arraycopy(var2, 0, this.leafNodes, 0, var4);
     }
 
-    void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, int par6)
+    void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block par6)
     {
         int var7 = (int)((double)par4 + 0.618D);
         byte var8 = otherCoordPairs[par5];
@@ -181,15 +184,17 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
                 else
                 {
                     var11[var9] = var10[var9] + var13;
-                    int var14 = this.worldObj.getBlockId(var11[0], var11[1], var11[2]);
+                    //TODO-                     getBlock
+                    Block var14 = this.worldObj.func_147439_a(var11[0], var11[1], var11[2]);
 
-                    if (var14 != 0 && var14 != Block.leaves.blockID)
+                    if (var14 != null && var14 != Blocks.leaves)
                     {
                         ++var13;
                     }
                     else
                     {
-                        if(hasLeaves)this.setBlockAndMetadata(this.worldObj, var11[0], var11[1], var11[2], par6, leafMeta);
+                    	//TODO-           setBlockAndMetadata
+                        if(hasLeaves)this.func_150516_a(this.worldObj, var11[0], var11[1], var11[2], par6, leafMeta);
                         ++var13;
                     }
                 }
@@ -245,14 +250,14 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         for (int var5 = par2 + this.leafDistanceLimit; var4 < var5; ++var4)
         {
             float var6 = this.leafSize(var4 - par2);
-            this.genTreeLayer(par1, var4, par3, var6, (byte)1, Block.leaves.blockID);
+            this.genTreeLayer(par1, var4, par3, var6, (byte)1, Blocks.leaves);
         }
     }
 
     /**
      * Places a line of the specified block ID into the world from the first coordinate triplet to the second.
      */
-    void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, int par3)
+    void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, Block par3)
     {
         int[] var4 = new int[] {0, 0, 0};
         byte var5 = 0;
@@ -309,7 +314,8 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
                         var17 = 8;
                     }
                 }
-                this.setBlockAndMetadata(this.worldObj, var14[0], var14[1], var14[2], par3, woodMeta);
+                //TODO- setBlockAndMetadata
+                this.func_150516_a(this.worldObj, var14[0], var14[1], var14[2], par3, woodMeta);
             }
         }
     }
@@ -350,19 +356,19 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         int var4 = this.basePos[2];
         int[] var5 = new int[] {var1, var2, var4};
         int[] var6 = new int[] {var1, var3, var4};
-        this.placeBlockLine(var5, var6, Block.wood.blockID);
+        this.placeBlockLine(var5, var6, Blocks.log);
 
         if (this.trunkSize == 2)
         {
             ++var5[0];
             ++var6[0];
-            this.placeBlockLine(var5, var6, Block.wood.blockID);
+            this.placeBlockLine(var5, var6, Blocks.log);
             ++var5[2];
             ++var6[2];
-            this.placeBlockLine(var5, var6, Block.wood.blockID);
+            this.placeBlockLine(var5, var6, Blocks.log);
             var5[0] += -1;
             var6[0] += -1;
-            this.placeBlockLine(var5, var6, Block.wood.blockID);
+            this.placeBlockLine(var5, var6, Blocks.log);
         }
         
     }
@@ -384,7 +390,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
 
             if (this.leafNodeNeedsBase(var6))
             {
-                this.placeBlockLine(var3, var5, (byte)Block.wood.blockID);
+                this.placeBlockLine(var3, var5, Blocks.log);
             }
         }
     }
@@ -439,9 +445,10 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
                 var13[var5] = par1ArrayOfInteger[var5] + var14;
                 var13[var6] = MathHelper.floor_double((double)par1ArrayOfInteger[var6] + (double)var14 * var9);
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
-                int var16 = this.worldObj.getBlockId(var13[0], var13[1], var13[2]);
+                //TODO-                     getBlock
+                Block var16 = this.worldObj.func_147439_a(var13[0], var13[1], var13[2]);
 
-                if (var16 != 0 && var16 != Block.leaves.blockID)
+                if (var16 != null && var16 != Blocks.leaves)
                 {
                     break;
                 }
@@ -459,25 +466,26 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
     {
         int[] var1 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
         int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
-        int var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
+        //TODO-                    getBlock
+        Block var3 = this.worldObj.func_147439_a(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
 
         if(!hasLeaves)System.out.println(var3);
         
         
-        if (var3 != Block.grass.blockID && var3 != Block.dirt.blockID)
+        if (var3 != Blocks.grass && var3 != Blocks.dirt)
         {
             if(hasLeaves)return false;
         }
-        if(!hasLeaves && var3 == Block.waterStill.blockID){
-        	if((var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]))
-        			== Block.waterStill.blockID){
+        if(!hasLeaves && var3 == Blocks.water){
+        	if((var3 = this.worldObj.func_147439_a(this.basePos[0], this.basePos[1] - 1, this.basePos[2]))
+        			== Blocks.water){
         		basePos[1]--;
         	}
-        	if((var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]))
-        			== Block.waterStill.blockID){
+        	if((var3 = this.worldObj.func_147439_a(this.basePos[0], this.basePos[1] - 1, this.basePos[2]))
+        			== Blocks.water){
         		basePos[1]--;
         	}
-        	if (var3 != Block.grass.blockID && var3 != Block.dirt.blockID && var3 != Block.sand.blockID)return false;
+        	if (var3 != Blocks.grass && var3 != Blocks.dirt && var3 != Blocks.sand)return false;
         }
         
         int var4 = this.checkBlockLine(var1, var2);

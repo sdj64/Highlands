@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
@@ -20,11 +21,14 @@ public class BlockHighlandsPlanks extends Block
     @SideOnly(Side.CLIENT)
     private IIcon[] iconArray;
 
-    public BlockHighlandsPlanks(int par1)
+    public BlockHighlandsPlanks()
     {
-        super(par1, Material.wood);
-        this.setCreativeTab(CreativeTabs.tabBlock);
-        setBurnProperties(this.blockID, 5, 5);
+    	//TODO-        right material?
+        super(Material.field_151567_E);
+        //TODO-setCreativeTab
+        this.func_149647_a(CreativeTabs.tabBlock);
+        //TODO- fix setBurnProperties
+        //setBurnProperties(this.blockID, 5, 5);
     }
 
     @SideOnly(Side.CLIENT)
@@ -68,7 +72,8 @@ public class BlockHighlandsPlanks extends Block
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    //TODO-     getSubBlocks
+    public void func_149666_a(Item par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         par3List.add(new ItemStack(par1, 1, 0));
         par3List.add(new ItemStack(par1, 1, 1));
