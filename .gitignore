@@ -7,7 +7,7 @@ build
 
 # eclipse
 assets
-!src/main/resources/assets
+!resources/assets
 .settings
 .metadata
 .classpath
