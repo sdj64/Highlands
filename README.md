@@ -3,16 +3,16 @@ Highlands
 
 A mod for Minecraft which adds:
 
-Over 40 new biomes
-14 new trees
-A variety of useful small plants
-Highlands and Highlands Large Biomes World Types
-Biome-specific ore generation (some biomes have more ores!)
-256 block high Mountains
-More realistic biome placement
-Villages in more biomes
-Better oceans and islands
-Tons of options to customize
+- Over 40 new biomes
+- 14 new trees
+- A variety of useful small plants
+- Highlands and Highlands Large Biomes World Types
+- Biome-specific ore generation (some biomes have more ores!)
+- 256 block high Mountains
+- More realistic biome placement
+- Villages in more biomes
+- Better oceans and islands
+- Tons of options to customize
 
 ...and soon more!
 
