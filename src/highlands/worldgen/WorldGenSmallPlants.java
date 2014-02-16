@@ -13,9 +13,9 @@ public class WorldGenSmallPlants extends WorldGenerator
     private int genAmount;
     private int radius;
 
-    public WorldGenSmallPlants(int id)
+    public WorldGenSmallPlants(Block blueberryBush)
     {
-        this.plantID = id;
+        this.plantID = blueberryBush;
         this.genAmount = 36;
         this.radius = 8;
     }

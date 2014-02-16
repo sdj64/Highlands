@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.WorldGenTaiga1;
 import net.minecraft.world.gen.feature.WorldGenTaiga2;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.world.biome.SpawnListEntry;
+import net.minecraft.init.Blocks;
 import highlands.api.HighlandsBlocks;
 import highlands.HighlandsMain;
 import highlands.worldgen.WorldGenAutumnTree;
@@ -44,8 +44,8 @@ public class BiomeGenAutumnForest extends BiomeGenBaseHighlands
     }
 	
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (WorldGenerator)(rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.raspberryBush.blockID)
-				: new WorldGenSmallPlants(HighlandsBlocks.blueberryBush.blockID));
+		return (WorldGenerator)(rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.raspberryBush)
+				: new WorldGenSmallPlants(HighlandsBlocks.blueberryBush));
 	}
 
     /**
@@ -55,25 +55,25 @@ public class BiomeGenAutumnForest extends BiomeGenBaseHighlands
     {
     	int a = par1Random.nextInt(6)+1;
     	switch(a){
-    	case 1: return (WorldGenerator)this.worldGeneratorForest; //birch tree
+    	case 1: return (WorldGenerator)this.worldGeneratorTrees; //birch tree
     	
-    	case 2: if(HighlandsMain.vanillaBlocksFlag) return this.worldGeneratorForest;//birch tree (vanillaBlocks only)
+    	case 2: if(HighlandsMain.vanillaBlocksFlag) return this.worldGeneratorTrees;//birch tree (vanillaBlocks only)
     	
-    			else return (WorldGenerator)new WorldGenAutumnTree(false, 4, Block.wood.blockID, HighlandsBlocks.autumnYellowLeaves.blockID);// autumn tree yellow
+    			else return (WorldGenerator)new WorldGenAutumnTree(false, 4, Blocks.log, HighlandsBlocks.autumnYellowLeaves);// autumn tree yellow
     	
     	case 3: if(HighlandsMain.vanillaBlocksFlag) return (WorldGenerator)(par1Random.nextInt(2) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false));//pine tree(vanillaBlocks only)
 				
-    			else return (par1Random.nextBoolean() ? (WorldGenerator)new WorldGenAutumnTree(false, 4, Block.wood.blockID, HighlandsBlocks.autumnYellowLeaves.blockID) :
-					(WorldGenerator)new WorldGenAutumnBigTree(false, Block.wood.blockID, HighlandsBlocks.autumnYellowLeaves.blockID));// autumn tree yellow (chance of BigTree)
+    			else return (par1Random.nextBoolean() ? (WorldGenerator)new WorldGenAutumnTree(false, 4, Blocks.log, HighlandsBlocks.autumnYellowLeaves) :
+					(WorldGenerator)new WorldGenAutumnBigTree(false, Blocks.log, HighlandsBlocks.autumnYellowLeaves));// autumn tree yellow (chance of BigTree)
     	
     	case 4: if(HighlandsMain.vanillaBlocksFlag) return this.worldGeneratorTrees;//regular trees (vanillaBlocks only)
     	
-				else return (WorldGenerator)new WorldGenAutumnTree(false, 4, Block.wood.blockID, HighlandsBlocks.autumnOrangeLeaves.blockID);// autumn tree orange
+				else return (WorldGenerator)new WorldGenAutumnTree(false, 4, Blocks.log, HighlandsBlocks.autumnOrangeLeaves);// autumn tree orange
     	
     	case 5: if(HighlandsMain.vanillaBlocksFlag) return this.worldGeneratorBigTree;//big trees (vanillaBlocks only)
     	
-				else return (par1Random.nextBoolean() ? (WorldGenerator)new WorldGenAutumnTree(false, 4, Block.wood.blockID, HighlandsBlocks.autumnOrangeLeaves.blockID) :
-					(WorldGenerator)new WorldGenAutumnBigTree(false, Block.wood.blockID, HighlandsBlocks.autumnOrangeLeaves.blockID));// autumn tree orange (chance of BigTree)
+				else return (par1Random.nextBoolean() ? (WorldGenerator)new WorldGenAutumnTree(false, 4, Blocks.log, HighlandsBlocks.autumnOrangeLeaves) :
+					(WorldGenerator)new WorldGenAutumnBigTree(false, Blocks.log, HighlandsBlocks.autumnOrangeLeaves));// autumn tree orange (chance of BigTree)
     	
     	case 6: return (WorldGenerator)(par1Random.nextInt(2) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false)); //pine tree
     	}
@@ -82,9 +82,9 @@ public class BiomeGenAutumnForest extends BiomeGenBaseHighlands
         //return (WorldGenerator)(par1Random.nextInt(5) == 0 ? this.worldGeneratorForest : (par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees));
     }
     
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
     {
-        biomedec.decorate(par1World, par2Random, par3, par4);
+        biomedec.decorate(par1World, par2Random, biome, par3, par4);
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
     }
     

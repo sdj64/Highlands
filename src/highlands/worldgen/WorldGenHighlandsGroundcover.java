@@ -1,6 +1,7 @@
 package highlands.worldgen;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -15,9 +16,9 @@ public class WorldGenHighlandsGroundcover extends WorldGenerator
     //Type 1 is Cliff (tall grass + cobble boulders), Type 2 is Outback (tall grass + grass blocks underneath on sand)
     private int type;
 
-    public WorldGenHighlandsGroundcover(int par1, int par2, int type)
+    public WorldGenHighlandsGroundcover(BlockTallGrass tallgrass, int par2, int type)
     {
-        this.tallGrassID = par1;
+        this.tallGrassID = tallgrass;
         this.tallGrassMetadata = par2;
         this.type = type;
     }

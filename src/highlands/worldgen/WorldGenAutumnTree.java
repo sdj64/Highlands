@@ -25,12 +25,12 @@ public class WorldGenAutumnTree extends WorldGenerator
     /** The blockID of the leaves to use in tree generation. */
     private int blockLeaves;
 
-    public WorldGenAutumnTree(boolean par1, int par2, int par3, int par4)
+    public WorldGenAutumnTree(boolean par1, int par2, Block log, Block autumnYellowLeaves)
     {
         super(par1);
         this.minTreeHeight = par2;
-        this.blockWood = par3;
-        this.blockLeaves = par4;
+        this.blockWood = log;
+        this.blockLeaves = autumnYellowLeaves;
         this.vinesGrow = false;
         
         if(HighlandsMain.vanillaBlocksFlag){

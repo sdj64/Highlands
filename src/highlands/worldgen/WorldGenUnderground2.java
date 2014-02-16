@@ -18,18 +18,18 @@ public class WorldGenUnderground2 extends WorldGenerator
     
     private int IDtoReplace;
 
-    public WorldGenUnderground2(int par1, int par2)
+    public WorldGenUnderground2(Block water, int par2)
     {
-        this.minableBlockId = par1;
+        this.minableBlockId = water;
         this.numberOfBlocks = par2;
         this.IDtoReplace = Block.stone.blockID;
     }
     
-    public WorldGenUnderground2(int par1, int par2, int IDtoReplace)
+    public WorldGenUnderground2(Block dirt, int par2, Block sand)
     {
-        this.minableBlockId = par1;
+        this.minableBlockId = dirt;
         this.numberOfBlocks = par2;
-        this.IDtoReplace = IDtoReplace;
+        this.IDtoReplace = sand;
     }
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)

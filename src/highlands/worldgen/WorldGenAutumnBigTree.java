@@ -66,8 +66,8 @@ public class WorldGenAutumnBigTree extends WorldGenerator
         heightLimit = treeHeightLim;
     }
     
-    public WorldGenAutumnBigTree(boolean notify, int wid, int lid){
-    	this(notify, true, 0, 0, wid, lid, 1, 0);
+    public WorldGenAutumnBigTree(boolean notify, Block log, Block autumnYellowLeaves){
+    	this(notify, true, 0, 0, log, autumnYellowLeaves, 1, 0);
     }
     
     public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){

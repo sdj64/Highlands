@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.World;
@@ -23,31 +24,27 @@ import highlands.worldgen.WorldGenTreePalm;
 
 public class BiomeGenEverglades extends BiomeGenBaseHighlands
 {
-	
 	private BiomeDecoratorHighlands biomedec;
+	private static final Height biomeHeight = new Height(-0.2F, 0.1F);
 
 	public BiomeGenEverglades(int par1){
 		super(par1);
-		
 		int trees = -10;
 	    int grass = 0;
 	    int flowers = 0;
 	    int plants = 0;
 	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers, plants);
-        
-        this.topBlock = (byte)Block.grass.blockID;
-        this.fillerBlock = (byte)Block.dirt.blockID;
-        
-        this.minHeight = -0.2F;
-        this.maxHeight = 0.1F;
+        this.topBlock = Blocks.grass;
+        this.fillerBlock = Blocks.dirt;
+        this.setHeight(biomeHeight);
         this.temperature = 0.7F;
         this.rainfall = 1.2F;
 	        
 	}
 	
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (WorldGenerator)(rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cattail.blockID)
-		: new WorldGenSmallPlants(HighlandsBlocks.leafyFern.blockID));
+		return (WorldGenerator)(rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cattail)
+		: new WorldGenSmallPlants(HighlandsBlocks.leafyFern));
 	}
 
     /**
@@ -55,7 +52,7 @@ public class BiomeGenEverglades extends BiomeGenBaseHighlands
      */
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
-        return new WorldGenTallGrass(Block.tallGrass.blockID, 1);
+        return new WorldGenTallGrass(Blocks.tallgrass, 1);
     }
     
     public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
@@ -63,9 +60,9 @@ public class BiomeGenEverglades extends BiomeGenBaseHighlands
         return (WorldGenerator)new WorldGenTreeMangrove(4, 2, false);
     }
 
-    public void decorate(World world, Random rand, int par3, int par4)
+    public void decorate(World world, Random rand, BiomeGenBaseHighlands biome, int par3, int par4)
     {
-    	biomedec.decorate(world, rand, par3, par4);
+    	biomedec.decorate(world, rand, biome, par3, par4);
     	
     	boolean mangroves = rand.nextInt(10) == 0;
     	/*
@@ -94,13 +91,13 @@ public class BiomeGenEverglades extends BiomeGenBaseHighlands
     	for(int i = 0; i < 16; i++){
     		for(int j = 0; j < 16; j++){
     			int topY = 128;
-    			int var11;
-    	        for (boolean var6 = false; ((var11 = world.getBlockId(par3+i, topY, par4+j)) == 0 || var11 == Block.leaves.blockID) && topY > 0; --topY)
+    			Block var11;
+    	        for (boolean var6 = false; ((var11 = world.getBlock(par3+i, topY, par4+j)) == Blocks.air || var11 == Blocks.leaves) && topY > 0; --topY)
     	        {
     	            ;
     	        }
     			//System.out.println("the top block is id" + par1World.getBlockId(par3+i, topY, par4+j));
-    			if(world.getBlockId(par3+i, topY, par4+j) == 0)topY--;
+    			if(world.getBlock(par3+i, topY, par4+j) == Blocks.air)topY--;
     			/*
     			if(world.getBlockId(par3+i, topY, par4+j) == Block.grass.blockID && rand.nextInt(2) == 0){
     				world.setBlock(par3+i, topY, par4+j, Block.grass.blockID);
@@ -114,7 +111,7 @@ public class BiomeGenEverglades extends BiomeGenBaseHighlands
     				if(rand.nextInt(10) == 0 && mangroves)new WorldGenTreeMangrove(4, 2, false).generate(world, rand, par3+i, topY, par4+j);
     			}
     			else if(topY == 62){
-    				if(world.getBlockId(par3+i, topY, par4+j) == Block.grass.blockID)world.setBlock(par3+i, topY+1, par4+j, Block.tallGrass.blockID, 1, 2);
+    				if(world.getBlock(par3+i, topY, par4+j) == Blocks.grass)world.setBlock(par3+i, topY+1, par4+j, Blocks.tallgrass, 1, 2);
     			}
     			else{
     				if(rand.nextInt(20) == 0)new WorldGenTreeMangrove(4, 2, false).generate(world, rand, par3+i, topY, par4+j);

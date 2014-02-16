@@ -20,8 +20,9 @@ public abstract class BiomeGenBaseHighlands extends BiomeGenBase
 		subBiomes = new ArrayList<BiomeGenBase>();
 	}
 	
+	//TODO- could be crashy...
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (WorldGenerator)new WorldGenSmallPlants(0);
+		return (WorldGenerator)new WorldGenSmallPlants(null);
 	}
 	
 	public void setSpawnLists(List monster, List creature, List waterCreature){

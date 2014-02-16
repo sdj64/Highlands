@@ -12,6 +12,7 @@ import highlands.worldgen.WorldGenTreePoplar;
 public class BiomeGenLake extends BiomeGenBaseHighlands
 {
     private BiomeDecoratorHighlands biomedec;
+    private static final Height biomeHeight = new Height(-0.7F, 0.2F);
 
 	public BiomeGenLake(int par1)
     {
@@ -21,9 +22,7 @@ public class BiomeGenLake extends BiomeGenBaseHighlands
 	    int grass = 12;
 	    int flowers = 0;
 	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
-    	
-	    this.minHeight = -0.7F;
-	    this.maxHeight = 0.2F;
+    	this.setHeight(biomeHeight);
         this.temperature = 0.8F;
         this.rainfall = 0.8F;
 	    
