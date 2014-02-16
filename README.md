@@ -23,11 +23,12 @@ If you are contributing to the project, follow these steps carefully:
 
 1. Download/clone into a folder(very important!).
 2. Open a command prompt window from the workspace folder.
-3. Run 'gradlew setupDecompWorkspace eclipse'.
-4. Open eclipse and select import from the file tab.
-5. Under the general category, select the 'Exsiting Projects Into Workspace' option.
-6. Find the workspace folder and select it.
-7. Make whatever changes you would like, just don't distribute them!
+3. Run 'gradlew setupDecompWorkspace'.
+4. Then, run 'gradlew eclipse', DO NOT run it with 'setupDecompWorkspace', this causes problems.
+5. Open eclipse and select import from the file tab.
+6. Under the general category, select the 'Exsiting Projects Into Workspace' option.
+7. Find the workspace folder and select it.
+8. Make whatever changes you would like, just don't distribute them!
 
 Building the Project
 ====================

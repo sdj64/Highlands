@@ -2,6 +2,7 @@ package highlands;
 
 import highlands.api.HighlandsBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;
 
@@ -9,41 +10,41 @@ public class HighlandsFuelHandler implements IFuelHandler
 {
 	public int getBurnTime(ItemStack fuel) {
 		
-		int id = fuel.getItem().itemID;
+		//Item id = fuel.getItem();
+		//TODO- all this ItemStack stuff makes me worry...
+		if(fuel == new ItemStack(HighlandsBlocks.firWood))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.acaciaWood))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.redwoodWood))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.canopyWood))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.poplarWood))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.mangroveWood))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.ashWood))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.palmWood))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.ironWood))return 300;
 		
-		if(id == HighlandsBlocks.firWood.blockID)return 300;
-		if(id == HighlandsBlocks.acaciaWood.blockID)return 300;
-		if(id == HighlandsBlocks.redwoodWood.blockID)return 300;
-		if(id == HighlandsBlocks.canopyWood.blockID)return 300;
-		if(id == HighlandsBlocks.poplarWood.blockID)return 300;
-		if(id == HighlandsBlocks.mangroveWood.blockID)return 300;
-		if(id == HighlandsBlocks.ashWood.blockID)return 300;
-		if(id == HighlandsBlocks.palmWood.blockID)return 300;
-		if(id == HighlandsBlocks.ironWood.blockID)return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.hlplanks))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs0))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs1))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs2))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs3))return 300;
+		if(fuel == new ItemStack(HighlandsBlocks.hlplankhalf))return 150;
 		
-		if(id == HighlandsBlocks.hlplanks.blockID)return 300;
-		if(id == HighlandsBlocks.hlplankstairs0.blockID)return 300;
-		if(id == HighlandsBlocks.hlplankstairs1.blockID)return 300;
-		if(id == HighlandsBlocks.hlplankstairs2.blockID)return 300;
-		if(id == HighlandsBlocks.hlplankstairs3.blockID)return 300;
-		if(id == HighlandsBlocks.hlplankhalf.blockID)return 150;
-		
-		if(id == HighlandsBlocks.firSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.acaciaSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.redwoodSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.poplarSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.canopySapling.blockID)return 100;
-	    if(id == HighlandsBlocks.greatOakSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.beechSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.deadSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.evergreenBushSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.deciduousBushSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.palmSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.ironwoodSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.mangroveSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.ashSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.autumnYellowSapling.blockID)return 100;
-	    if(id == HighlandsBlocks.autumnOrangeSapling.blockID)return 100;
+		if(fuel == new ItemStack(HighlandsBlocks.firSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.acaciaSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.redwoodSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.poplarSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.canopySapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.greatOakSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.beechSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.deadSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.evergreenBushSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.deciduousBushSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.palmSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.ironwoodSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.mangroveSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.ashSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.autumnYellowSapling))return 100;
+	    if(fuel == new ItemStack(HighlandsBlocks.autumnOrangeSapling))return 100;
 		
 		
 		return 0;

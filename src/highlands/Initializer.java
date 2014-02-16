@@ -63,7 +63,7 @@ public class Initializer
 	
 	public static void constructBlocks() {
 		//Saplings
-		HighlandsBlocks.acaciaSapling = new BlockHighlandsSapling(Config.acaciaSaplingID.getInt(), 1).setHardness(0.0F)
+		HighlandsBlocks.acaciaSapling = new BlockHighlandsSapling(1).setHardness(0.0F)
 				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_acaciaSapling");
 		HighlandsBlocks.beechSapling = new BlockHighlandsSapling(Config.beechSaplingID.getInt(), 6).setHardness(0.0F)
 				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_beechSapling");

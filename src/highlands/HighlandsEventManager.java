@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import highlands.api.HighlandsBiomes;
@@ -12,17 +14,17 @@ import highlands.block.BlockHighlandsSapling;
 import highlands.integration.HighlandsCompatibilityManager;
 import highlands.worldgen.layer.GenLayerHL;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenVillage;
-import net.minecraftforge.event.Event;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import net.minecraftforge.event.terraingen.WorldTypeEvent.BiomeSize;
 import net.minecraftforge.event.terraingen.WorldTypeEvent.InitBiomeGens;
@@ -33,23 +35,23 @@ public class HighlandsEventManager {
 	private Random rand = new Random();
 	
 	//allows get wood achievement for Highlands woods
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onItemPickupWood(EntityItemPickupEvent e){
-		if (e.item.getEntityItem().itemID == HighlandsBlocks.firWood.blockID
-				|| e.item.getEntityItem().itemID == HighlandsBlocks.acaciaWood.blockID
-				|| e.item.getEntityItem().itemID == HighlandsBlocks.redwoodWood.blockID
-				|| e.item.getEntityItem().itemID == HighlandsBlocks.poplarWood.blockID
-				|| e.item.getEntityItem().itemID == HighlandsBlocks.canopyWood.blockID
-				|| e.item.getEntityItem().itemID == HighlandsBlocks.ironWood.blockID
-				|| e.item.getEntityItem().itemID == HighlandsBlocks.mangroveWood.blockID
-				|| e.item.getEntityItem().itemID == HighlandsBlocks.ashWood.blockID){
+		if (e.item.getEntityItem() == new ItemStack(HighlandsBlocks.firWood)
+				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.acaciaWood)
+				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.redwoodWood)
+				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.poplarWood)
+				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.canopyWood)
+				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ironWood)
+				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.mangroveWood)
+				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ashWood)){
 			e.entityPlayer.triggerAchievement(AchievementList.mineWood);
 		}
 	}
 	
 	
 	// Adds village spawning to Highlands worlds and default worlds if Highlands is enabled.
-	@ForgeSubscribe
+    @SubscribeEvent
 	public void onWorldStart(Load e){
 		if(e.world.provider.terrainType == HighlandsMain.HL || e.world.provider.terrainType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag){
 			ArrayList<BiomeGenBase> newTotalVillageBiomes = new ArrayList<BiomeGenBase>();
@@ -66,7 +68,7 @@ public class HighlandsEventManager {
 	}
 	
 	// Sets biome size for Highlands Large Biomes
-	@ForgeSubscribe
+    @SubscribeEvent
 	public void onLoadWorldType(BiomeSize e){
 		if(e.worldType == HighlandsMain.HL){
 			e.newSize = (byte)HighlandsMain.HighlandsBiomeSizeDefault;
@@ -77,7 +79,7 @@ public class HighlandsEventManager {
 	}
 	
 	// Initiates the new GenLayers
-	@ForgeSubscribe
+    @SubscribeEvent
 	public void onInitBiomeGenerators(InitBiomeGens e){
 		if(e.worldType == HighlandsMain.HL || e.worldType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag){
 			//this initiates the new gen layers (hills, shore, island).
@@ -102,7 +104,7 @@ public class HighlandsEventManager {
 	
 	// Prevents populate lakes from generating in Highlands worlds-
 	// Biomes that don't decorate lakes actually won't have any.
-	@ForgeSubscribe
+    @SubscribeEvent
 	public void onDecorateLakes2(Populate e){
 		if(e.type == Populate.EventType.LAKE && 
 				(e.world.provider.terrainType == HighlandsMain.HL || e.world.provider.terrainType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag)){
@@ -111,19 +113,22 @@ public class HighlandsEventManager {
 		}
 	}
 	
-	@ForgeSubscribe
+    @SubscribeEvent
     public void bonemealEvent(BonemealEvent e)
     {
         if (!e.world.isRemote)
         {
         	boolean isHLSapling = false;
-        	for(Block b: HighlandsBlocks.saplings)if(b != null && e.ID == b.blockID)isHLSapling = true;
+        	for(Block b: HighlandsBlocks.saplings)if(b != null && e.block == b)isHLSapling = true;
             if (isHLSapling)
             {
-                BlockHighlandsSapling sapling = (BlockHighlandsSapling)Block.blocksList[e.ID];
+            	//TODO- questionable fix
+                BlockHighlandsSapling sapling = (BlockHighlandsSapling)Block.blockRegistry.getObject(e.block);
                 e.setResult(Event.Result.ALLOW);
-                if(e.entityPlayer.capabilities.isCreativeMode)sapling.growTree(e.world, e.X, e.Y, e.Z, rand);
-                else sapling.updateTick(e.world, e.X, e.Y, e.Z, rand);
+                if(e.entityPlayer.capabilities.isCreativeMode)
+                	sapling.growTree(e.world, e.x, e.y, e.z, rand);
+                else 
+                	sapling.updateTick(e.world, e.x, e.y, e.z, rand);
             }
         }
     }
@@ -131,27 +136,26 @@ public class HighlandsEventManager {
 	
 	// sets default village blocks
 	@SideOnly(Side.CLIENT)
-	
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onVillageSelectBlock(GetVillageBlockID e){
 		if(e.biome != null && HighlandsBiomes.sahel != null && HighlandsBiomes.outback != null && BiomeGenBase.icePlains != null){
 			if (e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
 	        {
-				if (e.original == Block.wood.blockID)e.replacement = Block.wood.blockID;
-	            if (e.original == Block.cobblestone.blockID)e.replacement = Block.sandStone.blockID;
-	            if (e.original == Block.planks.blockID)e.replacement = Block.planks.blockID;
-	            if (e.original == Block.stairsWoodOak.blockID)e.replacement = Block.stairsWoodOak.blockID;
-	            if (e.original == Block.stairsCobblestone.blockID)e.replacement = Block.stairsSandStone.blockID;
-	            if (e.original == Block.gravel.blockID)e.replacement = Block.gravel.blockID;
+				if (e.original == Blocks.log)e.replacement = Blocks.log;
+	            if (e.original == Blocks.cobblestone)e.replacement = Blocks.sandstone;
+	            if (e.original == Blocks.planks)e.replacement = Blocks.planks;
+	            if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
+	            if (e.original == Blocks.stone_stairs)e.replacement = Blocks.sandstone_stairs;
+	            if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
 	        }
 			if (e.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
 	        {
-	            if (e.original == Block.wood.blockID)e.replacement = Block.wood.blockID;
-	            if (e.original == Block.cobblestone.blockID)e.replacement = Block.cobblestone.blockID;
-	            if (e.original == Block.planks.blockID)e.replacement = Block.blockSnow.blockID;
-	            if (e.original == Block.stairsWoodOak.blockID)e.replacement = Block.stairsWoodOak.blockID;
-	            if (e.original == Block.stairsCobblestone.blockID)e.replacement = Block.stairsCobblestone.blockID;
-	            if (e.original == Block.gravel.blockID)e.replacement = Block.gravel.blockID;
+	            if (e.original == Blocks.log)e.replacement = Blocks.log;
+	            if (e.original == Blocks.cobblestone)e.replacement = Blocks.cobblestone;
+	            if (e.original == Blocks.planks)e.replacement = Blocks.snow;
+	            if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
+	            if (e.original == Blocks.stone_stairs)e.replacement = Blocks.stone_stairs;
+	            if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
 	        }
 		}
 	}
