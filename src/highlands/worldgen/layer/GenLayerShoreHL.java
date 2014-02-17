@@ -254,11 +254,12 @@ public class GenLayerShoreHL extends GenLayer
                     float maxRainDifference = 0;
                     
                     try{
-                    	BiomeGenBase b0 = BiomeGenBase.biomeList[var9];
-                    	BiomeGenBase b1 = BiomeGenBase.biomeList[var10];
-                    	BiomeGenBase b2 = BiomeGenBase.biomeList[var11];
-                    	BiomeGenBase b3 = BiomeGenBase.biomeList[var12];
-                    	BiomeGenBase b4 = BiomeGenBase.biomeList[var13];
+                    	//TODO- correct 1.7.x fix?
+                    	BiomeGenBase b0 = BiomeGenBase.getBiomeGenArray()[var9];
+                    	BiomeGenBase b1 = BiomeGenBase.getBiomeGenArray()[var10];
+                    	BiomeGenBase b2 = BiomeGenBase.getBiomeGenArray()[var11];
+                    	BiomeGenBase b3 = BiomeGenBase.getBiomeGenArray()[var12];
+                    	BiomeGenBase b4 = BiomeGenBase.getBiomeGenArray()[var13];
                     	
 		                if(!(b0 instanceof BiomeGenBaseHighlands) ||
 		                		(b0 instanceof BiomeGenBaseHighlands && !((BiomeGenBaseHighlands) b0).subBiomes.contains(b1))){

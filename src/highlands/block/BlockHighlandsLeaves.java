@@ -253,7 +253,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
             par1World.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
     }
-
+    
     private void removeLeaves(World par1World, int par2, int par3, int par4)
     {
         this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
@@ -293,16 +293,13 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      */
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
     {
+    	//TODO- right fix?
     	if (!par1World.isRemote)
         {
-            ArrayList<ItemStack> items = getItemDropped(par5, par1World.rand, par7);
-
-            for (ItemStack item : items)
+            Item item = getItemDropped(par5, par1World.rand, par7);
+            if (par1World.rand.nextFloat() <= par6)
             {
-                if (par1World.rand.nextFloat() <= par6)
-                {
-                    this.dropBlockAsItem(par1World, par2, par3, par4, item);
-                }
+                this.dropBlockAsItem(par1World, par2, par3, par4, new ItemStack(item, 1, this.damageDropped(par5)));
             }
         }
     }
@@ -348,24 +345,26 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * @param target The full target the player is looking at
      * @return A ItemStack to add to the player's inventory, Null if nothing should be added.
      */
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
-    {
-    	int id = idPicked(world, x, y, z);
-
-        if (id == 0)
-        {
-            return null;
-        }
-
-        Item item = Item.itemsList[id];
-        if (item == null)
-        {
-            return null;
-        }
-
-        return new ItemStack(id, 1, 0);
-        //return new ItemStack(this.blockID, 1, 0);
-    }
+    //TODO- doesn't seem to work/isn't used anymore...
+//    @Override
+//    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+//    {
+//    	Block picked = target.
+//    	
+//        if (target == Blocks.air)
+//        {
+//            return null;
+//        }
+//
+//        Item item = Item.itemsList[id];
+//        if (item == null)
+//        {
+//            return null;
+//        }
+//
+//        return new ItemStack(id, 1, 0);
+//        //return new ItemStack(this.blockID, 1, 0);
+//    }
 
     @SideOnly(Side.CLIENT)
 

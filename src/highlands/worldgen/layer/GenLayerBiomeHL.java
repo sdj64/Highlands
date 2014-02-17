@@ -17,7 +17,7 @@ public class GenLayerBiomeHL extends GenLayer
     public GenLayerBiomeHL(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
     {
         super(par1);
-        this.allowedBiomes = par4WorldType.getBiomesForWorldType();
+        this.allowedBiomes = par4WorldType.;
         this.parent = par3GenLayer;
         wt = par4WorldType;
     }

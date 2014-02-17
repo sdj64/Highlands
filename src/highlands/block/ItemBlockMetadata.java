@@ -2,21 +2,23 @@ package highlands.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import java.util.List;
+
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class ItemBlockMetadata extends ItemBlock
 {
 
-    public ItemBlockMetadata(int par1)
+    public ItemBlockMetadata(Block par1)
     {
         super(par1);
         setHasSubtypes(true);
@@ -30,9 +32,10 @@ public class ItemBlockMetadata extends ItemBlock
     	return par1;
     }
     
-    public Icon getIconFromDamage(int par1){
-    	if(this.itemID < 4096 && Block.blocksList[this.itemID].getRenderType() != 0)
-    		return Block.blocksList[this.itemID].getIcon(0, par1);
-    	else return super.getIconFromDamage(par1);
-    }
+    //TODO- broke all the things
+//    public IIcon getIconFromDamage(int par1){
+//    	if(this.getIdFromItem(getContainerItem()) < 4096 && this != 0)
+//    		return this.getIcon(new ItemStack(Blocks.air), par1);
+//    	else return super.getIconFromDamage(par1);
+//    }
 }

@@ -3,6 +3,7 @@ package highlands.worldgen;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -49,19 +50,19 @@ public class WorldGenAutumnBigTree extends WorldGenerator
     
     int leafMeta;
     int woodMeta;
-    int leafID;
-    int woodID;
+    Block leafID;
+    Block woodID;
     
     boolean hasLeaves;
 
-    public WorldGenAutumnBigTree(boolean par1, boolean placeLeaves, int wmd, int lmd, int wid, int lid, int trunkDiameter, int treeHeightLim)
+    public WorldGenAutumnBigTree(boolean par1, boolean placeLeaves, int wmd, int lmd, Block log, Block autumnYellowLeaves, int trunkDiameter, int treeHeightLim)
     {
         super(par1);
         hasLeaves = placeLeaves;
         leafMeta = lmd;
         woodMeta = wmd;
-        leafID = lid;
-        woodID = wid;
+        leafID = autumnYellowLeaves;
+        woodID = log;
         trunkSize = trunkDiameter;
         heightLimit = treeHeightLim;
     }
@@ -71,7 +72,7 @@ public class WorldGenAutumnBigTree extends WorldGenerator
     }
     
     public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){
-    	int id = world.getBlockId(locX, locY, locZ);
+    	Block id = world.getBlock(locX, locY, locZ);
     	int meta = world.getBlockMetadata(locX, locY, locZ);
     	boolean flag = generate(world, random, locX, locY, locZ);
     	if(!flag) world.setBlock(locX, locY, locZ, id, meta, 3);
@@ -190,15 +191,15 @@ public class WorldGenAutumnBigTree extends WorldGenerator
                 else
                 {
                     var11[var9] = var10[var9] + var13;
-                    int var14 = this.worldObj.getBlockId(var11[0], var11[1], var11[2]);
+                    Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
 
-                    if (var14 != 0 && var14 != leafID)
+                    if (var14 != Blocks.air && var14 != leafID)
                     {
                         ++var13;
                     }
                     else
                     {
-                        if(hasLeaves)this.setBlockAndMetadata(this.worldObj, var11[0], var11[1], var11[2], par6, leafMeta);
+                        if(hasLeaves)this.(this.worldObj, var11[0], var11[1], var11[2], par6, leafMeta);
                         ++var13;
                     }
                 }
