@@ -15,7 +15,6 @@ import cpw.mods.fml.common.Loader;
 import highlands.api.*;
 import highlands.biome.*;
 import highlands.block.*;
-import highlands.integration.HighlandsCompatibilityManager;
 import highlands.worldgen.WorldGenUnderground2;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
@@ -137,7 +136,7 @@ public class HighlandsMain {
 		//debug();
 
 		// This must NOT be in postInit.
-		HighlandsCompatibilityManager.registerBlocksBuildcraft();
+		//HighlandsCompatibilityManager.registerBlocksBuildcraft();
 		
 		proxy.registerRenderers();
 	}
@@ -182,49 +181,49 @@ public class HighlandsMain {
 		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2(Block.cocoaPlant.blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("cocoa");
 
 		//Forestry PostInit
-		if (Loader.isModLoaded("Forestry") ){
-			try {
-				HighlandsCompatibilityManager.registerBlocksForestry();
-				HighlandsCompatibilityManager.registerRecipesForestry();
-			}
-			catch( Exception e ) {
-				System.err.println("[Highlands] Failed to enable Forestry compatibility because: ");
-				e.printStackTrace();
-			}
-		}
-
-		//MFR PostInit
-		if (Loader.isModLoaded("MineFactoryReloaded") ){
-			try {
-				HighlandsCompatibilityManager.registerBlocksMFR();
-			}
-			catch( Exception e ) {
-				System.err.println("[Highlands] Failed to enable MFR compatibility because: ");
-				e.printStackTrace();
-			}
-		}
-
-		//Thaumcraft PostInit
-		if (Loader.isModLoaded("Thaumcraft")){
-			try {
-				HighlandsCompatibilityManager.registerBlocksThaumcraft();
-			}
-			catch( Exception e ) {
-				System.err.println("[Highlands] Failed to enable Thaumcraft compatibility because: ");
-				e.printStackTrace();
-			}
-		}
-		
-		//ATG PostInit
-		if (Loader.isModLoaded("ATG")){
-			try {
-				HighlandsCompatibilityManager.registerBiomesATG();
-			}
-			catch( Exception e ) {
-				System.err.println("[Highlands] Failed to enable ATG compatibility because: ");
-				e.printStackTrace();
-			}
-		}
+//		if (Loader.isModLoaded("Forestry") ){
+//			try {
+//				HighlandsCompatibilityManager.registerBlocksForestry();
+//				HighlandsCompatibilityManager.registerRecipesForestry();
+//			}
+//			catch( Exception e ) {
+//				System.err.println("[Highlands] Failed to enable Forestry compatibility because: ");
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		//MFR PostInit
+//		if (Loader.isModLoaded("MineFactoryReloaded") ){
+//			try {
+//				HighlandsCompatibilityManager.registerBlocksMFR();
+//			}
+//			catch( Exception e ) {
+//				System.err.println("[Highlands] Failed to enable MFR compatibility because: ");
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		//Thaumcraft PostInit
+//		if (Loader.isModLoaded("Thaumcraft")){
+//			try {
+//				HighlandsCompatibilityManager.registerBlocksThaumcraft();
+//			}
+//			catch( Exception e ) {
+//				System.err.println("[Highlands] Failed to enable Thaumcraft compatibility because: ");
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		//ATG PostInit
+//		if (Loader.isModLoaded("ATG")){
+//			try {
+//				HighlandsCompatibilityManager.registerBiomesATG();
+//			}
+//			catch( Exception e ) {
+//				System.err.println("[Highlands] Failed to enable ATG compatibility because: ");
+//				e.printStackTrace();
+//			}
+//		}
 	}	
 	
 	//method to print debug info

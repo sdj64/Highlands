@@ -9,7 +9,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenOcean2 extends BiomeGenBaseHighlands
 {
-	
+	private static final Height biomeHeight = new Height(-1.5F, 0.4F);
 	private BiomeDecoratorHighlands biomedec;
 	
     public BiomeGenOcean2(int par1)
@@ -21,12 +21,10 @@ public class BiomeGenOcean2 extends BiomeGenBaseHighlands
 	    int grass = 3;
 	    int flowers = 1;
         this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
-        
-        this.maxHeight = 0.4F;
-        this.minHeight = -1.5F;
+        this.setHeight(biomeHeight);
     }
     
-    public void decorate(World world, Random par2Random, int par3, int par4)
+    public void decorate(World world, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
     {
     	/*
     	// makes islands grass
@@ -51,7 +49,7 @@ public class BiomeGenOcean2 extends BiomeGenBaseHighlands
     	}
     	*/
 
-        biomedec.decorate(world, par2Random, par3, par4);
+        biomedec.decorate(world, par2Random, biome, par3, par4);
         biomedec.genOreHighlands(world, par2Random, par3, par4, 10, biomedec.HLwater, 0, 64);
 	    biomedec.genOreHighlands(world, par2Random, par3, par4, 10, biomedec.HLsand, 0, 64);
     }

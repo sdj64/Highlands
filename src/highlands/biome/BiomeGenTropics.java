@@ -4,10 +4,10 @@ import java.util.Random;
 
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenVines;
@@ -20,8 +20,8 @@ import highlands.worldgen.WorldGenTreeCanopy;
 
 public class BiomeGenTropics extends BiomeGenBaseHighlands
 {
+	private static final Height biomeHeight = new Height(0.1F, 0.4F);
 	private BiomeDecoratorHighlands biomedec;
-
 
 	public BiomeGenTropics(int par1)
 	{
@@ -36,15 +36,13 @@ public class BiomeGenTropics extends BiomeGenBaseHighlands
 	    
         this.spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
         this.spawnableCreatureList.add(new SpawnListEntry(EntityChicken.class, 10, 4, 4));
-        
-        this.maxHeight = 0.4F;
-        this.minHeight = 0.1F;
+        this.setHeight(biomeHeight);
         this.temperature = 1.2F;
         this.rainfall = 1.0F;
     }
 	
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.leafyFern.blockID);
+		return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.leafyFern);
 	}
 
 
@@ -61,13 +59,13 @@ public class BiomeGenTropics extends BiomeGenBaseHighlands
      */
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
-        return new WorldGenTallGrass(Block.tallGrass.blockID, 2);
+        return new WorldGenTallGrass(Blocks.tallgrass, 2);
     }
 
     
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
     {
-        biomedec.decorate(par1World, par2Random, par3, par4);
+        biomedec.decorate(par1World, par2Random, biome, par3, par4);
         WorldGenVines var5 = new WorldGenVines();
 
         for (int var6 = 0; var6 < 50; ++var6)

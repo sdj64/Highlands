@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTaiga1;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
@@ -18,7 +19,7 @@ import highlands.worldgen.WorldGenTreeFir;
 
 public class BiomeGenLowlands extends BiomeGenBaseHighlands
 {
-	
+	private static final Height biomeHeight = new Height(-0.2F, 0.5F);
 	private BiomeDecoratorHighlands biomedec;
 
 	public BiomeGenLowlands(int par1)
@@ -31,17 +32,16 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
 	    int plants = 4;
 	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers, plants);
 
-        this.minHeight = -0.2F;
-        this.maxHeight = 0.5F;
+        this.setHeight(biomeHeight);
         this.temperature = 0.5F;
         this.rainfall = 1.2F;
         
     }
 	
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (WorldGenerator)(rand.nextInt(3) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cattail.blockID)
-				: (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cotton.blockID)
-				: new WorldGenSmallPlants(HighlandsBlocks.blueFlower.blockID)));
+		return (WorldGenerator)(rand.nextInt(3) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cattail)
+				: (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cotton)
+				: new WorldGenSmallPlants(HighlandsBlocks.blueFlower)));
 	}
 
     /**
@@ -59,12 +59,12 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
      */
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
-        return new WorldGenTallGrass(Block.tallGrass.blockID, 1);
+        return new WorldGenTallGrass(Blocks.tallgrass, 1);
     }
 
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
     {
-        biomedec.decorate(par1World, par2Random, par3, par4);
+        biomedec.decorate(par1World, par2Random, biome, par3, par4);
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.coalGen, 0, 128);
     }
 }

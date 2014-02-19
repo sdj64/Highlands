@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
@@ -19,6 +19,7 @@ import highlands.worldgen.WorldGenTreePoplar;
 public class BiomeGenMeadow extends BiomeGenBaseHighlands
 {
     private BiomeDecoratorHighlands biomedec;
+    private static final Height biomeHeight = new Height(0.1F, 0.1F);
 
 	public BiomeGenMeadow(int par1)
     {
@@ -33,17 +34,15 @@ public class BiomeGenMeadow extends BiomeGenBaseHighlands
 	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers, plants);
         
         this.theBiomeDecorator.generateLakes = false;
-        
-        this.minHeight = 0.1F;
-        this.maxHeight = 0.1F;
+        this.setHeight(biomeHeight);
         
         this.temperature = 0.6F;
         this.rainfall = 0.8F;
     }
 	
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (WorldGenerator)(rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cotton.blockID)
-				: new WorldGenSmallPlants(HighlandsBlocks.lavender.blockID));
+		return (WorldGenerator)(rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cotton)
+				: new WorldGenSmallPlants(HighlandsBlocks.lavender));
 	}
     
     /**
@@ -51,7 +50,7 @@ public class BiomeGenMeadow extends BiomeGenBaseHighlands
      */
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
 	{
-	    return new WorldGenTallGrass(Block.tallGrass.blockID, 1);
+	    return new WorldGenTallGrass(Blocks.tallgrass, 1);
 	}
     
     public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
@@ -59,9 +58,9 @@ public class BiomeGenMeadow extends BiomeGenBaseHighlands
         return (WorldGenerator)new WorldGenTreePoplar(10, 4, false);
     }
     
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
     {
-        biomedec.decorate(par1World, par2Random, par3, par4);
+        biomedec.decorate(par1World, par2Random, biome, par3, par4);
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 10, biomedec.HLwater, 0, 64);
     }

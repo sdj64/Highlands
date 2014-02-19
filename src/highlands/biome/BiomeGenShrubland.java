@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -18,7 +18,7 @@ import highlands.worldgen.WorldGenSmallPlants;
 
 public class BiomeGenShrubland extends BiomeGenBaseHighlands
 {
-	
+	private static final Height biomeHeight = new Height(0.1F, 0.3F);
 	private BiomeDecoratorHighlands biomedec;
 
 	public BiomeGenShrubland(int par1)
@@ -33,9 +33,7 @@ public class BiomeGenShrubland extends BiomeGenBaseHighlands
 	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
         
 	    biomedec.generateLakes = true;
-	    
-        this.minHeight = 0.1F;
-        this.maxHeight = 0.3F;
+	    this.setHeight(biomeHeight);
         this.temperature = 0.6F;
         this.rainfall = 0.5F;
         
@@ -44,16 +42,16 @@ public class BiomeGenShrubland extends BiomeGenBaseHighlands
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
 		int i = rand.nextInt(9);
 		switch(i){
-		case 0: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.blueFlower.blockID);
-		case 1: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.leafyFern.blockID);
-		case 2: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.whiteFlower.blockID);
-		case 3: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.cattail.blockID);
-		case 4: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.lavender.blockID);
-		case 5: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.raspberryBush.blockID);
-		case 6: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.blueberryBush.blockID);
-		case 7: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.thornbush.blockID);
-		case 8: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.cotton.blockID);
-		default: return (WorldGenerator)new WorldGenSmallPlants(0);
+		case 0: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.blueFlower);
+		case 1: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.leafyFern);
+		case 2: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.whiteFlower);
+		case 3: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.cattail);
+		case 4: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.lavender);
+		case 5: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.raspberryBush);
+		case 6: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.blueberryBush);
+		case 7: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.thornbush);
+		case 8: return (WorldGenerator)new WorldGenSmallPlants(HighlandsBlocks.cotton);
+		default: return (WorldGenerator)new WorldGenSmallPlants(Blocks.air);
 		}
 	}
 
@@ -70,11 +68,11 @@ public class BiomeGenShrubland extends BiomeGenBaseHighlands
      */
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
-        return new WorldGenTallGrass(Block.tallGrass.blockID, 1);
+        return new WorldGenTallGrass(Blocks.tallgrass, 1);
     }
 
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
     {
-        biomedec.decorate(par1World, par2Random, par3, par4);
+        biomedec.decorate(par1World, par2Random, biome, par3, par4);
     }
 }

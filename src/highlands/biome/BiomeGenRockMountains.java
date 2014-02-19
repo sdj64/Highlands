@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.HighlandsMain;
@@ -15,6 +16,7 @@ import highlands.worldgen.WorldGenMountain;
 
 public class BiomeGenRockMountains extends BiomeGenBaseHighlands
 {
+	private static final Height biomeHeight = new Height(2.0F, 2.0F);
     private BiomeDecoratorHighlands biomedec;
 
 	public BiomeGenRockMountains(int par1)
@@ -28,9 +30,8 @@ public class BiomeGenRockMountains extends BiomeGenBaseHighlands
         
         this.spawnableCreatureList.clear();
         
-        this.fillerBlock = (byte) Block.stone.blockID;
-        this.maxHeight = 2.0F;
-        this.minHeight = 2.0F;
+        this.fillerBlock = Blocks.stone;
+        this.setHeight(biomeHeight);
         this.temperature = 0.6F;
         this.rainfall = 0.5F;
         
@@ -42,12 +43,12 @@ public class BiomeGenRockMountains extends BiomeGenBaseHighlands
         return (WorldGenerator)(new WorldGenHighlandsShrub(1, 1));
     }
     
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
     {
     	if(par2Random.nextInt(2) == 0)
     		new WorldGenMountain(15, 15, false, 1).generate(par1World, par2Random, par3+par2Random.nextInt(16), 128, par4+par2Random.nextInt(16));
     	
-        biomedec.decorate(par1World, par2Random, par3, par4);
+        biomedec.decorate(par1World, par2Random, biome, par3, par4);
         
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.ironGen, 64, 128);
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 40, biomedec.ironGen, 0, 128);

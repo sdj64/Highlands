@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTaiga1;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
@@ -15,7 +16,7 @@ import highlands.worldgen.WorldGenTreeFir;
 
 public class BiomeGenTallPineForest extends BiomeGenBaseHighlands
 {
-	
+	private static final Height biomeHeight = new Height(0.2F, 0.7F);
 	private BiomeDecoratorHighlands biomedec;
 
 	public BiomeGenTallPineForest(int par1)
@@ -26,10 +27,7 @@ public class BiomeGenTallPineForest extends BiomeGenBaseHighlands
 		    int grass = 2;
 		    int flowers = 0;
 		    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
-
-	        
-	        this.minHeight = 0.2F;
-	        this.maxHeight = 0.7F;
+		    this.setHeight(biomeHeight);
 	        this.temperature = 0.1F;
 	        this.rainfall = 0.8F;
 	        
@@ -51,12 +49,12 @@ public class BiomeGenTallPineForest extends BiomeGenBaseHighlands
 	     */
 	    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
 	    {
-	        return new WorldGenTallGrass(Block.tallGrass.blockID, 1);
+	        return new WorldGenTallGrass(Blocks.tallgrass, 1);
 	    }
 
-	    public void decorate(World par1World, Random par2Random, int par3, int par4)
+	    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
 	    {
-	        biomedec.decorate(par1World, par2Random, par3, par4);
+	        biomedec.decorate(par1World, par2Random, biome, par3, par4);
 	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.coalGen, 0, 128);
 	    }
 }

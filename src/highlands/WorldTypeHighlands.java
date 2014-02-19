@@ -21,7 +21,7 @@ public class WorldTypeHighlands extends WorldType {
 	public WorldTypeHighlands(int par1, String par2Str) {
 		super(par1, par2Str);
 		name = par2Str;
-		this. = new BiomeGenBase[] {};
+		this.biomesForWorldType = new BiomeGenBase[] {};
 	}
 
 	@Override
