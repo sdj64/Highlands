@@ -8,9 +8,9 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class WorldGenDeadBush2 extends WorldGenerator
 {
     /** stores the ID for WorldGenDeadBush */
-    private int deadBushID;
+    private Block deadBushID;
 
-    public WorldGenDeadBush2(int par1)
+    public WorldGenDeadBush2(Block par1)
     {
         this.deadBushID = par1;
     }
@@ -22,7 +22,7 @@ public class WorldGenDeadBush2 extends WorldGenerator
         Block block = null;
         do 
         {
-            block = Block.blocksList[par1World.getBlockId(par3,  par4, par5)];
+            block = par1World.getBlock(par3,  par4, par5);
             if (block != null && !block.isLeaves(par1World, par3, par4, par5))
             {
                 break;
@@ -36,7 +36,7 @@ public class WorldGenDeadBush2 extends WorldGenerator
             int var9 = par4 + par2Random.nextInt(4) - par2Random.nextInt(4);
             int var10 = par5 + par2Random.nextInt(8) - par2Random.nextInt(8);
 
-            if (par1World.isAirBlock(var8, var9, var10) && Block.blocksList[this.deadBushID].canBlockStay(par1World, var8, var9, var10))
+            if (par1World.isAirBlock(var8, var9, var10) && this.deadBushID.canBlockStay(par1World, var8, var9, var10))
             {
                 par1World.setBlock(var8, var9, var10, this.deadBushID, 0, 2);
             }

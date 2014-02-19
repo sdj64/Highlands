@@ -1,16 +1,15 @@
 package highlands.worldgen;
 
-import java.awt.Point;
-import java.util.ArrayList;
+import highlands.HighlandsMain;
+import highlands.api.HighlandsBlocks;
+
 import java.util.Random;
 
-import highlands.HighlandsMain;
-import highlands.api.HighlandsBiomes;
-import highlands.api.HighlandsBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
 {
@@ -25,7 +24,7 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreePalm(int lmd, int wmd, int wb, int lb, int minH, int maxH, boolean notify)
+    public WorldGenTreePalm(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
         
@@ -34,11 +33,11 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreePalm(int minH, int maxH, boolean notify){
-    	this(0, 0, HighlandsBlocks.palmWood.blockID, HighlandsBlocks.palmLeaves.blockID, minH, maxH, notify);
+    	this(0, 0, HighlandsBlocks.palmWood, (BlockLeaves) HighlandsBlocks.palmLeaves, minH, maxH, notify);
     	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Block.wood.blockID;
+    		this.woodID = Blocks.log;
     		this.woodMeta = 3;
-    		this.leavesID = Block.leaves.blockID;
+    		this.leavesID = Blocks.leaves;
     		this.leavesMeta = 3;
     	}
     }
@@ -51,7 +50,7 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
 
         
         if(!isLegalTreePosition(world, locX, locY, locZ)
-        		&& world.getBlockId(locX, locY-1, locZ) != Block.sand.blockID)return false;
+        		&& world.getBlock(locX, locY-1, locZ) != Blocks.sand)return false;
         if(!isCubeClear(locX, locY+3, locZ, 1, 4))return false;
         
         //generates trunk
@@ -102,10 +101,10 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
                 if (random.nextInt(2) == 0)
                 {
                     int i2 = random.nextInt(3);
-                    this.setBlockAndMetadata(world, locX +
+                    this.setBlockAndNotifyAdequately(world, locX +
                     		Direction.offsetX[Direction.rotateOpposite[k1]], h,
                     		locZ + Direction.offsetZ[Direction.rotateOpposite[k1]],
-                    		Block.cocoaPlant.blockID, i2 << 2 | k1);
+                    		Blocks.cocoa, i2 << 2 | k1);
                 }
             }
     	}

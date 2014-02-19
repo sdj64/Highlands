@@ -165,7 +165,7 @@ public class WorldGenAutumnBigTree extends WorldGenerator
         System.arraycopy(var2, 0, this.leafNodes, 0, var4);
     }
 
-    void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, int par6)
+    void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block par6)
     {
         int var7 = (int)((double)par4 + 0.618D);
         byte var8 = otherCoordPairs[par5];
@@ -199,7 +199,9 @@ public class WorldGenAutumnBigTree extends WorldGenerator
                     }
                     else
                     {
-                        if(hasLeaves)this.(this.worldObj, var11[0], var11[1], var11[2], par6, leafMeta);
+                        if(hasLeaves)
+                        	//TODO- right fix?
+                        	this.setBlockAndNotifyAdequately(this.worldObj, var11[0], var11[1], var11[2], par6, leafMeta);
                         ++var13;
                     }
                 }
@@ -262,7 +264,7 @@ public class WorldGenAutumnBigTree extends WorldGenerator
     /**
      * Places a line of the specified block ID into the world from the first coordinate triplet to the second.
      */
-    void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, int par3)
+    void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, Block par3)
     {
         int[] var4 = new int[] {0, 0, 0};
         byte var5 = 0;
@@ -319,7 +321,8 @@ public class WorldGenAutumnBigTree extends WorldGenerator
                         var17 = 8;
                     }
                 }
-                this.setBlockAndMetadata(this.worldObj, var14[0], var14[1], var14[2], par3, woodMeta);
+                //TODO- right fix?
+                this.setBlockAndNotifyAdequately(this.worldObj, var14[0], var14[1], var14[2], par3, woodMeta);
             }
         }
     }
@@ -449,9 +452,9 @@ public class WorldGenAutumnBigTree extends WorldGenerator
                 var13[var5] = par1ArrayOfInteger[var5] + var14;
                 var13[var6] = MathHelper.floor_double((double)par1ArrayOfInteger[var6] + (double)var14 * var9);
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
-                int var16 = this.worldObj.getBlockId(var13[0], var13[1], var13[2]);
+                Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-                if (var16 != 0 && var16 != leafID)
+                if (var16 != Blocks.air && var16 != leafID)
                 {
                     break;
                 }
@@ -469,9 +472,9 @@ public class WorldGenAutumnBigTree extends WorldGenerator
     {
         int[] var1 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
         int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
-        int var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
+        Block var3 = this.worldObj.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
 
-        if (var3 != 2 && var3 != 3)
+        if (var3 != Blocks.dirt && var3 != Blocks.grass)
         {
             return false;
         }

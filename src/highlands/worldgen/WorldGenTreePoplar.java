@@ -1,14 +1,14 @@
 package highlands.worldgen;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Random;
-
 import highlands.HighlandsMain;
 import highlands.api.HighlandsBlocks;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
 {
@@ -23,7 +23,7 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreePoplar(int lmd, int wmd, int wb, int lb, int minH, int maxH, boolean notify)
+    public WorldGenTreePoplar(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify)
     {
         super(lmd, wmd, wb, lb, notify);
         this.minHeight = minH;
@@ -31,11 +31,11 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreePoplar(int minH, int maxH, boolean notify){
-    	this(0, 0, HighlandsBlocks.poplarWood.blockID, HighlandsBlocks.poplarLeaves.blockID, minH, maxH, notify);
+    	this(0, 0, HighlandsBlocks.poplarWood, (BlockLeaves) HighlandsBlocks.poplarLeaves, minH, maxH, notify);
     	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Block.wood.blockID;
+    		this.woodID = Blocks.log;
     		this.woodMeta = 2;
-    		this.leavesID = Block.leaves.blockID;
+    		this.leavesID = Blocks.leaves;
     		this.leavesMeta = 2;
     	}
     }

@@ -7,6 +7,8 @@ import java.util.Random;
 import highlands.HighlandsMain;
 import highlands.api.HighlandsBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -23,7 +25,7 @@ public class WorldGenTreeAsh extends WorldGenHighlandsTreeBase
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreeAsh(int lmd, int wmd, int wb, int lb, int minH, int maxH, boolean notify)
+    public WorldGenTreeAsh(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
         
@@ -32,10 +34,10 @@ public class WorldGenTreeAsh extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreeAsh(int minH, int maxH, boolean notify){
-    	this(0, 0, HighlandsBlocks.ashWood.blockID, HighlandsBlocks.ashLeaves.blockID, minH, maxH, notify);
+    	this(0, 0, HighlandsBlocks.ashWood, (BlockLeaves) HighlandsBlocks.ashLeaves, minH, maxH, notify);
     	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Block.wood.blockID;
-    		this.leavesID = Block.leaves.blockID;
+    		this.woodID = Blocks.log;
+    		this.leavesID = Blocks.leaves;
     	}
     }
 

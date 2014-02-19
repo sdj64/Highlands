@@ -1,14 +1,14 @@
 package highlands.worldgen;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Random;
-
 import highlands.HighlandsMain;
 import highlands.api.HighlandsBlocks;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
 {
@@ -25,7 +25,7 @@ public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreeCanopy(int lmd, int wmd, int wb, int lb, int minH, int maxH, boolean notify, boolean thickTrunk)
+    public WorldGenTreeCanopy(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify, boolean thickTrunk)
     {
     	super(lmd, wmd, wb, lb, notify);
         
@@ -35,11 +35,11 @@ public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreeCanopy(int minH, int maxH, boolean notify, boolean thickTrunk){
-    	this(0, 0, HighlandsBlocks.canopyWood.blockID, HighlandsBlocks.canopyLeaves.blockID, minH, maxH, notify, thickTrunk);
+    	this(0, 0, HighlandsBlocks.canopyWood, (BlockLeaves) HighlandsBlocks.canopyLeaves, minH, maxH, notify, thickTrunk);
     	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Block.wood.blockID;
+    		this.woodID = Blocks.log;
     		this.woodMeta = 3;
-    		this.leavesID = Block.leaves.blockID;
+    		this.leavesID = Blocks.leaves;
     		this.leavesMeta = 3;
     	}
     }

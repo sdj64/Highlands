@@ -3,13 +3,13 @@ package highlands.worldgen;
 import java.util.Random;
 
 import highlands.HighlandsMain;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class WorldGenAutumnTree extends WorldGenerator
 {
@@ -20,10 +20,10 @@ public class WorldGenAutumnTree extends WorldGenerator
     private final boolean vinesGrow;
 
     /** The blockID of the wood to use in tree generation. */
-    private int blockWood;
+    private Block blockWood;
 
     /** The blockID of the leaves to use in tree generation. */
-    private int blockLeaves;
+    private Block blockLeaves;
 
     public WorldGenAutumnTree(boolean par1, int par2, Block log, Block autumnYellowLeaves)
     {
@@ -34,13 +34,13 @@ public class WorldGenAutumnTree extends WorldGenerator
         this.vinesGrow = false;
         
         if(HighlandsMain.vanillaBlocksFlag){
-        	blockWood = Block.wood.blockID;
-        	blockLeaves = Block.leaves.blockID;
+        	blockWood = Blocks.log;
+        	blockLeaves = Blocks.leaves;
         }
     }
     
     public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){
-    	int id = world.getBlockId(locX, locY, locZ);
+    	Block id = world.getBlock(locX, locY, locZ);
     	int meta = world.getBlockMetadata(locX, locY, locZ);
     	boolean flag = generate(world, random, locX, locY, locZ);
     	if(!flag) world.setBlock(locX, locY, locZ, id, meta, 3);
@@ -79,14 +79,12 @@ public class WorldGenAutumnTree extends WorldGenerator
                     {
                         if (i1 >= 0 && i1 < 256)
                         {
-                            k1 = par1World.getBlockId(l1, i1, j1);
+                            Block block = par1World.getBlock(l1, i1, j1);
 
-                            Block block = Block.blocksList[k1];
-
-                            if (k1 != 0 &&
-                               !block.isLeaves(par1World, l1, i1, j1) &&
-                                k1 != Block.grass.blockID &&
-                                k1 != Block.dirt.blockID &&
+                            if (block != Blocks.air && 
+                            		!block.isLeaves(par1World, l1, i1, j1) &&
+                            		block != Blocks.grass &&
+                            				block != Blocks.dirt &&
                                !block.isWood(par1World, l1, i1, j1))
                             {
                                 flag = false;
@@ -106,9 +104,8 @@ public class WorldGenAutumnTree extends WorldGenerator
             }
             else
             {
-                i1 = par1World.getBlockId(par3, par4 - 1, par5);
-                Block soil = Block.blocksList[i1];
-                boolean isSoil = (soil != null && soil.canSustainPlant(par1World, par3, par4 - 1, par5, ForgeDirection.UP, (BlockSapling)Block.sapling));
+                Block soil = par1World.getBlock(par3, par4 - 1, par5);
+                boolean isSoil = (soil != null && soil.canSustainPlant(par1World, par3, par4 - 1, par5, ForgeDirection.UP, (BlockSapling)Blocks.sapling));
 
                 if (isSoil && par4 < 256 - l - 1)
                 {
@@ -134,12 +131,12 @@ public class WorldGenAutumnTree extends WorldGenerator
 
                                 if (Math.abs(k2) != i2 || Math.abs(i3) != i2 || par2Random.nextInt(2) != 0 && k1 != 0)
                                 {
-                                    int j3 = par1World.getBlockId(j2, j1, l2);
-                                    Block block = Block.blocksList[j3];
+ 
+                                    Block block = par1World.getBlock(j2, j1, l2);
 
                                     if (block == null || block.canBeReplacedByLeaves(par1World, j2, j1, l2))
                                     {
-                                        this.setBlockAndMetadata(par1World, j2, j1, l2, this.blockLeaves, 0);
+                                        this.setBlockAndNotifyAdequately(par1World, j2, j1, l2, this.blockLeaves, 0);
                                     }
                                 }
                             }
@@ -148,34 +145,33 @@ public class WorldGenAutumnTree extends WorldGenerator
 
                     for (j1 = 0; j1 < l; ++j1)
                     {
-                        k1 = par1World.getBlockId(par3, par4 + j1, par5);
+                        Block block = par1World.getBlock(par3, par4 + j1, par5);
 
-                        Block block = Block.blocksList[k1];
-
-                        if (k1 == 0 || block == null || block.isLeaves(par1World, par3, par4 + j1, par5))
+                        //TODO- removed k1 = 0, right fix?
+                        if (block == null || block.isLeaves(par1World, par3, par4 + j1, par5))
                         {
-                            this.setBlockAndMetadata(par1World, par3, par4 + j1, par5, this.blockWood, 0);
+                            this.setBlockAndNotifyAdequately(par1World, par3, par4 + j1, par5, this.blockWood, 0);
 
                             if (this.vinesGrow && j1 > 0)
                             {
                                 if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 - 1, par4 + j1, par5))
                                 {
-                                    this.setBlockAndMetadata(par1World, par3 - 1, par4 + j1, par5, Block.vine.blockID, 8);
+                                    this.setBlockAndNotifyAdequately(par1World, par3 - 1, par4 + j1, par5, Blocks.vine, 8);
                                 }
 
                                 if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 + 1, par4 + j1, par5))
                                 {
-                                    this.setBlockAndMetadata(par1World, par3 + 1, par4 + j1, par5, Block.vine.blockID, 2);
+                                    this.setBlockAndNotifyAdequately(par1World, par3 + 1, par4 + j1, par5, Blocks.vine, 2);
                                 }
 
                                 if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3, par4 + j1, par5 - 1))
                                 {
-                                    this.setBlockAndMetadata(par1World, par3, par4 + j1, par5 - 1, Block.vine.blockID, 1);
+                                    this.setBlockAndNotifyAdequately(par1World, par3, par4 + j1, par5 - 1, Blocks.vine, 1);
                                 }
 
                                 if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3, par4 + j1, par5 + 1))
                                 {
-                                    this.setBlockAndMetadata(par1World, par3, par4 + j1, par5 + 1, Block.vine.blockID, 4);
+                                    this.setBlockAndNotifyAdequately(par1World, par3, par4 + j1, par5 + 1, Blocks.vine, 4);
                                 }
                             }
                         }
@@ -192,25 +188,25 @@ public class WorldGenAutumnTree extends WorldGenerator
                             {
                                 for (k2 = par5 - i2; k2 <= par5 + i2; ++k2)
                                 {
-                                    Block block = Block.blocksList[par1World.getBlockId(j2, j1, k2)];
+                                    Block block = par1World.getBlock(j2, j1, k2);
                                     if (block != null && block.isLeaves(par1World, j2, j1, k2))
                                     {
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(j2 - 1, j1, k2) == 0)
+                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2 - 1, j1, k2) == Blocks.air)
                                         {
                                             this.growVines(par1World, j2 - 1, j1, k2, 8);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(j2 + 1, j1, k2) == 0)
+                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2 + 1, j1, k2) == Blocks.air)
                                         {
                                             this.growVines(par1World, j2 + 1, j1, k2, 2);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(j2, j1, k2 - 1) == 0)
+                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2, j1, k2 - 1) == Blocks.air)
                                         {
                                             this.growVines(par1World, j2, j1, k2 - 1, 1);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(j2, j1, k2 + 1) == 0)
+                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2, j1, k2 + 1) == Blocks.air)
                                         {
                                             this.growVines(par1World, j2, j1, k2 + 1, 4);
                                         }
@@ -239,19 +235,19 @@ public class WorldGenAutumnTree extends WorldGenerator
      */
     private void growVines(World par1World, int par2, int par3, int par4, int par5)
     {
-        this.setBlockAndMetadata(par1World, par2, par3, par4, Block.vine.blockID, par5);
+        this.setBlockAndNotifyAdequately(par1World, par2, par3, par4, Blocks.vine, par5);
         int i1 = 4;
 
         while (true)
         {
             --par3;
 
-            if (par1World.getBlockId(par2, par3, par4) != 0 || i1 <= 0)
+            if (par1World.getBlock(par2, par3, par4) != Blocks.air || i1 <= 0)
             {
                 return;
             }
 
-            this.setBlockAndMetadata(par1World, par2, par3, par4, Block.vine.blockID, par5);
+            this.setBlockAndNotifyAdequately(par1World, par2, par3, par4, Blocks.vine, par5);
             --i1;
         }
     }

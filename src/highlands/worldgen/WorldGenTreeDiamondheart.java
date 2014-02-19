@@ -1,14 +1,14 @@
 package highlands.worldgen;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Random;
-
 import highlands.HighlandsMain;
 import highlands.api.HighlandsBlocks;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenTreeDiamondheart extends WorldGenHighlandsTreeBase
 {
@@ -23,7 +23,7 @@ public class WorldGenTreeDiamondheart extends WorldGenHighlandsTreeBase
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreeDiamondheart(int lmd, int wmd, int wb, int lb, int minH, int maxH, boolean notify)
+    public WorldGenTreeDiamondheart(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
         
@@ -32,10 +32,10 @@ public class WorldGenTreeDiamondheart extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreeDiamondheart(int minH, int maxH, boolean notify){
-    	this(0, 0, HighlandsBlocks.ironWood.blockID, HighlandsBlocks.acaciaLeaves.blockID, minH, maxH, notify);
+    	this(0, 0, HighlandsBlocks.ironWood, (BlockLeaves) HighlandsBlocks.acaciaLeaves, minH, maxH, notify);
     	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Block.wood.blockID;
-    		this.leavesID = Block.leaves.blockID;
+    		this.woodID = Blocks.log;
+    		this.leavesID = Blocks.leaves;
     	}
     }
 

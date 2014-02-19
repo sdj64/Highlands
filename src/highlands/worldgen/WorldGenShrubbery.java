@@ -1,13 +1,10 @@
 package highlands.worldgen;
 
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Random;
 
-import highlands.HighlandsMain;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
 {
@@ -18,7 +15,7 @@ public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
      */
     public WorldGenShrubbery(boolean notify)
     {
-    	super(0, 0, Block.fence.blockID, Block.leaves.blockID, notify);
+    	super(0, 0, Blocks.fence, Blocks.leaves, notify);
     }
 
     //a Shrubbery is a small tree with a 1 block high fence trunk and 2-4 blocks of leaves.
@@ -29,10 +26,11 @@ public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
     	
 
     	//finds top block for the given x,z position (excluding leaves and grass)
-        for (boolean var6 = false; (world.getBlockId(locX, locY, locZ) == 0 || world.getBlockId(locX, locY, locZ) == Block.leaves.blockID) && locY > 0; --locY);
+        for (boolean var6 = false; (world.getBlock(locX, locY, locZ) == Blocks.air || world.getBlock(locX, locY, locZ) == Blocks.leaves) && locY > 0; --locY);
         //locY is now the highest solid terrain block
         
-        if(!(world.getBlockId(locX, locY, locZ) == Block.grass.blockID || world.getBlockId(locX, locY, locZ) == Block.dirt.blockID))return false;
+        if(!(world.getBlock(locX, locY, locZ) == Blocks.grass || world.getBlock(locX, locY, locZ) == Blocks.dirt))
+        	return false;
         
     	//generates the trunk
     	locY++;

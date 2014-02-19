@@ -6,6 +6,7 @@ import java.util.Random;
 
 import highlands.HighlandsMain;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -55,18 +56,19 @@ public class WorldGenMountain extends WorldGenerator
 				if(dist <= radius){
 					//overwrites trees rather than placing the mountain on top of them.
 					for(locY = world.getTopSolidOrLiquidBlock(x, z); locY > 0; locY--){
-						Block block = Block.blocksList[world.getBlockId(x,  locY, z)]; 
+						Block block = world.getBlock(x,  locY, z); 
 						if(block != null && block.isOpaqueCube() && !block.isWood(world, x, locY, z) && !block.isLeaves(world, x, locY, z))break;
 					}
 					
 					int h = locY + height - dist;
 					for(int i = locY; i < h; i++){
-						if(snowrocksand == 0 && h-i <4)setBlockInWorld(x, i, z, Block.blockSnow.blockID, 0);
-						else if(snowrocksand == 2 && h-i <4)setBlockInWorld(x, i, z, Block.sandStone.blockID, 0);
-						else if(random.nextInt(3)== 0) setBlockInWorld(x, i, z, Block.cobblestone.blockID, 0);
-						else setBlockInWorld(x, i, z, Block.stone.blockID, 0);
+						if(snowrocksand == 0 && h-i <4)setBlockInWorld(x, i, z, Blocks.snow, 0);
+						else if(snowrocksand == 2 && h-i <4)setBlockInWorld(x, i, z, Blocks.sandstone, 0);
+						else if(random.nextInt(3)== 0) setBlockInWorld(x, i, z, Blocks.cobblestone, 0);
+						else setBlockInWorld(x, i, z, Blocks.stone, 0);
 					}
-					if(snowrocksand == 0 && h > 62)setBlockInWorld(x, h, z, Block.snow.blockID, 0);
+					if(snowrocksand == 0 && h > 62)
+						setBlockInWorld(x, h, z, Blocks.snow, 0);
 				}
 			}
 		}
@@ -74,10 +76,10 @@ public class WorldGenMountain extends WorldGenerator
     }
     
     
-    private void setBlockInWorld(int x, int y, int z, int id, int meta){
+    private void setBlockInWorld(int x, int y, int z, Block sandstone, int meta){
     	try{
-			if(notifyFlag) world.setBlock(x, y, z, id, meta, 3);
-		    else world.setBlock(x, y, z, id, meta, 2);
+			if(notifyFlag) world.setBlock(x, y, z, sandstone, meta, 3);
+		    else world.setBlock(x, y, z, sandstone, meta, 2);
     	}
     	catch(RuntimeException e){
     		if(e.getMessage().equals("Already decorating!!")){
