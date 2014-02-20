@@ -24,9 +24,9 @@ public class ItemBlockMetadata extends ItemBlock
         setHasSubtypes(true);
     }
     
-    public String getUnlocalizedName(ItemStack stack){
-    	return getUnlocalizedName() + "_" + stack.getItemDamage();
-    }
+//    public String getUnlocalizedName(ItemStack stack){
+//    	//return getUnlocalizedName() + "_" + stack.getItemDamage();
+//    }
     
     public int getMetadata(int par1){
     	return par1;

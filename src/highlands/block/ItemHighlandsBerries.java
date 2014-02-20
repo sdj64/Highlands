@@ -23,7 +23,7 @@ public class ItemHighlandsBerries extends ItemFood{
     }
     
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
+    public void registerIcons(IIconRegister par1IconRegister)
     {
         this.itemIcon = par1IconRegister.registerIcon("Highlands:itemBerries");
     }

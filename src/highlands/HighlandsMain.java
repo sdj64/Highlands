@@ -105,20 +105,20 @@ public class HighlandsMain {
 		
 		
 		//set up worldtypes
-		WorldTypeHighlands.addBiomeList(HL, HighlandsBiomes.biomesForHighlands);
-		WorldTypeHighlands.addBiomeList(HLLB, HighlandsBiomes.biomesForHighlands);
-		if(HL.getBiomesForWorldType().length == 0) HL.addNewBiome(BiomeGenBase.icePlains);
-		if(HLLB.getBiomesForWorldType().length == 0) HLLB.addNewBiome(BiomeGenBase.icePlains);
-		if(highlandsInDefaultFlag){
-			WorldTypeHighlands.addBiomeList(WorldType.DEFAULT, HighlandsBiomes.biomesForDefault);
-			WorldTypeHighlands.addBiomeList(WorldType.LARGE_BIOMES, HighlandsBiomes.biomesForDefault);
-		}
-		
-		//add biomes to spawn strongholds in
-		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
-			if(i != HighlandsBiomes.woodsMountains && i != HighlandsBiomes.flyingMountains && i != HighlandsBiomes.ocean2)
-			MapGenStronghold.allowedBiomes.add(i);
-		}
+//		WorldTypeHighlands.addBiomeList(HL, HighlandsBiomes.biomesForHighlands);
+//		WorldTypeHighlands.addBiomeList(HLLB, HighlandsBiomes.biomesForHighlands);
+//		if(HL.getBiomesForWorldType().length == 0) HL.addNewBiome(BiomeGenBase.icePlains);
+//		if(HLLB.getBiomesForWorldType().length == 0) HLLB.addNewBiome(BiomeGenBase.icePlains);
+//		if(highlandsInDefaultFlag){
+//			WorldTypeHighlands.addBiomeList(WorldType.DEFAULT, HighlandsBiomes.biomesForDefault);
+//			WorldTypeHighlands.addBiomeList(WorldType.LARGE_BIOMES, HighlandsBiomes.biomesForDefault);
+//		}
+//		
+//		//add biomes to spawn strongholds in
+//		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
+//			if(i != HighlandsBiomes.woodsMountains && i != HighlandsBiomes.flyingMountains && i != HighlandsBiomes.ocean2)
+//			MapGenStronghold.allowedBiomes.add(i);
+//		}
 		
 		// allow player spawning in biomes
 		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
@@ -172,13 +172,14 @@ public class HighlandsMain {
 		
 		defaultvillagebiomes = MapGenVillage.villageSpawnBiomes;
 
+		//TODO- readd compat
 		//BiomeDictionary PostInit
-		HighlandsCompatibilityManager.registerBiomesForgeBiomeDict();
+		//HighlandsCompatibilityManager.registerBiomesForgeBiomeDict();
 		
 		GameRegistry.registerFuelHandler(new HighlandsFuelHandler());
 		
-		Block.blocksList[Block.cocoaPlant.blockID] = null;
-		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2(Block.cocoaPlant.blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("cocoa");
+//		Block.blocksList[Block.cocoaPlant.blockID] = null;
+//		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2(Block.cocoaPlant.blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("cocoa");
 
 		//Forestry PostInit
 //		if (Loader.isModLoaded("Forestry") ){
@@ -234,14 +235,14 @@ public class HighlandsMain {
 			else System.out.println(i.biomeName + " " + i.biomeID);
 		}
 		
-		System.out.println("   Highlands Biomes: ");
-		for(BiomeGenBase i : HL.getBiomesForWorldType()){
-			if(i == null) System.out.println("Null Biome! Error!");
-			else System.out.println(i.biomeName + " " + i.biomeID);
-		}
-		System.out.println("   Default Biomes: ");
-		for(BiomeGenBase i : WorldType.DEFAULT.getBiomesForWorldType()){
-			System.out.println(i.biomeName + " " + i.biomeID);
-		}
+//		System.out.println("   Highlands Biomes: ");
+//		for(BiomeGenBase i : HL.getBiomesForWorldType()){
+//			if(i == null) System.out.println("Null Biome! Error!");
+//			else System.out.println(i.biomeName + " " + i.biomeID);
+//		}
+//		System.out.println("   Default Biomes: ");
+//		for(BiomeGenBase i : WorldType.DEFAULT.getBiomesForWorldType()){
+//			System.out.println(i.biomeName + " " + i.biomeID);
+//		}
 	}
 }

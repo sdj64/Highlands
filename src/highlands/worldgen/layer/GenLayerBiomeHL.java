@@ -6,6 +6,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class GenLayerBiomeHL extends GenLayer
 {
@@ -17,7 +18,8 @@ public class GenLayerBiomeHL extends GenLayer
     public GenLayerBiomeHL(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
     {
         super(par1);
-        this.allowedBiomes = par4WorldType.getBiomesFromWorldType();
+        //TODO- this fix is BAAAAAAAAD, not even sure if it works
+        this.allowedBiomes = BiomeGenBase.getBiomeGenArray();
         this.parent = par3GenLayer;
         wt = par4WorldType;
     }

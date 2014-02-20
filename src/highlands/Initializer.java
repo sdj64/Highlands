@@ -1,32 +1,72 @@
 package highlands;
 
-import java.util.ArrayList;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
-import highlands.biome.*;
+import highlands.biome.BiomeGenAlps;
+import highlands.biome.BiomeGenAutumnForest;
+import highlands.biome.BiomeGenBadlands;
+import highlands.biome.BiomeGenBaldHill;
+import highlands.biome.BiomeGenBaseHighlands;
+import highlands.biome.BiomeGenBirchHills;
+import highlands.biome.BiomeGenBog;
+import highlands.biome.BiomeGenCliffs;
+import highlands.biome.BiomeGenDesertIsland;
+import highlands.biome.BiomeGenDesertMountains;
+import highlands.biome.BiomeGenDunes;
+import highlands.biome.BiomeGenEstuary;
+import highlands.biome.BiomeGenFlyingMountains;
+import highlands.biome.BiomeGenGlacier;
+import highlands.biome.BiomeGenHighlands;
+import highlands.biome.BiomeGenLake;
+import highlands.biome.BiomeGenLowlands;
+import highlands.biome.BiomeGenMeadow;
+import highlands.biome.BiomeGenMesa;
+import highlands.biome.BiomeGenOasis;
+import highlands.biome.BiomeGenOcean2;
+import highlands.biome.BiomeGenOutback;
+import highlands.biome.BiomeGenPinelands;
+import highlands.biome.BiomeGenRainforest;
+import highlands.biome.BiomeGenRedwoodForest;
+import highlands.biome.BiomeGenRockIsland;
+import highlands.biome.BiomeGenRockMountains;
+import highlands.biome.BiomeGenSahel;
+import highlands.biome.BiomeGenSavannah;
+import highlands.biome.BiomeGenShrubland;
+import highlands.biome.BiomeGenSnowMountains;
+import highlands.biome.BiomeGenSteppe;
+import highlands.biome.BiomeGenTallPineForest;
+import highlands.biome.BiomeGenTropicalIslands;
+import highlands.biome.BiomeGenTropics;
+import highlands.biome.BiomeGenTundra;
+import highlands.biome.BiomeGenVolcanoIsland;
+import highlands.biome.BiomeGenWoodlands;
+import highlands.biome.BiomeGenWoodsMountains;
+import highlands.block.BlockHLPlankSlab;
 import highlands.block.BlockHighlandsLeaves;
 import highlands.block.BlockHighlandsLog;
 import highlands.block.BlockHighlandsPlanks;
 import highlands.block.BlockHighlandsSapling;
 import highlands.block.BlockHighlandsSmallPlants;
 import highlands.block.BlockHighlandsStairs;
-import highlands.block.BlockHLPlankSlab;
 import highlands.block.ItemBlockMetadata;
 import highlands.block.ItemHighlandsBerries;
+
+import java.util.ArrayList;
+
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenBeach;
+import net.minecraft.world.biome.BiomeGenBase.Height;
 import net.minecraft.world.biome.BiomeGenForest;
 import net.minecraft.world.biome.BiomeGenJungle;
 import net.minecraft.world.biome.BiomeGenOcean;
 import net.minecraft.world.biome.BiomeGenTaiga;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 public class Initializer
@@ -64,119 +104,119 @@ public class Initializer
 	public static void constructBlocks() {
 		//Saplings
 		HighlandsBlocks.acaciaSapling = new BlockHighlandsSapling(1).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_acaciaSapling");
-		HighlandsBlocks.beechSapling = new BlockHighlandsSapling(Config.beechSaplingID.getInt(), 6).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_beechSapling");
-		HighlandsBlocks.canopySapling = new BlockHighlandsSapling(Config.canopySaplingID.getInt(), 4).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_canopySapling");
-		HighlandsBlocks.deadSapling = new BlockHighlandsSapling(Config.deadSaplingID.getInt(), 7).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_deadSapling");
-		HighlandsBlocks.greatOakSapling = new BlockHighlandsSapling(Config.greatOakSaplingID.getInt(), 5).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_greatOakSapling");
-		HighlandsBlocks.firSapling = new BlockHighlandsSapling(Config.firSaplingID.getInt(), 0).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_firSapling");
-		HighlandsBlocks.poplarSapling = new BlockHighlandsSapling(Config.poplarSaplingID.getInt(), 2).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_poplarSapling");
-		HighlandsBlocks.redwoodSapling = new BlockHighlandsSapling(Config.redwoodSaplingID.getInt(), 3).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_redwoodSapling");
-		HighlandsBlocks.evergreenBushSapling = new BlockHighlandsSapling(Config.evergreenBushSaplingID.getInt(), 8).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_evgBushSapling");
-		HighlandsBlocks.deciduousBushSapling = new BlockHighlandsSapling(Config.deciduousBushSaplingID.getInt(), 9).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_decBushSapling");
-		HighlandsBlocks.palmSapling = new BlockHighlandsSapling(Config.palmSaplingID.getInt(), 10).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_palmSapling");
-		HighlandsBlocks.ironwoodSapling = new BlockHighlandsSapling(Config.ironwoodSaplingID.getInt(), 11).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_ironwoodSapling");
-		HighlandsBlocks.mangroveSapling = new BlockHighlandsSapling(Config.mangroveSaplingID.getInt(), 12).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_mangroveSapling");
-		HighlandsBlocks.ashSapling = new BlockHighlandsSapling(Config.ashSaplingID.getInt(), 13).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_ashSapling");
-		HighlandsBlocks.autumnYellowSapling = new BlockHighlandsSapling(Config.autumnYellowSaplingID.getInt(), 14).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_autumnYellowSapling");
-		HighlandsBlocks.autumnOrangeSapling = new BlockHighlandsSapling(Config.autumnOrangeSaplingID.getInt(), 15).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_autumnOrangeSapling");
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_acaciaSapling");
+		HighlandsBlocks.beechSapling = new BlockHighlandsSapling(6).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_beechSapling");
+		HighlandsBlocks.canopySapling = new BlockHighlandsSapling(4).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_canopySapling");
+		HighlandsBlocks.deadSapling = new BlockHighlandsSapling(7).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_deadSapling");
+		HighlandsBlocks.greatOakSapling = new BlockHighlandsSapling(5).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_greatOakSapling");
+		HighlandsBlocks.firSapling = new BlockHighlandsSapling(0).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_firSapling");
+		HighlandsBlocks.poplarSapling = new BlockHighlandsSapling(2).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_poplarSapling");
+		HighlandsBlocks.redwoodSapling = new BlockHighlandsSapling(3).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_redwoodSapling");
+		HighlandsBlocks.evergreenBushSapling = new BlockHighlandsSapling(8).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_evgBushSapling");
+		HighlandsBlocks.deciduousBushSapling = new BlockHighlandsSapling(9).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_decBushSapling");
+		HighlandsBlocks.palmSapling = new BlockHighlandsSapling(10).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_palmSapling");
+		HighlandsBlocks.ironwoodSapling = new BlockHighlandsSapling(11).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_ironwoodSapling");
+		HighlandsBlocks.mangroveSapling = new BlockHighlandsSapling(12).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_mangroveSapling");
+		HighlandsBlocks.ashSapling = new BlockHighlandsSapling(13).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_ashSapling");
+		HighlandsBlocks.autumnYellowSapling = new BlockHighlandsSapling(14).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_autumnYellowSapling");
+		HighlandsBlocks.autumnOrangeSapling = new BlockHighlandsSapling(15).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_autumnOrangeSapling");
 		
 		//Wood
-		HighlandsBlocks.acaciaWood = new BlockHighlandsLog(Config.acaciaWoodID.getInt(), 1).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_acaciaWood");
-		HighlandsBlocks.canopyWood = new BlockHighlandsLog(Config.canopyWoodID.getInt(), 4).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_canopyWood");
-		HighlandsBlocks.firWood = new BlockHighlandsLog(Config.firWoodID.getInt(), 0).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_firWood");
-		HighlandsBlocks.poplarWood = new BlockHighlandsLog(Config.poplarWoodID.getInt(), 2).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_poplarWood");
-		HighlandsBlocks.redwoodWood = new BlockHighlandsLog(Config.redwoodWoodID.getInt(), 3).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_redwoodWood");
-		HighlandsBlocks.palmWood = new BlockHighlandsLog(Config.palmWoodID.getInt(), 10).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_palmWood");
-		HighlandsBlocks.ironWood = new BlockHighlandsLog(Config.ironWoodID.getInt(), 11).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_ironwoodWood");
-		HighlandsBlocks.mangroveWood = new BlockHighlandsLog(Config.mangroveWoodID.getInt(), 12).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_mangroveWood");
-		HighlandsBlocks.ashWood = new BlockHighlandsLog(Config.ashWoodID.getInt(), 13).setHardness(2.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_ashWood");
+		HighlandsBlocks.acaciaWood = new BlockHighlandsLog(1).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_acaciaWood");
+		HighlandsBlocks.canopyWood = new BlockHighlandsLog(4).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_canopyWood");
+		HighlandsBlocks.firWood = new BlockHighlandsLog(0).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_firWood");
+		HighlandsBlocks.poplarWood = new BlockHighlandsLog(2).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_poplarWood");
+		HighlandsBlocks.redwoodWood = new BlockHighlandsLog(3).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_redwoodWood");
+		HighlandsBlocks.palmWood = new BlockHighlandsLog(10).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_palmWood");
+		HighlandsBlocks.ironWood = new BlockHighlandsLog(11).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_ironwoodWood");
+		HighlandsBlocks.mangroveWood = new BlockHighlandsLog(12).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_mangroveWood");
+		HighlandsBlocks.ashWood = new BlockHighlandsLog(13).setHardness(2.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_ashWood");
 		
 		//Leaves
-		HighlandsBlocks.acaciaLeaves = new BlockHighlandsLeaves(Config.acaciaLeavesID.getInt(), 1).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_acaciaLeaves");
-		HighlandsBlocks.canopyLeaves = new BlockHighlandsLeaves(Config.canopyLeavesID.getInt(), 4).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_canopyLeaves");
-		HighlandsBlocks.firLeaves = new BlockHighlandsLeaves(Config.firLeavesID.getInt(), 0).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_firLeaves");
-		HighlandsBlocks.poplarLeaves = new BlockHighlandsLeaves(Config.poplarLeavesID.getInt(), 2).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_poplarLeaves");
-		HighlandsBlocks.redwoodLeaves = new BlockHighlandsLeaves(Config.redwoodLeavesID.getInt(), 3).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_redwoodLeaves");
-		HighlandsBlocks.palmLeaves = new BlockHighlandsLeaves(Config.palmLeavesID.getInt(), 10).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_palmLeaves");
-		HighlandsBlocks.ironwoodLeaves = new BlockHighlandsLeaves(Config.ironwoodLeavesID.getInt(), 11).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_ironwoodLeaves");
-		HighlandsBlocks.mangroveLeaves = new BlockHighlandsLeaves(Config.mangroveLeavesID.getInt(), 12).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_mangroveLeaves");
-		HighlandsBlocks.ashLeaves = new BlockHighlandsLeaves(Config.ashLeavesID.getInt(), 13).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_ashLeaves");
-		HighlandsBlocks.autumnYellowLeaves = new BlockHighlandsLeaves(Config.autumnYellowLeavesID.getInt(), 14).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_autumnYellowLeaves");
-		HighlandsBlocks.autumnOrangeLeaves = new BlockHighlandsLeaves(Config.autumnOrangeLeavesID.getInt(), 15).setHardness(0.2F)
-				.setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_autumnOrangeLeaves");
+		HighlandsBlocks.acaciaLeaves = new BlockHighlandsLeaves(1).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_acaciaLeaves");
+		HighlandsBlocks.canopyLeaves = new BlockHighlandsLeaves(4).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_canopyLeaves");
+		HighlandsBlocks.firLeaves = new BlockHighlandsLeaves(0).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_firLeaves");
+		HighlandsBlocks.poplarLeaves = new BlockHighlandsLeaves(2).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_poplarLeaves");
+		HighlandsBlocks.redwoodLeaves = new BlockHighlandsLeaves(3).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_redwoodLeaves");
+		HighlandsBlocks.palmLeaves = new BlockHighlandsLeaves(10).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_palmLeaves");
+		HighlandsBlocks.ironwoodLeaves = new BlockHighlandsLeaves(11).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_ironwoodLeaves");
+		HighlandsBlocks.mangroveLeaves = new BlockHighlandsLeaves(12).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_mangroveLeaves");
+		HighlandsBlocks.ashLeaves = new BlockHighlandsLeaves(13).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_ashLeaves");
+		HighlandsBlocks.autumnYellowLeaves = new BlockHighlandsLeaves(14).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_autumnYellowLeaves");
+		HighlandsBlocks.autumnOrangeLeaves = new BlockHighlandsLeaves(15).setHardness(0.2F)
+				.setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("hl_autumnOrangeLeaves");
 		
 		//Plants
-		HighlandsBlocks.blueFlower = new BlockHighlandsSmallPlants(Config.blueFlowerID.getInt(), 0).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_blueFlower");
-		HighlandsBlocks.leafyFern = new BlockHighlandsSmallPlants(Config.leafyFernID.getInt(), 1).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_leafyFern");
-		HighlandsBlocks.whiteFlower = new BlockHighlandsSmallPlants(Config.whiteFlowerID.getInt(), 2).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_whiteFlower");
-		HighlandsBlocks.cattail = new BlockHighlandsSmallPlants(Config.cattailID.getInt(), 3).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_cattail");
-		HighlandsBlocks.lavender = new BlockHighlandsSmallPlants(Config.lavenderID.getInt(), 4).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_lavender");
-		HighlandsBlocks.raspberryBush = new BlockHighlandsSmallPlants(Config.raspberryBushID.getInt(), 5).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_raspberryBush");
-		HighlandsBlocks.blueberryBush = new BlockHighlandsSmallPlants(Config.blueberryBushID.getInt(), 6).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_blueberryBush");
-		HighlandsBlocks.thornbush = new BlockHighlandsSmallPlants(Config.thornbushID.getInt(), 7).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_thornbush");
-		HighlandsBlocks.cotton = new BlockHighlandsSmallPlants(Config.cottonID.getInt(), 8).setHardness(0.0F)
-				.setStepSound(Block.soundGrassFootstep).setUnlocalizedName("hl_cotton");
+		HighlandsBlocks.blueFlower = new BlockHighlandsSmallPlants(0).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_blueFlower");
+		HighlandsBlocks.leafyFern = new BlockHighlandsSmallPlants(1).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_leafyFern");
+		HighlandsBlocks.whiteFlower = new BlockHighlandsSmallPlants(2).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_whiteFlower");
+		HighlandsBlocks.cattail = new BlockHighlandsSmallPlants(3).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_cattail");
+		HighlandsBlocks.lavender = new BlockHighlandsSmallPlants(4).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_lavender");
+		HighlandsBlocks.raspberryBush = new BlockHighlandsSmallPlants(5).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_raspberryBush");
+		HighlandsBlocks.blueberryBush = new BlockHighlandsSmallPlants(6).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_blueberryBush");
+		HighlandsBlocks.thornbush = new BlockHighlandsSmallPlants(7).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_thornbush");
+		HighlandsBlocks.cotton = new BlockHighlandsSmallPlants(8).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_cotton");
 		
 		HighlandsBlocks.berries = new ItemHighlandsBerries(Config.berriesID.getInt()).setUnlocalizedName("hl_berries");
 		
 		//Planks
-		HighlandsBlocks.hlplanks = new BlockHighlandsPlanks(Config.hlplanksID.getInt()).setHardness(2.0F).setResistance(5.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodPlanks");
-		HighlandsBlocks.hlplankstairs0 = new BlockHighlandsStairs(Config.hlPlankStairs0ID.getInt(), HighlandsBlocks.hlplanks, 0).setHardness(2.0F).setResistance(5.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodStairs0");
-		HighlandsBlocks.hlplankstairs1 = new BlockHighlandsStairs(Config.hlPlankStairs1ID.getInt(), HighlandsBlocks.hlplanks, 1).setHardness(2.0F).setResistance(5.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodStairs1");
-		HighlandsBlocks.hlplankstairs2 = new BlockHighlandsStairs(Config.hlPlankStairs2ID.getInt(), HighlandsBlocks.hlplanks, 2).setHardness(2.0F).setResistance(5.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodStairs2");
-		HighlandsBlocks.hlplankstairs3 = new BlockHighlandsStairs(Config.hlPlankStairs3ID.getInt(), HighlandsBlocks.hlplanks, 3).setHardness(2.0F).setResistance(5.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodStairs3");
-		HighlandsBlocks.hlplankhalf = new BlockHLPlankSlab(Config.hlPlankHalfID.getInt(), false, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodSlab");
-		HighlandsBlocks.hlplankhalfdouble = new BlockHLPlankSlab(Config.hlPlankHalfDoubleID.getInt(), true, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
-				.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hl_woodSlabDouble");
+		HighlandsBlocks.hlplanks = new BlockHighlandsPlanks().setHardness(2.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodPlanks");
+		HighlandsBlocks.hlplankstairs0 = new BlockHighlandsStairs(HighlandsBlocks.hlplanks, 0).setHardness(2.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodStairs0");
+		HighlandsBlocks.hlplankstairs1 = new BlockHighlandsStairs(HighlandsBlocks.hlplanks, 1).setHardness(2.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodStairs1");
+		HighlandsBlocks.hlplankstairs2 = new BlockHighlandsStairs(HighlandsBlocks.hlplanks, 2).setHardness(2.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodStairs2");
+		HighlandsBlocks.hlplankstairs3 = new BlockHighlandsStairs(HighlandsBlocks.hlplanks, 3).setHardness(2.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodStairs3");
+		HighlandsBlocks.hlplankhalf = new BlockHLPlankSlab(false, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodSlab");
+//		HighlandsBlocks.hlplankhalfdouble = new BlockHLPlankSlab(true, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
+//				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodSlabDouble");
 
 		HighlandsBlocks.saplings = new Block[]{
 				HighlandsBlocks.firSapling,
@@ -225,9 +265,10 @@ public class Initializer
 	}
 
 	
-	
-	
-	
+	/*Height values for vanilla overrides*/
+	private static final Height desertIsle = new Height(0.1F, 0.1F);
+	private static final Height woodIsle = new Height(0.2F, 0.4F);
+	private static final Height windIsle = new Height(0.1F, 0.2F);
 	
 	public static void constructBiomes() {
 		
@@ -301,19 +342,20 @@ public class Initializer
 		
 		
 		//sub-biomes
-		HighlandsBiomes.desertIsland = new BiomeGenDesertIsland(Config.desertIslandID.getInt()).setBiomeName(biomePrefix+"Desert Island").setMinMaxHeight(0.1F, 0.1F);
+		HighlandsBiomes.desertIsland = new BiomeGenDesertIsland(Config.desertIslandID.getInt()).setBiomeName(biomePrefix+"Desert Island").setHeight(desertIsle);
 		if(Config.desertIslandGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.desertIsland);
-		HighlandsBiomes.forestIsland = new BiomeGenWoodlands(Config.forestIslandID.getInt()).setBiomeName(biomePrefix+"Forest Island").setMinMaxHeight(0.2F, 0.4F);
+		HighlandsBiomes.forestIsland = new BiomeGenWoodlands(Config.forestIslandID.getInt()).setBiomeName(biomePrefix+"Forest Island").setHeight(woodIsle);
 		if(Config.forestIslandGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.forestIsland);
-		HighlandsBiomes.jungleIsland = new BiomeGenJungle(Config.jungleIslandID.getInt()).setBiomeName(biomePrefix+"Jungle Island").setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(1.0F, 1.2F);
+		HighlandsBiomes.jungleIsland = new BiomeGenJungle(Config.jungleIslandID.getInt(), false).setBiomeName(biomePrefix+"Jungle Island").setHeight(woodIsle).setTemperatureRainfall(1.0F, 1.2F);
 		if(Config.jungleIslandGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.jungleIsland);
 		HighlandsBiomes.volcanoIsland = new BiomeGenVolcanoIsland(Config.volcanoIslandID.getInt()).setBiomeName(biomePrefix+"Volcano Island");
 		if(Config.volcanoIslandGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.volcanoIsland);
-		HighlandsBiomes.snowIsland = new BiomeGenTaiga(Config.snowIslandID.getInt()).setBiomeName(biomePrefix+"Snow Island").setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.0F, 0.6F);
+		//TODO- dat 3...
+		HighlandsBiomes.snowIsland = new BiomeGenTaiga(Config.snowIslandID.getInt(), 3).setBiomeName(biomePrefix+"Snow Island").setHeight(woodIsle).setTemperatureRainfall(0.0F, 0.6F);
 		if(Config.snowIslandGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.snowIsland);
 		HighlandsBiomes.rockIsland = new BiomeGenRockIsland(Config.rockIslandID.getInt()).setBiomeName(biomePrefix+"Rock Island");
 		if(Config.rockIslandGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.rockIsland);
-		HighlandsBiomes.windyIsland = new BiomeGenOcean(Config.windyIslandID.getInt()).setBiomeName(biomePrefix+"Windy Island").setMinMaxHeight(0.1F, 0.2F);
+		HighlandsBiomes.windyIsland = new BiomeGenOcean(Config.windyIslandID.getInt()).setBiomeName(biomePrefix+"Windy Island").setHeight(windIsle);
 		if(Config.windyIslandGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.windyIsland);
 		HighlandsBiomes.lake = new BiomeGenLake(Config.lakeID.getInt()).setBiomeName(biomePrefix+"Lake");
 		if(Config.lakeGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.lake);
@@ -321,7 +363,8 @@ public class Initializer
 		if(Config.baldHillGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.baldHill);
 		HighlandsBiomes.mesa = new BiomeGenMesa(Config.mesaID.getInt()).setBiomeName(biomePrefix+"Mesa");
 		if(Config.mesaGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.mesa);
-		HighlandsBiomes.valley = new BiomeGenForest(Config.valleyID.getInt()).setBiomeName(biomePrefix+"Valley");
+		//TODO- dat 3...
+		HighlandsBiomes.valley = new BiomeGenForest(Config.valleyID.getInt(), 3).setBiomeName(biomePrefix+"Valley");
 		if(Config.valleyGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.valley);
 		HighlandsBiomes.oasis = new BiomeGenOasis(Config.oasisID.getInt()).setBiomeName(biomePrefix+"Oasis");
 		if(Config.oasisGenerate.getBoolean(true)) HighlandsBiomes.subBiomes.add(HighlandsBiomes.oasis);
@@ -355,61 +398,61 @@ public class Initializer
 		if(HighlandsBlocks.firSapling != null){
 			registerBlock(HighlandsBlocks.firSapling, "Fir Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.firSapling),
-					new ItemStack(Block.sapling, 1, 1), new ItemStack(Block.wood, 1, 1));
+					new ItemStack(Blocks.sapling, 1, 1), new ItemStack(Blocks.log, 1, 1));
 		}
 		//Acacia Sapling
 		if(HighlandsBlocks.acaciaSapling != null){
 			registerBlock(HighlandsBlocks.acaciaSapling, "Acacia Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.acaciaSapling),
-					new ItemStack(Block.sapling, 1, 3), new ItemStack(Block.wood, 1, 0));
+					new ItemStack(Blocks.sapling, 1, 3), new ItemStack(Blocks.log, 1, 0));
 		}
 		//Poplar Sapling
 		if(HighlandsBlocks.poplarSapling != null){
 			registerBlock(HighlandsBlocks.poplarSapling, "Poplar Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.poplarSapling),
-					new ItemStack(Block.sapling, 1, 2), new ItemStack(Block.wood, 1, 0));
+					new ItemStack(Blocks.sapling, 1, 2), new ItemStack(Blocks.log, 1, 0));
 		}
 		//Sequoia Sapling
 		if(HighlandsBlocks.redwoodSapling != null && HighlandsBlocks.firSapling != null){
 			registerBlock(HighlandsBlocks.redwoodSapling, "Redwood Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.redwoodSapling),
-					new ItemStack(Item.dyePowder, 1, 15), new ItemStack(HighlandsBlocks.firSapling, 1, 0), new ItemStack(Block.wood, 1, 0));
+					new ItemStack(Items.dye, 1, 15), new ItemStack(HighlandsBlocks.firSapling, 1, 0), new ItemStack(Blocks.log, 1, 0));
 		}
 		//Canopy Tree Sapling
 		if(HighlandsBlocks.canopySapling != null){
 			registerBlock(HighlandsBlocks.canopySapling, "Canopy Tree Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.canopySapling),
-					new ItemStack(Block.sapling, 1, 3), new ItemStack(Block.wood, 1, 3));
+					new ItemStack(Blocks.sapling, 1, 3), new ItemStack(Blocks.log, 1, 3));
 		}
 		//Great Oak Sapling
 		if(HighlandsBlocks.greatOakSapling != null){
 			registerBlock(HighlandsBlocks.greatOakSapling, "Great Oak Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.greatOakSapling),
-					new ItemStack(Block.sapling, 1, 0), new ItemStack(Block.wood, 1, 0));
+					new ItemStack(Blocks.sapling, 1, 0), new ItemStack(Blocks.log, 1, 0));
 		}
 		//Beech Sapling
 		if(HighlandsBlocks.beechSapling != null){
 			registerBlock(HighlandsBlocks.beechSapling, "Beech Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.beechSapling),
-					new ItemStack(Block.sapling, 1, 2), new ItemStack(Block.wood, 1, 2));
+					new ItemStack(Blocks.sapling, 1, 2), new ItemStack(Blocks.log, 1, 2));
 		}
 		//Evergreen Bush Sapling
 		if(HighlandsBlocks.evergreenBushSapling != null){
 			registerBlock(HighlandsBlocks.evergreenBushSapling, "Evergreen Bushling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.evergreenBushSapling, 2, 0),
-					new ItemStack(Block.sapling, 1, 1), new ItemStack(Item.stick));
+					new ItemStack(Blocks.sapling, 1, 1), new ItemStack(Items.stick));
 		}
 		//Deciduous Bush Sapling
 		if(HighlandsBlocks.deciduousBushSapling != null){
 			registerBlock(HighlandsBlocks.deciduousBushSapling, "Deciduous Bushling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.deciduousBushSapling, 2, 0),
-					new ItemStack(Block.sapling, 1, 0), new ItemStack(Item.stick));
+					new ItemStack(Blocks.sapling, 1, 0), new ItemStack(Items.stick));
 		}
 		//Palm Sapling
 		if(HighlandsBlocks.palmSapling != null){
 			registerBlock(HighlandsBlocks.palmSapling, "Palm Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.palmSapling),
-					new ItemStack(Block.sapling, 1, 3), new ItemStack(Block.wood, 1, 2));
+					new ItemStack(Blocks.sapling, 1, 3), new ItemStack(Blocks.log, 1, 2));
 		}
 		//Dead Tree Sapling
 		if(HighlandsBlocks.deadSapling != null){
@@ -421,30 +464,30 @@ public class Initializer
 			registerBlock(HighlandsBlocks.ironwoodSapling, "Ironwood Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.ironwoodSapling),
 					new ItemStack(HighlandsBlocks.redwoodSapling, 1, 0), new ItemStack(HighlandsBlocks.greatOakSapling, 1, 0),
-					new ItemStack(HighlandsBlocks.canopySapling, 1, 0), new ItemStack(HighlandsBlocks.beechSapling, 1, 0), new ItemStack(Block.blockIron));
+					new ItemStack(HighlandsBlocks.canopySapling, 1, 0), new ItemStack(HighlandsBlocks.beechSapling, 1, 0), new ItemStack(Blocks.iron_block));
 		}
 		//Mangrove Sapling
 		if(HighlandsBlocks.mangroveSapling != null){
 			registerBlock(HighlandsBlocks.mangroveSapling, "Mangrove Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.mangroveSapling),
-					new ItemStack(Block.sapling, 1, 2), new ItemStack(Block.wood, 1, 3));
+					new ItemStack(Blocks.sapling, 1, 2), new ItemStack(Blocks.log, 1, 3));
 		}
 		//Ash Sapling
 		if(HighlandsBlocks.ashSapling != null){
 			registerBlock(HighlandsBlocks.ashSapling, "Ash Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.ashSapling),
-					new ItemStack(HighlandsBlocks.greatOakSapling, 1, 0), new ItemStack(Block.wood, 1, 3));
+					new ItemStack(HighlandsBlocks.greatOakSapling, 1, 0), new ItemStack(Blocks.log, 1, 3));
 		}
 		//Orange Sapling
 		if(HighlandsBlocks.autumnOrangeSapling != null){
 			registerBlock(HighlandsBlocks.autumnOrangeSapling, "Orange Autumn Sapling");
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.autumnOrangeSapling),
-					new ItemStack(Block.sapling, 1, 0), new ItemStack(Item.dyePowder, 1, 14));
+					new ItemStack(Blocks.sapling, 1, 0), new ItemStack(Items.dye, 1, 14));
 		}
 		//Yellow Sapling
 		if(HighlandsBlocks.autumnYellowSapling != null){
 			registerBlock(HighlandsBlocks.autumnYellowSapling, "Yellow Autumn Sapling");
-			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.autumnYellowSapling), new ItemStack(Block.sapling, 1, 0), new ItemStack(Item.dyePowder, 1, 11));
+			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.autumnYellowSapling), new ItemStack(Blocks.sapling, 1, 0), new ItemStack(Items.dye, 1, 11));
 		}
 		
 		
@@ -454,73 +497,74 @@ public class Initializer
 		if(HighlandsBlocks.firWood != null){
 			registerBlock(HighlandsBlocks.firWood, "Fir Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.firWood, 1, OreDictionary.WILDCARD_VALUE));
-			GameRegistry.addShapelessRecipe(new ItemStack (Block.planks, 4, 1), new ItemStack(HighlandsBlocks.firWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.firWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addShapelessRecipe(new ItemStack (Blocks.planks, 4, 1), new ItemStack(HighlandsBlocks.firWood, 1, 0));
+			GameRegistry.addSmelting(HighlandsBlocks.firWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		//Acacia Log
 		if(HighlandsBlocks.acaciaWood != null){
 			registerBlock(HighlandsBlocks.acaciaWood, "Acacia Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.acaciaWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 0), new ItemStack(HighlandsBlocks.acaciaWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.acaciaWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addSmelting(HighlandsBlocks.acaciaWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		//Poplar Log
 		if(HighlandsBlocks.poplarWood != null){
 			registerBlock(HighlandsBlocks.poplarWood, "Poplar Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.poplarWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 1), new ItemStack(HighlandsBlocks.poplarWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.poplarWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addSmelting(HighlandsBlocks.poplarWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		//Sequoia Log
 		if(HighlandsBlocks.redwoodWood != null){
 			registerBlock(HighlandsBlocks.redwoodWood, "Redwood Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.redwoodWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 2), new ItemStack(HighlandsBlocks.redwoodWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.redwoodWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addSmelting(HighlandsBlocks.redwoodWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		//Canopy Tree Log
 		if(HighlandsBlocks.canopyWood != null){
 			registerBlock(HighlandsBlocks.canopyWood, "Canopy Tree Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.canopyWood, 1, OreDictionary.WILDCARD_VALUE));
-			GameRegistry.addShapelessRecipe(new ItemStack (Block.planks, 4, 2), new ItemStack(HighlandsBlocks.canopyWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.canopyWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addShapelessRecipe(new ItemStack (Blocks.planks, 4, 2), new ItemStack(HighlandsBlocks.canopyWood, 1, 0));
+			GameRegistry.addSmelting(HighlandsBlocks.canopyWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		//Mangrove Log
 		if(HighlandsBlocks.mangroveWood != null){
 			registerBlock(HighlandsBlocks.mangroveWood, "Mangrove Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.mangroveWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 3), new ItemStack(HighlandsBlocks.mangroveWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.mangroveWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addSmelting(HighlandsBlocks.mangroveWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		//Ash Log
 		if(HighlandsBlocks.ashWood != null){
 			registerBlock(HighlandsBlocks.ashWood, "Ash Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.ashWood, 1, OreDictionary.WILDCARD_VALUE));
-			GameRegistry.addShapelessRecipe(new ItemStack (Block.planks, 4, 0), new ItemStack(HighlandsBlocks.ashWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.ashWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addShapelessRecipe(new ItemStack (Blocks.planks, 4, 0), new ItemStack(HighlandsBlocks.ashWood, 1, 0));
+			GameRegistry.addSmelting(HighlandsBlocks.ashWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		//Palm Log
 		if(HighlandsBlocks.palmWood != null){
 			registerBlock(HighlandsBlocks.palmWood, "Palm Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.palmWood, 1, OreDictionary.WILDCARD_VALUE));
-			GameRegistry.addShapelessRecipe(new ItemStack (Block.planks, 4, 0), new ItemStack(HighlandsBlocks.palmWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.palmWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addShapelessRecipe(new ItemStack (Blocks.planks, 4, 0), new ItemStack(HighlandsBlocks.palmWood, 1, 0));
+			GameRegistry.addSmelting(HighlandsBlocks.palmWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		//Ironwood Log
 		if(HighlandsBlocks.ironWood != null){
 			registerBlock(HighlandsBlocks.ironWood, "Ironwood Log");
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.ironWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 3), new ItemStack(HighlandsBlocks.ironWood, 1, 0));
-			GameRegistry.addSmelting(HighlandsBlocks.ironWood.blockID, new ItemStack(Item.coal, 1, 1), 0.15F);
+			GameRegistry.addSmelting(HighlandsBlocks.ironWood, new ItemStack(Items.coal, 1, 1), 0.15F);
 		}
 		
 		//Highlands Planks
 		if(HighlandsBlocks.hlplanks != null){
 			GameRegistry.registerBlock(HighlandsBlocks.hlplanks, ItemBlockMetadata.class, "hl_woodPlanks");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 0), "Yellow Wood Planks");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 1), "White Wood Planks");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 2), "Red Wood Planks");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 3), "Grey Wood Planks");
+//          @Depreciated- removing soon
+//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 0), "Yellow Wood Planks");
+//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 1), "White Wood Planks");
+//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 2), "Red Wood Planks");
+//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 3), "Grey Wood Planks");
 			OreDictionary.registerOre("plankWood", new ItemStack(HighlandsBlocks.hlplanks, 1, OreDictionary.WILDCARD_VALUE));
 		}
 		
@@ -550,15 +594,15 @@ public class Initializer
 		//Planks - half blocks
 		if(HighlandsBlocks.hlplanks != null && HighlandsBlocks.hlplankhalf != null){
 			GameRegistry.registerBlock(HighlandsBlocks.hlplankhalf, ItemBlockMetadata.class, "hl_woodSlab");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 0), "Yellow Wood Slab");
+/*			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 0), "Yellow Wood Slab");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 1), "White Wood Slab");
 			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 2), "Red Wood Slab");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 3), "Grey Wood Slab");
+			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 3), "Grey Wood Slab");*/
 			GameRegistry.registerBlock(HighlandsBlocks.hlplankhalfdouble, ItemBlockMetadata.class, "hl_woodSlabDouble");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 0), "Yellow Wood Double Slab");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 1), "White Wood Double Slab");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 2), "Red Wood Double Slab");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 3), "Grey Wood Double Slab");
+//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 0), "Yellow Wood Double Slab");
+//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 1), "White Wood Double Slab");
+//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 2), "Red Wood Double Slab");
+//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 3), "Grey Wood Double Slab");
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 0), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 1), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 2), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));
@@ -640,23 +684,23 @@ public class Initializer
 		//Blue Flower
 		if(HighlandsBlocks.blueFlower != null){
 			registerBlock(HighlandsBlocks.blueFlower, "Blue Flower");
-			GameRegistry.addShapelessRecipe(new ItemStack (Item.dyePowder, 1, 6), new ItemStack(HighlandsBlocks.blueFlower, 1, 0));
+			GameRegistry.addShapelessRecipe(new ItemStack (Items.dye, 1, 6), new ItemStack(HighlandsBlocks.blueFlower, 1, 0));
 		}
 		if(HighlandsBlocks.leafyFern != null){
 			registerBlock(HighlandsBlocks.leafyFern, "Leafy Fern");
-			GameRegistry.addShapelessRecipe(new ItemStack (Item.dyePowder, 1, 10), new ItemStack(HighlandsBlocks.leafyFern, 1, 0));
+			GameRegistry.addShapelessRecipe(new ItemStack (Items.dye, 1, 10), new ItemStack(HighlandsBlocks.leafyFern, 1, 0));
 		}
 		if(HighlandsBlocks.whiteFlower != null){
 			registerBlock(HighlandsBlocks.whiteFlower, "White Flower");
-			GameRegistry.addShapelessRecipe(new ItemStack (Item.dyePowder, 1, 7), new ItemStack(HighlandsBlocks.whiteFlower, 1, 0));
+			GameRegistry.addShapelessRecipe(new ItemStack (Items.dye, 1, 7), new ItemStack(HighlandsBlocks.whiteFlower, 1, 0));
 		}
 		if(HighlandsBlocks.cattail != null){
 			registerBlock(HighlandsBlocks.cattail, "Cattail");
-			GameRegistry.addShapelessRecipe(new ItemStack (Item.paper, 1, 0), new ItemStack(HighlandsBlocks.cattail, 1, 0));
+			GameRegistry.addShapelessRecipe(new ItemStack (Items.paper, 1, 0), new ItemStack(HighlandsBlocks.cattail, 1, 0));
 		}
 		if(HighlandsBlocks.lavender != null){
 			registerBlock(HighlandsBlocks.lavender, "Lavender");
-			GameRegistry.addShapelessRecipe(new ItemStack (Item.dyePowder, 1, 5), new ItemStack(HighlandsBlocks.lavender, 1, 0));
+			GameRegistry.addShapelessRecipe(new ItemStack (Items.dye, 1, 5), new ItemStack(HighlandsBlocks.lavender, 1, 0));
 		}
 		if(HighlandsBlocks.raspberryBush != null){
 			registerBlock(HighlandsBlocks.raspberryBush, "Raspberry Bush");
@@ -670,23 +714,23 @@ public class Initializer
 		}
 		if(HighlandsBlocks.thornbush != null){
 			registerBlock(HighlandsBlocks.thornbush, "Thornbush");
-			GameRegistry.addShapelessRecipe(new ItemStack (Item.stick, 2, 0), new ItemStack(HighlandsBlocks.thornbush, 1, 0));
+			GameRegistry.addShapelessRecipe(new ItemStack (Items.stick, 2, 0), new ItemStack(HighlandsBlocks.thornbush, 1, 0));
 		}
 		if(HighlandsBlocks.cotton != null){
 			registerBlock(HighlandsBlocks.cotton, "Cotton Plant");
-			GameRegistry.addShapelessRecipe(new ItemStack (Item.silk, 1, 0), new ItemStack(HighlandsBlocks.cotton, 1, 0));
+			GameRegistry.addShapelessRecipe(new ItemStack (Items.string, 1, 0), new ItemStack(HighlandsBlocks.cotton, 1, 0));
 		}
 		
 		if(HighlandsBlocks.berries != null){
 			GameRegistry.registerItem(HighlandsBlocks.berries, "hl_berries");
-			LanguageRegistry.addName(HighlandsBlocks.berries, "Berries");
+			//LanguageRegistry.addName(HighlandsBlocks.berries, "Berries");
 		}
 		
 	}
 	
 	public static void registerBlock(Block b, String name){
 		GameRegistry.registerBlock(b, b.getUnlocalizedName());
-		LanguageRegistry.addName(b, name);
+		//LanguageRegistry.addName(b, name);
 	}
 	
 	//sets up sub-biome lists after all biomes are initialized.

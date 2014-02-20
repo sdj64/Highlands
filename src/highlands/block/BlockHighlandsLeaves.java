@@ -60,7 +60,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     
     int[] adjacentTreeBlocks;
 
-    public BlockHighlandsLeaves(int id, int type)
+    public BlockHighlandsLeaves(int type)
     {
         super(Material.leaves, false);
         this.setTickRandomly(true);

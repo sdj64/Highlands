@@ -130,7 +130,7 @@ public class BlockHighlandsLog extends BlockLog
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerBlockIcons(IIconRegister par1IconRegister)
     {
         this.tree_top = par1IconRegister.registerIcon("Highlands:log"+treeNames[treeType]+"Top");
         this.tree_side = par1IconRegister.registerIcon("Highlands:log"+treeNames[treeType]+"Side");
