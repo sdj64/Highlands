@@ -4,10 +4,7 @@ import highlands.api.HighlandsBlocks;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-
-import javax.swing.Icon;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
@@ -20,7 +17,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -70,26 +66,28 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
         //this.setBurnProperties(this.blockID, 30, 60);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int getBlockColor()
     {
     	return 16777215;
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * Returns the color this block should be rendered. Used by leaves.
      */
+    @Override
+    @SideOnly(Side.CLIENT)
     public int getRenderColor(int par1)
     {
     	return 16777215;
     }
-    
+
     /**
      * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
      * when first determining what to render.
      */
+    @Override
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
     	return 16777215;
@@ -98,7 +96,8 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
     {
         byte b0 = 1;
         int j1 = b0 + 1;
@@ -122,10 +121,11 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
             }
         }
     }
-    
+
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote)
@@ -236,16 +236,16 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
             }
         }
     }
-    
-    @SideOnly(Side.CLIENT)
 
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
+    @Override
+    @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
     	super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
-        if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !par1World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
+        if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
         {
             double d0 = (double)((float)par2 + par5Random.nextFloat());
             double d1 = (double)par3 - 0.05D;
@@ -263,6 +263,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random)
     {
         return par1Random.nextInt(saplingRate[treeType]) == 0 ? 1 : 0;//chance to drop sapling. Change for different trees
@@ -291,6 +292,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
     {
     	//TODO- right fix?
@@ -308,6 +310,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
+    @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
     {
         super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
@@ -316,6 +319,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
+    @Override
     public int damageDropped(int par1)
     {
         return 0;
@@ -325,6 +329,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube()
     {
         return !this.field_150121_P;
@@ -338,47 +343,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     {
         this.field_150121_P = par1;
     }
-    
-    /**
-     * Called when a user uses the creative pick block button on this block
-     *
-     * @param target The full target the player is looking at
-     * @return A ItemStack to add to the player's inventory, Null if nothing should be added.
-     */
-    //TODO- doesn't seem to work/isn't used anymore...
-//    @Override
-//    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
-//    {
-//    	Block picked = target.
-//    	
-//        if (target == Blocks.air)
-//        {
-//            return null;
-//        }
-//
-//        Item item = Item.itemsList[id];
-//        if (item == null)
-//        {
-//            return null;
-//        }
-//
-//        return new ItemStack(id, 1, 0);
-//        //return new ItemStack(this.blockID, 1, 0);
-//    }
 
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
-    public IIcon getBlockTextureFromSideAndMetadata(int par1, int par2)
-    {
-    	this.field_150121_P = Minecraft.getMinecraft().isFancyGraphicsEnabled();
-    	
-    	if(this.field_150121_P)return textureFancy;
-    	else return textureFast;
-    }
-    
     //TODO- Better Leaves is not 1.7.x
 //    //BETTER LEAVES METHOD
 //    public Icon getIconFallingLeaves(int metadata) {
@@ -394,20 +359,21 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
 //    }
     
     @SideOnly(Side.CLIENT)
+    @Override
     public IIcon getIcon(int par1, int par2)
     {
-    	this.field_150121_P = Minecraft.getMinecraft().isFancyGraphicsEnabled();
+    	this.field_150121_P = Minecraft.isFancyGraphicsEnabled();
     	
     	if(this.field_150121_P)return textureFancy;
     	else return textureFast;
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Block par1, CreativeTabs par2CreativeTabs, List par3List)
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         par3List.add(new ItemStack(par1, 1, 0));
     }
@@ -416,17 +382,17 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    @Override
     protected ItemStack createStackedBlock(int par1)
     {
         return new ItemStack(this, 1, 0);
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
+    @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister par1IconRegister)
     {

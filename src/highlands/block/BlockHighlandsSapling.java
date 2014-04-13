@@ -29,6 +29,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
@@ -64,9 +65,8 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
 	};
 	
 	
-	/** constructs a Highlands sapling
-	 * 
-	 * @param par1 block id
+	/**
+     * constructs a Highlands sapling
 	 */
     public BlockHighlandsSapling(int type)
     {	
@@ -89,6 +89,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
         Block soil = par1World.getBlock(par2, par3 - 1, par4);
@@ -107,6 +108,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
 	/**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote)
@@ -152,7 +154,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
 	    return false;
     }
     */
-    
+
     public boolean growTree(World par1World, int i, int j, int k, Random r){
     	int meta = par1World.getBlockMetadata(i, j, k);
     	boolean isTreeGrowSuccess = true;
@@ -255,8 +257,8 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     	}
     	return null;
     }
-    
-    
+
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
@@ -265,6 +267,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
@@ -273,22 +276,26 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType()
     {
         return 1;
     }
-    
-    public EnumPlantType getPlantType(World world, int x, int y, int z)
+
+    @Override
+    public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
     {
     	//if(treeType == 12) return EnumPlantType.Water;
         return EnumPlantType.Plains;
     }
-    
-    public int getPlantMetadata(World world, int x, int y, int z)
+
+    @Override
+    public int getPlantMetadata(IBlockAccess world, int x, int y, int z)
     {
         return world.getBlockMetadata(x, y, z);
     }
-    
+
+    @Override
     public int damageDropped(int par1)
     {
         return 0;

@@ -33,6 +33,7 @@ public class BlockCocoaPlant2 extends BlockCocoa
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
         int l = getDirection(par1World.getBlockMetadata(par2, par3, par4));

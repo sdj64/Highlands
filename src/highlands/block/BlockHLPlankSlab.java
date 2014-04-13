@@ -4,19 +4,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.List;
-import java.util.Random;
 
-import highlands.HighlandsMain;
 import highlands.api.HighlandsBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 
 public class BlockHLPlankSlab extends BlockSlab
 {
@@ -29,11 +25,11 @@ public class BlockHLPlankSlab extends BlockSlab
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
+    @SideOnly(Side.CLIENT)
+    @Override
     public IIcon getIcon(int par1, int par2)
     {
         return modelBlock.getIcon(par1, par2 & 7);
@@ -82,12 +78,13 @@ public class BlockHLPlankSlab extends BlockSlab
         return super.getUnlocalizedName() + "." + par1;
     }
 
-    @SideOnly(Side.CLIENT)
 
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Block par1, CreativeTabs par2CreativeTabs, List par3List)
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
     {
     	//TODO-   isDoubleSlab
         if (!this.field_150004_a)
@@ -99,12 +96,12 @@ public class BlockHLPlankSlab extends BlockSlab
         }
     }
 
-    @SideOnly(Side.CLIENT)
-
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
+    @SideOnly(Side.CLIENT)
+    @Override
     public void registerBlockIcons(IIconRegister par1IconRegister) {}
 
 	@Override
