@@ -89,7 +89,14 @@ public class HighlandsMain {
 		config.load();
 		Config.setUpConfig(config);
 		config.save();
-		
+
+        //construct all variables
+        HighlandsBiomes.initBiomeArrays();
+        Initializer.constructBiomes();
+        Initializer.constructBlocks();
+        Initializer.constructSettings();
+        //initiate all recipes and ore dictionary definitions
+        Initializer.initRecipes();
 		//register event manager
 		MinecraftForge.TERRAIN_GEN_BUS.register(new HighlandsEventManager());
 		MinecraftForge.EVENT_BUS.register(new HighlandsEventManager());
@@ -97,13 +104,7 @@ public class HighlandsMain {
 	
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		//construct all variables
-		HighlandsBiomes.initBiomeArrays();
-		Initializer.constructBiomes();
-		Initializer.constructBlocks();
-		Initializer.constructSettings();
-		
-		
+
 		//set up worldtypes
 //		WorldTypeHighlands.addBiomeList(HL, HighlandsBiomes.biomesForHighlands);
 //		WorldTypeHighlands.addBiomeList(HLLB, HighlandsBiomes.biomesForHighlands);
@@ -124,10 +125,9 @@ public class HighlandsMain {
 		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
 			WorldChunkManager.allowedBiomes.add(i);
 		}
-		if(WorldChunkManager.allowedBiomes.size() == 0)WorldChunkManager.allowedBiomes.add(HighlandsBiomes.ocean2);
-		
-		//initiate all recipes and ore dictionary definitions
-		Initializer.initRecipes();
+		if(WorldChunkManager.allowedBiomes.size() == 0)
+            WorldChunkManager.allowedBiomes.add(HighlandsBiomes.ocean2);
+
 		
 		//set up sub-biomes
 		Initializer.setUpAllSubBiomes();
@@ -144,7 +144,7 @@ public class HighlandsMain {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		
-		hlvillagebiomes = Arrays.asList(new BiomeGenBase[] {
+		hlvillagebiomes = Arrays.asList(
 				HighlandsBiomes.autumnForest,
 				HighlandsBiomes.highlandsb,
 				HighlandsBiomes.pinelands,
@@ -168,7 +168,7 @@ public class HighlandsMain {
 				BiomeGenBase.taiga,
 				BiomeGenBase.swampland,
 				BiomeGenBase.icePlains
-		});
+		);
 		
 		defaultvillagebiomes = MapGenVillage.villageSpawnBiomes;
 
