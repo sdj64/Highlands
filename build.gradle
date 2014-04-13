@@ -17,8 +17,8 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0" //TODO- bump version automatically
-archivesBaseName = "project.projectDir.name"
+version = "2.2.0pre1" //TODO- bump version automatically
+archivesBaseName = project.projectDir.name
 
 minecraft {
     version = "1.7.2-10.12.0.1024"
