@@ -56,7 +56,6 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.Height;
@@ -66,7 +65,6 @@ import net.minecraft.world.biome.BiomeGenOcean;
 import net.minecraft.world.biome.BiomeGenTaiga;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 public class Initializer
@@ -200,7 +198,7 @@ public class Initializer
 		HighlandsBlocks.cotton = new BlockHighlandsSmallPlants(8).setHardness(0.0F)
 				.setStepSound(Block.soundTypeGrass).setBlockName("hl_cotton");
 		
-		HighlandsBlocks.berries = new ItemHighlandsBerries(Config.berriesID.getInt()).setUnlocalizedName("hl_berries");
+		HighlandsBlocks.berries = new ItemHighlandsBerries().setUnlocalizedName("hl_berries");
 		
 		//Planks
 		HighlandsBlocks.hlplanks = new BlockHighlandsPlanks().setHardness(2.0F).setResistance(5.0F)
@@ -560,11 +558,6 @@ public class Initializer
 		//Highlands Planks
 		if(HighlandsBlocks.hlplanks != null){
 			GameRegistry.registerBlock(HighlandsBlocks.hlplanks, ItemBlockMetadata.class, "hl_woodPlanks");
-//          @Depreciated- removing soon
-//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 0), "Yellow Wood Planks");
-//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 1), "White Wood Planks");
-//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 2), "Red Wood Planks");
-//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplanks, 1, 3), "Grey Wood Planks");
 			OreDictionary.registerOre("plankWood", new ItemStack(HighlandsBlocks.hlplanks, 1, OreDictionary.WILDCARD_VALUE));
 		}
 		
@@ -594,44 +587,22 @@ public class Initializer
 		//Planks - half blocks
 		if(HighlandsBlocks.hlplanks != null && HighlandsBlocks.hlplankhalf != null){
 			GameRegistry.registerBlock(HighlandsBlocks.hlplankhalf, ItemBlockMetadata.class, "hl_woodSlab");
-/*			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 0), "Yellow Wood Slab");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 1), "White Wood Slab");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 2), "Red Wood Slab");
-			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalf, 1, 3), "Grey Wood Slab");*/
 			GameRegistry.registerBlock(HighlandsBlocks.hlplankhalfdouble, ItemBlockMetadata.class, "hl_woodSlabDouble");
-//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 0), "Yellow Wood Double Slab");
-//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 1), "White Wood Double Slab");
-//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 2), "Red Wood Double Slab");
-//			LanguageRegistry.addName(new ItemStack(HighlandsBlocks.hlplankhalfdouble, 1, 3), "Grey Wood Double Slab");
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 0), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 1), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 2), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 3), "   ", "   ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 3));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 0), "   ", "xxx", "   ", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 1), "   ", "xxx", "   ", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 2), "   ", "xxx", "   ", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 3), "   ", "xxx", "   ", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 3));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 0), "xxx", "   ", "   ", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 1), "xxx", "   ", "   ", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 2), "xxx", "   ", "   ", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 3), "xxx", "   ", "   ", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 3));
+			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 0), "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
+			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 1), "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
+			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 2), "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));
+			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 3), "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 3));
 			
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplanks, 1, 0), "x ", "x ", 'x', new ItemStack(HighlandsBlocks.hlplankhalf, 1, 0));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplanks, 1, 1), "x ", "x ", 'x', new ItemStack(HighlandsBlocks.hlplankhalf, 1, 1));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplanks, 1, 2), "x ", "x ", 'x', new ItemStack(HighlandsBlocks.hlplankhalf, 1, 2));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplanks, 1, 3), "x ", "x ", 'x', new ItemStack(HighlandsBlocks.hlplankhalf, 1, 3));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplanks, 1, 0), " x", " x", 'x', new ItemStack(HighlandsBlocks.hlplankhalf, 1, 0));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplanks, 1, 1), " x", " x", 'x', new ItemStack(HighlandsBlocks.hlplankhalf, 1, 1));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplanks, 1, 2), " x", " x", 'x', new ItemStack(HighlandsBlocks.hlplankhalf, 1, 2));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplanks, 1, 3), " x", " x", 'x', new ItemStack(HighlandsBlocks.hlplankhalf, 1, 3));
 		}
 		//Planks - double half blocks
 		if(HighlandsBlocks.hlplanks != null && HighlandsBlocks.hlplankhalfdouble != null){
 			GameRegistry.registerBlock(HighlandsBlocks.hlplankhalfdouble, ItemBlockMetadata.class, "hl_woodDoubleSlab");
 		}
-		
-		
-		
+
 		//LEAVES
 		
 		//Fir Leaves
@@ -723,14 +694,12 @@ public class Initializer
 		
 		if(HighlandsBlocks.berries != null){
 			GameRegistry.registerItem(HighlandsBlocks.berries, "hl_berries");
-			//LanguageRegistry.addName(HighlandsBlocks.berries, "Berries");
 		}
 		
 	}
 	
 	public static void registerBlock(Block b, String name){
 		GameRegistry.registerBlock(b, b.getUnlocalizedName());
-		//LanguageRegistry.addName(b, name);
 	}
 	
 	//sets up sub-biome lists after all biomes are initialized.
