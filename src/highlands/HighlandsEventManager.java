@@ -14,6 +14,7 @@ import highlands.block.BlockHighlandsSapling;
 import highlands.worldgen.layer.GenLayerHL;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -31,33 +32,23 @@ import net.minecraftforge.event.world.WorldEvent.Load;
 
 public class HighlandsEventManager {
 
-	private Random rand = new Random();
-	
 	//allows get wood achievement for Highlands woods
 	@SubscribeEvent
 	public void onItemPickupWood(EntityItemPickupEvent e){
-		if (e.item.getEntityItem() == new ItemStack(HighlandsBlocks.firWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.acaciaWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.redwoodWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.poplarWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.canopyWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ironWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.mangroveWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ashWood)){
-			e.entityPlayer.triggerAchievement(AchievementList.mineWood);
-		}
+        Item picked = e.item.getEntityItem().getItem();
+        for(Block block:HighlandsBlocks.logs){
+            if(Item.getItemFromBlock(block) == picked){
+                e.entityPlayer.triggerAchievement(AchievementList.mineWood);
+                break;
+            }
+        }
 	}
-	
-	
+
 	// Adds village spawning to Highlands worlds and default worlds if Highlands is enabled.
     @SubscribeEvent
 	public void onWorldStart(Load e){
 		if(e.world.provider.terrainType == HighlandsMain.HL || e.world.provider.terrainType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag){
-			ArrayList<BiomeGenBase> newTotalVillageBiomes = new ArrayList<BiomeGenBase>();
-			newTotalVillageBiomes.addAll(MapGenVillage.villageSpawnBiomes);
-			newTotalVillageBiomes.addAll(HighlandsMain.hlvillagebiomes);
-			
-			MapGenVillage.villageSpawnBiomes = newTotalVillageBiomes;
+			MapGenVillage.villageSpawnBiomes.addAll(HighlandsMain.hlvillagebiomes);
 		}
 		
 		// loads compatibility mob lists for all biomes
@@ -117,44 +108,40 @@ public class HighlandsEventManager {
     {
         if (!e.world.isRemote)
         {
-        	boolean isHLSapling = false;
-        	for(Block b: HighlandsBlocks.saplings)if(b != null && e.block == b)isHLSapling = true;
-            if (isHLSapling)
-            {
-            	//TODO- questionable fix
-                BlockHighlandsSapling sapling = (BlockHighlandsSapling)Block.blockRegistry.getObject(e.block);
-                e.setResult(Event.Result.ALLOW);
-                if(e.entityPlayer.capabilities.isCreativeMode)
-                	sapling.growTree(e.world, e.x, e.y, e.z, rand);
-                else 
-                	sapling.updateTick(e.world, e.x, e.y, e.z, rand);
-            }
+        	for(Block b: HighlandsBlocks.saplings)
+                if(b != null && e.block == b) {
+                    BlockHighlandsSapling sapling = (BlockHighlandsSapling)e.block;
+                    e.setResult(Event.Result.ALLOW);
+                    if(e.entityPlayer.capabilities.isCreativeMode)
+                        sapling.growTree(e.world, e.x, e.y, e.z, e.world.rand);
+                    else
+                        sapling.updateTick(e.world, e.x, e.y, e.z, e.world.rand);
+                    break;
+                }
         }
     }
-	
-	
+
 	// sets default village blocks
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onVillageSelectBlock(GetVillageBlockID e){
 		if(e.biome != null && HighlandsBiomes.sahel != null && HighlandsBiomes.outback != null && BiomeGenBase.icePlains != null){
 			if (e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
 	        {
 				if (e.original == Blocks.log)e.replacement = Blocks.log;
-	            if (e.original == Blocks.cobblestone)e.replacement = Blocks.sandstone;
-	            if (e.original == Blocks.planks)e.replacement = Blocks.planks;
-	            if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
-	            if (e.original == Blocks.stone_stairs)e.replacement = Blocks.sandstone_stairs;
-	            if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
+	            else if (e.original == Blocks.cobblestone)e.replacement = Blocks.sandstone;
+                else if (e.original == Blocks.planks)e.replacement = Blocks.planks;
+                else if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
+                else if (e.original == Blocks.stone_stairs)e.replacement = Blocks.sandstone_stairs;
+                else if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
 	        }
-			if (e.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
+			else if (e.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
 	        {
 	            if (e.original == Blocks.log)e.replacement = Blocks.log;
-	            if (e.original == Blocks.cobblestone)e.replacement = Blocks.cobblestone;
-	            if (e.original == Blocks.planks)e.replacement = Blocks.snow;
-	            if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
-	            if (e.original == Blocks.stone_stairs)e.replacement = Blocks.stone_stairs;
-	            if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
+                else if (e.original == Blocks.cobblestone)e.replacement = Blocks.cobblestone;
+                else if (e.original == Blocks.planks)e.replacement = Blocks.snow;
+                else if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
+                else if (e.original == Blocks.stone_stairs)e.replacement = Blocks.stone_stairs;
+                else if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
 	        }
 		}
 	}
