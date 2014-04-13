@@ -16,10 +16,6 @@ public class Config
 	
 	public static String CATEGORY_VANILLABIOME_GENERATE = "Biomes.Generate Vanilla Biomes true/false?";
 	
-	//Item ID Properties
-	public static Property berriesID;
-	
-	
 	//Biome ID Properties
 	public static Property woodlandMountainsID;
     public static Property highlandsbID;
@@ -144,7 +140,6 @@ public class Config
 	public static void setUpConfig(Configuration config)
 	{
 		addBiomeEntries(config);
-		addItemEntries(config);
 		addSettingsEntries(config);
 	}
 	
@@ -253,12 +248,6 @@ public class Config
 		jungleGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Jungle Generate", true);
 		icePlainsGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Ice Plains Generate", true);
 		taigaGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Taiga Generate", true);
-	}
-
-	private static void addItemEntries(Configuration config) 
-	{
-		berriesID = config.get(CATEGORY_BLOCK_ID, "Berries ID", 766);
-
 	}
 
 	private static void addSettingsEntries(Configuration config) 
