@@ -6,7 +6,7 @@ import highlands.api.HighlandsBlocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -23,7 +23,7 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreePoplar(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify)
+    public WorldGenTreePoplar(int lmd, int wmd, Block wb, BlockLeavesBase lb, int minH, int maxH, boolean notify)
     {
         super(lmd, wmd, wb, lb, notify);
         this.minHeight = minH;
@@ -31,7 +31,7 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreePoplar(int minH, int maxH, boolean notify){
-    	this(0, 0, HighlandsBlocks.poplarWood, (BlockLeaves) HighlandsBlocks.poplarLeaves, minH, maxH, notify);
+    	this(0, 0, HighlandsBlocks.poplarWood, (BlockLeavesBase) HighlandsBlocks.poplarLeaves, minH, maxH, notify);
     	if(HighlandsMain.vanillaBlocksFlag){
     		this.woodID = Blocks.log;
     		this.woodMeta = 2;
