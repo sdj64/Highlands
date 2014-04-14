@@ -16,19 +16,19 @@ tile.hl_ironwoodSapling.name=Ironwood Sapling
 tile.hl_mangroveSapling.name=Mangrove Sapling
 tile.hl_ashSapling.name=Ash Sapling
 tile.hl_autumnYellowSapling.name=Yellow Autumn Sapling
-tile.hl_autummnOrangeSapling.name=Orange Autumn Sapling
+tile.hl_autumnOrangeSapling.name=Orange Autumn Sapling
 	
 <!-- Logs -->
-tile.hl_acaciaWood.name=Acacia Wood Log
-tile.hl_beechWood.name=Beech Wood Log
-tile.hl_canopyWood.name=Canopy Wood Log
-tile.hl_firWood.name=Fir Wood Log
-tile.hl_poplarWood.name=Poplar Wood Log
-tile.hl_redwoodWood.name=Redwood Wood Log
-tile.hl_palmWood.name=Palm Wood Log
-tile.hl_ironwoodWood.name=Ironwood Wood Log
-tile.hl_mangroveWood.name=Mangrove Wood Log
-tile.hl_ashWood.name=Ash Wood Log
+tile.hl_acaciaWood.name=Acacia Wood
+tile.hl_beechWood.name=Beech Wood
+tile.hl_canopyWood.name=Canopy Wood
+tile.hl_firWood.name=Fir Wood
+tile.hl_poplarWood.name=Poplar Wood
+tile.hl_redwoodWood.name=Redwood Wood
+tile.hl_palmWood.name=Palm Wood
+tile.hl_ironwoodWood.name=Ironwood Wood
+tile.hl_mangroveWood.name=Mangrove Wood
+tile.hl_ashWood.name=Ash Wood
 
 <!-- Wood -->
 tile.hl_woodPlanks0.name=Yellow Wood Planks
@@ -77,3 +77,7 @@ tile.hl_cotton.name=Cotton Plant
 	
 <!-- Items -->
 item.hl_berries.name=Berries
+
+<!-- World Types -->
+generator.Highlands=Highlands
+generator.Highlands LB=Highlands LB
