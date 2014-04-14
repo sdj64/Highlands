@@ -497,6 +497,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.firWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (Blocks.planks, 4, 1), new ItemStack(HighlandsBlocks.firWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.firWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.firWood, 5, 5);
 		}
 		//Acacia Log
 		if(HighlandsBlocks.acaciaWood != null){
@@ -504,6 +505,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.acaciaWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 0), new ItemStack(HighlandsBlocks.acaciaWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.acaciaWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.acaciaWood, 5, 5);
 		}
 		//Poplar Log
 		if(HighlandsBlocks.poplarWood != null){
@@ -511,6 +513,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.poplarWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 1), new ItemStack(HighlandsBlocks.poplarWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.poplarWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.poplarWood, 5, 5);
 		}
 		//Sequoia Log
 		if(HighlandsBlocks.redwoodWood != null){
@@ -518,6 +521,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.redwoodWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 2), new ItemStack(HighlandsBlocks.redwoodWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.redwoodWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.redwoodWood, 5, 5);
 		}
 		//Canopy Tree Log
 		if(HighlandsBlocks.canopyWood != null){
@@ -525,6 +529,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.canopyWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (Blocks.planks, 4, 2), new ItemStack(HighlandsBlocks.canopyWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.canopyWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.canopyWood, 5, 5);
 		}
 		//Mangrove Log
 		if(HighlandsBlocks.mangroveWood != null){
@@ -532,6 +537,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.mangroveWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 3), new ItemStack(HighlandsBlocks.mangroveWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.mangroveWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.mangroveWood, 5, 5);
 		}
 		//Ash Log
 		if(HighlandsBlocks.ashWood != null){
@@ -539,6 +545,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.ashWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (Blocks.planks, 4, 0), new ItemStack(HighlandsBlocks.ashWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.ashWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.ashWood, 5, 5);
 		}
 		//Palm Log
 		if(HighlandsBlocks.palmWood != null){
@@ -546,6 +553,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.palmWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (Blocks.planks, 4, 0), new ItemStack(HighlandsBlocks.palmWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.palmWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.palmWood, 5, 5);
 		}
 		//Ironwood Log
 		if(HighlandsBlocks.ironWood != null){
@@ -553,6 +561,7 @@ public class Initializer
 			OreDictionary.registerOre("logWood", new ItemStack(HighlandsBlocks.ironWood, 1, OreDictionary.WILDCARD_VALUE));
 			GameRegistry.addShapelessRecipe(new ItemStack (HighlandsBlocks.hlplanks, 4, 3), new ItemStack(HighlandsBlocks.ironWood, 1, 0));
 			GameRegistry.addSmelting(HighlandsBlocks.ironWood, new ItemStack(Items.coal, 1, 1), 0.15F);
+            Blocks.fire.setFireInfo(HighlandsBlocks.ironWood, 5, 5);
 		}
 		
 		//Highlands Planks
@@ -565,22 +574,18 @@ public class Initializer
 		if(HighlandsBlocks.hlplanks != null && HighlandsBlocks.hlplankstairs0 != null){
 			registerBlock(HighlandsBlocks.hlplankstairs0, "Yellow Wood Stairs");
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankstairs0, 4, 0), "x  ", "xx ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankstairs0, 4, 0), "  x", " xx", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
 		}
 		if(HighlandsBlocks.hlplanks != null && HighlandsBlocks.hlplankstairs1 != null){
 			registerBlock(HighlandsBlocks.hlplankstairs1, "White Wood Stairs");
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankstairs1, 4, 0), "x  ", "xx ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankstairs1, 4, 0), "  x", " xx", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
 		}
 		if(HighlandsBlocks.hlplanks != null && HighlandsBlocks.hlplankstairs2 != null){
 			registerBlock(HighlandsBlocks.hlplankstairs2, "Red Wood Stairs");
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankstairs2, 4, 0), "x  ", "xx ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankstairs2, 4, 0), "  x", " xx", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));
 		}
 		if(HighlandsBlocks.hlplanks != null && HighlandsBlocks.hlplankstairs3 != null){
 			registerBlock(HighlandsBlocks.hlplankstairs3, "Grey Wood Stairs");
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankstairs3, 4, 0), "x  ", "xx ", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 3));
-			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankstairs3, 4, 0), "  x", " xx", "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 3));
 		}
 
 		
@@ -607,46 +612,57 @@ public class Initializer
 		//Fir Leaves
 		if(HighlandsBlocks.firLeaves != null){
 			registerBlock(HighlandsBlocks.firLeaves, "Fir Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.firLeaves, 30, 60);
 		}
 		//Acacia Leaves
 		if(HighlandsBlocks.acaciaLeaves != null){
 			registerBlock(HighlandsBlocks.acaciaLeaves, "Acacia Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.acaciaLeaves, 30, 60);
 		}
 		//Poplar Leaves
 		if(HighlandsBlocks.poplarLeaves != null){
 			registerBlock(HighlandsBlocks.poplarLeaves, "Poplar Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.poplarLeaves, 30, 60);
 		}
 		//Sequoia Leaves
 		if(HighlandsBlocks.redwoodLeaves != null && HighlandsBlocks.firLeaves != null){
 			registerBlock(HighlandsBlocks.redwoodLeaves, "Redwood Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.redwoodLeaves, 30, 60);
 		}
 		//Canopy Tree Leaves
 		if(HighlandsBlocks.canopyLeaves != null){
 			registerBlock(HighlandsBlocks.canopyLeaves, "Canopy Tree Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.canopyLeaves, 30, 60);
 		}
 		//Ironwood Leaves
 		if(HighlandsBlocks.ironwoodLeaves != null){
 			registerBlock(HighlandsBlocks.ironwoodLeaves, "Ironwood Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.ironwoodLeaves, 30, 60);
 		}
 		//Mangrove Leaves
 		if(HighlandsBlocks.mangroveLeaves != null){
 			registerBlock(HighlandsBlocks.mangroveLeaves, "Mangrove Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.mangroveLeaves, 30, 60);
 		}
 		//Ash Leaves
 		if(HighlandsBlocks.ashLeaves != null){
 			registerBlock(HighlandsBlocks.ashLeaves, "Ash Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.ashLeaves, 30, 60);
 		}
 		//Palm Leaves
 		if(HighlandsBlocks.palmLeaves != null){
 			registerBlock(HighlandsBlocks.palmLeaves, "Palm Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.palmLeaves, 30, 60);
 		}
 		//Yellow Leaves
 		if(HighlandsBlocks.autumnOrangeLeaves != null){
 			registerBlock(HighlandsBlocks.autumnOrangeLeaves, "Yellow Autumn Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.autumnOrangeLeaves, 30, 60);
 		}
 		//Orange Leaves
 		if(HighlandsBlocks.autumnYellowLeaves != null){
 			registerBlock(HighlandsBlocks.autumnYellowLeaves, "Orange Autumn Leaves");
+            Blocks.fire.setFireInfo(HighlandsBlocks.autumnYellowLeaves, 30, 60);
 		}
 		
 		//PLANTS
