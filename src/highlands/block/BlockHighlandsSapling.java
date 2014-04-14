@@ -1,5 +1,6 @@
 package highlands.block;
 
+import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
@@ -12,7 +13,6 @@ import highlands.worldgen.WorldGenShrubbery;
 import highlands.worldgen.WorldGenTreeAcacia;
 import highlands.worldgen.WorldGenTreeAsh;
 import highlands.worldgen.WorldGenTreeCanopy;
-import highlands.worldgen.WorldGenTreeDiamondheart;
 import highlands.worldgen.WorldGenTreeFir;
 import highlands.worldgen.WorldGenTreeIronwood;
 import highlands.worldgen.WorldGenTreeMangrove;
@@ -21,10 +21,8 @@ import highlands.worldgen.WorldGenTreePoplar;
 import highlands.worldgen.WorldGenTreeRedwood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -75,8 +73,6 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
         this.setCreativeTab(CreativeTabs.tabDecorations);
         treeType = type;
-        
-        //System.out.println("Highlands Saplings texture file: " + this.currentTexture);
     }
     
     @Override
@@ -84,6 +80,20 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     public void registerBlockIcons(IIconRegister par1IconRegister)
     {
     	this.blockIcon = par1IconRegister.registerIcon("Highlands:sapling" + treeNames[treeType]);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta)
+    {
+        return blockIcon;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item item, CreativeTabs tab, List list)
+    {
+        list.add(new ItemStack(item, 1, 0));
     }
     
     /**
