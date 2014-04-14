@@ -13,6 +13,7 @@ assets
 .classpath
 .project
 bin
+eclipse
 
 # intellij
 out
