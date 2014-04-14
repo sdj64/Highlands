@@ -1,8 +1,3 @@
-{
-  
-"modinfoversion": 2,
-
-"modlist": 
 [{
     
 "modid": "Highlands",
@@ -16,15 +11,12 @@
 "mcversion": "$mcversion",
     
 "url": "http://www.minecraftforum.net/topic/1602064-147146-forge-highlands-new-biomes-trees-and-more/",
-    "updateUrl": "",
+
 "authorList": [ "sdj64" ],
 
 "credits": "Sadris, zombiepig333, VeryBigBro, Mpenver, Vexatos",
 
 "logoFile": "logo.png",
-
-"screenshots": [],
-    "parent": "",
     
 "requiredMods": [ "Forge" ],
     
@@ -34,4 +26,3 @@
     "useDependencyInformation": "false"
   
 }]
-}

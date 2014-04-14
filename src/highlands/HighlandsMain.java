@@ -1,34 +1,16 @@
 package highlands;
 
-import java.lang.Exception;
 import java.lang.System;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
-
-import cpw.mods.fml.common.Loader;
-
-//don't need these imports after testing is over
 
 import highlands.api.*;
-import highlands.biome.*;
-import highlands.block.*;
-import highlands.worldgen.WorldGenUnderground2;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.gen.structure.MapGenVillage;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.WorldType;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -38,14 +20,14 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid="Highlands", name="Highlands", version="2.2.0",
+@Mod(modid=HighlandsMain.modid, name=HighlandsMain.modid, version="2.2.0",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
 public class HighlandsMain {
 
-	public static String modid = "Highlands";
+	public static final String modid = "Highlands";
 	
     // The instance of your mod that Forge uses.
-	@Instance("Highlands")
+	@Instance(modid)
 	public static HighlandsMain instance;
 	
 	// Says where the client and server 'proxy' code is loaded.
@@ -53,7 +35,7 @@ public class HighlandsMain {
 	public static CommonProxy proxy;
 	
 	//Highlands Worldtypes
-	public static final WorldTypeHighlands HL = new WorldTypeHighlands("Highlands");
+	public static final WorldTypeHighlands HL = new WorldTypeHighlands(modid);
 	public static final WorldTypeHighlands HLLB = new WorldTypeHighlands("Highlands LB");
 	
 	public static int HighlandsBiomeSizeDefault;
@@ -83,7 +65,7 @@ public class HighlandsMain {
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		//new settings set-up
-		Configuration config = new Configuration((event.getSuggestedConfigurationFile()));
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 		Config.setUpConfig(config);
 		config.save();
