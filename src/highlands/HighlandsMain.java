@@ -1,6 +1,5 @@
 package highlands;
 
-import java.io.File;
 import java.lang.Exception;
 import java.lang.System;
 import java.util.ArrayList;
@@ -20,13 +19,13 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.WorldType;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
@@ -38,7 +37,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid="Highlands", name="Highlands", version="2.2.0",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
@@ -55,8 +53,8 @@ public class HighlandsMain {
 	public static CommonProxy proxy;
 	
 	//Highlands Worldtypes
-	public static final WorldType HL = (WorldType) new WorldTypeHighlands(10, "Highlands");
-	public static final WorldType HLLB = (WorldType) new WorldTypeHighlands(11, "Highlands LB");
+	public static final WorldTypeHighlands HL = new WorldTypeHighlands("Highlands");
+	public static final WorldTypeHighlands HLLB = new WorldTypeHighlands("Highlands LB");
 	
 	public static int HighlandsBiomeSizeDefault;
 	public static int HighlandsBiomeSizeLB;
@@ -85,7 +83,7 @@ public class HighlandsMain {
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		//new settings set-up
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + File.separator + "Highlands.cfg"));
+		Configuration config = new Configuration((event.getSuggestedConfigurationFile()));
 		config.load();
 		Config.setUpConfig(config);
 		config.save();
@@ -106,24 +104,20 @@ public class HighlandsMain {
 	public void load(FMLInitializationEvent event) {
 
 		//set up worldtypes
-//		WorldTypeHighlands.addBiomeList(HL, HighlandsBiomes.biomesForHighlands);
-//		WorldTypeHighlands.addBiomeList(HLLB, HighlandsBiomes.biomesForHighlands);
-//		if(HL.getBiomesForWorldType().length == 0) HL.addNewBiome(BiomeGenBase.icePlains);
-//		if(HLLB.getBiomesForWorldType().length == 0) HLLB.addNewBiome(BiomeGenBase.icePlains);
-//		if(highlandsInDefaultFlag){
-//			WorldTypeHighlands.addBiomeList(WorldType.DEFAULT, HighlandsBiomes.biomesForDefault);
-//			WorldTypeHighlands.addBiomeList(WorldType.LARGE_BIOMES, HighlandsBiomes.biomesForDefault);
-//		}
-//		
-//		//add biomes to spawn strongholds in
-//		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
-//			if(i != HighlandsBiomes.woodsMountains && i != HighlandsBiomes.flyingMountains && i != HighlandsBiomes.ocean2)
-//			MapGenStronghold.allowedBiomes.add(i);
-//		}
+		HL.addBiomeList(HighlandsBiomes.biomesForHighlands);
+		HLLB.addBiomeList(HighlandsBiomes.biomesForHighlands);
+		if(HL.getBiomeListSize() == 0) HL.addBiomeList(BiomeGenBase.icePlains);
+		if(HLLB.getBiomeListSize() == 0) HLLB.addBiomeList(BiomeGenBase.icePlains);
+
+		//add biomes to spawn strongholds in
+		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
+			if(i != HighlandsBiomes.woodsMountains && i != HighlandsBiomes.flyingMountains && i != HighlandsBiomes.ocean2)
+			BiomeManager.addStrongholdBiome(i);
+		}
 		
 		// allow player spawning in biomes
 		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
-			WorldChunkManager.allowedBiomes.add(i);
+			BiomeManager.addSpawnBiome(i);
 		}
 		if(WorldChunkManager.allowedBiomes.size() == 0)
             WorldChunkManager.allowedBiomes.add(HighlandsBiomes.ocean2);

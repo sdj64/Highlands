@@ -1,65 +1,51 @@
 package highlands.biome;
 
 import java.util.Random;
-import java.util.Random;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.ColorizerFoliage;
-import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import highlands.HighlandsMain;
-import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenTreeMangrove;
 
 public class BiomeGenEstuary extends BiomeGenBaseHighlands
 {
-	private BiomeDecoratorHighlands biomedec;
 	private static final Height biomeHeight = new Height(-0.28F, 0.1F);
+    private static final int trees = 10, grass = 0, flowers = 0;
+    public BiomeGenEstuary(int par1){
+        super(par1, new BiomeDecoratorHighlands(trees, grass, flowers));
+        this.topBlock = Blocks.sand;
+        this.fillerBlock = Blocks.dirt;
+        this.setHeight(biomeHeight);
+        this.temperature = 0.8F;
+        this.rainfall = 0.9F;
+    }
 
-	public BiomeGenEstuary(int par1){
-			super(par1);	
-			int trees = 10;
-		    int grass = 0;
-		    int flowers = 0;
-		    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
-	        this.topBlock = Blocks.sand;
-	        this.fillerBlock = Blocks.dirt;
-	        this.setHeight(biomeHeight);
-	        this.temperature = 0.8F;
-	        this.rainfall = 0.9F;
-	        
-	    }
+    /**
+     * Gets a WorldGen appropriate for this biome.
+     */
+    @Override
+    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
+    {
+        return new WorldGenTallGrass(Blocks.tallgrass, 1);
+    }
 
-	    /**
-	     * Gets a WorldGen appropriate for this biome.
-	     */
-	    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-	    {
-	        return new WorldGenTallGrass(Blocks.tallgrass, 1);
-	    }
-	    
-	    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
-	    {
-	        return (WorldGenerator)new WorldGenTreeMangrove(4, 2, false);
-	    }
+    @Override
+    public WorldGenAbstractTree func_150567_a(Random par1Random)
+    {
+        return new WorldGenTreeMangrove(4, 2, false);
+    }
 
-	    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-	    {
-	    	if(par2Random.nextBoolean())biomedec.treesPerChunk = 0;
-	    	else biomedec.treesPerChunk = 10;
-	    	
-	        biomedec.decorate(par1World, par2Random, biome, par3, par4);
-	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);
-	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 15, biomedec.HLsand, 0, 64);
-	    }
-	    
+    @Override
+    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    {
+        if(par2Random.nextBoolean())biomedec.treesPerChunk = 0;
+        else biomedec.treesPerChunk = 10;
+
+        biomedec.decorateChunk(par1World, par2Random, this, par3, par4);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);
+        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 15, biomedec.HLsand, 0, 64);
+    }
 }
 
 

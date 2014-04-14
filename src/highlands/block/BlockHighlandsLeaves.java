@@ -63,7 +63,6 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
         this.treeType = type;
         setLightOpacity(1);
         this.setCreativeTab(CreativeTabs.tabDecorations);
-        //this.setBurnProperties(this.blockID, 30, 60);
     }
 
     @Override

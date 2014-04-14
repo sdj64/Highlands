@@ -47,7 +47,6 @@ public class BlockHighlandsLog extends BlockLog
     {
         super();
         this.treeType = type;
-        //setBurnProperties(this.blockID, 5, 5);
     }
 
     @Override

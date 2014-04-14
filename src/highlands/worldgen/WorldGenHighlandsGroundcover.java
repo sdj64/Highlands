@@ -29,7 +29,7 @@ public class WorldGenHighlandsGroundcover extends WorldGenerator
     {
         Block var11;
 
-        for (boolean var6 = false; ((var11 = par1World.getBlock(par3, par4, par5)) == Blocks.air || var11 == Blocks.leaves) && par4 > 0; --par4)
+        for (; ((var11 = par1World.getBlock(par3, par4, par5)) == Blocks.air || var11 == Blocks.leaves) && par4 > 0; --par4)
         {
             ;
         }

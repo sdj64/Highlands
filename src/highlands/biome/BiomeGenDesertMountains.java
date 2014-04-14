@@ -2,30 +2,19 @@ package highlands.biome;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import highlands.HighlandsMain;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenMountain;
 
 public class BiomeGenDesertMountains extends BiomeGenBaseHighlands
 {
-    private BiomeDecoratorHighlands biomedec;
     private static final Height biomeHeight = new Height(2.0F, 2.0F);
-    
-	public BiomeGenDesertMountains(int par1)
+    private static final int trees = -999, grass = 0, flowers = 0;
+    public BiomeGenDesertMountains(int par1)
     {
-        super(par1);
-        int trees = -999;
-	    int grass = 0;
-	    int flowers = 0;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+        super(par1, new BiomeDecoratorHighlands(trees, grass, flowers));
         
         this.spawnableCreatureList.clear();
         
@@ -36,18 +25,20 @@ public class BiomeGenDesertMountains extends BiomeGenBaseHighlands
         
         this.setDisableRain();
     }
-    
-    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+
+    @Override
+    public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (WorldGenerator)(new WorldGenHighlandsShrub(1, 1));
+        return (new WorldGenHighlandsShrub(1, 1));
     }
-    
-    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
+
+    @Override
+    public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
     	if(par2Random.nextInt(4) == 0)
     		new WorldGenMountain(15, 20, false, 2).generate(par1World, par2Random, par3+par2Random.nextInt(16), 128, par4+par2Random.nextInt(16));
     	
-        biomedec.decorate(par1World, par2Random, biome, par3, par4);
+        biomedec.decorateChunk(par1World, par2Random, this, par3, par4);
         
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.ironGen, 64, 128);
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 8, biomedec.redstoneGen, 16, 32);

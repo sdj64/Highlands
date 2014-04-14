@@ -2,21 +2,18 @@ package highlands.worldgen;
 
 import highlands.block.BlockHighlandsSapling;
 
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
 {
 	protected Block woodID;
-	protected BlockLeaves leavesID;
+	protected BlockLeavesBase leavesID;
     protected int woodMeta;
     protected int leavesMeta;
     protected int type;
@@ -37,12 +34,10 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
      * @param wmd wood meta data
      * @param fence wood block id
      * @param leaves leaf block id
-     * @param minH minimum height of tree trunk
-     * @param maxH max possible height above minH the tree trunk could grow
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenHighlandsTreeBase(int lmd, int wmd, Block fence, BlockLeaves leaves, boolean notify)
+    public WorldGenHighlandsTreeBase(int lmd, int wmd, Block fence, BlockLeavesBase leaves, boolean notify)
     {
         super(notify);
         this.woodID = fence;
@@ -51,9 +46,6 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
         this.leavesMeta = lmd;
         this.notifyFlag = notify;
     }
-
-    public abstract boolean generate(World world, Random random, int locX, int locY, int locZ);
-
     
 	//UTILITY GENERATORS - LEAVES, BRANCHES, TRUNKS
     
@@ -256,8 +248,8 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     
     //finds top block for the given x,z position (excluding leaves)
     protected int findTopBlock(int x, int z){
-    	int y = 256;
-        for (boolean var6 = false; (world.getBlock(x, y, z) == Blocks.air || world.getBlock(x, y, z).isLeaves(world, x, y, z)) && y > 0; --y);
+    	int y = world.getTopSolidOrLiquidBlock(x, z);
+        for (; (world.getBlock(x, y, z) == Blocks.air || world.getBlock(x, y, z).isLeaves(world, x, y, z)) && y > 0; --y);
         return y;
     }
 }

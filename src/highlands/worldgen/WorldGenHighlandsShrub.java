@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenHighlandsShrub extends WorldGenAbstractTree
 {
@@ -33,7 +32,7 @@ public class WorldGenHighlandsShrub extends WorldGenAbstractTree
     {
         Block var15;
 
-        for (boolean var6 = false; ((var15 = par1World.getBlock(par3, par4, par5)) == Blocks.air || var15 == Blocks.leaves) && par4 > 0; --par4)
+        for (; ((var15 = par1World.getBlock(par3, par4, par5)) == Blocks.air || var15 == Blocks.leaves) && par4 > 0; --par4)
         {
             ;
         }

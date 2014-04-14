@@ -4,31 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import highlands.HighlandsMain;
-import highlands.worldgen.WorldGenSmallPlants;
-
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public abstract class BiomeGenBaseHighlands extends BiomeGenBase
 {
-	
 	public ArrayList<BiomeGenBase> subBiomes;
+    public final BiomeDecoratorHighlands biomedec;
 
-	public BiomeGenBaseHighlands(int a){
+	public BiomeGenBaseHighlands(int a, BiomeDecoratorHighlands decoratorHighlands){
 		super(a);
+        biomedec = decoratorHighlands;
+        theBiomeDecorator = decoratorHighlands;
 		subBiomes = new ArrayList<BiomeGenBase>();
 	}
-	
-	//TODO- could be crashy...
+
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (WorldGenerator)new WorldGenSmallPlants(null);
-	}
+        return null;
+    }
 	
 	public void setSpawnLists(List monster, List creature, List waterCreature){
 		this.spawnableCreatureList = creature;
 		this.spawnableMonsterList = monster;
 		this.spawnableWaterCreatureList = waterCreature;
 	}
-	
+
+    @Override
+    public BiomeDecorator createBiomeDecorator(){
+        return biomedec;
+    }
 }

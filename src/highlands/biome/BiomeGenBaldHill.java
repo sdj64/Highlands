@@ -1,63 +1,56 @@
 package highlands.biome;
 
 import java.util.Random;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBlocks;
-import highlands.HighlandsMain;
-import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
 
 public class BiomeGenBaldHill extends BiomeGenBaseHighlands
 {
-	private BiomeDecoratorHighlands biomedec;
 	private static final Height biomeHeight = new Height(1.0F, 1.0F);
-	
+    private static final int trees = 0, grass = 4, flowers = 1, plants = 2;
 	public BiomeGenBaldHill(int par1){
-		super(par1);
-		
-		int trees = 0;
-	    int grass = 4;
-	    int flowers = 1;
-	    int plants = 2;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers, plants);
+		super(par1, new BiomeDecoratorHighlands(trees, grass, flowers, plants));
+
         this.topBlock = Blocks.grass;
         this.fillerBlock = Blocks.dirt;
         this.setHeight(biomeHeight);
         this.temperature = 0.5F;
         this.rainfall = 0.7F;
-        
     }
-	
+
+    @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (WorldGenerator)(rand.nextInt(3) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.whiteFlower)
+		return (rand.nextInt(3) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.whiteFlower)
 				: (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.raspberryBush)
 				: new WorldGenSmallPlants(HighlandsBlocks.cotton)));
 	}
 
-	public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+    @Override
+	public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-		return (WorldGenerator)(par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees);
+		return (par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees);
     }
 	
     /**
      * Gets a WorldGen appropriate for this biome.
      */
+    @Override
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
         return new WorldGenTallGrass(Blocks.tallgrass, 1);
     }
     
-
-    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
+    @Override
+    public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
-        biomedec.decorate(par1World, par2Random, biome, par3, par4);
+        biomedec.decorateChunk(par1World, par2Random, this, par3, par4);
         
         int var5 = 3 + par2Random.nextInt(6);
 

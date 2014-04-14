@@ -7,6 +7,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -24,7 +25,7 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreeFir(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify, boolean thickTrunk)
+    public WorldGenTreeFir(int lmd, int wmd, Block wb, BlockLeavesBase lb, int minH, int maxH, boolean notify, boolean thickTrunk)
     {
         super(lmd, wmd, wb, lb, notify);
         this.minHeight = minH;
@@ -33,7 +34,7 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreeFir(int minH, int maxH, boolean notify, boolean thickTrunk){
-    	this(0, 0, HighlandsBlocks.firWood, (BlockLeaves) HighlandsBlocks.firLeaves, minH, maxH, notify, thickTrunk);
+    	this(0, 0, HighlandsBlocks.firWood, (BlockLeavesBase) HighlandsBlocks.firLeaves, minH, maxH, notify, thickTrunk);
     	if(HighlandsMain.vanillaBlocksFlag){
     		this.woodID = Blocks.log;
     		this.woodMeta = 1;

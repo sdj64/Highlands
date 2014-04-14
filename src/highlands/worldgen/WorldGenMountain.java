@@ -1,10 +1,7 @@
 package highlands.worldgen;
 
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Random;
 
-import highlands.HighlandsMain;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;

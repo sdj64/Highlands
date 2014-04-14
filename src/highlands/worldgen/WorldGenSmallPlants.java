@@ -29,6 +29,7 @@ public class WorldGenSmallPlants extends WorldGenerator
         this.radius = 4;
     }
 
+    @Override
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         int l;
@@ -37,7 +38,7 @@ public class WorldGenSmallPlants extends WorldGenerator
         do 
         {
             block = par1World.getBlock(par3,par4, par5);
-            if (block != null && !block.isLeaves(par1World, par3, par4, par5))
+            if (!block.isAir(par1World, par3, par4, par5) && !block.isLeaves(par1World, par3, par4, par5))
             {
                 break;
             }
@@ -49,13 +50,14 @@ public class WorldGenSmallPlants extends WorldGenerator
             int j1 = par3 + par2Random.nextInt(radius) - par2Random.nextInt(radius);
             int k1 = par4 + par2Random.nextInt(4) - par2Random.nextInt(4);
             int l1 = par5 + par2Random.nextInt(radius) - par2Random.nextInt(radius);
-
+            if(k1<=0){
+                continue;
+            }
             if (par1World.isAirBlock(j1, k1, l1) && Blocks.tallgrass.canBlockStay(par1World, j1, k1, l1))
             {
                 par1World.setBlock(j1, k1, l1, this.plantID, 0, 2);
             }
         }
-
         return true;
     }
 }

@@ -2,29 +2,21 @@ package highlands.biome;
 
 import java.util.Random;
 
-import highlands.HighlandsMain;
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenOcean2 extends BiomeGenBaseHighlands
 {
 	private static final Height biomeHeight = new Height(-1.5F, 0.4F);
-	private BiomeDecoratorHighlands biomedec;
-	
+    private static final int trees = 0 ,grass = 3, flowers = 1;
     public BiomeGenOcean2(int par1)
     {
-        super(par1);
+        super(par1, new BiomeDecoratorHighlands(trees, grass, flowers));
         this.spawnableCreatureList.clear();
-        
-        int trees = 0;
-	    int grass = 3;
-	    int flowers = 1;
-        this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
         this.setHeight(biomeHeight);
     }
-    
-    public void decorate(World world, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
+
+    @Override
+    public void decorate(World world, Random par2Random, int par3, int par4)
     {
     	/*
     	// makes islands grass
@@ -49,7 +41,7 @@ public class BiomeGenOcean2 extends BiomeGenBaseHighlands
     	}
     	*/
 
-        biomedec.decorate(world, par2Random, biome, par3, par4);
+        biomedec.decorateChunk(world, par2Random, this, par3, par4);
         biomedec.genOreHighlands(world, par2Random, par3, par4, 10, biomedec.HLwater, 0, 64);
 	    biomedec.genOreHighlands(world, par2Random, par3, par4, 10, biomedec.HLsand, 0, 64);
     }
