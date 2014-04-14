@@ -587,7 +587,6 @@ public class Initializer
 		//Planks - half blocks
 		if(HighlandsBlocks.hlplanks != null && HighlandsBlocks.hlplankhalf != null){
 			GameRegistry.registerBlock(HighlandsBlocks.hlplankhalf, ItemBlockMetadata.class, "hl_woodSlab");
-			GameRegistry.registerBlock(HighlandsBlocks.hlplankhalfdouble, ItemBlockMetadata.class, "hl_woodSlabDouble");
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 0), "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 0));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 1), "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 1));
 			GameRegistry.addRecipe(new ItemStack(HighlandsBlocks.hlplankhalf, 6, 2), "xxx", 'x', new ItemStack(HighlandsBlocks.hlplanks, 1, 2));
