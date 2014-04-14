@@ -27,6 +27,7 @@ public class HighlandsFuelHandler implements IFuelHandler
 		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs1))return 300;
 		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs2))return 300;
 		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs3))return 300;
+
 		if(fuel == new ItemStack(HighlandsBlocks.hlplankhalf))return 150;
 		
 		if(fuel == new ItemStack(HighlandsBlocks.firSapling))return 100;

@@ -15,6 +15,7 @@ import cpw.mods.fml.common.Loader;
 import highlands.api.*;
 import highlands.biome.*;
 import highlands.block.*;
+import highlands.integration.HighlandsCompatibilityManager;
 import highlands.worldgen.WorldGenUnderground2;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
@@ -27,6 +28,7 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.WorldType;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
@@ -42,21 +44,21 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid="Highlands", name="Highlands", version="2.2.0",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
-public class HighlandsMain {
+public class Highlands {
 
 	public static String modid = "Highlands";
 	
     // The instance of your mod that Forge uses.
 	@Instance("Highlands")
-	public static HighlandsMain instance;
+	public static Highlands instance;
 	
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide="highlands.CommonProxy", serverSide="highlands.CommonProxy")
 	public static CommonProxy proxy;
 	
 	//Highlands Worldtypes
-	public static final WorldType HL = (WorldType) new WorldTypeHighlands(10, "Highlands");
-	public static final WorldType HLLB = (WorldType) new WorldTypeHighlands(11, "Highlands LB");
+	public static final WorldType HL = (WorldType) new WorldTypeHighlands("Highlands");
+	public static final WorldType HLLB = (WorldType) new WorldTypeHighlands("Highlands LB");
 	
 	public static int HighlandsBiomeSizeDefault;
 	public static int HighlandsBiomeSizeLB;
@@ -90,6 +92,9 @@ public class HighlandsMain {
 		Config.setUpConfig(config);
 		config.save();
 		
+		Initializer.constructBlocks();
+		Initializer.initRecipes();
+		
 		//register event manager
 		MinecraftForge.TERRAIN_GEN_BUS.register(new HighlandsEventManager());
 		MinecraftForge.EVENT_BUS.register(new HighlandsEventManager());
@@ -100,7 +105,7 @@ public class HighlandsMain {
 		//construct all variables
 		HighlandsBiomes.initBiomeArrays();
 		Initializer.constructBiomes();
-		Initializer.constructBlocks();
+		
 		Initializer.constructSettings();
 		
 		
@@ -115,10 +120,10 @@ public class HighlandsMain {
 //		}
 //		
 //		//add biomes to spawn strongholds in
-//		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
-//			if(i != HighlandsBiomes.woodsMountains && i != HighlandsBiomes.flyingMountains && i != HighlandsBiomes.ocean2)
-//			MapGenStronghold.allowedBiomes.add(i);
-//		}
+		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
+			if(i != HighlandsBiomes.woodsMountains && i != HighlandsBiomes.flyingMountains && i != HighlandsBiomes.ocean2)
+				BiomeManager.strongHoldBiomes.add(i);
+		}
 		
 		// allow player spawning in biomes
 		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
@@ -127,7 +132,7 @@ public class HighlandsMain {
 		if(WorldChunkManager.allowedBiomes.size() == 0)WorldChunkManager.allowedBiomes.add(HighlandsBiomes.ocean2);
 		
 		//initiate all recipes and ore dictionary definitions
-		Initializer.initRecipes();
+		
 		
 		//set up sub-biomes
 		Initializer.setUpAllSubBiomes();
@@ -174,7 +179,7 @@ public class HighlandsMain {
 
 		//TODO- readd compat
 		//BiomeDictionary PostInit
-		//HighlandsCompatibilityManager.registerBiomesForgeBiomeDict();
+		HighlandsCompatibilityManager.registerBiomesForgeBiomeDict();
 		
 		GameRegistry.registerFuelHandler(new HighlandsFuelHandler());
 		
@@ -182,17 +187,17 @@ public class HighlandsMain {
 //		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2(Block.cocoaPlant.blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("cocoa");
 
 		//Forestry PostInit
-//		if (Loader.isModLoaded("Forestry") ){
-//			try {
-//				HighlandsCompatibilityManager.registerBlocksForestry();
-//				HighlandsCompatibilityManager.registerRecipesForestry();
-//			}
-//			catch( Exception e ) {
-//				System.err.println("[Highlands] Failed to enable Forestry compatibility because: ");
-//				e.printStackTrace();
-//			}
-//		}
-//
+  		if (Loader.isModLoaded("Forestry") ){
+ 			try {
+ 				HighlandsCompatibilityManager.registerBlocksForestry();
+ 				HighlandsCompatibilityManager.registerRecipesForestry();
+ 			}
+ 			catch( Exception e ) {
+ 				System.err.println("[Highlands] Failed to enable Forestry compatibility because: ");
+ 				e.printStackTrace();
+ 			}
+ 		}
+
 //		//MFR PostInit
 //		if (Loader.isModLoaded("MineFactoryReloaded") ){
 //			try {
