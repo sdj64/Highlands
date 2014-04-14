@@ -1,7 +1,5 @@
 package highlands.worldgen;
 
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Random;
 
 import highlands.HighlandsMain;
@@ -10,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenTreeAsh extends WorldGenHighlandsTreeBase
 {
@@ -41,12 +38,11 @@ public class WorldGenTreeAsh extends WorldGenHighlandsTreeBase
     	}
     }
 
+    @Override
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
     	this.world = world;
     	this.random = random;
-    	
-        
         if(!isLegalTreePosition(world, locX, locY, locZ))return false;
         if(!isCubeClear(locX, locY+3, locZ, 3, 15))return false;
         

@@ -10,9 +10,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
+public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
 {
 	protected Block woodID;
 	protected BlockLeaves leavesID;
@@ -43,6 +44,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
      */
     public WorldGenHighlandsTreeBase(int lmd, int wmd, Block fence, BlockLeaves leaves, boolean notify)
     {
+        super(notify);
         this.woodID = fence;
         this.leavesID = leaves;
         this.woodMeta = wmd;

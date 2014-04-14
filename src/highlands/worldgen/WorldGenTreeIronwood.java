@@ -41,6 +41,7 @@ public class WorldGenTreeIronwood extends WorldGenHighlandsTreeBase
     	}
     }
 
+    @Override
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
     	

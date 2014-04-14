@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.Random;
 
 import highlands.api.HighlandsBlocks;
 import net.minecraft.block.Block;
@@ -13,6 +14,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 public class BlockHLPlankSlab extends BlockSlab
 {
@@ -35,14 +37,14 @@ public class BlockHLPlankSlab extends BlockSlab
         return modelBlock.getIcon(par1, par2 & 7);
     }
 
-//    /**
-//     * Returns the ID of the items to drop on destruction.  Unfortunately can't make this use modelblock.
-//     */
-//    @Override
-//    public Block damageDropped(int par1, Random par2Random, int par3)
-//    {
-//        return HighlandsBlocks.hlplankhalf;
-//    }
+    /**
+     * Returns the ID of the items to drop on destruction.  Unfortunately can't make this use modelblock.
+     */
+    @Override
+    public Item getItemDropped(int par1, Random par2Random, int par3)
+    {
+        return Item.getItemFromBlock(HighlandsBlocks.hlplankhalf);
+    }
     
     /*
      * attempt to get it to make double slabs like vanilla slabs do
@@ -65,6 +67,7 @@ public class BlockHLPlankSlab extends BlockSlab
      * 
      * Unfortunately can't make this use modelblock.
      */
+    @Override
     protected ItemStack createStackedBlock(int par1)
     {
         return new ItemStack(HighlandsBlocks.hlplankhalf, 2, par1 & 7);
@@ -73,7 +76,8 @@ public class BlockHLPlankSlab extends BlockSlab
     /**
      * Returns the slab block name with step type.
      */
-    public String getFullSlabName(int par1)
+    @Override
+    public String func_150002_b(int par1)
     {
         return super.getUnlocalizedName() + "." + par1;
     }
@@ -104,9 +108,9 @@ public class BlockHLPlankSlab extends BlockSlab
     @Override
     public void registerBlockIcons(IIconRegister par1IconRegister) {}
 
-	@Override
-	public String func_150002_b(int var1) {
-		// TODO Auto-generated method stub
-		return "";
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Item getItem(World world, int x, int y, int z){
+        return Item.getItemFromBlock(HighlandsBlocks.hlplankhalf);
+    }
 }

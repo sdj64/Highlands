@@ -6,9 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenHighlandsBigTree extends WorldGenerator
+public class WorldGenHighlandsBigTree extends WorldGenAbstractTree
 {
     /**
      * Contains three sets of two values that provide complimentary indices for a given 'major' index - 1 and 2 for 0, 0

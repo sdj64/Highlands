@@ -39,12 +39,11 @@ public class WorldGenTreeDiamondheart extends WorldGenHighlandsTreeBase
     	}
     }
 
+    @Override
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
     	this.world = world;
     	this.random = random;
-    	
-
         
         if(!isLegalTreePosition(world, locX, locY, locZ))return false;
         if(!isCubeClear(locX, locY+3, locZ, 8, 60))return false;

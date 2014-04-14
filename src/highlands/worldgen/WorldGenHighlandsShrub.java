@@ -5,15 +5,17 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenHighlandsShrub extends WorldGenerator
+public class WorldGenHighlandsShrub extends WorldGenAbstractTree
 {
     private int field_76527_a;
     private int field_76526_b;
 
     public WorldGenHighlandsShrub(int par1, int par2)
     {
+        super(false);
         this.field_76526_b = par1;
         this.field_76527_a = par2;
     }
@@ -26,6 +28,7 @@ public class WorldGenHighlandsShrub extends WorldGenerator
     	return flag;
     }
 
+    @Override
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         Block var15;

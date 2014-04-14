@@ -213,8 +213,8 @@ public class Initializer
 				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodStairs3");
 		HighlandsBlocks.hlplankhalf = new BlockHLPlankSlab(false, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodSlab");
-//		HighlandsBlocks.hlplankhalfdouble = new BlockHLPlankSlab(true, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
-//				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodSlabDouble");
+		HighlandsBlocks.hlplankhalfdouble = new BlockHLPlankSlab(true, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodSlabDouble");
 
 		HighlandsBlocks.saplings = new Block[]{
 				HighlandsBlocks.firSapling,

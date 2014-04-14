@@ -8,10 +8,11 @@ import net.minecraft.block.BlockSapling;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class WorldGenAutumnTree extends WorldGenerator
+public class WorldGenAutumnTree extends WorldGenAbstractTree
 {
     /** The minimum height of a generated tree. */
     private final int minTreeHeight;
@@ -47,6 +48,7 @@ public class WorldGenAutumnTree extends WorldGenerator
     	return flag;
     }
 
+    @Override
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         int l = par2Random.nextInt(3) + this.minTreeHeight;
