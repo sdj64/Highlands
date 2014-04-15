@@ -44,38 +44,37 @@ public class WorldGenTreeIronwood extends WorldGenHighlandsTreeBase
     @Override
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	
     	this.world = world;
     	this.random = random;
-    	
-        
         if(!isLegalTreePosition(world, locX, locY, locZ))return false;
         if(!isCubeClear(locX, locY+2, locZ, 2, 6))return false;
         
     	//generates the leaf layer
     	if(!new WorldGenIronwoodCrown(false, true, 0, 0, 1, maxHeight).generate(world, random, locX, locY, locZ))return false;
     	//generates the trunk
-    	generateWorldTreeTrunk(world, random, locX, locY, locZ);
+    	generateWorldTreeTrunk(locX, locY, locZ);
+        this.world = null;
+        this.random = null;
 		return true;
     }
     
-    private void generateWorldTreeTrunk(World world, Random random, int locX, int locY, int locZ) {
+    private void generateWorldTreeTrunk(int locX, int locY, int locZ) {
 		locY-=2;
 		double r = 6.5;
-		generateWoodLayerCircle(world, random, r, locX, locZ, locY);
+		generateWoodLayerCircle(r, locX, locZ, locY);
 		locY++; r-=.5;
-		generateWoodLayerCircle(world, random, r, locX, locZ, locY);
+		generateWoodLayerCircle(r, locX, locZ, locY);
 		locY++; r-=.5;
-		generateWoodLayerCircle(world, random, r, locX, locZ, locY);
+		generateWoodLayerCircle(r, locX, locZ, locY);
 		locY++; r-=.5;
-		generateWoodLayerCircle(world, random, r, locX, locZ, locY);
+		generateWoodLayerCircle(r, locX, locZ, locY);
 		locY++; r-=.5;
-		generateWoodLayerCircle(world, random, r, locX, locZ, locY);
+		generateWoodLayerCircle(r, locX, locZ, locY);
 		locY++; r-=.5;
-		generateWoodLayerCircle(world, random, r, locX, locZ, locY);
+		generateWoodLayerCircle(r, locX, locZ, locY);
 		locY++; r-=.5;
 		for(int i = 0; i < minHeight-4; i++){
-			generateWoodLayerCircle(world, random, r, locX, locZ, locY+i);
+			generateWoodLayerCircle(r, locX, locZ, locY+i);
 		}
 		
 	}
@@ -256,13 +255,14 @@ public class WorldGenTreeIronwood extends WorldGenHighlandsTreeBase
                        var11[var9] = var10[var9] + var13;
                        Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
 
-                       if (var14 != Blocks.air && !var14.isLeaves(worldObj, var11[0], var11[1], var11[2]))
+                       if (!var14.isAir(worldObj, var11[0], var11[1], var11[2]) && !var14.isLeaves(worldObj, var11[0], var11[1], var11[2]))
                        {
                            ++var13;
                        }
                        else
                        {
-                           if(hasLeaves)this.setBlockAndNotifyAdequately(this.worldObj, var11[0], var11[1], var11[2], par6, leafMeta);
+                           if(hasLeaves)
+                               this.setBlockAndNotifyAdequately(this.worldObj, var11[0], var11[1], var11[2], par6, leafMeta);
                            ++var13;
                        }
                    }
@@ -366,22 +366,6 @@ public class WorldGenTreeIronwood extends WorldGenHighlandsTreeBase
                    var14[var6] = MathHelper.floor_double((double)(par1ArrayOfInteger[var6] + var15) + 0.5D);
                    var14[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var15 * var10 + 0.5D);
                    var14[var8] = MathHelper.floor_double((double)par1ArrayOfInteger[var8] + (double)var15 * var12 + 0.5D);
-                   byte var17 = 0;
-                   int var18 = Math.abs(var14[0] - par1ArrayOfInteger[0]);
-                   int var19 = Math.abs(var14[2] - par1ArrayOfInteger[2]);
-                   int var20 = Math.max(var18, var19);
-
-                   if (var20 > 0)
-                   {
-                       if (var18 == var20)
-                       {
-                           var17 = 4;
-                       }
-                       else if (var19 == var20)
-                       {
-                           var17 = 8;
-                       }
-                   }
                    this.setBlockAndNotifyAdequately(this.worldObj, var14[0], var14[1], var14[2], par3, woodMeta);
                }
            }
@@ -514,7 +498,7 @@ public class WorldGenTreeIronwood extends WorldGenHighlandsTreeBase
                    var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
                    Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-                   if (var16 != Blocks.air && !var16.isLeaves(worldObj, var13[0], var13[1], var13[2]))
+                   if (!var16.isAir(worldObj, var13[0], var13[1], var13[2]) && !var16.isLeaves(worldObj, var13[0], var13[1], var13[2]))
                    {
                        break;
                    }

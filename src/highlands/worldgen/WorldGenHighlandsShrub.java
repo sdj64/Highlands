@@ -30,16 +30,15 @@ public class WorldGenHighlandsShrub extends WorldGenAbstractTree
     @Override
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
-        Block var15;
+        Block var15 = par1World.getBlock(par3, par4, par5);
 
-        for (; ((var15 = par1World.getBlock(par3, par4, par5)) == Blocks.air || var15 == Blocks.leaves) && par4 > 0; --par4)
+        while (par4 > 0 && (var15.isAir(par1World, par3, par4, par5) || var15.isLeaves(par1World, par3, par4, par5)))
         {
-            ;
+            par4--;
+            var15 = par1World.getBlock(par3, par4, par5);
         }
 
-        Block var7 = par1World.getBlock(par3, par4, par5);
-
-        if (var7 == Blocks.dirt || var7 == Blocks.grass || var7 == Blocks.snow || var7 == Blocks.sand)
+        if (var15 == Blocks.dirt || var15 == Blocks.grass || var15 == Blocks.snow || var15 == Blocks.sand)
         {
             ++par4;
             this.setBlockAndNotifyAdequately(par1World, par3, par4, par5, Blocks.log, this.field_76526_b);

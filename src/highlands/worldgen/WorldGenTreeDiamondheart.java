@@ -61,12 +61,14 @@ public class WorldGenTreeDiamondheart extends WorldGenHighlandsTreeBase
     		for(double j = angleRad; j < angleRad + 2*Math.PI; j += Math.PI/4){
     			int x = (int)(primaryRadius * Math.cos(j));
     			int z = (int)(primaryRadius * Math.sin(j));
-    			generateWoodLayerCircle(world, random, secondaryRadius, x+locX, z+locZ, i+locY);
+    			generateWoodLayerCircle(secondaryRadius, x+locX, z+locZ, i+locY);
     		}
     		angleRad += Math.PI / 40;
     		primaryRadius -= (primaryRadius - finalRadius)/15.0;
     		secondaryRadius -= (secondaryRadius - finalRadius2)/15.0;
     	}
+        this.world = null;
+        this.random = null;
     	
     	/*
     	int h = locY + treeHeight - 1;

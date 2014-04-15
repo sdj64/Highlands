@@ -19,22 +19,23 @@ public class WorldGenAutumnTree extends WorldGenAbstractTree
     private final boolean vinesGrow;
 
     /** The blockID of the wood to use in tree generation. */
-    private Block blockWood;
+    private final Block blockWood;
 
     /** The blockID of the leaves to use in tree generation. */
-    private Block blockLeaves;
+    private final Block blockLeaves;
 
     public WorldGenAutumnTree(boolean par1, int par2, Block log, Block autumnYellowLeaves)
     {
         super(par1);
         this.minTreeHeight = par2;
-        this.blockWood = log;
-        this.blockLeaves = autumnYellowLeaves;
         this.vinesGrow = false;
         
         if(HighlandsMain.vanillaBlocksFlag){
-        	blockWood = Blocks.log;
-        	blockLeaves = Blocks.leaves;
+            this.blockWood = Blocks.log;
+            this.blockLeaves = Blocks.leaves;
+        }else{
+            this.blockWood = log;
+            this.blockLeaves = autumnYellowLeaves;
         }
     }
     
@@ -145,10 +146,12 @@ public class WorldGenAutumnTree extends WorldGenAbstractTree
 
                     for (j1 = 0; j1 < l; ++j1)
                     {
+                        if(par4+j1<0)
+                            continue;
                         Block block = par1World.getBlock(par3, par4 + j1, par5);
 
                         //TODO- removed k1 = 0, right fix?
-                        if (block == null || block.isLeaves(par1World, par3, par4 + j1, par5))
+                        if (block.isAir(par1World, par3, par4 + j1, par5) || block.isLeaves(par1World, par3, par4 + j1, par5))
                         {
                             this.setBlockAndNotifyAdequately(par1World, par3, par4 + j1, par5, this.blockWood, 0);
 
@@ -181,6 +184,8 @@ public class WorldGenAutumnTree extends WorldGenAbstractTree
                     {
                         for (j1 = par4 - 3 + l; j1 <= par4 + l; ++j1)
                         {
+                            if(j1<0)
+                                continue;
                             k1 = j1 - (par4 + l);
                             i2 = 2 - k1 / 2;
 
@@ -191,17 +196,17 @@ public class WorldGenAutumnTree extends WorldGenAbstractTree
                                     Block block = par1World.getBlock(j2, j1, k2);
                                     if (block != null && block.isLeaves(par1World, j2, j1, k2))
                                     {
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2 - 1, j1, k2) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 - 1, j1, k2))
                                         {
                                             this.growVines(par1World, j2 - 1, j1, k2, 8);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2 + 1, j1, k2) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 + 1, j1, k2))
                                         {
                                             this.growVines(par1World, j2 + 1, j1, k2, 2);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2, j1, k2 - 1) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 - 1))
                                         {
                                             this.growVines(par1World, j2, j1, k2 - 1, 1);
                                         }

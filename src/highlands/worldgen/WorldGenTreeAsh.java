@@ -57,24 +57,26 @@ public class WorldGenTreeAsh extends WorldGenHighlandsTreeBase
     	//generates leaves at top
     	int h;
     	for(h = locY+treeHeight - 3; h < locY + treeHeight; h++){
-    		generateLeafLayerCircleNoise(world, random, 3.5, locX+random.nextInt(2), locZ+random.nextInt(2), h);
+    		generateLeafLayerCircleNoise(3.5, locX+random.nextInt(2), locZ+random.nextInt(2), h);
     	}
-    	generateLeafLayerCircleNoise(world, random, 3.8, locX+random.nextInt(2), locZ+random.nextInt(2), h);
+    	generateLeafLayerCircleNoise(3.8, locX+random.nextInt(2), locZ+random.nextInt(2), h);
     	h++;
-    	generateLeafLayerCircleNoise(world, random, 2.5, locX+random.nextInt(2), locZ+random.nextInt(2), h);
+    	generateLeafLayerCircleNoise(2.5, locX+random.nextInt(2), locZ+random.nextInt(2), h);
     	h++;
-    	generateLeafLayerCircleNoise(world, random, 2, locX+random.nextInt(2), locZ+random.nextInt(2), h);
+    	generateLeafLayerCircleNoise(2, locX+random.nextInt(2), locZ+random.nextInt(2), h);
     	h++;
-    	generateLeafLayerCircleNoise(world, random, 1, locX+random.nextInt(2), locZ+random.nextInt(2), h);
+    	generateLeafLayerCircleNoise(1, locX+random.nextInt(2), locZ+random.nextInt(2), h);
     	h -= 16;
     	//generates branches / leaves
     	int firstDir = random.nextInt(4);
     	for(int i = 0; i < 8; i++){
-    		int[] xyz = generateStraightBranch(world, random, 5, locX+random.nextInt(2), h+i, locZ+random.nextInt(2), (firstDir + i)%4);
-    		generateLeafLayerCircleNoise(world, random, 1.8, xyz[0], xyz[2], xyz[1]-1);
-    		generateLeafLayerCircleNoise(world, random, 2.5, xyz[0], xyz[2], xyz[1]);
-    		generateLeafLayerCircleNoise(world, random, 1.8, xyz[0], xyz[2], xyz[1]+1);
+    		int[] xyz = generateStraightBranch(5, locX+random.nextInt(2), h+i, locZ+random.nextInt(2), (firstDir + i)%4);
+    		generateLeafLayerCircleNoise(1.8, xyz[0], xyz[2], xyz[1]-1);
+    		generateLeafLayerCircleNoise(2.5, xyz[0], xyz[2], xyz[1]);
+    		generateLeafLayerCircleNoise(1.8, xyz[0], xyz[2], xyz[1]+1);
     	}
+        this.world = null;
+        this.random = null;
     	return true;
     }
 }

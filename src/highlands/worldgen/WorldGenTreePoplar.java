@@ -59,24 +59,26 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     	
     	//generates the leaves.
     	int h = locY + 3;
-    	generateLeafLayerCircle(world, random, 1, locX, locZ, h);
+    	generateLeafLayerCircle(1, locX, locZ, h);
     	h++;
-    	generateLeafLayerCircle(world, random, 1.5, locX, locZ, h);
+    	generateLeafLayerCircle(1.5, locX, locZ, h);
     	h++;
-    	generateLeafLayerCircle(world, random, 2, locX, locZ, h);
+    	generateLeafLayerCircle(2, locX, locZ, h);
     	
     	for(h = h + 1; h < locY + treeHeight; h++){
-    		generateLeafLayerCircleNoise(world, random, 2.8, locX, locZ, h);
+    		generateLeafLayerCircleNoise(2.8, locX, locZ, h);
     	}
-    	generateLeafLayerCircleNoise(world, random, 2, locX, locZ, h);
+    	generateLeafLayerCircleNoise(2, locX, locZ, h);
     	h++;
-    	generateLeafLayerCircleNoise(world, random, 1.5, locX, locZ, h);
+    	generateLeafLayerCircleNoise(1.5, locX, locZ, h);
     	h++;
-    	generateLeafLayerCircleNoise(world, random, 1, locX, locZ, h);
-    	h++;
-    	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+    	generateLeafLayerCircleNoise(1, locX, locZ, h);
     	h++;
     	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+    	h++;
+    	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+        this.world = null;
+        this.random = null;
     	return true;
     }
     

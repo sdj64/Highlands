@@ -16,7 +16,6 @@ public class WorldGenMountain extends WorldGenerator
     private final boolean notifyFlag;
     
     private World world;
-    private Random random;
 
     /** Constructor
      * @param minH minimum height of tree trunk
@@ -36,10 +35,8 @@ public class WorldGenMountain extends WorldGenerator
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
     	this.world = world;
-    	this.random = random;
     	
-    	int height = minHeight + random.nextInt(maxHeight);
-    	int radius = height;
+    	int radius = minHeight + random.nextInt(maxHeight);
     	
     	//System.out.println("H:"+height+" X:"+locX+" Z:"+locZ);
     	
@@ -53,11 +50,12 @@ public class WorldGenMountain extends WorldGenerator
 				if(dist <= radius){
 					//overwrites trees rather than placing the mountain on top of them.
 					for(locY = world.getTopSolidOrLiquidBlock(x, z); locY > 0; locY--){
-						Block block = world.getBlock(x,  locY, z); 
-						if(block != null && block.isOpaqueCube() && !block.isWood(world, x, locY, z) && !block.isLeaves(world, x, locY, z))break;
+						Block block = world.getBlock(x, locY, z);
+						if(block != null && block.isOpaqueCube() && !block.isWood(world, x, locY, z) && !block.isLeaves(world, x, locY, z))
+                            break;
 					}
 					
-					int h = locY + height - dist;
+					int h = locY + radius - dist;
 					for(int i = locY; i < h; i++){
 						if(snowrocksand == 0 && h-i <4)setBlockInWorld(x, i, z, Blocks.snow, 0);
 						else if(snowrocksand == 2 && h-i <4)setBlockInWorld(x, i, z, Blocks.sandstone, 0);
@@ -69,6 +67,7 @@ public class WorldGenMountain extends WorldGenerator
 				}
 			}
 		}
+        this.world = null;
     	return true;
     }
     

@@ -107,6 +107,8 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
                 }
             }
     	}
+        this.world = null;
+        this.random = null;
 		return true;
     }
 }

@@ -56,32 +56,34 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
 		
 		for(int i = -3; i <= treeHeight; i++){
 			double r = (treeHeight - i) * Math.tan(theta);
-			generateWoodLayerCircle(world, random, r, locX, locZ, locY+i);
+			generateWoodLayerCircle(r, locX, locZ, locY+i);
 		}
 		
 		//generate the branches. They start halfway up the tree and are generated every 5 blocks up.
 		int h = locY + treeHeight - 5;
 		double r = 2;
 		for(int i = 0; i < 6; i++){
-			generateSequoiaBranch(world, random, r, locX, locZ, h);
+			generateSequoiaBranch(r, locX, locZ, h);
 			h-=3;
 			if(r < 6)r++;
 		}
 		
 		h = locY + treeHeight - 2;
-		generateLeafLayerCircleNoise(world, random, 3.5, locX, locZ, h);
+		generateLeafLayerCircleNoise(3.5, locX, locZ, h);
 		h++;
-		generateLeafLayerCircleNoise(world, random, 2.5, locX, locZ, h);
+		generateLeafLayerCircleNoise(2.5, locX, locZ, h);
 		h++;
-		generateLeafLayerCircleNoise(world, random, 2, locX, locZ, h);
+		generateLeafLayerCircleNoise(2, locX, locZ, h);
 		h++;
-		generateLeafLayerCircleNoise(world, random, 1.5, locX, locZ, h);
+		generateLeafLayerCircleNoise(1.5, locX, locZ, h);
 		h++;
-		generateLeafLayerCircleNoise(world, random, 1, locX, locZ, h);
+		generateLeafLayerCircleNoise(1, locX, locZ, h);
 		h++;
-		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
+		generateLeafLayerCircleNoise(0, locX, locZ, h);
 		h++;
-		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
+		generateLeafLayerCircleNoise(0, locX, locZ, h);
+        this.world = null;
+        this.random = null;
 		return true;
     }
 }

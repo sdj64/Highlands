@@ -57,18 +57,18 @@ public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
         if(!isCubeClear(locX, locY+3, locZ, 2, 15))return false;
     	
 		//generates the trunk
-    	genTree(world, random, locX, locY, locZ, treeHeight, isWide);
-    	
-    	
-    	
+    	genTree(random, locX, locY, locZ, treeHeight, isWide);
+
     	if(this.trunk2){
     		treeHeight+= 3;
-    		genTree(world, random, locX+1, locY, locZ, treeHeight, isWide);
+    		genTree(random, locX+1, locY, locZ, treeHeight, isWide);
     		treeHeight+= 3;
-    		genTree(world, random, locX, locY, locZ+1, treeHeight, isWide);
+    		genTree(random, locX, locY, locZ+1, treeHeight, isWide);
     		treeHeight+= 3;
-    		genTree(world, random, locX+1, locY, locZ+1, treeHeight, isWide);
+    		genTree(random, locX+1, locY, locZ+1, treeHeight, isWide);
     	}
+        this.world = null;
+        this.random = null;
     	
     	return true;
     }
@@ -76,22 +76,22 @@ public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
     
     //TREE GENERATORS
     
-	private boolean genTree(World world, Random random, int locX, int locY, int locZ, int treeHeight, boolean isWide){
+	private boolean genTree(Random random, int locX, int locY, int locZ, int treeHeight, boolean isWide){
     	for(int i = 0; i < treeHeight; i++){
     		setBlockInWorld(locX, locY + i, locZ, this.woodID, this.woodMeta);
     	}
     	
     	int h = locY + treeHeight - 1;
     	//generate leaves above trunk
-    	generateLeafLayerCircle(world, random, 5.5, locX, locZ, h);
+    	generateLeafLayerCircle(5.5, locX, locZ, h);
     	h++;
-    	generateLeafLayerCircle(world, random, 4.5, locX, locZ, h);
+    	generateLeafLayerCircle(4.5, locX, locZ, h);
 
 		h = locY + treeHeight - 6;
 		//generates branch
-		int[] xyz = generateStraightBranch(world, random, 4, locX, h, locZ, random.nextInt(4));
-		generateLeafLayerCircle(world, random, 4.5, xyz[0], xyz[2], xyz[1]);
-		generateLeafLayerCircle(world, random, 3.5, xyz[0], xyz[2], xyz[1]+1);
+		int[] xyz = generateStraightBranch(4, locX, h, locZ, random.nextInt(4));
+		generateLeafLayerCircle(4.5, xyz[0], xyz[2], xyz[1]);
+		generateLeafLayerCircle(3.5, xyz[0], xyz[2], xyz[1]+1);
 		return true;
     }
     	

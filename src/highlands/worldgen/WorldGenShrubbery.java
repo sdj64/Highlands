@@ -2,6 +2,7 @@ package highlands.worldgen;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -23,18 +24,22 @@ public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
     {
     	this.world = world;
     	this.random = random;
-    	
 
     	//finds top block for the given x,z position (excluding leaves and grass)
-        for (boolean var6 = false; (world.getBlock(locX, locY, locZ) == Blocks.air || world.getBlock(locX, locY, locZ) == Blocks.leaves) && locY > 0; --locY);
+        Block var11 = world.getBlock(locX, locY, locZ);
+
+        while (locY > 0 && (var11.isAir(world, locX, locY, locZ) || var11.isLeaves(world, locX, locY, locZ)))
+        {
+            locY--;
+            var11 = world.getBlock(locX, locY, locZ);
+        }
         //locY is now the highest solid terrain block
         
-        if(!(world.getBlock(locX, locY, locZ) == Blocks.grass || world.getBlock(locX, locY, locZ) == Blocks.dirt))
+        if(!(var11 == Blocks.grass || var11 == Blocks.dirt))
         	return false;
         
     	//generates the trunk
     	locY++;
-    	int treeHeight = minHeight + random.nextInt(maxHeight);
     	setBlockInWorld(locX, locY, locZ, this.woodID, this.woodMeta);
     	
     	//generate leaves above trunk
@@ -42,7 +47,9 @@ public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
     	for(int i = 1; i < leafHeight; i++){
     		setBlockInWorld(locX, locY + 1, locZ, this.leavesID, this.leavesMeta);
     	}
-    	
+
+        this.world = null;
+        this.random = null;
     	
 		return true;
     }

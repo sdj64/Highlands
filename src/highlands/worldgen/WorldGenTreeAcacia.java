@@ -43,7 +43,6 @@ public class WorldGenTreeAcacia extends WorldGenHighlandsTreeBase
     {
     	this.world = world;
     	this.random = random;
-    	
 
     	//locY = findTopBlock(locX, locZ);
         
@@ -58,15 +57,17 @@ public class WorldGenTreeAcacia extends WorldGenHighlandsTreeBase
     	
     	int h = locY + treeHeight - 1;
     	//generate leaves above trunk
-    	generateLeafLayerCircle(world, random, 5.5, locX, locZ, h);
+    	generateLeafLayerCircle(5.5, locX, locZ, h);
     	h++;
-    	generateLeafLayerCircle(world, random, 4.5, locX, locZ, h);
+    	generateLeafLayerCircle(4.5, locX, locZ, h);
 
 		h = locY + treeHeight - 6;
 		//generates branch
-		int[] xyz = generateStraightBranch(world, random, 4, locX, h, locZ, random.nextInt(4));
-		generateLeafLayerCircle(world, random, 4.5, xyz[0], xyz[2], xyz[1]);
-		generateLeafLayerCircle(world, random, 3.5, xyz[0], xyz[2], xyz[1]+1);
+		int[] xyz = generateStraightBranch(4, locX, h, locZ, random.nextInt(4));
+		generateLeafLayerCircle(4.5, xyz[0], xyz[2], xyz[1]);
+		generateLeafLayerCircle(3.5, xyz[0], xyz[2], xyz[1]+1);
+        this.world = null;
+        this.random = null;
 		return true;
     }
 }

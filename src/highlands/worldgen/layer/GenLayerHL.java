@@ -48,29 +48,25 @@ public abstract class GenLayerHL extends GenLayer
         GenLayer var6 = GenLayerZoom.magnify(1000L, var16, 0);
         GenLayerBiomeHL var17 = new GenLayerBiomeHL(200L, var6, par2WorldType);
         var6 = GenLayerZoom.magnify(1000L, var17, 2);
-        Object var18 = new GenLayerHillsHL(1000L, var6);
+        GenLayer var18 = new GenLayerHillsHL(1000L, var6);
 
         for (int var7 = 0; var7 < var4; ++var7)
         {
-            var18 = new GenLayerZoom((long)(1000 + var7), (GenLayer)var18);
+            var18 = new GenLayerZoom((long)(1000 + var7), var18);
 
             if (var7 == 0)
             {
-                var18 = new GenLayerAddIsland(3L, (GenLayer)var18);
+                var18 = new GenLayerAddIsland(3L, var18);
             }
 
             if (var7 == 1)
             {
-                var18 = new GenLayerShoreHL(1000L, (GenLayer)var18);
-            }
-
-            if (var7 == 1)
-            {
-                var18 = new GenLayerRiver(1000L, (GenLayer)var18);
+                var18 = new GenLayerShoreHL(1000L, var18);
+                var18 = new GenLayerRiver(1000L, var18);
             }
         }
 
-        GenLayerSmooth var19 = new GenLayerSmooth(1000L, (GenLayer)var18);
+        GenLayerSmooth var19 = new GenLayerSmooth(1000L, var18);
         GenLayerRiverMix var20 = new GenLayerRiverMix(100L, var19, var15);
         GenLayerVoronoiZoom var8 = new GenLayerVoronoiZoom(10L, var20);
         var20.initWorldGenSeed(par0);

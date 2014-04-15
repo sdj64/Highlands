@@ -17,7 +17,7 @@ public class WorldGenWatermelon extends WorldGenerator
             int var8 = par4 + par2Random.nextInt(4) - par2Random.nextInt(4);
             int var9 = par5 + par2Random.nextInt(8) - par2Random.nextInt(8);
 
-            if (par1World.isAirBlock(var7, var8, var9) && par1World.getBlock(var7, var8 - 1, var9) == Blocks.grass && Blocks.pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
+            if (var8>0 && par1World.isAirBlock(var7, var8, var9) && par1World.getBlock(var7, var8 - 1, var9) == Blocks.grass && Blocks.pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
             {
                 par1World.setBlock(var7, var8, var9, Blocks.melon_block, par2Random.nextInt(4), 2);
             }
