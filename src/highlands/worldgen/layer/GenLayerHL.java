@@ -1,17 +1,7 @@
 package highlands.worldgen.layer;
 
 import net.minecraft.world.WorldType;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.GenLayerAddIsland;
-import net.minecraft.world.gen.layer.GenLayerAddMushroomIsland;
-import net.minecraft.world.gen.layer.GenLayerAddSnow;
-import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
-import net.minecraft.world.gen.layer.GenLayerRiver;
-import net.minecraft.world.gen.layer.GenLayerRiverInit;
-import net.minecraft.world.gen.layer.GenLayerRiverMix;
-import net.minecraft.world.gen.layer.GenLayerSmooth;
-import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
-import net.minecraft.world.gen.layer.GenLayerZoom;
+import net.minecraft.world.gen.layer.*;
 
 public abstract class GenLayerHL extends GenLayer
 {
@@ -21,36 +11,38 @@ public abstract class GenLayerHL extends GenLayer
      */
     public static GenLayer[] initializeAllBiomeGenerators(long par0, WorldType par2WorldType)
     {
-        GenLayerIslandHL var3 = new GenLayerIslandHL(1L);
-        GenLayerFuzzyZoom var9 = new GenLayerFuzzyZoom(2000L, var3);
-        GenLayerAddIsland var10 = new GenLayerAddIsland(1L, var9);
-        GenLayerZoom var11 = new GenLayerZoom(2001L, var10);
-        var10 = new GenLayerAddIsland(2L, var11);
-        GenLayerAddSnow var12 = new GenLayerAddSnow(2L, var10);
-        var11 = new GenLayerZoom(2002L, var12);
-        var10 = new GenLayerAddIsland(3L, var11);
-        var11 = new GenLayerZoom(2003L, var10);
-        var10 = new GenLayerAddIsland(4L, var11);
-        GenLayerAddMushroomIsland var16 = new GenLayerAddMushroomIsland(5L, var10);
-        byte var4 = 4;
-
+        GenLayerIslandHL islandHL = new GenLayerIslandHL(1L);
+        GenLayerFuzzyZoom fuzzy = new GenLayerFuzzyZoom(2000L, islandHL);
+        GenLayerAddIsland addIsland = new GenLayerAddIsland(1L, fuzzy);
+        GenLayerZoom zoom = new GenLayerZoom(2001L, addIsland);
+        addIsland = new GenLayerAddIsland(2L, zoom);
+        GenLayerAddSnow var12 = new GenLayerAddSnow(2L, addIsland);
+        zoom = new GenLayerZoom(2002L, var12);
+        addIsland = new GenLayerAddIsland(3L, zoom);
+        zoom = new GenLayerZoom(2003L, addIsland);
+        addIsland = new GenLayerAddIsland(4L, zoom);
+        GenLayerAddMushroomIsland mushroomIsland = new GenLayerAddMushroomIsland(5L, addIsland);
+        GenLayerDeepOcean genlayerdeepocean = new GenLayerDeepOcean(4L, mushroomIsland);
+        GenLayer genLayer = GenLayerZoom.magnify(1000L, genlayerdeepocean, 0);
+        byte size = 4;
         if (par2WorldType == WorldType.LARGE_BIOMES)
         {
-            var4 = 6;
+            size = 6;
         }
-        var4 = getModdedBiomeSize(par2WorldType, var4);
+        size = getModdedBiomeSize(par2WorldType, size);
 
-        GenLayer var5 = GenLayerZoom.magnify(1000L, var16, 0);
-        GenLayerRiverInit var13 = new GenLayerRiverInit(100L, var5);
-        var5 = GenLayerZoom.magnify(1000L, var13, var4 + 2);
-        GenLayerRiver var14 = new GenLayerRiver(1L, var5);
-        GenLayerSmooth var15 = new GenLayerSmooth(1000L, var14);
-        GenLayer var6 = GenLayerZoom.magnify(1000L, var16, 0);
-        GenLayerBiomeHL var17 = new GenLayerBiomeHL(200L, var6, par2WorldType);
-        var6 = GenLayerZoom.magnify(1000L, var17, 2);
+        GenLayer var5 = GenLayerZoom.magnify(1000L, genLayer, 0);
+        GenLayerRiverInit riverInit = new GenLayerRiverInit(100L, var5);
+        var5 = GenLayerZoom.magnify(1000L, riverInit, size + 2);
+        GenLayerRiver river = new GenLayerRiver(1L, var5);
+        GenLayerSmooth var15 = new GenLayerSmooth(1000L, river);
+
+        GenLayer var6 = GenLayerZoom.magnify(1000L, mushroomIsland, 0);
+        GenLayerBiomeHL biomeHL = new GenLayerBiomeHL(200L, var6, par2WorldType);
+        var6 = GenLayerZoom.magnify(1000L, biomeHL, 2);
         GenLayer var18 = new GenLayerHillsHL(1000L, var6);
 
-        for (int var7 = 0; var7 < var4; ++var7)
+        for (int var7 = 0; var7 < size; ++var7)
         {
             var18 = new GenLayerZoom((long)(1000 + var7), var18);
 
@@ -58,11 +50,9 @@ public abstract class GenLayerHL extends GenLayer
             {
                 var18 = new GenLayerAddIsland(3L, var18);
             }
-
-            if (var7 == 1)
+            else if (var7 == 1)
             {
                 var18 = new GenLayerShoreHL(1000L, var18);
-                var18 = new GenLayerRiver(1000L, var18);
             }
         }
 

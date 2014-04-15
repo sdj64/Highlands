@@ -45,10 +45,9 @@ public class GenLayerBiomeHL extends GenLayer
                 this.initChunkSeed((long)(var8 + par1), (long)(var7 + par2));
                 int var9 = var5[var8 + var7 * par3];
 
-                
                 //System.out.println("  Biome Gen Layer Uses: " + var8 + var7 * par3);
                 
-                if (var9 == 0)
+                if (var9 <= 0)
                 {
                 	if(HighlandsMain.improvedOceans)
                 		var6[var8 + var7 * par3] = HighlandsBiomes.ocean2.biomeID;
