@@ -22,7 +22,7 @@ minecraft {
     assetDir = "eclipse/assets"
 }
 
-version = "2.2.0pre2"
+version = "2.2.0pre3"
 archivesBaseName = "Highlands"
 
 sourceSets.main{
