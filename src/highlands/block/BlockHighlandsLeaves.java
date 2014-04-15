@@ -6,24 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeavesBase;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
+public class BlockHighlandsLeaves extends BlockLeaves
 {
 	private String[] treeNames = 
 		{
@@ -53,16 +49,11 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     private IIcon textureFancy;
     
     private int treeType;
-    
-    int[] adjacentTreeBlocks;
 
     public BlockHighlandsLeaves(int type)
     {
-        super(Material.leaves, false);
-        this.setTickRandomly(true);
+        super();
         this.treeType = type;
-        setLightOpacity(1);
-        this.setCreativeTab(CreativeTabs.tabDecorations);
     }
 
     @Override
@@ -90,173 +81,6 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
     	return 16777215;
-    }
-
-    /**
-     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
-     */
-    @Override
-    public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
-    {
-        byte b0 = 1;
-        int j1 = b0 + 1;
-
-        if (par1World.checkChunksExist(par2 - j1, par3 - j1, par4 - j1, par2 + j1, par3 + j1, par4 + j1))
-        {
-            for (int k1 = -b0; k1 <= b0; ++k1)
-            {
-                for (int l1 = -b0; l1 <= b0; ++l1)
-                {
-                    for (int i2 = -b0; i2 <= b0; ++i2)
-                    {
-                        Block j2 = par1World.getBlock(par2 + k1, par3 + l1, par4 + i2);
-
-                        if (j2 != null)
-                        {
-                            j2.beginLeavesDecay(par1World, par2 + k1, par3 + l1, par4 + i2);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Ticks the block if it's been scheduled
-     */
-    @Override
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (!par1World.isRemote)
-        {
-            int l = par1World.getBlockMetadata(par2, par3, par4);
-
-            if ((l & 8) != 0 && (l & 4) == 0)
-            {
-                byte b0 = 4;
-                int i1 = b0 + 1;
-                byte b1 = 32;
-                int j1 = b1 * b1;
-                int k1 = b1 / 2;
-
-                if (this.adjacentTreeBlocks == null)
-                {
-                    this.adjacentTreeBlocks = new int[b1 * b1 * b1];
-                }
-
-                int l1;
-
-                if (par1World.checkChunksExist(par2 - i1, par3 - i1, par4 - i1, par2 + i1, par3 + i1, par4 + i1))
-                {
-                    int i2;
-                    int j2;
-                    int k2;
-
-                    for (l1 = -b0; l1 <= b0; ++l1)
-                    {
-                        for (i2 = -b0; i2 <= b0; ++i2)
-                        {
-                            for (j2 = -b0; j2 <= b0; ++j2)
-                            {
-                                Block block = par1World.getBlock(par2 + l1, par3 + i2, par4 + j2);
-
-                                if (block != null && block.canSustainLeaves(par1World, par2 + l1, par3 + i2, par4 + j2))
-                                {
-                                    this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = 0;
-                                }
-                                else if (block != null && block.isLeaves(par1World, par2 + l1, par3 + i2, par4 + j2))
-                                {
-                                    this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -2;
-                                }
-                                else
-                                {
-                                    this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -1;
-                                }
-                            }
-                        }
-                    }
-
-                    for (l1 = 1; l1 <= 4; ++l1)
-                    {
-                        for (i2 = -b0; i2 <= b0; ++i2)
-                        {
-                            for (j2 = -b0; j2 <= b0; ++j2)
-                            {
-                                for (k2 = -b0; k2 <= b0; ++k2)
-                                {
-                                    if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1] == l1 - 1)
-                                    {
-                                        if (this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + (k2 + k1 - 1)] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + (k2 + k1 - 1)] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] = l1;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                l1 = this.adjacentTreeBlocks[k1 * j1 + k1 * b1 + k1];
-
-                if (l1 >= 0)
-                {
-                    par1World.setBlockMetadataWithNotify(par2, par3, par4, l & -9, 4);
-                }
-                else
-                {
-                    this.removeLeaves(par1World, par2, par3, par4);
-                }
-            }
-        }
-    }
-
-    /**
-     * A randomly called display update to be able to add particles or other items for display
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-    	super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
-        if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
-        {
-            double d0 = (double)((float)par2 + par5Random.nextFloat());
-            double d1 = (double)par3 - 0.05D;
-            double d2 = (double)((float)par4 + par5Random.nextFloat());
-            par1World.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-        }
-    }
-    
-    private void removeLeaves(World par1World, int par2, int par3, int par4)
-    {
-        this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-        par1World.setBlockToAir(par2, par3, par4);
     }
 
     /**
@@ -304,16 +128,6 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
             }
         }
     }
-    
-    /**
-     * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
-     * block and l is the block's subtype/damage.
-     */
-    @Override
-    public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
-    {
-        super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
-    }
 
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
@@ -322,25 +136,6 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     public int damageDropped(int par1)
     {
         return 0;
-    }
-    
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
-    @Override
-    public boolean isOpaqueCube()
-    {
-        return !this.field_150121_P;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    /**
-     * Pass true to draw this block using fancy graphics, or false for fast graphics.
-     */
-    public void setGraphicsLevel(boolean par1)
-    {
-        this.field_150121_P = par1;
     }
 
     //TODO- Better Leaves is not 1.7.x
@@ -389,6 +184,11 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
         return new ItemStack(this, 1, 0);
     }
 
+    @Override
+    public String[] func_150125_e() {
+        return treeNames;
+    }
+
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
@@ -400,16 +200,9 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
         textureFancy = par1IconRegister.registerIcon("Highlands:leaves"+treeNames[treeType]);
         textureFast = par1IconRegister.registerIcon("Highlands:leaves"+treeNames[treeType]+"Fast");
     }
-    
-	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x,
-			int y, int z) {
-		return true;
-	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
-			int x, int y, int z, int fortune) {
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         ret.add(new ItemStack(this, 1, 0));
         return ret;
@@ -419,12 +212,6 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     public void beginLeavesDecay(World world, int x, int y, int z)
     {
         world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, 4);
-    }
-
-    @Override
-    public boolean isLeaves(IBlockAccess world, int x, int y, int z)
-    {
-        return true;
     }
 
     //TODO- MFR isn't 1.7.x yet
