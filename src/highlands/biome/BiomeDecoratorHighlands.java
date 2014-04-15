@@ -2,7 +2,8 @@ package highlands.biome;
 
 import java.util.Random;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
+import highlands.api.HighlandsBiomes;
 import highlands.worldgen.WorldGenUnderground2;
 import highlands.worldgen.WorldGenWatermelon;
 import net.minecraft.world.biome.BiomeDecorator;
@@ -30,6 +31,15 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
 {
 	private int highlandsPlantsPerChunk;
 	
+	//Ore Generators
+	//Used in Biomes directly
+	public static WorldGenerator HLsand = new WorldGenMinable(Blocks.sand, 32);
+	public static WorldGenerator HLice = new WorldGenMinable(Blocks.ice, 32);
+	public static WorldGenerator HLwater = new WorldGenUnderground2(Blocks.water, 4);
+	public static WorldGenerator HLlava = new WorldGenUnderground2(Blocks.lava, 8);
+	public static WorldGenerator HLdirt = new WorldGenUnderground2(Blocks.dirt, 72, Blocks.sand);
+	public static WorldGenerator HLrock = new WorldGenUnderground2(Blocks.stone, 72, Blocks.dirt);
+	public static WorldGenerator HLobsidian = new WorldGenMinable(Blocks.obsidian, 8);
 	
 	public BiomeDecoratorHighlands(BiomeGenBase par1BiomeGenBase, int trees, int grass, int flowers, int hlPlants) {
 		super();
@@ -62,29 +72,29 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
             this.chunk_Z = par4;
         }
 		
-		if (/*randomGenerator.nextInt(8) == 0 &&*/ (biome.biomeName.equals("Autumn Forest") || biome.biomeName.equals("Bog")))
+		if (biome == HighlandsBiomes.autumnForest || biome == HighlandsBiomes.bog)
         {
-            int var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+            int var2 = this.chunk_X + this.randomGenerator.nextInt(16); // + 8;
             int var3 = this.randomGenerator.nextInt(128);
-            int var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+            int var4 = this.chunk_Z + this.randomGenerator.nextInt(16); // + 8;
             (new WorldGenPumpkin()).generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
         }
         
-        if (/*randomGenerator.nextInt(16) == 0 &&*/ (biome.biomeName.equals("Tropics") || biome.biomeName.equals("Tropcial Islands")))
+        if (biome == HighlandsBiomes.tropics || biome == HighlandsBiomes.tropicalIslands)
         {
-            int var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+            int var2 = this.chunk_X + this.randomGenerator.nextInt(16); // + 8;
             int var3 = this.randomGenerator.nextInt(128);
-            int var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+            int var4 = this.chunk_Z + this.randomGenerator.nextInt(16); // + 8;
             (new WorldGenWatermelon()).generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
         }
         
         // highlands plants generator
-        if(HighlandsMain.plantsFlag){
+        if(Highlands.plantsFlag){
 	        for (int j = 0; j < this.highlandsPlantsPerChunk; ++j)
 	        {
-	            int k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+	            int k = this.chunk_X + this.randomGenerator.nextInt(16); // + 8;
 	            int l = this.randomGenerator.nextInt(128);
-	            int i1 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+	            int i1 = this.chunk_Z + this.randomGenerator.nextInt(16); // + 8;
 	            WorldGenerator worldgenerator1 = biome.getRandomWorldGenForHighlandsPlants(this.randomGenerator);
 	            worldgenerator1.generate(this.currentWorld, this.randomGenerator, k, l, i1);
 	        }
@@ -108,7 +118,7 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
 		//WorldGenerators are in biomedec.goldGen, for example for gold.
 		public void genOreHighlands(World par1World, Random par2Random, int locX, int locZ, int timesPerChunk, WorldGenerator HLWorldGenerator, int minH, int maxH)
 	    {
-			if(HighlandsMain.useOreGens){
+			if(Highlands.useOreGens){
 		        for (int var5 = 0; var5 < timesPerChunk; ++var5)
 		        {
 		            int var6 = locX + par2Random.nextInt(16);
@@ -130,13 +140,6 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
 	        }
 	    }
 		
-		//Ore Generators
-		public static WorldGenerator HLsand = new WorldGenMinable(Blocks.sand, 32);
-		public static WorldGenerator HLice = new WorldGenMinable(Blocks.ice, 32);
-		public static WorldGenerator HLwater = new WorldGenUnderground2(Blocks.water, 4);
-		public static WorldGenerator HLlava = new WorldGenUnderground2(Blocks.lava, 8);
-		public static WorldGenerator HLdirt = new WorldGenUnderground2(Blocks.dirt, 72, Blocks.sand);
-		public static WorldGenerator HLrock = new WorldGenUnderground2(Blocks.stone, 72, Blocks.dirt);
-		public static WorldGenerator HLobsidian = new WorldGenMinable(Blocks.obsidian, 8);
+
 	
 }
