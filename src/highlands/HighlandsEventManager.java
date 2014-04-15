@@ -20,6 +20,9 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent.BiomeSize;
 import net.minecraftforge.event.terraingen.WorldTypeEvent.InitBiomeGens;
 import net.minecraftforge.event.world.WorldEvent.Load;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class HighlandsEventManager {
 
 	//allows get wood achievement for Highlands woods
@@ -27,7 +30,7 @@ public class HighlandsEventManager {
 	public void onItemPickupWood(EntityItemPickupEvent e){
         Item picked = e.item.getEntityItem().getItem();
         for(Block block:HighlandsBlocks.logs){
-            if(Item.getItemFromBlock(block) == picked){
+            if(block != null && Item.getItemFromBlock(block) == picked){
                 e.entityPlayer.triggerAchievement(AchievementList.mineWood);
                 break;
             }
@@ -114,27 +117,29 @@ public class HighlandsEventManager {
 	// sets default village blocks
 	@SubscribeEvent
 	public void onVillageSelectBlock(GetVillageBlockID e){
-		if(e.biome != null && HighlandsBiomes.sahel != null && HighlandsBiomes.outback != null && BiomeGenBase.icePlains != null){
-			if (e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
+		if(e.biome != null){
+			if ((HighlandsBiomes.sahel != null && e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName)) ||(HighlandsBiomes.outback != null && e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName)))
 	        {
-				if (e.original == Blocks.log)e.replacement = Blocks.log;
-	            else if (e.original == Blocks.cobblestone)e.replacement = Blocks.sandstone;
-                else if (e.original == Blocks.planks)e.replacement = Blocks.planks;
-                else if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
-                else if (e.original == Blocks.stone_stairs)e.replacement = Blocks.sandstone_stairs;
-                else if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
+                int i = replaced.indexOf(e.original);
+                if(i!=-1){
+                    e.replacement = replacement0.get(i);
+                    e.setResult(Event.Result.DENY);
+                }
 	        }
-			else if (e.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
+			else if (BiomeGenBase.icePlains != null && e.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
 	        {
-	            if (e.original == Blocks.log)e.replacement = Blocks.log;
-                else if (e.original == Blocks.cobblestone)e.replacement = Blocks.cobblestone;
-                else if (e.original == Blocks.planks)e.replacement = Blocks.snow;
-                else if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
-                else if (e.original == Blocks.stone_stairs)e.replacement = Blocks.stone_stairs;
-                else if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
+                int i = replaced.indexOf(e.original);
+                if(i!=-1){
+                    e.replacement = replacement1.get(i);
+                    e.setResult(Event.Result.DENY);
+                }
 	        }
 		}
 	}
+
+    private static List<Block> replaced = Arrays.asList(Blocks.log, Blocks.cobblestone, Blocks.planks, Blocks.oak_stairs, Blocks.stone_stairs, Blocks.gravel);
+    private static List<Block> replacement0 = Arrays.asList(Blocks.log, Blocks.sandstone, Blocks.planks, Blocks.oak_stairs, Blocks.sandstone_stairs, Blocks.gravel);
+    private static List<Block> replacement1 = Arrays.asList(Blocks.log, Blocks.cobblestone, Blocks.snow, Blocks.oak_stairs, Blocks.stone_stairs, Blocks.gravel);
 }
 
 
