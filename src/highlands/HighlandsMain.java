@@ -48,9 +48,9 @@ public class HighlandsMain {
 	public static int islandRarity = 14;
     
     //Village Biomes list
-	public static List hlvillagebiomes;
+	public static List<BiomeGenBase> hlvillagebiomes;
 	
-	public static List defaultvillagebiomes;
+	public static List<BiomeGenBase> defaultvillagebiomes;
     
     //highlands in default flag
     public static boolean highlandsInDefaultFlag = false;

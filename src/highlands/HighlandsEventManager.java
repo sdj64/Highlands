@@ -11,7 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.structure.MapGenVillage;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID;
@@ -41,8 +41,10 @@ public class HighlandsEventManager {
     @SubscribeEvent
 	public void onWorldStart(Load e){
 		if(e.world.provider.terrainType == HighlandsMain.HL || e.world.provider.terrainType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag){
-			MapGenVillage.villageSpawnBiomes.addAll(HighlandsMain.hlvillagebiomes);
-		}
+			for(BiomeGenBase biome:HighlandsMain.hlvillagebiomes){
+                BiomeManager.addVillageBiome(biome, true);
+            }
+        }
 		
 		// loads compatibility mob lists for all biomes
 		//if(HighlandsMain.mocreaturescomp)HighlandsCompatibilityManager.mobload_biomes();
