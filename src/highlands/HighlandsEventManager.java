@@ -36,14 +36,16 @@ public class HighlandsEventManager {
 	//allows get wood achievement for Highlands woods
 	@SubscribeEvent
 	public void onItemPickupWood(EntityItemPickupEvent e){
-		if (e.item.getEntityItem() == new ItemStack(HighlandsBlocks.firWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.acaciaWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.redwoodWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.poplarWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.canopyWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ironWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.mangroveWood)
-				|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ashWood)){
+		if (e.item.getEntityItem() == new ItemStack(HighlandsBlocks.acaciaWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.canopyWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.firWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.poplarWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.redwoodWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.palmWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ironWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.mangroveWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ashWood)
+			){
 			e.entityPlayer.triggerAchievement(AchievementList.mineWood);
 		}
 	}
