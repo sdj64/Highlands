@@ -14,11 +14,11 @@ import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid=HighlandsMain.modid, name=HighlandsMain.modid, version="2.2.0",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
@@ -29,10 +29,6 @@ public class HighlandsMain {
     // The instance of your mod that Forge uses.
 	@Instance(modid)
 	public static HighlandsMain instance;
-	
-	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide="highlands.CommonProxy", serverSide="highlands.CommonProxy")
-	public static CommonProxy proxy;
 	
 	//Highlands Worldtypes
 	public static final WorldTypeHighlands HL = new WorldTypeHighlands(modid);
@@ -61,7 +57,9 @@ public class HighlandsMain {
     
     public static boolean useOreGens = true;
     public static boolean useGenLayers = true;
-    
+
+    public static Logger logger;
+
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		//new settings set-up
@@ -80,6 +78,8 @@ public class HighlandsMain {
 		//register event manager
 		MinecraftForge.TERRAIN_GEN_BUS.register(new HighlandsEventManager());
 		MinecraftForge.EVENT_BUS.register(new HighlandsEventManager());
+        //initiate logger
+        logger = event.getModLog();
 	}
 	
 	@EventHandler
@@ -113,8 +113,7 @@ public class HighlandsMain {
 
 		// This must NOT be in postInit.
 		//HighlandsCompatibilityManager.registerBlocksBuildcraft();
-		
-		proxy.registerRenderers();
+
 	}
 	
 	@EventHandler
