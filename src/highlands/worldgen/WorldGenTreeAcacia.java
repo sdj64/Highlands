@@ -26,7 +26,6 @@ public class WorldGenTreeAcacia extends WorldGenHighlandsTreeBase
     public WorldGenTreeAcacia(int lmd, int wmd, Block wb, BlockLeavesBase lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
-        
         this.minHeight = minH;
         this.maxHeight = maxH;
     }

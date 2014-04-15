@@ -6,14 +6,13 @@ import highlands.api.HighlandsBlocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
 {
-    private boolean trunk2;
+    private final boolean trunk2;
 
     /** Constructor - gets the generator for the correct highlands tree
      * @param lmd leaf meta data
@@ -51,17 +50,16 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     	
     	boolean isWide = (random.nextInt(3) == 0);
     	int treeHeight = minHeight + random.nextInt(maxHeight);
-    	
-        
+
         if(!isLegalTreePosition(world, locX, locY, locZ) 
-        		&& world.getBlock(locX, locY-1, locZ) != Blocks.snow)return false;
-        if(!isCubeClear(locX, locY+3, locZ, 2, 10))return false;
+        		&& world.getBlock(locX, locY-1, locZ) != Blocks.snow)
+            return false;
+        if(!isCubeClear(locX, locY+3, locZ, 2, 10))
+            return false;
     	
 		//generates the trunk
     	genTree(world, random, locX, locY, locZ, treeHeight, isWide);
-    	
-    	
-    	
+
     	if(this.trunk2){
     		genTree(world, random, locX+1, locY, locZ, treeHeight, isWide);
     		genTree(world, random, locX, locY, locZ+1, treeHeight, isWide);

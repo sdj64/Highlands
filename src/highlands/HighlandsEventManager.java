@@ -92,7 +92,6 @@ public class HighlandsEventManager {
 		if(e.type == Populate.EventType.LAKE && 
 				(e.world.provider.terrainType == HighlandsMain.HL || e.world.provider.terrainType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag)){
 			e.setResult(Event.Result.DENY);
-			//System.out.println("Stopped a tiny pond from generating");
 		}
 	}
 	

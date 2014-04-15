@@ -56,9 +56,10 @@ public class WorldGenTreeMangrove extends WorldGenHighlandsTreeBase
     	
         
         int waterH = 0;//height of water
-        for (boolean var6 = false; (world.getBlock(locX, locY-waterH, locZ) == Blocks.air || world.getBlock(locX, locY-waterH, locZ) == Blocks.leaves 
+        for (; (world.getBlock(locX, locY-waterH, locZ) == Blocks.air || world.getBlock(locX, locY-waterH, locZ) == Blocks.leaves
         		|| world.getBlock(locX, locY-waterH, locZ) == Blocks.water) && locY-waterH > 0; ++waterH);
-        if(waterH > 4)return false;
+        if(waterH > 4)
+            return false;
         
         
     	//generates trunk

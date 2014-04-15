@@ -45,11 +45,11 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     {
     	this.world = world;
     	this.random = random;
-    	
-    	
-        
-        if(!isLegalTreePosition(world, locX, locY, locZ))return false;
-        if(!isCubeClear(locX, locY+3, locZ, 1, 8))return false;
+
+        if(!isLegalTreePosition(world, locX, locY, locZ))
+            return false;
+        if(!isCubeClear(locX, locY+3, locZ, 1, 8))
+            return false;
     	
         //generates the trunk
     	int treeHeight = minHeight + random.nextInt(maxHeight);

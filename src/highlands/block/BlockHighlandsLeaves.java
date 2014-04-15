@@ -363,8 +363,10 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     {
     	this.field_150121_P = Minecraft.isFancyGraphicsEnabled();
     	
-    	if(this.field_150121_P)return textureFancy;
-    	else return textureFast;
+    	if(this.field_150121_P)
+            return textureFancy;
+    	else
+            return textureFast;
     }
 
     /**

@@ -204,20 +204,14 @@ public class HighlandsMain {
 	
 	//method to print debug info
 	public static void debug(){
-		System.out.println("   Configured Biomes: ");
+        System.out.println("   Highlands Biomes for default: ");
 		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
-			if(i == null) System.out.println("Null Biome! Abort!");
-			else System.out.println(i.biomeName + " " + i.biomeID);
+			if(i != null) System.out.println(i.biomeName + " " + i.biomeID);
 		}
 		
-//		System.out.println("   Highlands Biomes: ");
-//		for(BiomeGenBase i : HL.getBiomesForWorldType()){
-//			if(i == null) System.out.println("Null Biome! Error!");
-//			else System.out.println(i.biomeName + " " + i.biomeID);
-//		}
-//		System.out.println("   Default Biomes: ");
-//		for(BiomeGenBase i : WorldType.DEFAULT.getBiomesForWorldType()){
-//			System.out.println(i.biomeName + " " + i.biomeID);
-//		}
+		System.out.println("   Highlands Biomes: ");
+		for(BiomeGenBase i : HL.getBiomeList()){
+			if(i != null) System.out.println(i.biomeName + " " + i.biomeID);
+		}
 	}
 }

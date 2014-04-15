@@ -27,7 +27,6 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
     public WorldGenTreePalm(int lmd, int wmd, Block wb, BlockLeavesBase lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
-        
         this.minHeight = minH;
         this.maxHeight = maxH;
     }
@@ -47,12 +46,11 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
     {
     	this.world = world;
     	this.random = random;
-    	
 
-        
-        if(!isLegalTreePosition(world, locX, locY, locZ)
-        		&& world.getBlock(locX, locY-1, locZ) != Blocks.sand)return false;
-        if(!isCubeClear(locX, locY+3, locZ, 1, 4))return false;
+        if(!isLegalTreePosition(world, locX, locY, locZ) && world.getBlock(locX, locY-1, locZ) != Blocks.sand)
+            return false;
+        if(!isCubeClear(locX, locY+3, locZ, 1, 4))
+            return false;
         
         //generates trunk
     	int treeHeight = minHeight + random.nextInt(maxHeight);

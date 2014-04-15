@@ -26,7 +26,6 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
     public WorldGenTreeRedwood(int lmd, int wmd, Block wb, BlockLeavesBase lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
-        
         this.minHeight = minH;
         this.maxHeight = maxH;
     }
@@ -45,11 +44,11 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
     {
     	this.world = world;
     	this.random = random;
-    	
-        
-        if(!isLegalTreePosition(world, locX, locY, locZ))return false;
-        if(!isCubeClear(locX, locY+3, locZ, 4, 20))return false;
-    	
+
+        if(!isLegalTreePosition(world, locX, locY, locZ))
+            return false;
+        if(!isCubeClear(locX, locY+3, locZ, 4, 20))
+            return false;
         
         int treeHeight = minHeight + random.nextInt(maxHeight);
 		//generates the trunk - different than other tree types, uses layer circles.

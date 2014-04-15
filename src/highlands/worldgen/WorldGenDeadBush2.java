@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class WorldGenDeadBush2 extends WorldGenerator
 {
     /** stores the ID for WorldGenDeadBush */
-    private Block deadBushID;
+    private final Block deadBushID;
 
     public WorldGenDeadBush2(Block par1)
     {

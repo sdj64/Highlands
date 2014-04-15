@@ -11,13 +11,13 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class WorldGenUnderground2 extends WorldGenerator
 {
     /** The block ID of the ore to be placed using this generator. */
-    private Block minableBlockId;
+    private final Block minableBlockId;
     private int minableBlockMeta = 0;
 
     /** The number of blocks to generate. */
-    private int numberOfBlocks;
+    private final int numberOfBlocks;
     
-    private Block IDtoReplace;
+    private final Block IDtoReplace;
 
     public WorldGenUnderground2(Block water, int par2)
     {

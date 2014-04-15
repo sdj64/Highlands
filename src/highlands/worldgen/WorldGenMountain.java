@@ -9,12 +9,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenMountain extends WorldGenerator
 {
+    private final int minHeight;
+    private final int maxHeight;
     
-    private int minHeight;
-    private int maxHeight;
-    
-    private int snowrocksand;
-    private boolean notifyFlag;
+    private final int snowrocksand;
+    private final boolean notifyFlag;
     
     private World world;
     private Random random;
