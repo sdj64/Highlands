@@ -60,17 +60,17 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
 		
 		if (/*randomGenerator.nextInt(8) == 0 &&*/ (biome.biomeName.equals("Autumn Forest") || biome.biomeName.equals("Bog")))
         {
-            int var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+            int var2 = this.chunk_X + 8;
             int var3 = this.randomGenerator.nextInt(128);
-            int var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+            int var4 = this.chunk_Z + 8;
             HLpumpkin.generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
         }
         
         if (/*randomGenerator.nextInt(16) == 0 &&*/ (biome.biomeName.equals("Tropics") || biome.biomeName.equals("Tropcial Islands")))
         {
-            int var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+            int var2 = this.chunk_X + 8;
             int var3 = this.randomGenerator.nextInt(128);
-            int var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+            int var4 = this.chunk_Z + 8;
             HLWatermelon.generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
         }
         
@@ -78,9 +78,9 @@ public class BiomeDecoratorHighlands extends BiomeDecorator
         if(HighlandsMain.plantsFlag){
 	        for (int j = 0; j < this.highlandsPlantsPerChunk; ++j)
 	        {
-	            int k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+	            int k = this.chunk_X + 8;
 	            int l = this.randomGenerator.nextInt(128);
-	            int i1 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+	            int i1 = this.chunk_Z + 8;
 	            WorldGenerator worldgenerator1 = ((BiomeGenBaseHighlands)biome).getRandomWorldGenForHighlandsPlants(this.randomGenerator);
                 if(worldgenerator1!=null)
 	                worldgenerator1.generate(this.currentWorld, this.randomGenerator, k, l, i1);
