@@ -4,14 +4,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenTreePoplar;
 
 public class BiomeGenLake extends BiomeGenBaseHighlands
 {
-    private BiomeDecoratorHighlands biomedec;
     private static final Height biomeHeight = new Height(-0.7F, 0.2F);
 
 	public BiomeGenLake(int par1)
@@ -21,7 +21,8 @@ public class BiomeGenLake extends BiomeGenBaseHighlands
     	int trees = 3;
 	    int grass = 12;
 	    int flowers = 0;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+	    this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+	    
     	this.setHeight(biomeHeight);
         this.temperature = 0.8F;
         this.rainfall = 0.8F;
@@ -29,8 +30,9 @@ public class BiomeGenLake extends BiomeGenBaseHighlands
         this.spawnableCreatureList.clear();
     }
 	
-	public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+    @Override
+    public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-		return (WorldGenerator)new WorldGenTreePoplar(10, 4, false);
+		return (WorldGenAbstractTree)new WorldGenTreePoplar(10, 4, false);
     }
 }

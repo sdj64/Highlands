@@ -8,13 +8,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 
 public class BiomeGenRockIsland extends BiomeGenBaseHighlands
 {
 	private static final Height biomeHeight = new Height(0.0F, 0.4F);
-	private BiomeDecoratorHighlands biomedec;
 
 	public BiomeGenRockIsland(int par1)
     {
@@ -23,7 +22,7 @@ public class BiomeGenRockIsland extends BiomeGenBaseHighlands
         int trees = -100;
 	    int grass = 0;
 	    int flowers = 0;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+	    this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
         this.spawnableCreatureList.clear();
         
         this.topBlock = Blocks.stone;
@@ -33,8 +32,9 @@ public class BiomeGenRockIsland extends BiomeGenBaseHighlands
         this.rainfall = 0.4F;
     }
     
-    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-    {
-    	biomedec.decorate(par1World, par2Random, biome, par3, par4);
+	@Override
+	public void decorate(World world, Random random, int x, int z) {
+		BiomeGenBaseHighlands biome = this;
+		this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
     }
 }

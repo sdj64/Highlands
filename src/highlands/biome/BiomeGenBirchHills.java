@@ -7,17 +7,17 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import highlands.api.HighlandsBlocks;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
 import highlands.worldgen.WorldGenTreePoplar;
 
 public class BiomeGenBirchHills extends BiomeGenBaseHighlands
 {
-    private BiomeDecoratorHighlands biomedec;
     private static final Height biomeHeight = new Height(-0.1F, 0.8F);
 
 	public BiomeGenBirchHills(int par1)
@@ -27,7 +27,8 @@ public class BiomeGenBirchHills extends BiomeGenBaseHighlands
 	    int grass = 10;
 	    int flowers = 4;
 	    int plants = 1;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers, plants);
+	    this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers, plants);
+	    
         this.theBiomeDecorator.generateLakes = false;
         this.setHeight(biomeHeight);
         this.temperature = 0.6F;
@@ -47,16 +48,18 @@ public class BiomeGenBirchHills extends BiomeGenBaseHighlands
 	    return new WorldGenTallGrass(Blocks.tallgrass, 1);
 	}
     
-    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+    @Override
+    public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (WorldGenerator)new WorldGenTreePoplar(10, 4, false);
+        return (WorldGenAbstractTree)new WorldGenTreePoplar(10, 4, false);
     }
     
-    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-    {
-        biomedec.decorate(par1World, par2Random, biome, par3, par4);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.lapisGen, 0, 32);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 10, biomedec.HLwater, 0, 64);
+    @Override
+	public void decorate(World world, Random random, int x, int z) {
+    	BiomeGenBaseHighlands biome = this;
+		this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
+		((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 2, this.theBiomeDecorator.lapisGen, 0, 32);
+		((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 10, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLwater, 0, 64);
     }
 
 }

@@ -6,18 +6,17 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.entity.passive.EntityWolf;
 import highlands.api.HighlandsBlocks;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsBigTree;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
 
 public class BiomeGenWoodlands extends BiomeGenBaseHighlands
 {
-    private BiomeDecoratorHighlands biomedec;
-
 	public BiomeGenWoodlands(int par1)
     {
         super(par1);
@@ -27,9 +26,9 @@ public class BiomeGenWoodlands extends BiomeGenBaseHighlands
         int grass = 2;
         int flowers = 0;
         int plants = 1;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+        this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
 	    
-	    biomedec.generateLakes = true;
+        this.theBiomeDecorator.generateLakes = true;
 	    
 	    this.temperature = 0.6F;
 	    this.rainfall = 0.6F;
@@ -45,22 +44,24 @@ public class BiomeGenWoodlands extends BiomeGenBaseHighlands
     /**
      * Gets a WorldGen appropriate for this biome.
      */
-    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+    @Override
+    public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
     	int a = par1Random.nextInt(12);
     	switch(a){
-    	case 1: return (WorldGenerator)this.worldGeneratorTrees;
-    	case 2: return (WorldGenerator)this.worldGeneratorTrees;
-    	case 3: return (WorldGenerator)this.worldGeneratorBigTree;
-    	case 4: return (WorldGenerator)new WorldGenHighlandsBigTree(false, true, 2, 2, 1, 0);
-    	case 5: return (WorldGenerator)new WorldGenHighlandsBigTree(false, true, 0, 0, 2, 20);
-    	default: return (WorldGenerator)this.worldGeneratorTrees;
+    	case 1: return (WorldGenAbstractTree)this.worldGeneratorTrees;
+    	case 2: return (WorldGenAbstractTree)this.worldGeneratorTrees;
+    	case 3: return (WorldGenAbstractTree)this.worldGeneratorBigTree;
+    	case 4: return (WorldGenAbstractTree)new WorldGenHighlandsBigTree(false, true, 2, 2, 1, 0);
+    	case 5: return (WorldGenAbstractTree)new WorldGenHighlandsBigTree(false, true, 0, 0, 2, 20);
+    	default: return (WorldGenAbstractTree)this.worldGeneratorTrees;
     	}
         //return (WorldGenerator)(par1Random.nextInt(5) == 0 ? this.worldGeneratorForest : (par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees));
     }
     
-    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-    {
-    	biomedec.decorate(par1World, par2Random, biome, par3, par4);
+    @Override
+	public void decorate(World world, Random random, int x, int z) {
+		BiomeGenBaseHighlands biome = this;
+		this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
     }
 }

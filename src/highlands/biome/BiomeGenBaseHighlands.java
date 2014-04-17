@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenSmallPlants;
 
 import net.minecraft.world.biome.BiomeGenBase;
@@ -15,8 +15,8 @@ public abstract class BiomeGenBaseHighlands extends BiomeGenBase
 	
 	public ArrayList<BiomeGenBase> subBiomes;
 
-	public BiomeGenBaseHighlands(int a){
-		super(a);
+	public BiomeGenBaseHighlands(int id){
+		super(id);
 		subBiomes = new ArrayList<BiomeGenBase>();
 	}
 	

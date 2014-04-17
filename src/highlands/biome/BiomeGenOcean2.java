@@ -2,7 +2,7 @@ package highlands.biome;
 
 import java.util.Random;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -10,7 +10,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 public class BiomeGenOcean2 extends BiomeGenBaseHighlands
 {
 	private static final Height biomeHeight = new Height(-1.5F, 0.4F);
-	private BiomeDecoratorHighlands biomedec;
 	
     public BiomeGenOcean2(int par1)
     {
@@ -20,12 +19,14 @@ public class BiomeGenOcean2 extends BiomeGenBaseHighlands
         int trees = 0;
 	    int grass = 3;
 	    int flowers = 1;
-        this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+        this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+        
         this.setHeight(biomeHeight);
     }
     
-    public void decorate(World world, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-    {
+    @Override
+	public void decorate(World world, Random random, int x, int z) {
+		BiomeGenBaseHighlands biome = this;
     	/*
     	// makes islands grass
     	for(int i = -16; i < 32; i++){
@@ -49,8 +50,8 @@ public class BiomeGenOcean2 extends BiomeGenBaseHighlands
     	}
     	*/
 
-        biomedec.decorate(world, par2Random, biome, par3, par4);
-        biomedec.genOreHighlands(world, par2Random, par3, par4, 10, biomedec.HLwater, 0, 64);
-	    biomedec.genOreHighlands(world, par2Random, par3, par4, 10, biomedec.HLsand, 0, 64);
+		this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
+        ((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 10, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLwater, 0, 64);
+        ((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 10, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLsand, 0, 64);
     }
 }

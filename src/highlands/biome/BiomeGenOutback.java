@@ -2,21 +2,23 @@ package highlands.biome;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsGroundcover;
 import highlands.worldgen.WorldGenHighlandsShrub;
 
 public class BiomeGenOutback extends BiomeGenBaseHighlands
 {
 	private static final Height biomeHeight = new Height(0.1F, 0.3F);
-	private BiomeDecoratorHighlands biomedec;
 
 	public BiomeGenOutback(int par1){
 			super(par1);
@@ -24,15 +26,16 @@ public class BiomeGenOutback extends BiomeGenBaseHighlands
 			int trees = 1;
 		    int grass = 10;
 		    int flowers = 0;
-		    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+		    this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
 		    
-		    biomedec.deadBushPerChunk = 40;
-		    biomedec.cactiPerChunk = 4;
+		    this.theBiomeDecorator.deadBushPerChunk = 40;
+		    this.theBiomeDecorator.cactiPerChunk = 4;
 		    this.setHeight(biomeHeight);
 	        this.temperature = 1.6F;
 	        this.rainfall = 0.1F;
 	        
 	        this.topBlock = Blocks.sand;
+	        this.field_150604_aj = 1; // metadata ?
 	        this.fillerBlock = Blocks.sand;
 	        
 	        this.spawnableCreatureList.clear();
@@ -50,16 +53,18 @@ public class BiomeGenOutback extends BiomeGenBaseHighlands
 	        return new WorldGenHighlandsGroundcover(Blocks.tallgrass, 1, 2);
 	    }
 	    
-	    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+	    @Override
+	    public WorldGenAbstractTree func_150567_a(Random par1Random)
 	    {
-	        return (WorldGenerator)new WorldGenHighlandsShrub(0, 0);
+	        return (WorldGenAbstractTree)new WorldGenHighlandsShrub(0, 0);
 	    }
 
-	    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-	    {
-	        biomedec.decorate(par1World, par2Random, biome, par3, par4);
-	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
-	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 10, biomedec.HLsand, 0, 64);
+	    @Override
+		public void decorate(World world, Random random, int x, int z) {
+	    	BiomeGenBaseHighlands biome = this;
+			this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
+	    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 2, this.theBiomeDecorator.goldGen, 0, 32);
+	        ((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 10, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLsand, 0, 64);
 	        
 	        //the code for the random half grass
 	        /*
@@ -94,9 +99,11 @@ public class BiomeGenOutback extends BiomeGenBaseHighlands
 	    	return 0xA6C968;
 	    }
 	    
-	    public int getBiomeGrassColor()
+	    @SideOnly(Side.CLIENT)
+	    @Override
+	    public int getBiomeGrassColor(int x, int y, int z)
 	    {
-	        return 0xEEE980;
+	        return getModdedBiomeGrassColor(0xEEE980);
 	    }
 }
 

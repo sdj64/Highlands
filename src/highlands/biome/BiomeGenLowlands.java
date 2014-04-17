@@ -7,12 +7,13 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTaiga1;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBlocks;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
 import highlands.worldgen.WorldGenTreeFir;
@@ -20,7 +21,6 @@ import highlands.worldgen.WorldGenTreeFir;
 public class BiomeGenLowlands extends BiomeGenBaseHighlands
 {
 	private static final Height biomeHeight = new Height(-0.2F, 0.5F);
-	private BiomeDecoratorHighlands biomedec;
 
 	public BiomeGenLowlands(int par1)
     {
@@ -30,7 +30,7 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
 	    int grass = 4;
 	    int flowers = 0;
 	    int plants = 4;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers, plants);
+	    this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
 
         this.setHeight(biomeHeight);
         this.temperature = 0.5F;
@@ -47,9 +47,10 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
     /**
      * Gets a WorldGen appropriate for this biome.
      */
-    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+    @Override
+    public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (WorldGenerator)(par1Random.nextInt(8) == 0 ?
+        return (WorldGenAbstractTree)(par1Random.nextInt(8) == 0 ?
         		new WorldGenHighlandsShrub(0, 0) : par1Random.nextInt(4) != 0 ?
         		new WorldGenTrees(false, 3 + par1Random.nextInt(3), 0, 0, false) : new WorldGenTreeFir(10, 5, false, false));
     }
@@ -62,9 +63,10 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
         return new WorldGenTallGrass(Blocks.tallgrass, 1);
     }
 
-    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-    {
-        biomedec.decorate(par1World, par2Random, biome, par3, par4);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.coalGen, 0, 128);
+    @Override
+	public void decorate(World world, Random random, int x, int z) {
+		BiomeGenBaseHighlands biome = this;
+		this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
+		((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 20, this.theBiomeDecorator.coalGen, 0, 128);
     }
 }
