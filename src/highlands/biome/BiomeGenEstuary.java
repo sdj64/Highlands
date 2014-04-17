@@ -4,8 +4,6 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.worldgen.WorldGenTreeMangrove;
 
 public class BiomeGenEstuary extends BiomeGenBaseHighlands
@@ -19,28 +17,22 @@ public class BiomeGenEstuary extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 0.8F;
         this.rainfall = 0.9F;
-    }
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
+        this.treeGenCache = new WorldGenTreeMangrove(4, 2, false);
     }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return new WorldGenTreeMangrove(4, 2, false);
+        return this.treeGenCache;
     }
 
     @Override
     public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
-        if(par2Random.nextBoolean())biomedec.treesPerChunk = 0;
-        else biomedec.treesPerChunk = 10;
+        if(par2Random.nextBoolean())
+            biomedec.treesPerChunk = 0;
+        else
+            biomedec.treesPerChunk = 10;
 
         biomedec.decorateChunk(par1World, par2Random, this, par3, par4);
         biomedec.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);

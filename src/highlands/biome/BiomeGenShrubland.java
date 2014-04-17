@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenSmallPlants;
@@ -26,22 +25,24 @@ public class BiomeGenShrubland extends BiomeGenBaseHighlands
 	    this.setHeight(biomeHeight);
         this.temperature = 0.6F;
         this.rainfall = 0.5F;
+        this.treeGenCache = new WorldGenHighlandsShrub(0, 0);
+        this.smallPlantsGenCache = new WorldGenSmallPlants(Blocks.air);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
 		int i = rand.nextInt(9);
 		switch(i){
-		case 0: return new WorldGenSmallPlants(HighlandsBlocks.blueFlower);
-		case 1: return new WorldGenSmallPlants(HighlandsBlocks.leafyFern);
-		case 2: return new WorldGenSmallPlants(HighlandsBlocks.whiteFlower);
-		case 3: return new WorldGenSmallPlants(HighlandsBlocks.cattail);
-		case 4: return new WorldGenSmallPlants(HighlandsBlocks.lavender);
-		case 5: return new WorldGenSmallPlants(HighlandsBlocks.raspberryBush);
-		case 6: return new WorldGenSmallPlants(HighlandsBlocks.blueberryBush);
-		case 7: return new WorldGenSmallPlants(HighlandsBlocks.thornbush);
-		case 8: return new WorldGenSmallPlants(HighlandsBlocks.cotton);
-		default: return new WorldGenSmallPlants(Blocks.air);
+		case 0: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.blueFlower);
+		case 1: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.leafyFern);
+		case 2: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.whiteFlower);
+		case 3: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.cattail);
+		case 4: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.lavender);
+		case 5: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.raspberryBush);
+		case 6: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.blueberryBush);
+		case 7: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.thornbush);
+		case 8: return this.smallPlantsGenCache.setPlant(HighlandsBlocks.cotton);
+		default: return null;
 		}
 	}
 
@@ -51,16 +52,7 @@ public class BiomeGenShrubland extends BiomeGenBaseHighlands
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (par1Random.nextInt(3) != 0 ? new WorldGenHighlandsShrub(0, 0) : new WorldGenTrees(false, 2 + par1Random.nextInt(3), 0, 0, false));
-    }
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
+        return (par1Random.nextInt(3) != 0 ? this.treeGenCache : new WorldGenTrees(false, 2 + par1Random.nextInt(3), 0, 0, false));
     }
 
     @Override

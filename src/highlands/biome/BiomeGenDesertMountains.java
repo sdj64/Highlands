@@ -15,13 +15,13 @@ public class BiomeGenDesertMountains extends BiomeGenBaseHighlands
     public BiomeGenDesertMountains(int par1)
     {
         super(par1, new BiomeDecoratorHighlands(trees, grass, flowers));
-        
         this.spawnableCreatureList.clear();
         
         this.topBlock = Blocks.sand;
         this.fillerBlock = Blocks.sand;
         this.temperature = 0.9F;
         this.rainfall = 0.0F;
+        this.treeGenCache = new WorldGenHighlandsShrub(1, 1);
         
         this.setDisableRain();
     }
@@ -29,7 +29,7 @@ public class BiomeGenDesertMountains extends BiomeGenBaseHighlands
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (new WorldGenHighlandsShrub(1, 1));
+        return this.treeGenCache;
     }
 
     @Override

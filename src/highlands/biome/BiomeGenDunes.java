@@ -7,8 +7,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.HighlandsMain;
 import highlands.worldgen.WorldGenTreePalm;
 
@@ -24,23 +22,14 @@ public class BiomeGenDunes extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 2.0F;
         this.rainfall = 0.0F;
-
+        this.treeGenCache = new WorldGenTreePalm(8, 3, false);
         this.setDisableRain();
-    }
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
     }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return new WorldGenTreePalm(8, 3, false);
+        return treeGenCache;
     }
 
     @Override

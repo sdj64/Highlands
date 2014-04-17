@@ -20,13 +20,14 @@ public class BiomeGenRockMountains extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 0.6F;
         this.rainfall = 0.5F;
+        this.treeGenCache = new WorldGenHighlandsShrub(1, 1);
         //this.setEnableSnow();
     }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (new WorldGenHighlandsShrub(1, 1));
+        return this.treeGenCache;
     }
 
     @Override

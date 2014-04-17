@@ -23,17 +23,19 @@ public class BiomeGenAutumnForest extends BiomeGenBaseHighlands
         super(par1, new BiomeDecoratorHighlands(trees, grass, flowers, plants));
 	    
 	    biomedec.generateLakes = true;
+        biomedec.generatePumpkin = true;
 	    
         this.spawnableCreatureList.add(new SpawnListEntry(EntityWolf.class, 5, 4, 4));
         
         this.temperature = 0.6F;
         this.rainfall = 0.5F;
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.raspberryBush);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.raspberryBush)
-				: new WorldGenSmallPlants(HighlandsBlocks.blueberryBush));
+		return (rand.nextInt(2) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.raspberryBush)
+				: this.smallPlantsGenCache.setPlant(HighlandsBlocks.blueberryBush));
 	}
 
     /**

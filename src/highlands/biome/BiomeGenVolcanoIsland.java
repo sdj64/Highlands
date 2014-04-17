@@ -33,20 +33,21 @@ public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
     		for(int j = 0; j < 16; j++){
     			if(par1World.getBiomeGenForCoords(par3+i, par4+j) == HighlandsBiomes.volcanoIsland){
 	    			int topY = 128;
-	    			Block var11;
-	    	        for (boolean var6 = false; ((var11 = par1World.getBlock(par3+i, topY, par4+j)) == Blocks.air || var11 == Blocks.leaves) && topY > 0; --topY)
-	    	        {
-	    	            ;
-	    	        }
-	    	        if(topY > 65){
-		    			if(par1World.getBlock(par3+i, topY, par4+j) == Blocks.air)topY--;
+                    Block var11 = par1World.getBlock(par3+i, topY, par4+j);
+                    while(topY > 0 && (var11.isAir(par1World, par3+i, topY, par4+j) || var11.isLeaves(par1World, par3+i, topY, par4+j))){
+                        --topY;
+                        var11 = par1World.getBlock(par3+i, topY, par4+j);
+                    }
+                    if(topY > 65){
+                        if(par1World.getBlock(par3+i, topY, par4+j).isAir(par1World, par3+i, topY, par4+j))
+                            topY--;
 		    			
 		    			//chance to generate a lava lake on top of the volcano
-		    			if(par1World.getBiomeGenForCoords(par3+i + 8, par4+j) == HighlandsBiomes.volcanoIsland &&
+		    			if(par2Random.nextInt(10) == 0 && par1World.getBiomeGenForCoords(par3+i + 8, par4+j) == HighlandsBiomes.volcanoIsland &&
 		    					par1World.getBiomeGenForCoords(par3+i - 8, par4+j) == HighlandsBiomes.volcanoIsland &&
 		    					par1World.getBiomeGenForCoords(par3+i, par4+j + 8) == HighlandsBiomes.volcanoIsland &&
-		    					par1World.getBiomeGenForCoords(par3+i, par4+j - 8) == HighlandsBiomes.volcanoIsland &&
-		    					par2Random.nextInt(10) == 0){
+		    					par1World.getBiomeGenForCoords(par3+i, par4+j - 8) == HighlandsBiomes.volcanoIsland
+		    					){
 		    				new WorldGenLakes(Blocks.lava).generate(par1World, par2Random, par3+i, topY, par4+j);
 		    			}
 		    			

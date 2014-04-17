@@ -27,11 +27,14 @@ public class BiomeGenFlyingMountains extends BiomeGenBaseHighlands
         this.temperature = 0.7F;
         this.rainfall = 1.2F;
         this.spawnableCreatureList.clear();
+        this.treeGenCache = new WorldGenHighlandsShrub(0, 0);
+        this.genCache = new WorldGenTallGrass(Blocks.tallgrass, 2);
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.blueFlower);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return new WorldGenSmallPlants(HighlandsBlocks.blueFlower);
+		return this.smallPlantsGenCache;
 	}
 
 	/**
@@ -40,13 +43,13 @@ public class BiomeGenFlyingMountains extends BiomeGenBaseHighlands
     @Override
 	public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-    	return new WorldGenHighlandsShrub(0, 0);
+    	return this.treeGenCache;
     }
 
     @Override
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
-        return new WorldGenTallGrass(Blocks.tallgrass, 2);
+        return this.genCache;
     }
 
     @Override
@@ -59,20 +62,19 @@ public class BiomeGenFlyingMountains extends BiomeGenBaseHighlands
         //random water sources on top of the mountains
         for(int i = 0; i < 16; i++){
     		for(int j = 0; j < 16; j++){
-    			if(par1World.getBiomeGenForCoords(par3+i, par4+j) == HighlandsBiomes.flyingMountains){
+                int a = par2Random.nextInt(10);
+    			if(a == 9 && par1World.getBiomeGenForCoords(par3+i, par4+j) == HighlandsBiomes.flyingMountains){
 	    			int topY = 128;
-	    			Block var11;
-	    	        for (boolean var6 = false; ((var11 = par1World.getBlock(par3+i, topY, par4+j)) == Blocks.air || var11 == Blocks.leaves) && topY > 0; --topY)
-	    	        {
-	    	            ;
+	    			Block var11 = par1World.getBlock(par3+i, topY, par4+j);
+	    	        while(topY > 0 && (var11.isAir(par1World, par3+i, topY, par4+j) || var11.isLeaves(par1World, par3+i, topY, par4+j))){
+                        --topY;
+                        var11 = par1World.getBlock(par3+i, topY, par4+j);
 	    	        }
-	    	        if(topY > 65){
-		    			if(par1World.getBlock(par3+i, topY, par4+j) == Blocks.air)topY--;
-		    			int a = par2Random.nextInt(10);
-		    			if(a == 9 && par2Random.nextInt(10) == 0){
-		    				par1World.setBlock(par3+i, topY, par4+j, Blocks.water, 0, 3);
-		    				par1World.setBlock(par3+i, topY+1, par4+j, Blocks.air, 0, 3);
-		    			}
+	    	        if(topY > 65 && par2Random.nextInt(10) == 0){
+		    			if(par1World.getBlock(par3+i, topY, par4+j).isAir(par1World, par3+i, topY, par4+j))
+                            topY--;
+                        par1World.setBlock(par3+i, topY, par4+j, Blocks.water, 0, 3);
+                        par1World.setBlock(par3+i, topY+1, par4+j, Blocks.air, 0, 3);
 	    	        }
 	    		}
     		}

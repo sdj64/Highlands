@@ -6,8 +6,6 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.worldgen.WorldGenTreeAcacia;
 
 public class BiomeGenSavannah extends BiomeGenBaseHighlands
@@ -22,21 +20,13 @@ public class BiomeGenSavannah extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 1.2F;
         this.rainfall = 0.1F;
-    }
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
+        this.treeGenCache = new WorldGenTreeAcacia(7, 3, false);
     }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return new WorldGenTreeAcacia(7, 3, false);
+        return this.treeGenCache;
     }
 
     @Override

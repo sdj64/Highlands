@@ -16,11 +16,12 @@ public class BiomeGenLake extends BiomeGenBaseHighlands
         this.temperature = 0.8F;
         this.rainfall = 0.8F;
         this.spawnableCreatureList.clear();
+        this.treeGenCache = new WorldGenTreePoplar(10, 4, false);
     }
 
     @Override
 	public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-		return new WorldGenTreePoplar(10, 4, false);
+		return this.treeGenCache;
     }
 }

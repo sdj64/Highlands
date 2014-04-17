@@ -10,14 +10,14 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class WorldGenSmallPlants extends WorldGenerator
 {
     /** Stores ID for WorldGenTallGrass */
-    private final Block plantID;
+    private Block plantID;
     
     private final int genAmount;
     private final int radius;
 
-    public WorldGenSmallPlants(Block blueberryBush)
+    public WorldGenSmallPlants(Block bush)
     {
-        this.plantID = blueberryBush;
+        this.plantID = bush;
         this.genAmount = 36;
         this.radius = 8;
     }
@@ -27,6 +27,11 @@ public class WorldGenSmallPlants extends WorldGenerator
         this.plantID = id;
         this.genAmount = amt;
         this.radius = 4;
+    }
+
+    public WorldGenerator setPlant(Block plant){
+        this.plantID = plant;
+        return this;
     }
 
     @Override

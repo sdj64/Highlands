@@ -7,7 +7,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenHighlandsBigTree;
@@ -19,35 +18,28 @@ public class BiomeGenBog extends BiomeGenBaseHighlands
     private static final int trees = 3, grass = 2, flowers = 0, plants = 6;
     public BiomeGenBog(int par1){
 		super(par1, new BiomeDecoratorHighlands(trees, grass, flowers, plants));
-
-	    biomedec.generateLakes = true;
+        biomedec.generateLakes = true;
+        biomedec.generatePumpkin = true;
         this.topBlock = Blocks.grass;
         this.fillerBlock = Blocks.dirt;
         this.setHeight(biomeHeight);
         this.temperature = 0.7F;
         this.rainfall = 1.2F;
         this.waterColorMultiplier = 0x84FF38;
+        this.genCache = new WorldGenSmallPlants(HighlandsBlocks.cattail);
+        this.treeGenCache = new WorldGenHighlandsBigTree(false, false, 0, 0, 1, 0);
 	}
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return new WorldGenSmallPlants(HighlandsBlocks.cattail);
+		return this.genCache;
 	}
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
-    }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
         return (par1Random.nextInt(3) == 0? this.worldGeneratorSwamp :
-        	(par1Random.nextInt(3) == 0? new WorldGenHighlandsBigTree(false, false, 0, 0, 1, 0) : this.worldGeneratorBigTree));
+        	(par1Random.nextInt(3) == 0? treeGenCache : this.worldGeneratorBigTree));
     }
 
     @Override

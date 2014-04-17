@@ -2,12 +2,9 @@ package highlands.biome;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTaiga1;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenTreeFir;
 
@@ -21,6 +18,7 @@ public class BiomeGenTallPineForest extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 0.1F;
         this.rainfall = 0.8F;
+        this.treeGenCache = new WorldGenTreeFir(15, 10, false, false);
     }
 
     /**
@@ -32,16 +30,7 @@ public class BiomeGenTallPineForest extends BiomeGenBaseHighlands
         return (par1Random.nextInt(8) == 0 ?
                 new WorldGenTaiga1() : par1Random.nextInt(3) == 0 ?
                 new WorldGenHighlandsShrub(0, 0) :
-                    par1Random.nextInt(4) == 0? new WorldGenTreeFir(15, 10, false, true) : new WorldGenTreeFir(15, 10, false, false));
-    }
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
+                    par1Random.nextInt(4) == 0? new WorldGenTreeFir(15, 10, false, true) : this.treeGenCache);
     }
 
     @Override

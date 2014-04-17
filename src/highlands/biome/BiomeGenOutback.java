@@ -22,7 +22,8 @@ public class BiomeGenOutback extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 1.6F;
         this.rainfall = 0.1F;
-
+        this.treeGenCache = new WorldGenHighlandsShrub(0, 0);
+        this.genCache = new WorldGenHighlandsGroundcover(Blocks.tallgrass, 1, 2);
         this.topBlock = Blocks.sand;
         this.fillerBlock = Blocks.sand;
 
@@ -35,13 +36,13 @@ public class BiomeGenOutback extends BiomeGenBaseHighlands
     @Override
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
-        return new WorldGenHighlandsGroundcover(Blocks.tallgrass, 1, 2);
+        return this.genCache;
     }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return new WorldGenHighlandsShrub(0, 0);
+        return this.treeGenCache;
     }
 
     @Override

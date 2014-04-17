@@ -23,13 +23,14 @@ public class BiomeGenTundra extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 0.0F;
         this.rainfall = 0.5F;
+        this.treeGenCache = new WorldGenHighlandsShrub(1, 1);
         this.setEnableSnow();
     }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (new WorldGenHighlandsShrub(1, 1));
+        return this.treeGenCache;
         
         //par1Random.nextInt(2) == 0 ? new WorldGenHighlandsShrub(1, 1) : new WorldGenTallGrass(Block.tallGrass.blockID, 1)
     }

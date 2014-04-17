@@ -22,6 +22,10 @@ public class BiomeGenTropicalIslands extends BiomeGenBaseHighlands
 	    this.setHeight(biomeHeight);
         this.temperature = 1.0F;
         this.rainfall = 1.2F;
+        this.biomedec.generateWatermelon = true;
+        this.genCache = new WorldGenTallGrass(Blocks.tallgrass, 2);
+        this.treeGenCache = new WorldGenTreePalm(8, 3, false);
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.leafyFern);
     }
     
     /**
@@ -30,19 +34,19 @@ public class BiomeGenTropicalIslands extends BiomeGenBaseHighlands
     @Override
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
 	{
-	    return new WorldGenTallGrass(Blocks.tallgrass, 2);
+	    return this.genCache;
 	}
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return new WorldGenTreePalm(8, 3, false);
+        return this.treeGenCache;
     }
 
     @Override
     public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.leafyFern)
-				: new WorldGenSmallPlants(HighlandsBlocks.whiteFlower));
+		return (rand.nextInt(2) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.leafyFern)
+				: this.smallPlantsGenCache.setPlant(HighlandsBlocks.whiteFlower));
 	}
 
     @Override

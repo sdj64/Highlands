@@ -21,12 +21,13 @@ public class BiomeGenWoodlands extends BiomeGenBaseHighlands
 	    biomedec.generateLakes = true;
 	    this.temperature = 0.6F;
 	    this.rainfall = 0.6F;
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.raspberryBush);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.raspberryBush)
-				: new WorldGenSmallPlants(HighlandsBlocks.thornbush));
+		return (rand.nextInt(2) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.raspberryBush)
+				: this.smallPlantsGenCache.setPlant(HighlandsBlocks.thornbush));
 	}
 
     /**
@@ -37,8 +38,6 @@ public class BiomeGenWoodlands extends BiomeGenBaseHighlands
     {
     	int a = par1Random.nextInt(12);
     	switch(a){
-    	case 1: return this.worldGeneratorTrees;
-    	case 2: return this.worldGeneratorTrees;
     	case 3: return this.worldGeneratorBigTree;
     	case 4: return new WorldGenHighlandsBigTree(false, true, 2, 2, 1, 0);
     	case 5: return new WorldGenHighlandsBigTree(false, true, 0, 0, 2, 20);

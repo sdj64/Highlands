@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenSmallPlants;
@@ -22,26 +21,19 @@ public class BiomeGenMesa extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 1.4F;
         this.rainfall = 0.1F;
+        this.treeGenCache = new WorldGenTreeAcacia(7, 3, false);
+        this.genCache = new WorldGenSmallPlants(HighlandsBlocks.thornbush);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return new WorldGenSmallPlants(HighlandsBlocks.thornbush);
+		return this.genCache;
 	}
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
-    }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return new WorldGenTreeAcacia(7, 3, false);
+        return this.treeGenCache;
     }
 
     @Override

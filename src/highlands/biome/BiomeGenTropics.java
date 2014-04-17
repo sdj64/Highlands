@@ -24,16 +24,20 @@ public class BiomeGenTropics extends BiomeGenBaseHighlands
 	{
         super(par1, new BiomeDecoratorHighlands(trees, grass, flowers, plants));
 	    biomedec.generateLakes = true;
+        biomedec.generateWatermelon = true;
         this.spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
         this.spawnableCreatureList.add(new SpawnListEntry(EntityChicken.class, 10, 4, 4));
         this.setHeight(biomeHeight);
         this.temperature = 1.2F;
         this.rainfall = 1.0F;
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.leafyFern);
+        this.treeGenCache = new WorldGenHighlandsShrub(3, 0);
+        this.genCache = new WorldGenTallGrass(Blocks.tallgrass, 2);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return new WorldGenSmallPlants(HighlandsBlocks.leafyFern);
+		return this.smallPlantsGenCache;
 	}
 
     @Override
@@ -41,8 +45,8 @@ public class BiomeGenTropics extends BiomeGenBaseHighlands
     {
         return (par1Random.nextInt(2) == 0 ?
         		(par1Random.nextInt(4) == 0 ? new WorldGenTreeCanopy(13, 6, false, true) :
-        			new WorldGenTreeCanopy(13, 6, false, false)) :
-        			new WorldGenHighlandsShrub(3, 0));
+        			new WorldGenTreeCanopy(13, 6, false, false)) : this.treeGenCache
+        			);
     }
     /**
      * Gets a WorldGen appropriate for this biome.
@@ -50,7 +54,7 @@ public class BiomeGenTropics extends BiomeGenBaseHighlands
     @Override
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
-        return new WorldGenTallGrass(Blocks.tallgrass, 2);
+        return this.genCache;
     }
 
     @Override

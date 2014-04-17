@@ -2,11 +2,9 @@ package highlands.biome;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenSmallPlants;
 import highlands.worldgen.WorldGenTreePoplar;
@@ -22,27 +20,20 @@ public class BiomeGenBirchHills extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 0.6F;
         this.rainfall = 0.8F;
+        this.treeGenCache = new WorldGenTreePoplar(10, 4, false);
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.cotton);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cotton)
-				: new WorldGenSmallPlants(HighlandsBlocks.blueFlower));
-	}
-    
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-	{
-	    return new WorldGenTallGrass(Blocks.tallgrass, 1);
+		return (rand.nextInt(2) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.cotton)
+				: this.smallPlantsGenCache.setPlant(HighlandsBlocks.blueFlower));
 	}
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return new WorldGenTreePoplar(10, 4, false);
+        return treeGenCache;
     }
 
     @Override

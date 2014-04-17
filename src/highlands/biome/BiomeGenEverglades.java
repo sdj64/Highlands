@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenSmallPlants;
@@ -23,27 +22,20 @@ public class BiomeGenEverglades extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 0.7F;
         this.rainfall = 1.2F;
+        this.treeGenCache = new WorldGenTreeMangrove(4, 2, false);
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.cattail);
 	}
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cattail)
-		: new WorldGenSmallPlants(HighlandsBlocks.leafyFern));
+		return (rand.nextInt(2) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.cattail)
+		: this.smallPlantsGenCache.setPlant(HighlandsBlocks.leafyFern));
 	}
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
-    }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return new WorldGenTreeMangrove(4, 2, false);
+        return this.treeGenCache;
     }
 
     @Override
@@ -78,13 +70,14 @@ public class BiomeGenEverglades extends BiomeGenBaseHighlands
     	for(int i = 0; i < 16; i++){
     		for(int j = 0; j < 16; j++){
     			int topY = 128;
-    			Block var11;
-    	        for (boolean var6 = false; ((var11 = world.getBlock(par3+i, topY, par4+j)) == Blocks.air || var11 == Blocks.leaves) && topY > 0; --topY)
-    	        {
-    	            ;
+    			Block var11 = world.getBlock(par3+i, topY, par4+j);
+    	        while (topY > 0 && (var11.isAir(world, par3+i, topY, par4+j) || var11.isLeaves(world, par3+i, topY, par4+j))){
+                    --topY;
+                    var11 = world.getBlock(par3+i, topY, par4+j);
     	        }
     			//System.out.println("the top block is id" + par1World.getBlockId(par3+i, topY, par4+j));
-    			if(world.getBlock(par3+i, topY, par4+j) == Blocks.air)topY--;
+    			if(world.getBlock(par3+i, topY, par4+j).isAir(world, par3+i, topY, par4+j))
+                    topY--;
     			/*
     			if(world.getBlockId(par3+i, topY, par4+j) == Block.grass.blockID && rand.nextInt(2) == 0){
     				world.setBlock(par3+i, topY, par4+j, Block.grass.blockID);

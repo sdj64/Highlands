@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenHighlandsShrub;
@@ -24,28 +23,21 @@ public class BiomeGenSahel extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 1.6F;
         this.rainfall = 0.1F;
+        this.treeGenCache = new WorldGenTreeAcacia(7, 3, false);
+        this.genCache = new WorldGenHighlandsShrub(0, 0);
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.whiteFlower);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.whiteFlower)
-				: new WorldGenSmallPlants(HighlandsBlocks.thornbush));
+		return (rand.nextInt(2) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.whiteFlower)
+				: this.smallPlantsGenCache.setPlant(HighlandsBlocks.thornbush));
 	}
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
-    }
 
     @Override
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (par1Random.nextInt(3) == 0 ?
-        		new WorldGenTreeAcacia(7, 3, false) : new WorldGenHighlandsShrub(0, 0));
+        return (par1Random.nextInt(3) == 0 ? treeGenCache : (WorldGenAbstractTree) genCache);
     }
 
     @Override

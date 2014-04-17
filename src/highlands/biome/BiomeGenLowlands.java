@@ -2,7 +2,6 @@ package highlands.biome;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.*;
 import highlands.api.HighlandsBlocks;
@@ -20,13 +19,16 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
         this.setHeight(biomeHeight);
         this.temperature = 0.5F;
         this.rainfall = 1.2F;
+        this.treeGenCache = new WorldGenTreeFir(10, 5, false, false);
+        this.genCache = new WorldGenHighlandsShrub(0, 0);
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.cattail);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (rand.nextInt(3) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cattail)
-				: (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.cotton)
-				: new WorldGenSmallPlants(HighlandsBlocks.blueFlower)));
+		return (rand.nextInt(3) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.cattail)
+				: (rand.nextInt(2) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.cotton)
+				: this.smallPlantsGenCache.setPlant(HighlandsBlocks.blueFlower)));
 	}
 
     /**
@@ -36,17 +38,8 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
     public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
         return (par1Random.nextInt(8) == 0 ?
-        		new WorldGenHighlandsShrub(0, 0) : par1Random.nextInt(4) != 0 ?
-        		new WorldGenTrees(false, 3 + par1Random.nextInt(3), 0, 0, false) : new WorldGenTreeFir(10, 5, false, false));
-    }
-
-    /**
-     * Gets a WorldGen appropriate for this biome.
-     */
-    @Override
-    public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
-    {
-        return new WorldGenTallGrass(Blocks.tallgrass, 1);
+                (WorldGenAbstractTree)this.genCache : par1Random.nextInt(4) != 0 ?
+        		new WorldGenTrees(false, 3 + par1Random.nextInt(3), 0, 0, false) : this.treeGenCache);
     }
 
     @Override

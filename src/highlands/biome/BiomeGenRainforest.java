@@ -21,12 +21,15 @@ public class BiomeGenRainforest extends BiomeGenBaseHighlands
 	    this.setHeight(biomeHeight);
         this.temperature = 0.8F;
         this.rainfall = 1.0F;
+        this.treeGenCache = new WorldGenHighlandsShrub(0, 0);
+        this.genCache = new WorldGenTallGrass(Blocks.tallgrass, 2);
+        this.smallPlantsGenCache = new WorldGenSmallPlants(HighlandsBlocks.leafyFern);
     }
 
     @Override
 	public WorldGenerator getRandomWorldGenForHighlandsPlants(Random rand){
-		return (rand.nextInt(2) == 0 ? new WorldGenSmallPlants(HighlandsBlocks.leafyFern)
-				: new WorldGenSmallPlants(HighlandsBlocks.lavender));
+		return (rand.nextInt(2) == 0 ? this.smallPlantsGenCache.setPlant(HighlandsBlocks.leafyFern)
+				: this.smallPlantsGenCache.setPlant(HighlandsBlocks.lavender));
 	}
 
     /**
@@ -39,7 +42,7 @@ public class BiomeGenRainforest extends BiomeGenBaseHighlands
         return new WorldGenTreeAsh(16, 8, false);
     	else if(par1Random.nextInt(2) == 0)
     	return new WorldGenTrees(false, 5 + par1Random.nextInt(4), 0, 0, false);
-    	else return new WorldGenHighlandsShrub(0, 0);
+    	else return this.treeGenCache;
     }
 
     /**
@@ -48,7 +51,7 @@ public class BiomeGenRainforest extends BiomeGenBaseHighlands
     @Override
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random)
     {
-        return par1Random.nextInt(2) == 0 ? new WorldGenTallGrass(Blocks.tallgrass, 1) : new WorldGenTallGrass(Blocks.tallgrass, 2);
+        return par1Random.nextInt(2) == 0 ? super.getRandomWorldGenForGrass(par1Random) : this.genCache;
     }
 
     @Override
