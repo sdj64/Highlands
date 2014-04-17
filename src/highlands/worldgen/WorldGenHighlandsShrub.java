@@ -9,14 +9,14 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 public class WorldGenHighlandsShrub extends WorldGenAbstractTree
 {
-    private int field_76527_a;
-    private int field_76526_b;
+    private final int leavesMeta;
+    private final int logMeta;
 
     public WorldGenHighlandsShrub(int par1, int par2)
     {
         super(false);
-        this.field_76526_b = par1;
-        this.field_76527_a = par2;
+        this.logMeta = par1;
+        this.leavesMeta = par2;
     }
     
     public boolean generateReplaceSapling(World world, Random random, int locX, int locY, int locZ){
@@ -41,7 +41,7 @@ public class WorldGenHighlandsShrub extends WorldGenAbstractTree
         if (var15 == Blocks.dirt || var15 == Blocks.grass || var15 == Blocks.snow || var15 == Blocks.sand)
         {
             ++par4;
-            this.setBlockAndNotifyAdequately(par1World, par3, par4, par5, Blocks.log, this.field_76526_b);
+            this.setBlockAndNotifyAdequately(par1World, par3, par4, par5, Blocks.log, this.logMeta);
 
             for (int var8 = par4; var8 <= par4 + 2; ++var8)
             {
@@ -58,7 +58,7 @@ public class WorldGenHighlandsShrub extends WorldGenAbstractTree
 
                         if ((Math.abs(var12) != var10 || Math.abs(var14) != var10 || par2Random.nextInt(2) != 0) && !par1World.getBlock(var11, var8, var13).isOpaqueCube())
                         {
-                            this.setBlockAndNotifyAdequately(par1World, var11, var8, var13, Blocks.leaves, this.field_76527_a);
+                            this.setBlockAndNotifyAdequately(par1World, var11, var8, var13, Blocks.leaves, this.leavesMeta);
                         }
                     }
                 }

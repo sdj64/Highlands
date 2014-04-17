@@ -69,14 +69,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Initializer
 {
-	private static String biomePrefix = "";
-	
 	public static void constructSettings()
 	{
-		
 		HighlandsMain.HighlandsBiomeSizeDefault = Config.biomeSize.getInt();
 		HighlandsMain.HighlandsBiomeSizeLB = Config.LBbiomeSize.getInt();
-		
 		HighlandsMain.islandRarity = Config.islandRarity.getInt();
 		
 		int a = Config.moreOceans.getInt();
@@ -270,7 +266,7 @@ public class Initializer
 	
 	public static void constructBiomes() {
 		
-		biomePrefix = Config.biomePrefix.getBoolean(false) ? "Highlands_" : "";
+		String biomePrefix = Config.biomePrefix.getBoolean(false) ? "Highlands_" : "";
 		
 		//main biomes
 		HighlandsBiomes.alps = new BiomeGenAlps(Config.alpsID.getInt()).setBiomeName(biomePrefix+"Alps");
