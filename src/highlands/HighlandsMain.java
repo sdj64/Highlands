@@ -70,8 +70,8 @@ public class HighlandsMain {
 
         //construct all variables
         HighlandsBiomes.initBiomeArrays();
-        Initializer.constructBiomes();
         Initializer.constructBlocks();
+        Initializer.constructBiomes();
         Initializer.constructSettings();
         //initiate all recipes and ore dictionary definitions
         Initializer.initRecipes();
