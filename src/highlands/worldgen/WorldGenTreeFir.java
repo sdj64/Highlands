@@ -67,7 +67,7 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     	}
         this.world = null;
         this.random = null;
-    	
+
     	return true;
     }
     

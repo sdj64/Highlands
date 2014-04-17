@@ -104,14 +104,14 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     {
         Block soil = par1World.getBlock(par2, par3 - 1, par4);
         return (par1World.getFullBlockLightValue(par2, par3, par4) >= 8 || par1World.canBlockSeeTheSky(par2, par3, par4)) && 
-                (soil != null && isSoilGoodForSaplingType(soil, par1World, par2, par3, par4));
+                (soil != Blocks.air && isSoilGoodForSaplingType(soil, par1World, par2, par3, par4));
     }
     
     private boolean isSoilGoodForSaplingType(Block soil, World par1World, int par2, int par3, int par4) {
     	if(soil.canSustainPlant(par1World, par2, par3 - 1, par4, ForgeDirection.UP, this))return true;
-    	if(treeType == 0 && soil == Blocks.snow)return true;
-    	if(treeType == 10 && soil == Blocks.sand)return true;
-    	if(treeType == 12 && soil == Blocks.water)return true;
+    	else if(treeType == 0) return soil == Blocks.snow;
+    	else if(treeType == 10) return soil == Blocks.sand;
+    	else if(treeType == 12) return soil == Blocks.water;
 		return false;
 	}
 

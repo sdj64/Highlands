@@ -49,11 +49,16 @@ public class WorldGenMountain extends WorldGenerator
 				
 				if(dist <= radius){
 					//overwrites trees rather than placing the mountain on top of them.
-					for(locY = world.getTopSolidOrLiquidBlock(x, z); locY > 0; locY--){
+                    locY = world.getTopSolidOrLiquidBlock(x, z);
+					while(locY > 0){
 						Block block = world.getBlock(x, locY, z);
-						if(block != null && block.isOpaqueCube() && !block.isWood(world, x, locY, z) && !block.isLeaves(world, x, locY, z))
+						if(block.isOpaqueCube() && !block.isWood(world, x, locY, z) && !block.isLeaves(world, x, locY, z))
                             break;
+                        locY--;
 					}
+                    if(locY == 0){
+                        continue;
+                    }
 					
 					int h = locY + radius - dist;
 					for(int i = locY; i < h; i++){

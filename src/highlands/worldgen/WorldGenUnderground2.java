@@ -12,7 +12,7 @@ public class WorldGenUnderground2 extends WorldGenerator
 {
     /** The block ID of the ore to be placed using this generator. */
     private final Block minableBlockId;
-    private int minableBlockMeta = 0;
+    public int minableBlockMeta = 0;
 
     /** The number of blocks to generate. */
     private final int numberOfBlocks;
@@ -76,8 +76,8 @@ public class WorldGenUnderground2 extends WorldGenerator
                                 double var45 = ((double)var44 + 0.5D - var24) / (var28 / 2.0D);
 
                                 Block block = par1World.getBlock(var38, var41, var44);
-                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && (block != null && (block == IDtoReplace || 
-                                		(IDtoReplace == Blocks.dirt && block == Blocks.grass))))
+                                if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && (block == IDtoReplace ||
+                                		(IDtoReplace == Blocks.dirt && block == Blocks.grass)))
                                 {
                                 	if(par1World.getBlock(var38, var41+1, var44) == Blocks.air && minableBlockId == Blocks.dirt)
                                 		par1World.setBlock(var38, var41, var44, Blocks.grass, minableBlockMeta, 3);

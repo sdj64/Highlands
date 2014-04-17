@@ -211,25 +211,15 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     
     
     protected void setBlockInWorld(int x, int y, int z, Block block, int meta){
-    	try{
-    		Block bl = world.getBlock(x, y, z);
-    		//TODO- right fix? might be crashy...
-			if(block == this.woodID && (world.isAirBlock(x,y,z) || bl.isReplaceable(world, x, y, z) ||
-					bl.isLeaves(world, x, y, z) || bl instanceof BlockHighlandsSapling)){
-				if(notifyFlag) world.setBlock(x, y, z, block, meta, 3);
-		    	else world.setBlock(x, y, z, block, meta, 2);
-			}
-			else if(block == this.leavesID && world.isAirBlock(x,y,z)){
-				if(notifyFlag) world.setBlock(x, y, z, block, meta, 3);
-		    	else world.setBlock(x, y, z, block, meta, 2);
-			}
-    	}
-    	catch(RuntimeException e){
-    		if(e.getMessage().equals("Already decorating!!")){
-    			System.out.println("Error: Tree block couldn't generate!");
-    		}
-    		//e.printStackTrace();
-    	}
+        Block bl = world.getBlock(x, y, z);
+        if (block == this.woodID && (bl.isAir(world, x, y, z) || bl.isReplaceable(world, x, y, z) ||
+                bl.isLeaves(world, x, y, z) || bl instanceof BlockHighlandsSapling)) {
+            if (notifyFlag) world.setBlock(x, y, z, block, meta, 3);
+            else world.setBlock(x, y, z, block, meta, 2);
+        } else if (block == this.leavesID && bl.isAir(world, x, y, z)) {
+            if (notifyFlag) world.setBlock(x, y, z, block, meta, 3);
+            else world.setBlock(x, y, z, block, meta, 2);
+        }
     }
     
     
@@ -252,7 +242,11 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     //finds top block for the given x,z position (excluding leaves)
     protected int findTopBlock(int x, int z){
     	int y = world.getTopSolidOrLiquidBlock(x, z);
-        for (; (world.getBlock(x, y, z).isAir(world, x, y, z) || world.getBlock(x, y, z).isLeaves(world, x, y, z)) && y > 0; --y);
+        Block block = world.getBlock(x, y, z);
+        while(y > 0 && (block.isAir(world, x, y, z) || block.isLeaves(world, x, y, z))) {
+            --y;
+            block = world.getBlock(x, y, z);
+        }
         return y;
     }
 }
