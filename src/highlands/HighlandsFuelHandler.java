@@ -1,5 +1,7 @@
 package highlands;
 
+import org.apache.logging.log4j.Level;
+
 import highlands.api.HighlandsBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -10,7 +12,9 @@ public class HighlandsFuelHandler implements IFuelHandler
 {
 	public int getBurnTime(ItemStack fuel) {
 		
-		//Item id = fuel.getItem();
+		Item item = fuel.getItem();
+		Logs.log(Level.INFO, "[Highlands] "+item.toString());
+		
 		//TODO- all this ItemStack stuff makes me worry...
 		if(fuel == new ItemStack(HighlandsBlocks.firWood))return 300;
 		if(fuel == new ItemStack(HighlandsBlocks.acaciaWood))return 300;
@@ -27,7 +31,6 @@ public class HighlandsFuelHandler implements IFuelHandler
 		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs1))return 300;
 		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs2))return 300;
 		if(fuel == new ItemStack(HighlandsBlocks.hlplankstairs3))return 300;
-
 		if(fuel == new ItemStack(HighlandsBlocks.hlplankhalf))return 150;
 		
 		if(fuel == new ItemStack(HighlandsBlocks.firSapling))return 100;

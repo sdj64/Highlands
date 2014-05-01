@@ -6,113 +6,63 @@ import net.minecraftforge.common.config.Property;
 
 public class Config
 {
-	public static String CATEGORY_BIOME_ID = "Biomes.Biome IDs";
-	public static String CATEGORY_BIOME_GENERATE = "Biomes.Generate Biomes true/false?";
+	public static String CATEGORY_BIOME_ID = "Biomes.Biome IDs set to -1 to disable biome";
+	//public static String CATEGORY_BIOME_GENERATE = "Biomes.Generate Biomes true/false?";
 	
-	public static String CATEGORY_SUBBIOME_ID = "Biomes.Sub-biome IDs";
-	public static String CATEGORY_SUBBIOME_GENERATE = "Biomes.Generate Sub-biomes true/false?";
+	public static String CATEGORY_SUBBIOME_ID = "Biomes.Sub-biome IDs  set to -1 to disable biome";
+	//public static String CATEGORY_SUBBIOME_GENERATE = "Biomes.Generate Sub-biomes true/false?";
 	
 	public static String CATEGORY_BLOCK_ID = "Block IDs";
 	
 	public static String CATEGORY_VANILLABIOME_GENERATE = "Biomes.Generate Vanilla Biomes true/false?";
 	
-	//Item ID Properties
-	public static Property berriesID;
-	
 	
 	//Biome ID Properties
-	public static Property woodlandMountainsID;
-    public static Property highlandsbID;
-    public static Property tundraID;
-    public static Property cliffsID;
-    public static Property pinelandsID;
-    public static Property autumnForestID;
-    public static Property alpsID;
-    public static Property tallPineForestID;
-    public static Property meadowID;
-    public static Property savannahID;
-    public static Property tropicsID;
-    public static Property outbackID;
-    public static Property woodlandsID;
-    public static Property bogID;
-    public static Property redwoodForestID;
-    public static Property dunesID;
-    public static Property lowlandsID;
-    public static Property sahelID;
-    public static Property birchHillsID;
-    public static Property tropicalIslandsID;
-    public static Property rainforestID;
-    public static Property estuaryID;
-    public static Property badlandsID;
-    public static Property flyingMountainsID;
-    public static Property snowMountainsID;
-    public static Property rockMountainsID;
-    public static Property desertMountainsID;
-    public static Property steppeID;
-    public static Property glacierID;
+	public static int woodlandMountainsID;
+    public static int highlandsbID;
+    public static int tundraID;
+    public static int cliffsID;
+    public static int pinelandsID;
+    public static int autumnForestID;
+    public static int alpsID;
+    public static int tallPineForestID;
+    public static int meadowID;
+    public static int savannahID;
+    public static int tropicsID;
+    public static int outbackID;
+    public static int woodlandsID;
+    public static int bogID;
+    public static int redwoodForestID;
+    public static int dunesID;
+    public static int lowlandsID;
+    public static int sahelID;
+    public static int birchHillsID;
+    public static int tropicalIslandsID;
+    public static int rainforestID;
+    public static int estuaryID;
+    public static int badlandsID;
+    public static int flyingMountainsID;
+    public static int snowMountainsID;
+    public static int rockMountainsID;
+    public static int desertMountainsID;
+    public static int steppeID;
+    public static int glacierID;
     //public static Property evergladesID;
-    public static Property ocean2ID;
-    public static Property forestIslandID;
-    public static Property jungleIslandID;
-    public static Property desertIslandID;
-    public static Property volcanoIslandID;
-    public static Property snowIslandID;
-    public static Property windyIslandID;
-    public static Property rockIslandID;
-    public static Property valleyID;
-    public static Property lakeID;
-    public static Property mesaID;
-    public static Property baldHillID;
-    public static Property oasisID;
-    public static Property canyonID;
-    public static Property shrublandID;
-    
-    //Biome Generate Properties
-  	public static Property woodlandMountainsGenerate;
-	public static Property highlandsbGenerate;
-	public static Property tundraGenerate;
-	public static Property cliffsGenerate;
-	public static Property pinelandsGenerate;
-	public static Property autumnForestGenerate;
-	public static Property alpsGenerate;
-	public static Property tallPineForestGenerate;
-	public static Property meadowGenerate;
-	public static Property savannahGenerate;
-	public static Property tropicsGenerate;
-	public static Property outbackGenerate;
-	public static Property woodlandsGenerate;
-	public static Property bogGenerate;
-	public static Property redwoodForestGenerate;
-	public static Property dunesGenerate;
-	public static Property lowlandsGenerate;
-	public static Property sahelGenerate;
-	public static Property birchHillsGenerate;
-	public static Property tropicalIslandsGenerate;
-	public static Property rainforestGenerate;
-	public static Property estuaryGenerate;
-	public static Property badlandsGenerate;
-	public static Property flyingMountainsGenerate;
-	public static Property snowMountainsGenerate;
-	public static Property rockMountainsGenerate;
-	public static Property desertMountainsGenerate;
-	public static Property steppeGenerate;
-	public static Property glacierGenerate;
-	//public static Property evergladesGenerate;
-	public static Property ocean2Generate;
-	public static Property forestIslandGenerate;
-	public static Property jungleIslandGenerate;
-	public static Property desertIslandGenerate;
-	public static Property volcanoIslandGenerate;
-	public static Property snowIslandGenerate;
-	public static Property windyIslandGenerate;
-	public static Property rockIslandGenerate;
-	public static Property valleyGenerate;
-	public static Property lakeGenerate;
-	public static Property mesaGenerate;
-	public static Property baldHillGenerate;
-	public static Property oasisGenerate;
-	public static Property canyonGenerate;
-	public static Property shrublandGenerate;
+    public static int ocean2ID;
+    public static int forestIslandID;
+    public static int jungleIslandID;
+    public static int desertIslandID;
+    public static int volcanoIslandID;
+    public static int snowIslandID;
+    public static int windyIslandID;
+    public static int rockIslandID;
+    public static int valleyID;
+    public static int lakeID;
+    public static int mesaID;
+    public static int baldHillID;
+    public static int oasisID;
+    public static int canyonID;
+    public static int shrublandID;
 	
 	public static Property plainsGenerate;
 	public static Property desertGenerate;
@@ -136,6 +86,8 @@ public class Config
 	public static Property genOre;
 	public static Property mobModCompatibility;
 	public static Property safeMode;
+
+	private static Property ocean2Generate;
 	
 	
 	
@@ -144,106 +96,59 @@ public class Config
 	public static void setUpConfig(Configuration config)
 	{
 		addBiomeEntries(config);
-		addItemEntries(config);
 		addSettingsEntries(config);
 	}
 	
 	private static void addBiomeEntries(Configuration config) 
 	{
-		alpsID = config.get(CATEGORY_BIOME_ID, "Alps ID", 150);
-		alpsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Alps Generate", true);
-		autumnForestID = config.get(CATEGORY_BIOME_ID, "Autumn Forest ID", 151);
-		autumnForestGenerate = config.get(CATEGORY_BIOME_GENERATE, "Autumn Forest Generate", true);
-		badlandsID = config.get(CATEGORY_BIOME_ID, "Badlands ID", 152);
-		badlandsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Badlands Generate", true);
-		birchHillsID = config.get(CATEGORY_BIOME_ID, "Birch Hills ID", 153);
-		birchHillsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Birch Hills Generate", true);
-		bogID = config.get(CATEGORY_BIOME_ID, "Bog ID", 154);
-		bogGenerate = config.get(CATEGORY_BIOME_GENERATE, "Bog Generate", true);
-		cliffsID = config.get(CATEGORY_BIOME_ID, "Cliffs ID", 155);
-		cliffsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Cliffs Generate", true);
-		desertMountainsID = config.get(CATEGORY_BIOME_ID, "Desert Mountains ID", 156);
-		desertMountainsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Desert Mountains Generate", true);
-		dunesID = config.get(CATEGORY_BIOME_ID, "Dunes ID", 157);
-		dunesGenerate = config.get(CATEGORY_BIOME_GENERATE, "Dunes Generate", true);
-		estuaryID = config.get(CATEGORY_BIOME_ID, "Estuary ID", 158);
-		estuaryGenerate = config.get(CATEGORY_BIOME_GENERATE, "Estuary Generate", true);
-		//evergladesID = config.get(CATEGORY_BIOME_ID, "Everglades ID", 194);
-		//evergladesGenerate = config.get(CATEGORY_BIOME_GENERATE, "Everglades Generate", true);
-		flyingMountainsID = config.get(CATEGORY_BIOME_ID, "Flying Mountains ID", 159);
-		flyingMountainsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Flying Mountains Generate", true);
-		glacierID = config.get(CATEGORY_BIOME_ID, "Glacier ID", 160);
-		glacierGenerate = config.get(CATEGORY_BIOME_GENERATE, "Glacier Generate", true);
-		highlandsbID = config.get(CATEGORY_BIOME_ID, "Highlands ID", 161);
-		highlandsbGenerate = config.get(CATEGORY_BIOME_GENERATE, "Highlands Generate", true);
-		lowlandsID = config.get(CATEGORY_BIOME_ID, "Lowlands ID", 162);
-		lowlandsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Lowlands Generate", true);
-		meadowID = config.get(CATEGORY_BIOME_ID, "Meadow ID", 163);
-		meadowGenerate = config.get(CATEGORY_BIOME_GENERATE, "Meadow Generate", true);
-		outbackID = config.get(CATEGORY_BIOME_ID, "Outback ID", 164);
-		outbackGenerate = config.get(CATEGORY_BIOME_GENERATE, "Outback Generate", true);
-		pinelandsID = config.get(CATEGORY_BIOME_ID, "Pinelands ID", 165);
-		pinelandsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Pinelands Generate", true);
-		rainforestID = config.get(CATEGORY_BIOME_ID, "Rainforest ID", 166);
-		rainforestGenerate = config.get(CATEGORY_BIOME_GENERATE, "Rainforest Generate", true);
-		redwoodForestID = config.get(CATEGORY_BIOME_ID, "Redwood Forest ID", 167);
-		redwoodForestGenerate = config.get(CATEGORY_BIOME_GENERATE, "Redwood Forest Generate", true);
-		rockMountainsID = config.get(CATEGORY_BIOME_ID, "Rock Mountains ID", 168);
-		rockMountainsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Rock Mountains Generate", true);
-		sahelID = config.get(CATEGORY_BIOME_ID, "Sahel ID", 169);
-		sahelGenerate = config.get(CATEGORY_BIOME_GENERATE, "Sahel Generate", true);
-		savannahID = config.get(CATEGORY_BIOME_ID, "Savannah ID", 170);
-		savannahGenerate = config.get(CATEGORY_BIOME_GENERATE, "Savannah Generate", true);
-		steppeID = config.get(CATEGORY_BIOME_ID, "Steppe ID", 171);
-		steppeGenerate = config.get(CATEGORY_BIOME_GENERATE, "Steppe Generate", true);
-		snowMountainsID = config.get(CATEGORY_BIOME_ID, "Snow Mountains ID", 172);
-		snowMountainsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Snow Mountains Generate", true);
-		tallPineForestID = config.get(CATEGORY_BIOME_ID, "Tall Pine Forest ID", 173);
-		tallPineForestGenerate = config.get(CATEGORY_BIOME_GENERATE, "Tall Pine Forest Generate", true);
-		tropicsID = config.get(CATEGORY_BIOME_ID, "Tropics ID", 174);
-		tropicsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Tropics Generate", true);
-		tropicalIslandsID = config.get(CATEGORY_BIOME_ID, "Tropical Islands ID", 175);
-		tropicalIslandsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Tropical Islands Generate", true);
-		tundraID = config.get(CATEGORY_BIOME_ID, "Tundra ID", 176);
-		tundraGenerate = config.get(CATEGORY_BIOME_GENERATE, "Tundra Generate", true);
-		woodlandsID = config.get(CATEGORY_BIOME_ID, "Woodlands ID", 177);
-		woodlandsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Woodlands Generate", true);
-		woodlandMountainsID = config.get(CATEGORY_BIOME_ID, "Woodland Mountains ID", 178);
-		woodlandMountainsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Woodland Mountains Generate", true);
+		alpsID = config.get(CATEGORY_BIOME_ID, "Alps ID", 150).getInt();
+		autumnForestID = config.get(CATEGORY_BIOME_ID, "Autumn Forest ID", 151).getInt();
+		badlandsID = config.get(CATEGORY_BIOME_ID, "Badlands ID", 152).getInt();
+		birchHillsID = config.get(CATEGORY_BIOME_ID, "Birch Hills ID", 153).getInt();
+		bogID = config.get(CATEGORY_BIOME_ID, "Bog ID", 154).getInt();
+		cliffsID = config.get(CATEGORY_BIOME_ID, "Cliffs ID", 155).getInt();
+		desertMountainsID = config.get(CATEGORY_BIOME_ID, "Desert Mountains ID", 156).getInt();
+		dunesID = config.get(CATEGORY_BIOME_ID, "Dunes ID", 157).getInt();
+		estuaryID = config.get(CATEGORY_BIOME_ID, "Estuary ID", 158).getInt();
+		flyingMountainsID = config.get(CATEGORY_BIOME_ID, "Flying Mountains ID", 159).getInt();
+		glacierID = config.get(CATEGORY_BIOME_ID, "Glacier ID", 160).getInt();
+		highlandsbID = config.get(CATEGORY_BIOME_ID, "Highlands ID", 161).getInt();
+		lowlandsID = config.get(CATEGORY_BIOME_ID, "Lowlands ID", 162).getInt();
+		meadowID = config.get(CATEGORY_BIOME_ID, "Meadow ID", 163).getInt();
+		outbackID = config.get(CATEGORY_BIOME_ID, "Outback ID", 164).getInt();
+		pinelandsID = config.get(CATEGORY_BIOME_ID, "Pinelands ID", 165).getInt();
+		rainforestID = config.get(CATEGORY_BIOME_ID, "Rainforest ID", 166).getInt();
+		redwoodForestID = config.get(CATEGORY_BIOME_ID, "Redwood Forest ID", 167).getInt();
+		rockMountainsID = config.get(CATEGORY_BIOME_ID, "Rock Mountains ID", 168).getInt();
+		sahelID = config.get(CATEGORY_BIOME_ID, "Sahel ID", 169).getInt();
+		savannahID = config.get(CATEGORY_BIOME_ID, "Savannah ID", 170).getInt();
+		steppeID = config.get(CATEGORY_BIOME_ID, "Steppe ID", 171).getInt();
+		snowMountainsID = config.get(CATEGORY_BIOME_ID, "Snow Mountains ID", 172).getInt();
+		tallPineForestID = config.get(CATEGORY_BIOME_ID, "Tall Pine Forest ID", 173).getInt();
+		tropicsID = config.get(CATEGORY_BIOME_ID, "Tropics ID", 174).getInt();
+		tropicalIslandsID = config.get(CATEGORY_BIOME_ID, "Tropical Islands ID", 175).getInt();
+		tundraID = config.get(CATEGORY_BIOME_ID, "Tundra ID", 176).getInt();
+		woodlandsID = config.get(CATEGORY_BIOME_ID, "Woodlands ID", 177).getInt();
+		woodlandMountainsID = config.get(CATEGORY_BIOME_ID, "Woodland Mountains ID", 178).getInt();
 		
-		ocean2ID = config.get(CATEGORY_BIOME_ID, "Improved Oceans ID", 179);
-		ocean2Generate = config.get(CATEGORY_BIOME_GENERATE, "Improved Oceans Generate", true);
-		ocean2Generate.comment = "If this is false you will have regular Minecraft oceans instead.";
+		ocean2ID = config.get(CATEGORY_BIOME_ID, "Improved Oceans ID", 179).getInt();
+		//ocean2Generate = config.get(config.CATEGORY_GENERAL, "Improved Oceans Generate", true);
+		//ocean2Generate.comment = "If this is false you will have regular Minecraft oceans instead.";
 		
-		desertIslandID = config.get(CATEGORY_SUBBIOME_ID, "DesertIsland ID", 180);
-		desertIslandGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Desert Island Generate", true);
-		forestIslandID = config.get(CATEGORY_SUBBIOME_ID, "Forest Island ID", 181);
-		forestIslandGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Forest Island Generate", true);
-		jungleIslandID = config.get(CATEGORY_SUBBIOME_ID, "Jungle Island ID", 182);
-		jungleIslandGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Jungle Island Generate", true);
-		volcanoIslandID = config.get(CATEGORY_SUBBIOME_ID, "Volcano Island ID", 183);
-		volcanoIslandGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Volcano Island Generate", true);
-		snowIslandID = config.get(CATEGORY_SUBBIOME_ID, "Snow Island ID", 184);
-		snowIslandGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Snow Island Generate", true);
-		rockIslandID = config.get(CATEGORY_SUBBIOME_ID, "Rock Island ID", 185);
-		rockIslandGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Rock Island Generate", true);
-		windyIslandID = config.get(CATEGORY_SUBBIOME_ID, "Windy Island ID", 186);
-		windyIslandGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Windy Island Generate", true);
-		lakeID = config.get(CATEGORY_SUBBIOME_ID, "Lake ID", 187);
-		lakeGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Lake Generate", true);
-		baldHillID = config.get(CATEGORY_SUBBIOME_ID, "Bald Hill ID", 188);
-		baldHillGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Bald Hill Generate", true);
-		mesaID = config.get(CATEGORY_SUBBIOME_ID, "Mesa ID", 189);
-		mesaGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Mesa Generate", true);
-		valleyID = config.get(CATEGORY_SUBBIOME_ID, "Valley ID", 190);
-		valleyGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Valley Generate", true);
-		oasisID = config.get(CATEGORY_SUBBIOME_ID, "Oasis ID", 191);
-		oasisGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Oasis Generate", true);
-		canyonID = config.get(CATEGORY_SUBBIOME_ID, "Canyon ID", 192);
-		canyonGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Canyon Generate", true);
-		
-		shrublandID = config.get(CATEGORY_SUBBIOME_ID, "Shrublands ID", 193);
-		shrublandGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Shrublands Generate", true);
+		desertIslandID = config.get(CATEGORY_SUBBIOME_ID, "DesertIsland ID", 180).getInt();
+		forestIslandID = config.get(CATEGORY_SUBBIOME_ID, "Forest Island ID", 181).getInt();
+		jungleIslandID = config.get(CATEGORY_SUBBIOME_ID, "Jungle Island ID", 182).getInt();
+		volcanoIslandID = config.get(CATEGORY_SUBBIOME_ID, "Volcano Island ID", 183).getInt();
+		snowIslandID = config.get(CATEGORY_SUBBIOME_ID, "Snow Island ID", 184).getInt();
+		rockIslandID = config.get(CATEGORY_SUBBIOME_ID, "Rock Island ID", 185).getInt();
+		windyIslandID = config.get(CATEGORY_SUBBIOME_ID, "Windy Island ID", 186).getInt();
+		lakeID = config.get(CATEGORY_SUBBIOME_ID, "Lake ID", 187).getInt();
+		baldHillID = config.get(CATEGORY_SUBBIOME_ID, "Bald Hill ID", 188).getInt();
+		mesaID = config.get(CATEGORY_SUBBIOME_ID, "Mesa ID", 189).getInt();
+		valleyID = config.get(CATEGORY_SUBBIOME_ID, "Valley ID", 190).getInt();
+		oasisID = config.get(CATEGORY_SUBBIOME_ID, "Oasis ID", 191).getInt();
+		canyonID = config.get(CATEGORY_SUBBIOME_ID, "Canyon ID", 192).getInt();
+		shrublandID = config.get(CATEGORY_SUBBIOME_ID, "Shrublands ID", 193).getInt();
 		
 		plainsGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Plains Generate", true);
 		desertGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Desert Generate", true);
@@ -253,12 +158,6 @@ public class Config
 		jungleGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Jungle Generate", true);
 		icePlainsGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Ice Plains Generate", true);
 		taigaGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Taiga Generate", true);
-	}
-
-	private static void addItemEntries(Configuration config) 
-	{
-		berriesID = config.get(CATEGORY_BLOCK_ID, "Berries ID", 766);
-
 	}
 
 	private static void addSettingsEntries(Configuration config) 

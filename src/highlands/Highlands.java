@@ -22,7 +22,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.gen.structure.MapGenStronghold;
-import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -42,7 +41,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="Highlands", name="Highlands", version="2.2.0",
+@Mod(modid="Highlands", name="Highlands", version="2.2.0pre3",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
 public class Highlands {
 
@@ -57,8 +56,8 @@ public class Highlands {
 	public static CommonProxy proxy;
 	
 	//Highlands Worldtypes
-	public static final WorldType HL = (WorldType) new WorldTypeHighlands("Highlands");
-	public static final WorldType HLLB = (WorldType) new WorldTypeHighlands("Highlands LB");
+	public static WorldType HL;// = (WorldType) new WorldTypeHighlands("Highlands");
+	public static WorldType HLLB;// = (WorldType) new WorldTypeHighlands("HighlandsLB");
 	
 	public static int HighlandsBiomeSizeDefault;
 	public static int HighlandsBiomeSizeLB;
@@ -73,11 +72,6 @@ public class Highlands {
 	
 	public static int islandRarity = 14;
     
-    //Village Biomes list
-	public static List hlvillagebiomes;
-	
-	public static List defaultvillagebiomes;
-    
     //highlands in default flag
     public static boolean highlandsInDefaultFlag = false;
     
@@ -87,17 +81,13 @@ public class Highlands {
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		//new settings set-up
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + File.separator + "Highlands.cfg"));
+		Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + File.separator + "Highlands" + File.separator + "General.cfg"));
 		config.load();
 		Config.setUpConfig(config);
 		config.save();
 		
 		Initializer.constructBlocks();
 		Initializer.initRecipes();
-		
-		//register event manager
-		MinecraftForge.TERRAIN_GEN_BUS.register(new HighlandsEventManager());
-		MinecraftForge.EVENT_BUS.register(new HighlandsEventManager());
 	}
 	
 	@EventHandler
@@ -105,8 +95,13 @@ public class Highlands {
 		//construct all variables
 		HighlandsBiomes.initBiomeArrays();
 		Initializer.constructBiomes();
-		
 		Initializer.constructSettings();
+		
+		HL = new WorldTypeHighlands("Highlands");
+		HLLB = new WorldTypeHighlands("HighlandsLB");
+		//register event manager
+		MinecraftForge.TERRAIN_GEN_BUS.register(new HighlandsEventManager());
+		MinecraftForge.EVENT_BUS.register(new HighlandsEventManager());
 		
 		
 		//set up worldtypes
@@ -119,11 +114,6 @@ public class Highlands {
 //			WorldTypeHighlands.addBiomeList(WorldType.LARGE_BIOMES, HighlandsBiomes.biomesForDefault);
 //		}
 //		
-//		//add biomes to spawn strongholds in
-		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
-			if(i != HighlandsBiomes.woodsMountains && i != HighlandsBiomes.flyingMountains && i != HighlandsBiomes.ocean2)
-				BiomeManager.strongHoldBiomes.add(i);
-		}
 		
 		// allow player spawning in biomes
 		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
@@ -137,46 +127,12 @@ public class Highlands {
 		//set up sub-biomes
 		Initializer.setUpAllSubBiomes();
 		
-		// DEBUG - COMMENT OUT IN RELEASE
-		//debug();
-
-		// This must NOT be in postInit.
-		//HighlandsCompatibilityManager.registerBlocksBuildcraft();
-		
 		proxy.registerRenderers();
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		
-		hlvillagebiomes = Arrays.asList(new BiomeGenBase[] {
-				HighlandsBiomes.autumnForest,
-				HighlandsBiomes.highlandsb,
-				HighlandsBiomes.pinelands,
-				HighlandsBiomes.tallPineForest,
-				HighlandsBiomes.meadow,
-				HighlandsBiomes.savannah,
-				HighlandsBiomes.sahel,
-				HighlandsBiomes.steppe,
-				HighlandsBiomes.outback,
-				HighlandsBiomes.lowlands,
-				HighlandsBiomes.birchHills,
-				HighlandsBiomes.tropicalIslands,
-				HighlandsBiomes.steppe,
-				HighlandsBiomes.bog,
-				HighlandsBiomes.redwoodForest,
-				HighlandsBiomes.rainforest,
-				HighlandsBiomes.forestIsland,
-				HighlandsBiomes.windyIsland,
-				BiomeGenBase.jungle,
-				BiomeGenBase.forest,
-				BiomeGenBase.taiga,
-				BiomeGenBase.swampland,
-				BiomeGenBase.icePlains
-		});
-		
-		defaultvillagebiomes = MapGenVillage.villageSpawnBiomes;
-
+		MapGenStructureConfig.postInit();
 		//TODO- readd compat
 		//BiomeDictionary PostInit
 		HighlandsCompatibilityManager.registerBiomesForgeBiomeDict();
@@ -231,23 +187,4 @@ public class Highlands {
 //			}
 //		}
 	}	
-	
-	//method to print debug info
-	public static void debug(){
-		System.out.println("   Configured Biomes: ");
-		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
-			if(i == null) System.out.println("Null Biome! Abort!");
-			else System.out.println(i.biomeName + " " + i.biomeID);
-		}
-		
-//		System.out.println("   Highlands Biomes: ");
-//		for(BiomeGenBase i : HL.getBiomesForWorldType()){
-//			if(i == null) System.out.println("Null Biome! Error!");
-//			else System.out.println(i.biomeName + " " + i.biomeID);
-//		}
-//		System.out.println("   Default Biomes: ");
-//		for(BiomeGenBase i : WorldType.DEFAULT.getBiomesForWorldType()){
-//			System.out.println(i.biomeName + " " + i.biomeID);
-//		}
-	}
 }

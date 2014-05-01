@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
 import highlands.block.BlockHighlandsSapling;
+//import highlands.worldgen.layer.GenLayerHL;
+
 import highlands.worldgen.layer.GenLayerHL;
+import highlands.worldgen.layer.TerrainGenInjector;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -21,6 +27,7 @@ import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
+import net.minecraftforge.event.terraingen.WorldTypeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
@@ -45,6 +52,7 @@ public class HighlandsEventManager {
 			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ironWood)
 			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.mangroveWood)
 			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.ashWood)
+			|| e.item.getEntityItem() == new ItemStack(HighlandsBlocks.japaneseMapleWood)
 			){
 			e.entityPlayer.triggerAchievement(AchievementList.mineWood);
 		}
@@ -54,10 +62,10 @@ public class HighlandsEventManager {
 	// Adds village spawning to Highlands worlds and default worlds if Highlands is enabled.
     @SubscribeEvent
 	public void onWorldStart(Load e){
-		if(e.world.provider.terrainType == HighlandsMain.HL || e.world.provider.terrainType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag){
+		if(e.world.provider.terrainType == Highlands.HL || e.world.provider.terrainType == Highlands.HLLB || Highlands.highlandsInDefaultFlag){
 			ArrayList<BiomeGenBase> newTotalVillageBiomes = new ArrayList<BiomeGenBase>();
 			newTotalVillageBiomes.addAll(MapGenVillage.villageSpawnBiomes);
-			newTotalVillageBiomes.addAll(HighlandsMain.hlvillagebiomes);
+			newTotalVillageBiomes.addAll(MapGenStructureConfig.hlvillagebiomes);
 			
 			MapGenVillage.villageSpawnBiomes = newTotalVillageBiomes;
 		}
@@ -71,25 +79,43 @@ public class HighlandsEventManager {
 	// Sets biome size for Highlands Large Biomes
     @SubscribeEvent
 	public void onLoadWorldType(BiomeSize e){
-		if(e.worldType == HighlandsMain.HL){
-			e.newSize = (byte)HighlandsMain.HighlandsBiomeSizeDefault;
+		if(e.worldType == Highlands.HL){
+			e.newSize = (byte)Highlands.HighlandsBiomeSizeDefault;
 		}
-		if(e.worldType == HighlandsMain.HLLB){
-			e.newSize = (byte)HighlandsMain.HighlandsBiomeSizeLB;
+		if(e.worldType == Highlands.HLLB){
+			e.newSize = (byte)Highlands.HighlandsBiomeSizeLB;
 		}
 	}
 	
 	// Initiates the new GenLayers
+    /**
     @SubscribeEvent
 	public void onInitBiomeGenerators(InitBiomeGens e){
-		if(e.worldType == HighlandsMain.HL || e.worldType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag){
+		if(e.worldType == Highlands.HL || e.worldType == Highlands.HLLB || Highlands.highlandsInDefaultFlag){
 			//this initiates the new gen layers (hills, shore, island).
-			if(HighlandsMain.useGenLayers){
+			if(Highlands.useGenLayers){
 				e.newBiomeGens = GenLayerHL.initializeAllBiomeGenerators(e.seed, e.worldType);
+				e.setResult(Result.ALLOW);
 			}
-    		//System.out.println("Highlands initialized biome generators.");
+    		// System.out.println("Highlands initialized biome generators.");
 		}
 	}
+	*/
+    
+    /**
+    @SubscribeEvent
+    public void initBiomes(InitBiomeGens event)
+    {
+    	Logs.log(Level.INFO, "[Highlands] InitBiomeGens triggered");
+      if (HighlandsBiomes.volcanoIsland != null) {
+        for (int i = 0; i < event.newBiomeGens.length; i++) {
+        	// was 1500L
+          event.newBiomeGens[i] = new GenLayerAddHLIsland(event.seed, 1L, event.newBiomeGens[i]);
+        }
+      }
+    }
+    */
+
 	
 	/*
 	// Prevents lakes from generating in Highlands worlds
@@ -108,7 +134,7 @@ public class HighlandsEventManager {
     @SubscribeEvent
 	public void onDecorateLakes2(Populate e){
 		if(e.type == Populate.EventType.LAKE && 
-				(e.world.provider.terrainType == HighlandsMain.HL || e.world.provider.terrainType == HighlandsMain.HLLB || HighlandsMain.highlandsInDefaultFlag)){
+				(e.world.provider.terrainType == Highlands.HL || e.world.provider.terrainType == Highlands.HLLB || Highlands.highlandsInDefaultFlag)){
 			e.setResult(Event.Result.DENY);
 			//System.out.println("Stopped a tiny pond from generating");
 		}
@@ -123,8 +149,7 @@ public class HighlandsEventManager {
         	for(Block b: HighlandsBlocks.saplings)if(b != null && e.block == b)isHLSapling = true;
             if (isHLSapling)
             {
-            	//TODO- questionable fix
-                BlockHighlandsSapling sapling = (BlockHighlandsSapling)Block.blockRegistry.getObject(e.block);
+                BlockHighlandsSapling sapling = (BlockHighlandsSapling)e.block;
                 e.setResult(Event.Result.ALLOW);
                 if(e.entityPlayer.capabilities.isCreativeMode)
                 	sapling.growTree(e.world, e.x, e.y, e.z, rand);
@@ -138,28 +163,35 @@ public class HighlandsEventManager {
 	// sets default village blocks
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void onVillageSelectBlock(GetVillageBlockID e){
-		if(e.biome != null && HighlandsBiomes.sahel != null && HighlandsBiomes.outback != null && BiomeGenBase.icePlains != null){
-			if (e.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || e.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
+	public void onVillageSelectBlock(GetVillageBlockID event){
+		if(event.biome != null && HighlandsBiomes.sahel != null && HighlandsBiomes.outback != null && BiomeGenBase.icePlains != null){
+			if (event.biome.biomeName.equals(HighlandsBiomes.sahel.biomeName) || event.biome.biomeName.equals(HighlandsBiomes.outback.biomeName))
 	        {
-				if (e.original == Blocks.log)e.replacement = Blocks.log;
-	            if (e.original == Blocks.cobblestone)e.replacement = Blocks.sandstone;
-	            if (e.original == Blocks.planks)e.replacement = Blocks.planks;
-	            if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
-	            if (e.original == Blocks.stone_stairs)e.replacement = Blocks.sandstone_stairs;
-	            if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
+				if (event.original == Blocks.log)event.replacement = Blocks.log;
+	            if (event.original == Blocks.cobblestone)event.replacement = Blocks.sandstone;
+	            if (event.original == Blocks.planks)event.replacement = Blocks.planks;
+	            if (event.original == Blocks.oak_stairs)event.replacement = Blocks.oak_stairs;
+	            if (event.original == Blocks.stone_stairs)event.replacement = Blocks.sandstone_stairs;
+	            if (event.original == Blocks.gravel)event.replacement = Blocks.gravel;
 	        }
-			if (e.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
+			if (event.biome.biomeName.equals(BiomeGenBase.icePlains.biomeName))
 	        {
-	            if (e.original == Blocks.log)e.replacement = Blocks.log;
-	            if (e.original == Blocks.cobblestone)e.replacement = Blocks.cobblestone;
-	            if (e.original == Blocks.planks)e.replacement = Blocks.snow;
-	            if (e.original == Blocks.oak_stairs)e.replacement = Blocks.oak_stairs;
-	            if (e.original == Blocks.stone_stairs)e.replacement = Blocks.stone_stairs;
-	            if (e.original == Blocks.gravel)e.replacement = Blocks.gravel;
+	            if (event.original == Blocks.log)event.replacement = Blocks.log;
+	            if (event.original == Blocks.cobblestone)event.replacement = Blocks.cobblestone;
+	            if (event.original == Blocks.planks)event.replacement = Blocks.snow;
+	            if (event.original == Blocks.oak_stairs)event.replacement = Blocks.oak_stairs;
+	            if (event.original == Blocks.stone_stairs)event.replacement = Blocks.stone_stairs;
+	            if (event.original == Blocks.gravel)event.replacement = Blocks.gravel;
 	        }
 		}
 	}
+	
+	@SubscribeEvent
+    public void onInitBiomeGenerators(WorldTypeEvent.InitBiomeGens event) {
+		//if (event.worldType == Highlands.HL || event.worldType == Highlands.HLLB) {
+		//	event.newBiomeGens = TerrainGenInjector.assembleModdedBiomeGenerators(event.seed, event.worldType);
+		//}
+    }
 }
 
 
