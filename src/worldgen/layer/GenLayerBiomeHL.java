@@ -27,15 +27,12 @@ public class GenLayerBiomeHL extends GenLayer
         // Heat biomes
         this.heatBiomes = new BiomeGenBase[] {
         	BiomeGenBase.desert, BiomeGenBase.desert, BiomeGenBase.desert,
-        	//           Savanna                      Savanna
         	BiomeGenBase.savanna, BiomeGenBase.savanna, BiomeGenBase.plains
         };
         // Warm biomes
         this.warmBiomes = new BiomeGenBase[] {
-        	//                                Roofed Forest
         	BiomeGenBase.forest, BiomeGenBase.roofedForest, BiomeGenBase.extremeHills, BiomeGenBase.plains,
-        	//           Birch Forest
-        	BiomeGenBase.birchForest, BiomeGenBase.swampland
+        	BiomeGenBase.birchForest, BiomeGenBase.swampland, BiomeGenBase.jungle// mod add jungle
         };
         // Cool biomes
         this.coolBiomes = new BiomeGenBase[] {
@@ -43,7 +40,6 @@ public class GenLayerBiomeHL extends GenLayer
         };
         // Ice Biomes
         this.iceBiomes = new BiomeGenBase[] {
-        	//                                                                                   Cold Taiga
         	BiomeGenBase.icePlains, BiomeGenBase.icePlains, BiomeGenBase.icePlains, BiomeGenBase.coldTaiga
         };
         this.parent = par3GenLayer;
@@ -113,7 +109,7 @@ public class GenLayerBiomeHL extends GenLayer
                 int l1 = (k1 & 3840) >> 8;
                 k1 &= -3841;
                 
-                if (k1 < 0) k1 = 0; // vanilla bug ??
+                // if (k1 < 0) k1 = 0; // vanilla bug ??
 
                 if (isBiomeOceanic(k1))
                 {
