@@ -47,17 +47,17 @@ public class GenLayerHillsHL extends GenLayer
                 	//Logs.log(Level.INFO, "[Highlands] GenLayerRareBiomeHL k1=" + k1);
                 }
 
-                //if (k1 != 0 && l1 >= 2 && (l1 - 2) % 29 == 1 && k1 < 128)
-                //{
-                //    if (BiomeGenBase.getBiome(k1 + 128) != null)
-                //    {
-                //        aint2[j1 + i1 * par3] = k1 + 128;
-                //    }
-                //    else
-                //    {
-                //        aint2[j1 + i1 * par3] = k1;
-                //    }
-                //}
+                if (k1 != 0 && l1 >= 2 && (l1 - 2) % 29 == 1 && k1 < 128)
+                {
+                    //if (BiomeGenBase.getBiome(k1 + 128) != null)
+                    //{
+                    //    aint2[j1 + i1 * par3] = k1 + 128;
+                    //}
+                    //else
+                    //{
+                        aint2[j1 + i1 * par3] = k1;
+                    //}
+                }
                 else if (this.nextInt(3) != 0 && !flag)
                 {
                     aint2[j1 + i1 * par3] = k1;
