@@ -7,8 +7,6 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerRemoveTooMuchOceanHL extends GenLayer
 {
-    private static final String __OBFID = "CL_00000564";
-
     public GenLayerRemoveTooMuchOceanHL(long p_i45480_1_, GenLayer p_i45480_3_)
     {
         super(p_i45480_1_);
@@ -43,7 +41,7 @@ public class GenLayerRemoveTooMuchOceanHL extends GenLayer
                 this.initChunkSeed((long)(j2 + par1), (long)(i2 + par2));
                 
                 // replaces ocean with plains
-                if (isBiomeOceanic(k3) && isBiomeOceanic(k2) && isBiomeOceanic(l2) && isBiomeOceanic(i3) && isBiomeOceanic(j3) && this.nextInt(2) == 0)
+                if (k3 == 0 && k2 == 0 && l2 == 0 && i3 == 0 && j3 == 0 && this.nextInt(2) == 0)
                 {
                     aint1[j2 + i2 * par3] = 1;
                 }
@@ -51,13 +49,5 @@ public class GenLayerRemoveTooMuchOceanHL extends GenLayer
         }
 
         return aint1;
-    }
-    
-    /**
-     * returns true if the biomeId is one of the various ocean biomes.
-     */
-    protected static boolean isBiomeOceanic(int biomeID)
-    {
-        return biomeID == BiomeGenBase.ocean.biomeID || biomeID == BiomeGenBase.deepOcean.biomeID || biomeID == BiomeGenBase.frozenOcean.biomeID ||  biomeID == HighlandsBiomes.ocean2.biomeID;
     }
 }

@@ -27,8 +27,8 @@ public class GenLayerDeepOceanHL extends GenLayer
         int l1 = par4 + 2;
         int[] aint = this.parent.getInts(i1, j1, k1, l1);
         int[] aint1 = IntCache.getIntCache(par3 * par4);
-        // int oceanBiomeID = BiomeGenBase.ocean.biomeID;
-        int oceanBiomeID = HighlandsBiomes.ocean2.biomeID;
+        int oceanBiomeID = BiomeGenBase.ocean.biomeID;
+        //int oceanBiomeID = HighlandsBiomes.ocean2.biomeID;
 
         for (int i2 = 0; i2 < par4; ++i2)
         {
