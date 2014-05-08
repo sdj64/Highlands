@@ -60,6 +60,8 @@ import net.minecraft.world.biome.BiomeGenTaiga;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -67,6 +69,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class Initializer
 {
 	private static String biomePrefix = "";
+	public static boolean tooManyBiomesInstalled;
+	private static boolean railcraftInstalled;
 	
 	public static void constructSettings()
 	{
@@ -93,6 +97,9 @@ public class Initializer
 		
 		Highlands.useOreGens = Config.genOre.getBoolean(true);
 		Highlands.useGenLayers = !Config.safeMode.getBoolean(false);
+		
+		tooManyBiomesInstalled = Loader.isModLoaded("TooManyBiomes");
+		railcraftInstalled = Loader.isModLoaded("Railcraft");
 	}	
 	
 	
@@ -206,6 +213,9 @@ public class Initializer
 		
 		HighlandsBlocks.berries = new ItemHighlandsBerries().setUnlocalizedName("hl_berries");
 		GameRegistry.registerItem(HighlandsBlocks.berries, "hl_berries");
+		
+		HighlandsBlocks.cocoa2 = new BlockCocoaPlant2().setBlockName("hl_cocoa");
+		GameRegistry.registerBlock(HighlandsBlocks.cocoa2, "hl_cocoa");
 		
 		//Planks and stairs
 		HighlandsBlocks.hlplanks = new BlockHighlandsPlanks().setHardness(2.0F).setResistance(5.0F)
@@ -440,10 +450,13 @@ public class Initializer
 		
 		//improved ocean biome
 		if(Config.ocean2ID > -1) {
-			HighlandsBiomes.ocean2 = new BiomeGenOcean2(Config.ocean2ID).setBiomeName(biomePrefix+"Ocean2");
+			HighlandsBiomes.ocean2 = new BiomeGenOcean2(Config.ocean2ID).setBiomeName(biomePrefix+"Ocean");
 			Highlands.improvedOceans = true;
 			BiomeDictionary.registerBiomeType(HighlandsBiomes.ocean2, BiomeDictionary.Type.WATER);
 			BiomeManager.removeSpawnBiome(HighlandsBiomes.ocean2);
+			if (railcraftInstalled) {
+				FMLInterModComms.sendMessage("Railcraft", "geode-biome", ""+Config.ocean2ID);
+			}
 		}
 		
 		//sub-biomes
@@ -833,11 +846,6 @@ public class Initializer
 		if(HighlandsBlocks.cotton != null){
 			registerBlock(HighlandsBlocks.cotton, "Cotton Plant");
 			GameRegistry.addShapelessRecipe(new ItemStack (Items.string, 1, 0), new ItemStack(HighlandsBlocks.cotton, 1, 0));
-		}
-		
-		if(HighlandsBlocks.berries != null){
-			GameRegistry.registerItem(HighlandsBlocks.berries, "hl_berries");
-			//LanguageRegistry.addName(HighlandsBlocks.berries, "Berries");
 		}
 		
 	}

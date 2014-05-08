@@ -11,11 +11,15 @@ import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fabricator77.multiworld.api.IMWChunkProvider;
+import fabricator77.multiworld.api.IMWWorldType;
+import fabricator77.tmb.worldgen.layer.GenLayerBiomeTMB;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
 import highlands.block.BlockHighlandsSapling;
 //import highlands.worldgen.layer.GenLayerHL;
 
+import highlands.worldgen.layer.GenLayerBiomeHL;
 import highlands.worldgen.layer.GenLayerHL;
 import highlands.worldgen.layer.TerrainGenInjector;
 import net.minecraft.block.Block;
@@ -88,33 +92,13 @@ public class HighlandsEventManager {
 	}
 	
 	// Initiates the new GenLayers
-    /**
     @SubscribeEvent
-	public void onInitBiomeGenerators(InitBiomeGens e){
-		if(e.worldType == Highlands.HL || e.worldType == Highlands.HLLB || Highlands.highlandsInDefaultFlag){
-			//this initiates the new gen layers (hills, shore, island).
-			if(Highlands.useGenLayers){
-				e.newBiomeGens = GenLayerHL.initializeAllBiomeGenerators(e.seed, e.worldType);
-				e.setResult(Result.ALLOW);
-			}
-    		// System.out.println("Highlands initialized biome generators.");
+    public void onInitBiomeGenerators(WorldTypeEvent.InitBiomeGens event) {
+    	if (event.worldType instanceof IMWWorldType) {
+			//event.newBiomeGens = TerrainGenInjector.assembleModdedBiomeGenerators(event.seed, event.worldType);
+			event.newBiomeGens = GenLayerBiomeHL.initializeAllBiomeGenerators(event.seed, event.worldType);
 		}
-	}
-	*/
-    
-    /**
-    @SubscribeEvent
-    public void initBiomes(InitBiomeGens event)
-    {
-    	Logs.log(Level.INFO, "[Highlands] InitBiomeGens triggered");
-      if (HighlandsBiomes.volcanoIsland != null) {
-        for (int i = 0; i < event.newBiomeGens.length; i++) {
-        	// was 1500L
-          event.newBiomeGens[i] = new GenLayerAddHLIsland(event.seed, 1L, event.newBiomeGens[i]);
-        }
-      }
     }
-    */
 
 	
 	/*
@@ -185,13 +169,6 @@ public class HighlandsEventManager {
 	        }
 		}
 	}
-	
-	@SubscribeEvent
-    public void onInitBiomeGenerators(WorldTypeEvent.InitBiomeGens event) {
-		//if (event.worldType == Highlands.HL || event.worldType == Highlands.HLLB) {
-		//	event.newBiomeGens = TerrainGenInjector.assembleModdedBiomeGenerators(event.seed, event.worldType);
-		//}
-    }
 }
 
 

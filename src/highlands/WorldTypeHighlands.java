@@ -2,6 +2,7 @@ package highlands;
 
 //import highlands.worldgen.layer.GenLayerBiomeHL;
 
+import fabricator77.multiworld.api.IMWWorldType;
 import highlands.overworld.ChunkProviderHLOverworld;
 import highlands.worldgen.layer.GenLayerBiomeHL;
 
@@ -25,7 +26,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 
-public class WorldTypeHighlands extends WorldType {
+public class WorldTypeHighlands extends WorldType implements IMWWorldType {
 
 	private String name;
 	
@@ -41,22 +42,6 @@ public class WorldTypeHighlands extends WorldType {
 	     ret = new GenLayerBiomeEdge(1000L, ret);
 	     return ret;
 	 }
-	
-
-	 /**
-	@Override
-	public IChunkProvider getChunkGenerator(World world, String generatorOptions)
-    { 
-        return new ChunkProviderGenerate(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
-    }
-	 
-	 // WorldChunkMangerHL
-	 @Override
-	 public WorldChunkManager getChunkManager(World world)
-	 {
-	        return new WorldChunkMangerHL(world);//Not enough to replace vanilla GenLayer
-	 }
-	 */
 	 
 	 @Override
 	 public WorldChunkManager getChunkManager(World world)

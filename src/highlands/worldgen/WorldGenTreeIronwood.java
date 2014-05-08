@@ -55,6 +55,7 @@ public class WorldGenTreeIronwood extends WorldGenHighlandsTreeBase
     	if(!new WorldGenIronwoodCrown(false, true, 0, 0, 1, maxHeight).generate(world, random, locX, locY, locZ))return false;
     	//generates the trunk
     	generateWorldTreeTrunk(world, random, locX, locY, locZ);
+    	this.world = null;
 		return true;
     }
     

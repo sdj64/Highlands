@@ -80,7 +80,7 @@ public class WorldGenTreeMangrove extends WorldGenHighlandsTreeBase
 		generateLeafLayerCircle(world, random, 2.5, locX, locZ, h);
 		h++;
 		generateLeafLayerCircle(world, random, 1, locX, locZ, h);
-		
+		this.world = null;
     	return true;
     }
     

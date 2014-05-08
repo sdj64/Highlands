@@ -530,6 +530,7 @@ public class WorldGenAutumnBigTree extends WorldGenAbstractTree
 
         if (!this.validTreeLocation())
         {
+        	this.worldObj = null;
             return false;
         }
         else
@@ -539,10 +540,12 @@ public class WorldGenAutumnBigTree extends WorldGenAbstractTree
 	            this.generateLeaves();
 	            this.generateTrunk();
 	            this.generateLeafNodeBases();
+	            this.worldObj = null;
 	            return true;
         	}
         	catch(Exception e){
         		e.printStackTrace();
+        		this.worldObj = null;
         		return false;
         	}
         }

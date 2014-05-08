@@ -46,8 +46,9 @@ public class BiomeGenSnowMountains extends BiomeGenBaseHighlands
     @Override
 	public void decorate(World world, Random random, int x, int z) {
 		BiomeGenBaseHighlands biome = this;
-    	if(random.nextInt(3) == 0 && !world.provider.terrainType.getTranslateName().equals("ATG - Alternate"))
-    		new WorldGenMountain(15, 25, false, 0).generate(world, random, x+random.nextInt(16), 128, z+random.nextInt(16));
+		// WorldType.getTranslateName() doesn't work in bukkit ?
+    	//if(random.nextInt(3) == 0 && !world.provider.terrainType.getTranslateName().equals("ATG - Alternate"))
+    	//	new WorldGenMountain(15, 25, false, 0).generate(world, random, x+random.nextInt(16), 128, z+random.nextInt(16));
     	
     	this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
     	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 20, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLice, 0, 128);

@@ -69,7 +69,7 @@ public class WorldGenTreeCanopy extends WorldGenHighlandsTreeBase
     		treeHeight+= 3;
     		genTree(world, random, locX+1, locY, locZ+1, treeHeight, isWide);
     	}
-    	
+    	this.world = null;
     	return true;
     }
     

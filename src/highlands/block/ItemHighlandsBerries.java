@@ -17,11 +17,13 @@ public class ItemHighlandsBerries extends ItemFood{
 	/**
      * How long it takes to use or consume an item
      */
+	@Override
     public int getMaxItemUseDuration(ItemStack par1ItemStack)
     {
         return 16;
     }
     
+	@Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister)
     {

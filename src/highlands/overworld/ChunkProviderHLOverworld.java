@@ -1,5 +1,7 @@
 package highlands.overworld;
 
+import highlands.Initializer;
+
 import java.util.List;
 import java.util.Random;
 
@@ -62,7 +64,7 @@ public class ChunkProviderHLOverworld implements IChunkProvider, IMWChunkProvide
      * are map structures going to be generated (e.g. strongholds)
      */
     private final boolean mapFeaturesEnabled;
-    private WorldType field_147435_p;
+    private WorldType worldType;
     private final double[] field_147434_q;
     private final float[] field_147433_r;
     private double[] stoneNoise = new double[256];
@@ -101,7 +103,7 @@ public class ChunkProviderHLOverworld implements IChunkProvider, IMWChunkProvide
     {
         this.worldObj = par1World;
         this.mapFeaturesEnabled = par4;
-        this.field_147435_p = par1World.getWorldInfo().getTerrainType();
+        this.worldType = par1World.getWorldInfo().getTerrainType();
         this.rand = new Random(par2);
         this.field_147431_j = new NoiseGeneratorOctaves(this.rand, 16);
         this.field_147432_k = new NoiseGeneratorOctaves(this.rand, 16);
@@ -314,7 +316,7 @@ public class ChunkProviderHLOverworld implements IChunkProvider, IMWChunkProvide
                         float f3 = biomegenbase1.rootHeight;
                         float f4 = biomegenbase1.heightVariation;
 
-                        if (this.field_147435_p == WorldType.AMPLIFIED && f3 > 0.0F)
+                        if (this.worldType == WorldType.AMPLIFIED && f3 > 0.0F)
                         {
                             f3 = 1.0F + f3 * 2.0F;
                             f4 = 1.0F + f4 * 4.0F;
@@ -584,7 +586,8 @@ public class ChunkProviderHLOverworld implements IChunkProvider, IMWChunkProvide
 
 	@Override
 	public boolean genVillages(int dim) {
-		return false;
+		if (Initializer.tooManyBiomesInstalled) return false;
+		else return true;
 	}
 
 	@Override
@@ -594,7 +597,8 @@ public class ChunkProviderHLOverworld implements IChunkProvider, IMWChunkProvide
 
 	@Override
 	public boolean genScatteredFeature(int dim) {
-		return false;
+		if (Initializer.tooManyBiomesInstalled) return false;
+		else return true;
 	}
 
 	@Override
@@ -604,12 +608,14 @@ public class ChunkProviderHLOverworld implements IChunkProvider, IMWChunkProvide
 
 	@Override
 	public boolean genTMBVillages(int dim) {
-		return true;
+		if (Initializer.tooManyBiomesInstalled) return true;
+		else return false;
 	}
 
 	@Override
 	public boolean genTMBScatteredFeature(int dim) {
-		return true;
+		if (Initializer.tooManyBiomesInstalled) return true;
+		else return false;
 	}
 
 	@Override

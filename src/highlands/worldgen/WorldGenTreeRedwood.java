@@ -82,6 +82,7 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
 		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
 		h++;
 		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
+		this.world = null;
 		return true;
     }
 }

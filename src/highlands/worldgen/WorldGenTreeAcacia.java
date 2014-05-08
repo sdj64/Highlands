@@ -67,6 +67,7 @@ public class WorldGenTreeAcacia extends WorldGenHighlandsTreeBase
 		int[] xyz = generateStraightBranch(world, random, 4, locX, h, locZ, random.nextInt(4));
 		generateLeafLayerCircle(world, random, 4.5, xyz[0], xyz[2], xyz[1]);
 		generateLeafLayerCircle(world, random, 3.5, xyz[0], xyz[2], xyz[1]+1);
+		this.world = null;
 		return true;
     }
 }

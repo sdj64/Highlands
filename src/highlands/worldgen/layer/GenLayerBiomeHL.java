@@ -32,7 +32,7 @@ public class GenLayerBiomeHL extends GenLayer
         // Warm biomes
         this.warmBiomes = new BiomeGenBase[] {
         	BiomeGenBase.forest, BiomeGenBase.roofedForest, BiomeGenBase.extremeHills, BiomeGenBase.plains,
-        	BiomeGenBase.birchForest, BiomeGenBase.swampland, BiomeGenBase.jungle// mod add jungle
+        	BiomeGenBase.birchForest, BiomeGenBase.swampland, BiomeGenBase.jungle // mod add jungle
         };
         // Cool biomes
         this.coolBiomes = new BiomeGenBase[] {
@@ -122,6 +122,7 @@ public class GenLayerBiomeHL extends GenLayer
                 {
                     aint1[j1 + i1 * par3] = k1;
                 }
+                // plains
                 else if (k1 == 1)
                 {
                     if (l1 > 0)
@@ -140,17 +141,20 @@ public class GenLayerBiomeHL extends GenLayer
                         aint1[j1 + i1 * par3] = this.heatBiomes[this.nextInt(this.heatBiomes.length)].biomeID;
                     }
                 }
+                // desert
                 else if (k1 == 2)
                 {
-                    if (l1 > 0)
-                    {
-                        aint1[j1 + i1 * par3] = BiomeGenBase.jungle.biomeID;
-                    }
-                    else
-                    {
+                	// Jungle if ???
+                    //if (l1 > 0)
+                    //{
+                    //    aint1[j1 + i1 * par3] = BiomeGenBase.jungle.biomeID;
+                    //}
+                    //else
+                    //{
                         aint1[j1 + i1 * par3] = this.warmBiomes[this.nextInt(this.warmBiomes.length)].biomeID;
-                    }
+                    //}
                 }
+                // extreme hills
                 else if (k1 == 3)
                 {
                     if (l1 > 0)
@@ -162,6 +166,7 @@ public class GenLayerBiomeHL extends GenLayer
                         aint1[j1 + i1 * par3] = this.coolBiomes[this.nextInt(this.coolBiomes.length)].biomeID;
                     }
                 }
+                // forest
                 else if (k1 == 4)
                 {
                     aint1[j1 + i1 * par3] = this.iceBiomes[this.nextInt(this.iceBiomes.length)].biomeID;

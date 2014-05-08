@@ -104,10 +104,11 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
                     this.setBlockAndNotifyAdequately(world, locX +
                     		Direction.offsetX[Direction.rotateOpposite[k1]], h,
                     		locZ + Direction.offsetZ[Direction.rotateOpposite[k1]],
-                    		Blocks.cocoa, i2 << 2 | k1);
+                    		HighlandsBlocks.cocoa2, i2 << 2 | k1);
                 }
             }
     	}
+    	this.world = null;
 		return true;
     }
 }

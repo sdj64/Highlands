@@ -76,6 +76,7 @@ public class WorldGenMountain extends WorldGenerator
 				}
 			}
 		}
+    	this.world = null;
     	return true;
     }   
     

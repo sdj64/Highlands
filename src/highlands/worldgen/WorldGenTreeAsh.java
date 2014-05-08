@@ -79,6 +79,7 @@ public class WorldGenTreeAsh extends WorldGenHighlandsTreeBase
     		generateLeafLayerCircleNoise(world, random, 2.5, xyz[0], xyz[2], xyz[1]);
     		generateLeafLayerCircleNoise(world, random, 1.8, xyz[0], xyz[2], xyz[1]+1);
     	}
+    	this.world = null;
     	return true;
     }
 }

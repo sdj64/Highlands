@@ -65,7 +65,7 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     		genTree(world, random, locX, locY, locZ+1, treeHeight, isWide);
     		genTree(world, random, locX+1, locY, locZ+1, treeHeight, isWide);
     	}
-    	
+    	this.world = null;
     	return true;
     }
     

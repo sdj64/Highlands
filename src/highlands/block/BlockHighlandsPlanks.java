@@ -24,7 +24,7 @@ public class BlockHighlandsPlanks extends Block
 
     public BlockHighlandsPlanks()
     {
-    	super(Material.ice);
+    	super(Material.wood);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
     

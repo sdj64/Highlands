@@ -76,6 +76,7 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     	setBlockInWorld(locX, h, locZ, this.leaves, this.leavesMeta);
     	h++;
     	setBlockInWorld(locX, h, locZ, this.leaves, this.leavesMeta);
+    	this.world = null;
     	return true;
     }
     

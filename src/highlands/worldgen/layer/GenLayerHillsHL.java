@@ -10,13 +10,13 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerHillsHL extends GenLayer
 {
-    private GenLayer field_151628_d;
+    private GenLayer river;
 
     public GenLayerHillsHL(long par1, GenLayer par3, GenLayer par4)
     {
         super(par1);
         this.parent = par3;
-        this.field_151628_d = par4;
+        this.river = par4;
     }
 
     /**
@@ -27,7 +27,7 @@ public class GenLayerHillsHL extends GenLayer
     public int[] getInts(int par1, int par2, int par3, int par4)
     {    	
         int[] aint = this.parent.getInts(par1 - 1, par2 - 1, par3 + 2, par4 + 2);
-        int[] aint1 = this.field_151628_d.getInts(par1 - 1, par2 - 1, par3 + 2, par4 + 2);
+        int[] aint1 = this.river.getInts(par1 - 1, par2 - 1, par3 + 2, par4 + 2);
         int[] aint2 = IntCache.getIntCache(par3 * par4);
 
         for (int i1 = 0; i1 < par4; ++i1)
@@ -47,17 +47,22 @@ public class GenLayerHillsHL extends GenLayer
                 	//Logs.log(Level.INFO, "[Highlands] GenLayerRareBiomeHL k1=" + k1);
                 }
 
+                // parent not ocean &&
+                // river not plains or ocean &&
+                // river is megaTaiga
+                // parent less than 128
                 //if (k1 != 0 && l1 >= 2 && (l1 - 2) % 29 == 1 && k1 < 128)
-                //{
-                //    if (BiomeGenBase.getBiome(k1 + 128) != null)
-                //    {
-                //        aint2[j1 + i1 * par3] = k1 + 128;
-                //    }
-                //    else
-                //    {
-                //        aint2[j1 + i1 * par3] = k1;
-                //    }
-                //}
+                if (k1 != 0 && l1 >= 2 && l1 == 32 && k1 < 128)
+                {
+                    if (BiomeGenBase.getBiome(k1 + 128) != null)
+                    {
+                        aint2[j1 + i1 * par3] = k1 + 128;
+                    }
+                    else
+                    {
+                        aint2[j1 + i1 * par3] = k1;
+                    }
+                }
                 else if (this.nextInt(3) != 0 && !flag)
                 {
                     aint2[j1 + i1 * par3] = k1;
@@ -161,14 +166,15 @@ public class GenLayerHillsHL extends GenLayer
 
                     if (flag && i2 != k1)
                     {
-                        //if (BiomeGenBase.getBiome(i2 + 128) != null)
-                        //{
-                        //    i2 += 128;
-                        //}
-                        //else
-                        //{
+                    	// make apply to vanilla biomes only
+                        if (i2 < 40 && BiomeGenBase.getBiome(i2 + 128) != null)
+                        {
+                            i2 += 128;
+                        }
+                        else
+                        {
                             i2 = k1;
-                        //}
+                        }
                     }
 
                     if (i2 == k1)

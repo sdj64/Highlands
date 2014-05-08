@@ -43,7 +43,7 @@ public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
     		setBlockInWorld(locX, locY + 1, locZ, this.leaves, this.leavesMeta);
     	}
     	
-    	
+    	this.world = null;
 		return true;
     }
 }
