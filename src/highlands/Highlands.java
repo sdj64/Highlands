@@ -41,7 +41,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="Highlands", name="Highlands", version="2.2.0pre3",
+@Mod(modid="Highlands", name="Highlands", version="2.2.0",
 		dependencies = "after:Forestry;after:MineFactoryReloaded;after:Thaumcraft;after:BuildCraft|Transport")
 public class Highlands {
 

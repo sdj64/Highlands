@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import fabricator77.tmb.potions.PotionManager;
 import highlands.Logs;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenSmallPlants;
@@ -18,6 +17,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -107,9 +107,19 @@ public class BlockHighlandsSmallPlants extends BlockFlower implements IPlantable
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
     @Override
-    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
+    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity entity)
     {
-    	if(plantType == 7) par5Entity.attackEntityFrom(DamageSource.cactus, 1);
+    	if(plantType == 7) 
+    	if (plantType == 7 && (entity instanceof EntityCreature || entity instanceof EntityPlayer)) {
+    		entity.attackEntityFrom(DamageSource.cactus, 1);
+        	if (entity instanceof EntityCreature) {
+        		EntityCreature entityCreature = (EntityCreature)entity;
+        		float rotation = entityCreature.getRotationYawHead();
+        		entityCreature.motionY = 0.2;
+        		entityCreature.motionX = -(Math.sin(Math.toRadians(rotation)) * 0.5);
+        		entityCreature.motionZ = (Math.cos(Math.toRadians(rotation)) * 0.5);
+        	}
+        }
     }
 
     //IPlantable

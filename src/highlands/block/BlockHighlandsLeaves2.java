@@ -268,16 +268,41 @@ public class BlockHighlandsLeaves2 extends BlockLeavesBase implements IShearable
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
+    public void dropBlockAsItemWithChance(World world, int p_149690_2_, int p_149690_3_, int p_149690_4_, int p_149690_5_, float p_149690_6_, int p_149690_7_)
     {
-    	//TODO- right fix?
-    	if (!par1World.isRemote)
+        if (!world.isRemote)
         {
-            Item item = getItemDropped(par5, par1World.rand, par7);
-            if (par1World.rand.nextFloat() <= par6)
+            int j1 = saplingRate[treeType];
+
+            if (p_149690_7_ > 0)
             {
-                this.dropBlockAsItem(par1World, par2, par3, par4, new ItemStack(item, 1, this.damageDropped(par5)));
+                j1 -= 2 << p_149690_7_;
+
+                if (j1 < 10)
+                {
+                    j1 = 10;
+                }
             }
+
+            if (world.rand.nextInt(j1) == 0)
+            {
+                Item item = this.getItemDropped(p_149690_5_, world.rand, p_149690_7_);
+                this.dropBlockAsItem(world, p_149690_2_, p_149690_3_, p_149690_4_, new ItemStack(item, 1, this.damageDropped(p_149690_5_)));
+            }
+
+            j1 = 200;
+
+            if (p_149690_7_ > 0)
+            {
+                j1 -= 10 << p_149690_7_;
+
+                if (j1 < 40)
+                {
+                    j1 = 40;
+                }
+            }
+
+            //this.func_150124_c(world, p_149690_2_, p_149690_3_, p_149690_4_, p_149690_5_, j1);
         }
     }
     

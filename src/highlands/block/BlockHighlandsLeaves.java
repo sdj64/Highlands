@@ -295,23 +295,6 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
-    /**
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
-    {
-    	//TODO- right fix?
-    	if (!par1World.isRemote)
-        {
-            Item item = getItemDropped(par5, par1World.rand, par7);
-            if (par1World.rand.nextFloat() <= par6)
-            {
-                this.dropBlockAsItem(par1World, par2, par3, par4, new ItemStack(item, 1, this.damageDropped(par5)));
-            }
-        }
-    }
-    */
-    /**
-     * Drops the block items with a specified chance of dropping the specified items
-     */
     public void dropBlockAsItemWithChance(World world, int p_149690_2_, int p_149690_3_, int p_149690_4_, int p_149690_5_, float p_149690_6_, int p_149690_7_)
     {
         if (!world.isRemote)

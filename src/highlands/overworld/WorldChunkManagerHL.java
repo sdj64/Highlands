@@ -1,4 +1,4 @@
-package highlands;
+package highlands.overworld;
 
 import highlands.worldgen.layer.GenLayerHL;
 

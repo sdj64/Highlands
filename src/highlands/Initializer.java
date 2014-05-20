@@ -46,10 +46,12 @@ import highlands.block.*;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.Height;
@@ -238,13 +240,15 @@ public class Initializer
 				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodStairs3");
 		registerBlock(HighlandsBlocks.hlplankstairs3, "Grey Wood Stairs");
 		
-		HighlandsBlocks.hlplankhalf = new BlockHLPlankSlab(false, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
-				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodSlab");
-		GameRegistry.registerBlock(HighlandsBlocks.hlplankhalf, ItemBlockMetadata.class, "hl_woodSlab");
-		
 		HighlandsBlocks.hlplankhalfdouble = new BlockHLPlankSlab(true, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodSlabDouble");
-		GameRegistry.registerBlock(HighlandsBlocks.hlplankhalfdouble, ItemBlockMetadata.class, "hl_woodDoubleSlab");
+		GameRegistry.registerBlock(HighlandsBlocks.hlplankhalfdouble, ItemSlabPlanks.class, "hl_woodDoubleSlab");
+		HighlandsBlocks.hlplankhalf = new BlockHLPlankSlab(false, HighlandsBlocks.hlplanks).setHardness(2.0F).setResistance(5.0F)
+				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodSlab");
+		//GameRegistry.registerBlock(HighlandsBlocks.hlplankhalf, ItemBlockMetadata.class, "hl_woodSlab");
+		GameRegistry.registerBlock(HighlandsBlocks.hlplankhalf, ItemSlabPlanks.class, "hl_woodSlab");
+		
+		
 
 
 		HighlandsBlocks.saplings = new Block[]{

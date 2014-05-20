@@ -1,9 +1,8 @@
 package highlands;
 
-//import highlands.worldgen.layer.GenLayerBiomeHL;
-
 import fabricator77.multiworld.api.IMWWorldType;
 import highlands.overworld.ChunkProviderHLOverworld;
+import highlands.overworld.WorldChunkManagerHL;
 import highlands.worldgen.layer.GenLayerBiomeHL;
 
 import java.util.List;

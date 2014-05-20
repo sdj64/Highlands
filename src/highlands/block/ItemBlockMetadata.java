@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import fabricator77.tmb.block.BambooBlock;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;

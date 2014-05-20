@@ -13,7 +13,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fabricator77.multiworld.api.IMWChunkProvider;
 import fabricator77.multiworld.api.IMWWorldType;
-import fabricator77.tmb.worldgen.layer.GenLayerBiomeTMB;
 import highlands.api.HighlandsBiomes;
 import highlands.api.HighlandsBlocks;
 import highlands.block.BlockHighlandsSapling;

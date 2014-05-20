@@ -27,7 +27,8 @@ public class GenLayerBiomeHL extends GenLayer
         // Heat biomes
         this.heatBiomes = new BiomeGenBase[] {
         	BiomeGenBase.desert, BiomeGenBase.desert, BiomeGenBase.desert,
-        	BiomeGenBase.savanna, BiomeGenBase.savanna, BiomeGenBase.plains
+        	BiomeGenBase.savanna, BiomeGenBase.savanna, BiomeGenBase.plains,
+        	BiomeGenBase.mesaPlateau_F // mod add mesaPlateau_F
         };
         // Warm biomes
         this.warmBiomes = new BiomeGenBase[] {
@@ -36,7 +37,8 @@ public class GenLayerBiomeHL extends GenLayer
         };
         // Cool biomes
         this.coolBiomes = new BiomeGenBase[] {
-        	BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.taiga, BiomeGenBase.plains
+        	BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.taiga, BiomeGenBase.plains,
+        	BiomeGenBase.megaTaiga // mod add megaTaiga
         };
         // Ice Biomes
         this.iceBiomes = new BiomeGenBase[] {
@@ -82,7 +84,7 @@ public class GenLayerBiomeHL extends GenLayer
         addBiome(HighlandsBiomes.snowMountains, Mode.ICE);
         addBiome(HighlandsBiomes.rockMountains, Mode.WARM);
         addBiome(HighlandsBiomes.desertMountains, Mode.WARM);
-        addBiome(HighlandsBiomes.steppe, Mode.ICE);
+        addBiome(HighlandsBiomes.steppe, Mode.COOL);
         addBiome(HighlandsBiomes.glacier, Mode.ICE);
         
         //if (ModSettings.biomesOPlentyInstalled) {
@@ -125,46 +127,21 @@ public class GenLayerBiomeHL extends GenLayer
                 // plains
                 else if (k1 == 1)
                 {
-                    if (l1 > 0)
-                    {
-                        if (this.nextInt(3) == 0)
-                        {
-                            aint1[j1 + i1 * par3] = BiomeGenBase.mesaPlateau.biomeID;
-                        }
-                        else
-                        {
-                            aint1[j1 + i1 * par3] = BiomeGenBase.mesaPlateau_F.biomeID;
-                        }
-                    }
-                    else
-                    {
-                        aint1[j1 + i1 * par3] = this.heatBiomes[this.nextInt(this.heatBiomes.length)].biomeID;
+                    aint1[j1 + i1 * par3] = this.heatBiomes[this.nextInt(this.heatBiomes.length)].biomeID;
+                    // mod
+                    if (aint1[j1 + i1 * par3] == BiomeGenBase.mesaPlateau_F.biomeID && this.nextInt(3) == 0) {
+                    	aint1[j1 + i1 * par3] = BiomeGenBase.mesaPlateau.biomeID;
                     }
                 }
                 // desert
                 else if (k1 == 2)
                 {
-                	// Jungle if ???
-                    //if (l1 > 0)
-                    //{
-                    //    aint1[j1 + i1 * par3] = BiomeGenBase.jungle.biomeID;
-                    //}
-                    //else
-                    //{
-                        aint1[j1 + i1 * par3] = this.warmBiomes[this.nextInt(this.warmBiomes.length)].biomeID;
-                    //}
+                	aint1[j1 + i1 * par3] = this.warmBiomes[this.nextInt(this.warmBiomes.length)].biomeID;
                 }
                 // extreme hills
                 else if (k1 == 3)
                 {
-                    if (l1 > 0)
-                    {
-                        aint1[j1 + i1 * par3] = BiomeGenBase.megaTaiga.biomeID;
-                    }
-                    else
-                    {
-                        aint1[j1 + i1 * par3] = this.coolBiomes[this.nextInt(this.coolBiomes.length)].biomeID;
-                    }
+                    aint1[j1 + i1 * par3] = this.coolBiomes[this.nextInt(this.coolBiomes.length)].biomeID;
                 }
                 // forest
                 else if (k1 == 4)
@@ -175,11 +152,6 @@ public class GenLayerBiomeHL extends GenLayer
                 {
                 	// put code for mod Island Biomes here ???
                     aint1[j1 + i1 * par3] = BiomeGenBase.mushroomIsland.biomeID;
-                }
-                
-                if (k1 < 0 || aint1[j1 + i1 * par3] < 0) {
-                	k1 = 0; // vanilla bug ??
-                	aint1[j1 + i1 * par3] = k1;
                 }
             }
         }

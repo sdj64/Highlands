@@ -219,11 +219,6 @@ public class GenLayerHillsHL extends GenLayer
                         }
                     }
                 }
-                
-                // hack to prevent crashes due to biomID being huge number
-                //if (aint1[j1 + i1 * par3] > 255) {
-                //	aint1[j1 + i1 * par3] = 0;
-                //}
             }
         }
 

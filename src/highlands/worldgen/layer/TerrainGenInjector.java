@@ -1,12 +1,12 @@
 package highlands.worldgen.layer;
 
+import highlands.Logs;
 import highlands.worldgen.layer.GenLayerHillsHL;
 import highlands.worldgen.layer.GenLayerIslandHL;
 import highlands.worldgen.layer.GenLayerRareBiomeHL;
 
 import org.apache.logging.log4j.Level;
 
-import fabricator77.tmb.Logs;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerAddIsland;
