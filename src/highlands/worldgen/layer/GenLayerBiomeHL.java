@@ -161,16 +161,17 @@ public class GenLayerBiomeHL extends GenLayer
     
     // Custom mod
     public void addBiome (BiomeGenBase biome, Mode mode) {
+    	if (biome == null) return;
     	switch (mode.ordinal())
         {
-            case 1:
+            case 0:
             	this.heatBiomes = ObjectArrays.concat(this.heatBiomes, biome); return;
             default:
-            case 2:
+            case 1:
             	this.warmBiomes = ObjectArrays.concat(this.warmBiomes, biome); return;
-            case 3:
+            case 2:
             	this.coolBiomes = ObjectArrays.concat(this.coolBiomes, biome); return;
-            case 4:
+            case 3:
             	this.iceBiomes = ObjectArrays.concat(this.iceBiomes, biome); return;
         }
     }

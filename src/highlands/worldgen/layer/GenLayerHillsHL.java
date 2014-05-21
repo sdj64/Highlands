@@ -11,12 +11,14 @@ import net.minecraft.world.gen.layer.IntCache;
 public class GenLayerHillsHL extends GenLayer
 {
     private GenLayer river;
+    private int[] islandBiomeIDs;
 
     public GenLayerHillsHL(long par1, GenLayer par3, GenLayer par4)
     {
         super(par1);
         this.parent = par3;
         this.river = par4;
+        setIslandBiomes();
     }
 
     /**
@@ -138,28 +140,10 @@ public class GenLayerHillsHL extends GenLayer
                     // update to support multiple ocean and island biomes
                     else if ( (k1 == BiomeGenBase.deepOcean.biomeID || k1 == HighlandsBiomes.ocean2.biomeID) && this.nextInt(4) == 0) // was 3
                     {
-                        //j2 = this.nextInt(2);
-
-                        //if (j2 == 0)
-                        //{
-                        //    i2 = BiomeGenBase.plains.biomeID;
-                        //}
-                        //else
-                        //{
-                        //    i2 = BiomeGenBase.forest.biomeID;
-                        //}
-                    	//islands
-                    	j2 = this.nextInt(8);
-                    	switch (j2) {
-                    		case 1: i2 = HighlandsBiomes.jungleIsland.biomeID; break;
-                    		case 2: i2 = HighlandsBiomes.forestIsland.biomeID; break;
-                    		case 3: i2 = HighlandsBiomes.desertIsland.biomeID; break;
-                    		case 4: i2 = HighlandsBiomes.snowIsland.biomeID; break;
-                    		case 5: i2 = HighlandsBiomes.volcanoIsland.biomeID; break;
-                    		case 6: i2 = HighlandsBiomes.rockIsland.biomeID; break;
-                    		case 7: i2 = HighlandsBiomes.windyIsland.biomeID; break;
-                    		default: i2 = BiomeGenBase.plains.biomeID; break;
-                    	}
+                    	//islands                  	
+                    	j2 = this.nextInt(islandBiomeIDs.length);
+                    	i2 = islandBiomeIDs[j2];
+                    	
                     	flag = false; //crash fix ?
                     	//Logs.log(Level.ERROR, "GenLayerHillsHL.islandBiome="+i2);
                     }
@@ -223,5 +207,54 @@ public class GenLayerHillsHL extends GenLayer
         }
 
         return aint2;
+    }
+    
+    private void setIslandBiomes () {
+    	if (islandBiomeIDs != null) return;
+    	
+    	int[] available = new int[8];
+    	int total = 0;
+    	
+    	if (BiomeGenBase.plains != null) { // original GenLayerHills biome
+    		available[total] = BiomeGenBase.plains.biomeID;
+        	total++;
+    	}    	
+        if (HighlandsBiomes.jungleIsland != null) {
+        	available[total] = HighlandsBiomes.jungleIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.forestIsland != null) { // replaces original GenLayerHills biome
+        	available[total] = HighlandsBiomes.forestIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.desertIsland != null) {
+        	available[total] = HighlandsBiomes.desertIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.snowIsland != null) {
+        	available[total] = HighlandsBiomes.snowIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.volcanoIsland != null) {
+        	available[total] = HighlandsBiomes.volcanoIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.rockIsland != null) {
+        	available[total] = HighlandsBiomes.rockIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.windyIsland != null) {
+        	available[total] = HighlandsBiomes.windyIsland.biomeID;
+        	total++;
+        }
+        
+        islandBiomeIDs = new int[total];
+        int counter = 0;
+        for (int i=0; i<total; i++) {
+        	if (available[i] > 0) {
+        		islandBiomeIDs[counter] = available[i];
+        		counter++;
+        	}
+        }
     }
 }

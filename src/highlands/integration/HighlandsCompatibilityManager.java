@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import highlands.api.HighlandsBiomes;
 import highlands.biome.BiomeGenBaseHighlands;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -28,138 +29,136 @@ import ttftcuts.atg.api.ATGBiomes.BiomeType;
 import ttftcuts.atg.api.IGenMod;
 */
 
-import static net.minecraftforge.common.BiomeDictionary.Type;
+
 public class HighlandsCompatibilityManager{
-public static final BiomeGenBaseHighlands[] forestb = {
-(BiomeGenBaseHighlands)HighlandsBiomes.autumnForest,
-(BiomeGenBaseHighlands)HighlandsBiomes.woodlands,
-(BiomeGenBaseHighlands)HighlandsBiomes.woodsMountains,
-(BiomeGenBaseHighlands)HighlandsBiomes.birchHills,
-(BiomeGenBaseHighlands)HighlandsBiomes.lowlands,
-(BiomeGenBaseHighlands)HighlandsBiomes.forestIsland,
-(BiomeGenBaseHighlands)HighlandsBiomes.redwoodForest,
-//(BiomeGenBaseHighlands)HighlandsBiomes.valley
-};
-public static final BiomeGenBaseHighlands[] taigab = {
-(BiomeGenBaseHighlands)HighlandsBiomes.tallPineForest,
-//(BiomeGenBaseHighlands)HighlandsBiomes.snowIsland
-};
-public static final BiomeGenBaseHighlands[] snowb = {
-(BiomeGenBaseHighlands)HighlandsBiomes.alps,
-(BiomeGenBaseHighlands)HighlandsBiomes.tundra,
-(BiomeGenBaseHighlands)HighlandsBiomes.snowMountains,
-};
-public static final BiomeGenBaseHighlands[] jungleb = {
-(BiomeGenBaseHighlands)HighlandsBiomes.tropics,
-(BiomeGenBaseHighlands)HighlandsBiomes.flyingMountains,
-(BiomeGenBaseHighlands)HighlandsBiomes.tropicalIslands,
-(BiomeGenBaseHighlands)HighlandsBiomes.rainforest,
-//(BiomeGenBaseHighlands)HighlandsBiomes.jungleIsland
-};
-public static final BiomeGenBaseHighlands[] hillb = {
-(BiomeGenBaseHighlands)HighlandsBiomes.highlandsb,
-(BiomeGenBaseHighlands)HighlandsBiomes.pinelands,
-(BiomeGenBaseHighlands)HighlandsBiomes.cliffs,
-(BiomeGenBaseHighlands)HighlandsBiomes.rockMountains,
-(BiomeGenBaseHighlands)HighlandsBiomes.mesa,
-(BiomeGenBaseHighlands)HighlandsBiomes.baldHill,
-(BiomeGenBaseHighlands)HighlandsBiomes.badlands,
-(BiomeGenBaseHighlands)HighlandsBiomes.desertMountains,
-};
-public static final BiomeGenBaseHighlands[] plainsb = {
-(BiomeGenBaseHighlands)HighlandsBiomes.meadow,
-(BiomeGenBaseHighlands)HighlandsBiomes.savannah
-};
-public static final BiomeGenBaseHighlands[] desertb = {
-(BiomeGenBaseHighlands)HighlandsBiomes.dunes,
-(BiomeGenBaseHighlands)HighlandsBiomes.outback,
-(BiomeGenBaseHighlands)HighlandsBiomes.sahel,
-};
-public static final BiomeGenBaseHighlands[] oceanb = {
-(BiomeGenBaseHighlands)HighlandsBiomes.lake,
-(BiomeGenBaseHighlands)HighlandsBiomes.ocean2,
-(BiomeGenBaseHighlands)HighlandsBiomes.volcanoIsland,
-(BiomeGenBaseHighlands)HighlandsBiomes.desertIsland,
-(BiomeGenBaseHighlands)HighlandsBiomes.estuary,
-(BiomeGenBaseHighlands)HighlandsBiomes.flyingMountains,
-};
+	public static final BiomeGenBaseHighlands[] forestb = {
+		(BiomeGenBaseHighlands)HighlandsBiomes.autumnForest,
+		(BiomeGenBaseHighlands)HighlandsBiomes.woodlands,
+		(BiomeGenBaseHighlands)HighlandsBiomes.woodsMountains,
+		(BiomeGenBaseHighlands)HighlandsBiomes.birchHills,
+		(BiomeGenBaseHighlands)HighlandsBiomes.lowlands,
+		(BiomeGenBaseHighlands)HighlandsBiomes.forestIsland,
+		(BiomeGenBaseHighlands)HighlandsBiomes.redwoodForest,
+		//(BiomeGenBaseHighlands)HighlandsBiomes.valley
+	};
+	public static final BiomeGenBaseHighlands[] taigab = {
+		(BiomeGenBaseHighlands)HighlandsBiomes.tallPineForest,
+	};
+	public static final BiomeGenBaseHighlands[] snowb = {
+		(BiomeGenBaseHighlands)HighlandsBiomes.alps,
+		(BiomeGenBaseHighlands)HighlandsBiomes.tundra,
+		(BiomeGenBaseHighlands)HighlandsBiomes.snowMountains,
+	};
+	public static final BiomeGenBaseHighlands[] jungleb = {
+		(BiomeGenBaseHighlands)HighlandsBiomes.tropics,
+		(BiomeGenBaseHighlands)HighlandsBiomes.flyingMountains,
+		(BiomeGenBaseHighlands)HighlandsBiomes.tropicalIslands,
+		(BiomeGenBaseHighlands)HighlandsBiomes.rainforest,
+	};
+	public static final BiomeGenBaseHighlands[] hillb = {
+		(BiomeGenBaseHighlands)HighlandsBiomes.highlandsb,
+		(BiomeGenBaseHighlands)HighlandsBiomes.pinelands,
+		(BiomeGenBaseHighlands)HighlandsBiomes.cliffs,
+		(BiomeGenBaseHighlands)HighlandsBiomes.rockMountains,
+		(BiomeGenBaseHighlands)HighlandsBiomes.mesa,
+		(BiomeGenBaseHighlands)HighlandsBiomes.baldHill,
+		(BiomeGenBaseHighlands)HighlandsBiomes.badlands,
+		(BiomeGenBaseHighlands)HighlandsBiomes.desertMountains,
+	};
+	public static final BiomeGenBaseHighlands[] plainsb = {
+		(BiomeGenBaseHighlands)HighlandsBiomes.meadow,
+		(BiomeGenBaseHighlands)HighlandsBiomes.savannah
+	};
+	public static final BiomeGenBaseHighlands[] desertb = {
+		(BiomeGenBaseHighlands)HighlandsBiomes.dunes,
+		(BiomeGenBaseHighlands)HighlandsBiomes.outback,
+		(BiomeGenBaseHighlands)HighlandsBiomes.sahel,
+	};
+	public static final BiomeGenBaseHighlands[] oceanb = {
+		(BiomeGenBaseHighlands)HighlandsBiomes.lake,
+		(BiomeGenBaseHighlands)HighlandsBiomes.ocean2,
+		(BiomeGenBaseHighlands)HighlandsBiomes.volcanoIsland,
+		(BiomeGenBaseHighlands)HighlandsBiomes.desertIsland,
+		(BiomeGenBaseHighlands)HighlandsBiomes.estuary,
+		(BiomeGenBaseHighlands)HighlandsBiomes.flyingMountains,
+	};
 /** clears the spawn lists from all highlands biomes,
 * then sets it equal to the spawn lists from a similar default biome.
 * only called if "Mob Mod Compatibility" is set to true.
 */
 public static void mobload_biomes(){
-for(BiomeGenBaseHighlands a : forestb){
-if(a != null){
-a.setSpawnLists(
-BiomeGenBase.forest.getSpawnableList(EnumCreatureType.monster),
-BiomeGenBase.forest.getSpawnableList(EnumCreatureType.creature),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
-);
-}
-}
-for(BiomeGenBaseHighlands a : taigab){
-if(a != null){
-a.setSpawnLists(
-BiomeGenBase.taiga.getSpawnableList(EnumCreatureType.monster),
-BiomeGenBase.taiga.getSpawnableList(EnumCreatureType.creature),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
-);
-}
-}
-for(BiomeGenBaseHighlands a : snowb){
-if(a != null){
-a.setSpawnLists(
-BiomeGenBase.icePlains.getSpawnableList(EnumCreatureType.monster),
-BiomeGenBase.icePlains.getSpawnableList(EnumCreatureType.creature),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
-);
-}
-}
-for(BiomeGenBaseHighlands a : jungleb){
-if(a != null){
-a.setSpawnLists(
-BiomeGenBase.jungle.getSpawnableList(EnumCreatureType.monster),
-BiomeGenBase.jungle.getSpawnableList(EnumCreatureType.creature),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
-);
-}
-}
-for(BiomeGenBaseHighlands a : hillb){
-if(a != null){
-a.setSpawnLists(
-BiomeGenBase.extremeHills.getSpawnableList(EnumCreatureType.monster),
-BiomeGenBase.extremeHills.getSpawnableList(EnumCreatureType.creature),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
-);
-}
-}
-for(BiomeGenBaseHighlands a : plainsb){
-if(a != null){
-a.setSpawnLists(
-BiomeGenBase.plains.getSpawnableList(EnumCreatureType.monster),
-BiomeGenBase.plains.getSpawnableList(EnumCreatureType.creature),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
-);
-}
-}
-for(BiomeGenBaseHighlands a : desertb){
-if(a != null){
-a.setSpawnLists(
-BiomeGenBase.desert.getSpawnableList(EnumCreatureType.monster),
-BiomeGenBase.desert.getSpawnableList(EnumCreatureType.creature),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
-);
-}
-}
-for(BiomeGenBaseHighlands a : oceanb){
-if(a != null){
-a.setSpawnLists(
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.monster),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.creature),
-BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
-);
-}
-}
+	for(BiomeGenBaseHighlands a : forestb){
+		if(a != null){
+			a.setSpawnLists(
+				BiomeGenBase.forest.getSpawnableList(EnumCreatureType.monster),
+				BiomeGenBase.forest.getSpawnableList(EnumCreatureType.creature),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
+			);
+		}
+	}
+	for(BiomeGenBaseHighlands a : taigab){
+		if(a != null){
+			a.setSpawnLists(
+				BiomeGenBase.taiga.getSpawnableList(EnumCreatureType.monster),
+				BiomeGenBase.taiga.getSpawnableList(EnumCreatureType.creature),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
+			);
+		}
+	}
+	for(BiomeGenBaseHighlands a : snowb){
+		if(a != null){
+			a.setSpawnLists(
+				BiomeGenBase.icePlains.getSpawnableList(EnumCreatureType.monster),
+				BiomeGenBase.icePlains.getSpawnableList(EnumCreatureType.creature),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
+			);
+		}
+	}
+	for(BiomeGenBaseHighlands a : jungleb){
+		if(a != null){
+			a.setSpawnLists(
+				BiomeGenBase.jungle.getSpawnableList(EnumCreatureType.monster),
+				BiomeGenBase.jungle.getSpawnableList(EnumCreatureType.creature),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
+			);
+		}
+	}
+	for(BiomeGenBaseHighlands a : hillb){
+		if(a != null){
+			a.setSpawnLists(
+				BiomeGenBase.extremeHills.getSpawnableList(EnumCreatureType.monster),
+				BiomeGenBase.extremeHills.getSpawnableList(EnumCreatureType.creature),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
+			);
+		}
+	}
+	for(BiomeGenBaseHighlands a : plainsb){
+		if(a != null){
+			a.setSpawnLists(
+				BiomeGenBase.plains.getSpawnableList(EnumCreatureType.monster),
+				BiomeGenBase.plains.getSpawnableList(EnumCreatureType.creature),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
+			);
+		}
+	}
+	for(BiomeGenBaseHighlands a : desertb){
+		if(a != null){
+			a.setSpawnLists(
+				BiomeGenBase.desert.getSpawnableList(EnumCreatureType.monster),
+				BiomeGenBase.desert.getSpawnableList(EnumCreatureType.creature),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
+			);
+		}
+	}
+	for(BiomeGenBaseHighlands a : oceanb){
+		if(a != null){
+			a.setSpawnLists(
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.monster),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.creature),
+				BiomeGenBase.ocean.getSpawnableList(EnumCreatureType.waterCreature)
+			);
+		}
+	}
 }
 
 /**
@@ -222,76 +221,79 @@ new AspectList().add(Aspect.PLANT, 2).add(Aspect.DEATH, 1));
 */
 
 public static void registerBiomesForgeBiomeDict(){
-BiomeDictionary.registerBiomeType(HighlandsBiomes.woodsMountains, Type.MOUNTAIN, Type.FOREST);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.highlandsb, Type.HILLS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.tundra, Type.FROZEN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.cliffs, Type.MOUNTAIN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.pinelands, Type.HILLS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.autumnForest, Type.FOREST);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.alps, Type.FROZEN, Type.MOUNTAIN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.tallPineForest, Type.FROZEN, Type.FOREST);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.meadow, Type.PLAINS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.savannah, Type.PLAINS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.tropics, Type.JUNGLE);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.outback, Type.DESERT, Type.PLAINS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.woodlands, Type.FOREST);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.bog, Type.SWAMP);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.redwoodForest, Type.FOREST, Type.HILLS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.dunes, Type.DESERT, Type.HILLS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.lowlands, Type.FOREST, Type.PLAINS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.sahel, Type.DESERT, Type.PLAINS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.birchHills, Type.FOREST, Type.HILLS);
-BiomeDictionary.registerBiomeType( HighlandsBiomes.tropicalIslands, Type.JUNGLE, Type.WATER);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.rainforest, Type.JUNGLE, Type.FOREST);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.estuary, Type.BEACH, Type.SWAMP);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.badlands, Type.WASTELAND, Type.HILLS);
-BiomeDictionary.registerBiomeType( HighlandsBiomes.flyingMountains, Type.MOUNTAIN, Type.MAGICAL, Type.WATER);
-BiomeDictionary.registerBiomeType( HighlandsBiomes.snowMountains, Type.MOUNTAIN, Type.FROZEN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.rockMountains, Type.MOUNTAIN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.desertMountains, Type.MOUNTAIN, Type.DESERT);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.steppe, Type.PLAINS, Type.HILLS);
-BiomeDictionary.registerBiomeType( HighlandsBiomes.glacier, Type.FROZEN);
-BiomeDictionary.registerBiomeType( HighlandsBiomes.ocean2, Type.WATER);
-//Sub Biomes
-BiomeDictionary.registerBiomeType(HighlandsBiomes.forestIsland, Type.FOREST);
-BiomeDictionary.registerBiomeType( HighlandsBiomes.jungleIsland, Type.JUNGLE);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.desertIsland, Type.BEACH);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.volcanoIsland, Type.WASTELAND, Type.MOUNTAIN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.snowIsland, Type.FOREST, Type.FROZEN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.windyIsland, Type.PLAINS);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.rockIsland, Type.WASTELAND);
-BiomeDictionary.registerBiomeType( HighlandsBiomes.valley, Type.FOREST);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.lake, Type.WATER);
-BiomeDictionary.registerBiomeType( HighlandsBiomes.mesa, Type.MOUNTAIN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.baldHill, Type.MOUNTAIN);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.oasis, Type.JUNGLE);
-BiomeDictionary.registerBiomeType(HighlandsBiomes.canyon, Type.DESERT);
-//Border Biomes
-BiomeDictionary.registerBiomeType(HighlandsBiomes.shrubland, Type.PLAINS, Type.HILLS);
+	registerBiomeType(HighlandsBiomes.woodsMountains, Type.MOUNTAIN, Type.FOREST);
+	registerBiomeType(HighlandsBiomes.highlandsb, Type.HILLS);
+	registerBiomeType(HighlandsBiomes.tundra, Type.FROZEN);
+	registerBiomeType(HighlandsBiomes.cliffs, Type.MOUNTAIN);
+	registerBiomeType(HighlandsBiomes.pinelands, Type.HILLS);
+	registerBiomeType(HighlandsBiomes.autumnForest, Type.FOREST);
+	registerBiomeType(HighlandsBiomes.alps, Type.FROZEN, Type.MOUNTAIN);
+	registerBiomeType(HighlandsBiomes.tallPineForest, Type.FROZEN, Type.FOREST);
+	registerBiomeType(HighlandsBiomes.meadow, Type.PLAINS);
+	registerBiomeType(HighlandsBiomes.savannah, Type.PLAINS);
+	registerBiomeType(HighlandsBiomes.tropics, Type.JUNGLE);
+	registerBiomeType(HighlandsBiomes.outback, Type.DESERT, Type.PLAINS);
+	registerBiomeType(HighlandsBiomes.woodlands, Type.FOREST);
+	registerBiomeType(HighlandsBiomes.bog, Type.SWAMP);
+	registerBiomeType(HighlandsBiomes.redwoodForest, Type.FOREST, Type.HILLS);
+	registerBiomeType(HighlandsBiomes.dunes, Type.DESERT, Type.HILLS);
+	registerBiomeType(HighlandsBiomes.lowlands, Type.FOREST, Type.PLAINS);
+	registerBiomeType(HighlandsBiomes.sahel, Type.DESERT, Type.PLAINS);
+	registerBiomeType(HighlandsBiomes.birchHills, Type.FOREST, Type.HILLS);
+	registerBiomeType( HighlandsBiomes.tropicalIslands, Type.JUNGLE, Type.WATER);
+	registerBiomeType(HighlandsBiomes.rainforest, Type.JUNGLE, Type.FOREST);
+	registerBiomeType(HighlandsBiomes.estuary, Type.BEACH, Type.SWAMP);
+	registerBiomeType(HighlandsBiomes.badlands, Type.WASTELAND, Type.HILLS);
+	registerBiomeType( HighlandsBiomes.flyingMountains, Type.MOUNTAIN, Type.MAGICAL, Type.WATER);
+	registerBiomeType( HighlandsBiomes.snowMountains, Type.MOUNTAIN, Type.FROZEN);
+	registerBiomeType(HighlandsBiomes.rockMountains, Type.MOUNTAIN);
+	registerBiomeType(HighlandsBiomes.desertMountains, Type.MOUNTAIN, Type.DESERT);
+	registerBiomeType(HighlandsBiomes.steppe, Type.PLAINS, Type.HILLS);
+	registerBiomeType( HighlandsBiomes.glacier, Type.FROZEN);
+	registerBiomeType( HighlandsBiomes.ocean2, Type.WATER);
+	//Sub Biomes
+	registerBiomeType(HighlandsBiomes.forestIsland, Type.FOREST);
+	registerBiomeType( HighlandsBiomes.jungleIsland, Type.JUNGLE);
+	registerBiomeType(HighlandsBiomes.desertIsland, Type.BEACH);
+	registerBiomeType(HighlandsBiomes.volcanoIsland, Type.WASTELAND, Type.MOUNTAIN);
+	registerBiomeType(HighlandsBiomes.snowIsland, Type.FOREST, Type.FROZEN);
+	registerBiomeType(HighlandsBiomes.windyIsland, Type.PLAINS);
+	registerBiomeType(HighlandsBiomes.rockIsland, Type.WASTELAND);
+	registerBiomeType( HighlandsBiomes.valley, Type.FOREST);
+	registerBiomeType(HighlandsBiomes.lake, Type.WATER);
+	registerBiomeType( HighlandsBiomes.mesa, Type.MOUNTAIN);
+	registerBiomeType(HighlandsBiomes.baldHill, Type.MOUNTAIN);
+	registerBiomeType(HighlandsBiomes.oasis, Type.JUNGLE);
+	registerBiomeType(HighlandsBiomes.canyon, Type.DESERT);
+	//Border Biomes
+	registerBiomeType(HighlandsBiomes.shrubland, Type.PLAINS, Type.HILLS);
+}
+
+private static void registerBiomeType (BiomeGenBase biome, Type ... types) {
+	if (biome != null) BiomeDictionary.registerBiomeType(biome, types);
 }
 
 public static void registerBlocksForestry(){
-StringBuilder sb;
-sb = new StringBuilder();
-for (Block b : HighlandsBlocks.saplings){
-if (b==null)
-continue;
-//TODO: untested
-FMLInterModComms.sendMessage("Forestry", "add-farmable-sapling", "farmArboreal@" + b + ".0");
-sb.append(b).append(".0;");
-}
-FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "forester@" + sb.toString());
-sb = new StringBuilder();
-for (Block b : HighlandsBlocks.logs){
-if (b==null)
-continue;
-//TODO: untested
-sb.append(b).append(".0;");
-}
-FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "forester@" + sb.toString());
-FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.blueFlower));
-FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.lavender));
-FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.whiteFlower));
+	StringBuilder sb;
+	sb = new StringBuilder();
+	for (Block b : HighlandsBlocks.saplings){
+		if (b==null) continue;
+		//TODO: untested
+		FMLInterModComms.sendMessage("Forestry", "add-farmable-sapling", "farmArboreal@" + b + ".0");
+		sb.append(b).append(".0;");
+	}
+	FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "forester@" + sb.toString());
+	sb = new StringBuilder();
+	for (Block b : HighlandsBlocks.logs){
+		if (b==null)
+			continue;
+		//TODO: untested
+		sb.append(b).append(".0;");
+	}
+	FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "forester@" + sb.toString());
+	FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.blueFlower));
+	FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.lavender));
+	FlowerManager.plainFlowers.add(new ItemStack(HighlandsBlocks.whiteFlower));
 }
 
 public static void registerRecipesForestry(){

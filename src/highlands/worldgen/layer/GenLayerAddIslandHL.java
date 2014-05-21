@@ -7,11 +7,13 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerAddIslandHL extends GenLayer
 {
+	private int[] islandBiomeIDs;
 
     public GenLayerAddIslandHL(long par1, GenLayer par3GenLayer)
     {
         super(par1);
         this.parent = par3GenLayer;
+        setIslandBiomes();
     }
 
     /**
@@ -108,18 +110,57 @@ public class GenLayerAddIslandHL extends GenLayer
     }
     
     protected boolean isIslandBiome (int id) {
-    	if (id == HighlandsBiomes.jungleIsland.biomeID ||
-		id == HighlandsBiomes.forestIsland.biomeID ||
-		id == HighlandsBiomes.desertIsland.biomeID ||
-		id ==  HighlandsBiomes.snowIsland.biomeID ||
-		id ==  HighlandsBiomes.volcanoIsland.biomeID ||
-		id ==  HighlandsBiomes.rockIsland.biomeID ||
-		id ==  HighlandsBiomes.windyIsland.biomeID ||
-		id == BiomeGenBase.forest.biomeID)
-    	{
-    		return true;
+    	if (id == BiomeGenBase.forest.biomeID) return true; // original uses forest only (ID 4)
+    	for (int i=0; i<islandBiomeIDs.length; i++) {
+    		if (islandBiomeIDs[i] == id) {
+    			return true;
+    		}
     	}
     	return false;
+    }
+    private void setIslandBiomes () {
+    	if (islandBiomeIDs != null) return;
+    	
+    	int[] available = new int[7];
+    	
+    	int total = 0;
+        if (HighlandsBiomes.jungleIsland != null) {
+        	available[total] = HighlandsBiomes.jungleIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.forestIsland != null) {
+        	available[total] = HighlandsBiomes.forestIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.desertIsland != null) {
+        	available[total] = HighlandsBiomes.desertIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.snowIsland != null) {
+        	available[total] = HighlandsBiomes.snowIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.volcanoIsland != null) {
+        	available[total] = HighlandsBiomes.volcanoIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.rockIsland != null) {
+        	available[total] = HighlandsBiomes.rockIsland.biomeID;
+        	total++;
+        }
+        if (HighlandsBiomes.windyIsland != null) {
+        	available[total] = HighlandsBiomes.windyIsland.biomeID;
+        	total++;
+        }
+        
+        islandBiomeIDs = new int[total];
+        int counter = 0;
+        for (int i=0; i<total; i++) {
+        	if (available[i] > 0) {
+        		islandBiomeIDs[counter] = available[i];
+        		counter++;
+        	}
+        }
     }
     
     protected boolean isOceanBiome (int id) {
