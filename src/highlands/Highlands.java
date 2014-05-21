@@ -165,16 +165,16 @@ public class Highlands {
 //			}
 //		}
 //
-//		//Thaumcraft PostInit
-//		if (Loader.isModLoaded("Thaumcraft")){
-//			try {
-//				HighlandsCompatibilityManager.registerBlocksThaumcraft();
-//			}
-//			catch( Exception e ) {
-//				System.err.println("[Highlands] Failed to enable Thaumcraft compatibility because: ");
-//				e.printStackTrace();
-//			}
-//		}
+  		//Thaumcraft PostInit
+  		if (Loader.isModLoaded("Thaumcraft")){
+ 			try {
+ 				HighlandsCompatibilityManager.registerBlocksThaumcraft();
+ 			}
+ 			catch( Exception e ) {
+ 				System.err.println("[Highlands] Failed to enable Thaumcraft compatibility because: ");
+ 				e.printStackTrace();
+  			}
+  		}
 //		
 //		//ATG PostInit
 //		if (Loader.isModLoaded("ATG")){

@@ -19,11 +19,12 @@ import highlands.biome.BiomeGenBaseHighlands;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-/**
-import powercrystals.minefactoryreloaded.api.FactoryRegistry;
+
+//import powercrystals.minefactoryreloaded.api.FactoryRegistry;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+/**
 import ttftcuts.atg.api.ATGBiomes;
 import ttftcuts.atg.api.ATGBiomes.BiomeType;
 import ttftcuts.atg.api.IGenMod;
@@ -161,64 +162,52 @@ public static void mobload_biomes(){
 	}
 }
 
-/**
-public static void registerBlocksThaumcraft(){
-for( Block b : HighlandsBlocks.logs ){
-if (b.blockID == HighlandsBlocks.ironWood.blockID)
-ThaumcraftApi.registerObjectTag(b.blockID, 0, new AspectList().add(Aspect.TREE, 4).add(Aspect.METAL, 2));
-else
-ThaumcraftApi.registerObjectTag(b.blockID, 0, new AspectList().add(Aspect.TREE, 4));
-}
-for( Block b : HighlandsBlocks.leaves ){
-if (b.blockID == HighlandsBlocks.ironWood.blockID)
-ThaumcraftApi.registerObjectTag(b.blockID, 0, new AspectList().add(Aspect.PLANT, 1).add(Aspect.METAL, 1));
-else
-ThaumcraftApi.registerObjectTag(b.blockID, 0, new AspectList().add(Aspect.PLANT, 1));
-}
-for( Block b : HighlandsBlocks.saplings ){
-if (b.blockID == HighlandsBlocks.ironWood.blockID)
-ThaumcraftApi.registerObjectTag(b.blockID, 0,
-new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.SEED, 1).add(Aspect.METAL, 1));
-else
-ThaumcraftApi.registerObjectTag(b.blockID, 0,
-new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.SEED, 1));
-}
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplanks.blockID, new int[]{0,1,2,3},
-new AspectList().add(Aspect.TREE, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankhalf.blockID, new int[]{0,1,2,3},
-new AspectList().add(Aspect.TREE, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankstairs0.blockID, 0,
-new AspectList().add(Aspect.TREE, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankstairs1.blockID, 0,
-new AspectList().add(Aspect.TREE, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankstairs2.blockID, 0,
-new AspectList().add(Aspect.TREE, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.hlplankstairs3.blockID, 0,
-new AspectList().add(Aspect.TREE, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.berries.itemID, 0,
-new AspectList().add(Aspect.SEED, 1));
-//ThaumcraftApi.registerObjectTag(HighlandsBlocks.cocoa2.blockID, 0,
-// new AspectList().add(Aspect.PLANT, 2).add(Aspect.SENSES, 1).add(Aspect.CROP, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.blueFlower.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.blueFlower.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.WATER, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.lavender.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.cattail.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.CLOTH, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.whiteFlower.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.raspberryBush.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.blueberryBush.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.cattail.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.CLOTH, 1));
-ThaumcraftApi.registerObjectTag(HighlandsBlocks.thornbush.blockID, 0,
-new AspectList().add(Aspect.PLANT, 2).add(Aspect.DEATH, 1));
-}
-*/
+
+	public static void registerBlocksThaumcraft(){
+		for( Block b : HighlandsBlocks.logs ){
+			if (b == HighlandsBlocks.ironWood) {
+				ThaumcraftApi.registerObjectTag(new ItemStack(b), new AspectList().add(Aspect.TREE, 4).add(Aspect.METAL, 2));
+			}
+			else {
+				ThaumcraftApi.registerObjectTag(new ItemStack(b), new AspectList().add(Aspect.TREE, 4));
+			}
+		}
+		for( Block b : HighlandsBlocks.leaves ){
+			if (b == HighlandsBlocks.ironWood) {
+				ThaumcraftApi.registerObjectTag(new ItemStack(b), new AspectList().add(Aspect.PLANT, 1).add(Aspect.METAL, 1));
+			}
+			else {
+				ThaumcraftApi.registerObjectTag(new ItemStack(b), new AspectList().add(Aspect.PLANT, 1));
+			}
+		}
+		for( Block b : HighlandsBlocks.saplings ){
+			if (b == HighlandsBlocks.ironWood) {
+				ThaumcraftApi.registerObjectTag(new ItemStack(b), new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.PLANT, 1).add(Aspect.METAL, 1));
+			}
+			else {
+				ThaumcraftApi.registerObjectTag(new ItemStack(b), new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.PLANT, 1));
+			}
+		}
+
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.hlplanks), new int[]{0,1,2,3}, new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.hlplankhalf), new int[]{0,1,2,3}, new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.hlplankstairs0), new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.hlplankstairs1), new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.hlplankstairs2), new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.hlplankstairs3), new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.berries), new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.cocoa2), new AspectList().add(Aspect.PLANT, 2).add(Aspect.SENSES, 1).add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.blueFlower), new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
+		// ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.blueFlower), new AspectList().add(Aspect.PLANT, 2).add(Aspect.WATER, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.lavender), new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.cattail), new AspectList().add(Aspect.PLANT, 2).add(Aspect.CLOTH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.whiteFlower), new AspectList().add(Aspect.PLANT, 2).add(Aspect.LIGHT, 1).add(Aspect.SENSES, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.raspberryBush), new AspectList().add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.blueberryBush), new AspectList().add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.cattail), new AspectList().add(Aspect.PLANT, 2).add(Aspect.CLOTH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(HighlandsBlocks.thornbush), new AspectList().add(Aspect.PLANT, 2).add(Aspect.DEATH, 1));
+	}
+
 
 public static void registerBiomesForgeBiomeDict(){
 	registerBiomeType(HighlandsBiomes.woodsMountains, Type.MOUNTAIN, Type.FOREST);
