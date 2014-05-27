@@ -88,6 +88,14 @@ public class Highlands {
 		
 		Initializer.constructBlocks();
 		Initializer.initRecipes();
+		for (Block block:HighlandsBlocks.logs)
+			Initializer.setFireProperties(block, 5, 5);
+		for (Block block:HighlandsBlocks.leaves)
+			Initializer.setFireProperties(block, 30, 60);
+		for (Block block:HighlandsBlocks.plants)
+			Initializer.setFireProperties(block, 60, 100);
+		for (Block block:HighlandsBlocks.planks)
+			Initializer.setFireProperties(block, 5, 20);
 	}
 	
 	@EventHandler

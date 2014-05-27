@@ -72,6 +72,7 @@ public class HighlandsBlocks {
     public static Block blueberryBush;
     public static Block cotton;
     public static Block thornbush;
+    public static Block[] plants;
     
     //berries
     public static Item berries;
@@ -84,6 +85,7 @@ public class HighlandsBlocks {
     public static Block hlplankstairs3;
     public static Block hlplankhalf;
     public static Block hlplankhalfdouble;
+    public static Block[] planks;
     
     //palm cocoa
     public static Block cocoa2;
