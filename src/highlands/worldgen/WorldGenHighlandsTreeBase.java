@@ -8,6 +8,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -26,7 +27,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     
     protected boolean notifyFlag;
     
-    protected World world;
+    protected World worldObj;
     protected Random random;
     
     //this array is the 8 directions of x and y, used for palm trees.
@@ -35,8 +36,8 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     /** Constructor - sets up tree variables
      * @param lmd leaf meta data
      * @param wmd wood meta data
-     * @param log wood block id
-     * @param leaves leaf block id
+     * @param log wood block
+     * @param leaves leaf block
      * @param minH minimum height of tree trunk
      * @param maxH max possible height above minH the tree trunk could grow
      * @param notify whether or not to notify blocks of the tree being grown.
@@ -218,15 +219,15 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     
     protected void setBlockInWorld(int x, int y, int z, Block block, int meta){
     	try{
-    		Block bl = world.getBlock(x, y, z);
+    		Block bl = worldObj.getBlock(x, y, z);
     		//TODO- right fix? might be crashy...
 			//if(block == this.wood && (world.isAirBlock(x,y,z) || bl.isReplaceable(world, x, y, z) ||
 			//		bl.isLeaves(world, x, y, z) || bl instanceof BlockHighlandsSapling)){
-            if (bl.isFoliage(world, x, y, z) || world.isAirBlock(x, y, z) ||
+            if (bl.isFoliage(worldObj, x, y, z) || worldObj.isAirBlock(x, y, z) || bl instanceof BlockLiquid ||
             		bl instanceof BlockHighlandsSapling ||
             		bl.getMaterial() == Material.plants || bl.getMaterial() == Material.vine) {
-				if(notifyFlag) world.setBlock(x, y, z, block, meta, 3);
-		    	else world.setBlock(x, y, z, block, meta, 2);
+				if(notifyFlag) worldObj.setBlock(x, y, z, block, meta, 3);
+		    	else worldObj.setBlock(x, y, z, block, meta, 2);
 			}
 			//else if(block == this.leaves && world.isAirBlock(x,y,z)){
 			//	if(notifyFlag) world.setBlock(x, y, z, block, meta, 3);
@@ -249,7 +250,8 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     			for(int k = y; k <= y+height; k++){
     				//System.out.println(world.getBlockId(i, k, j));
     				//System.out.println(Block.blocksList[world.getBlockId(i, k, j)].isLeaves(world, i, j, k));
-    				if(!(world.getBlock(i, k, j) == Blocks.air || world.getBlock(i, k, j).isLeaves(world, i, k, j)))return false;
+    				if (worldObj.getBlock(i, k, j) != null) return false; 
+    				if(!(worldObj.getBlock(i, k, j) == Blocks.air || worldObj.getBlock(i, k, j).isLeaves(worldObj, i, k, j)))return false;
     			}
     		}
     	}
@@ -260,7 +262,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     //finds top block for the given x,z position (excluding leaves)
     protected int findTopBlock(int x, int z){
     	int y = 256;
-        for (boolean var6 = false; (world.getBlock(x, y, z) == Blocks.air || world.getBlock(x, y, z).isLeaves(world, x, y, z)) && y > 0; --y);
+        for (boolean var6 = false; (worldObj.getBlock(x, y, z) == Blocks.air || worldObj.getBlock(x, y, z).isLeaves(worldObj, x, y, z)) && y > 0; --y);
         return y;
     }
 }

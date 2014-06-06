@@ -8,7 +8,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class WorldGenHighlandsBigTree extends WorldGenAbstractTree
+public class WorldGenHighlandsBigTree extends WorldGenHighlandsTreeBase
 {
     /**
      * Contains three sets of two values that provide complimentary indices for a given 'major' index - 1 and 2 for 0, 0
@@ -20,7 +20,7 @@ public class WorldGenHighlandsBigTree extends WorldGenAbstractTree
     Random rand = new Random();
 
     /** Reference to the World object. */
-    World worldObj;
+    //World worldObj;
     int[] basePos = new int[] {0, 0, 0};
     int heightLimit = 0;
     int height;
@@ -54,7 +54,7 @@ public class WorldGenHighlandsBigTree extends WorldGenAbstractTree
 
     public WorldGenHighlandsBigTree(boolean par1, boolean placeLeaves, int wmd, int lmd, int trunkDiameter, int treeHeightLim)
     {
-        super(par1);
+    	super(lmd, wmd, Blocks.log, Blocks.leaves, false); // last 3 are dummy data for now
         hasLeaves = placeLeaves;
         leafMeta = lmd;
         woodMeta = wmd;
@@ -456,14 +456,12 @@ public class WorldGenHighlandsBigTree extends WorldGenAbstractTree
      * Returns a boolean indicating whether or not the current location for the tree, spanning basePos to to the height
      * limit, is valid.
      */
+    @Deprecated
     boolean validTreeLocation()
     {
         int[] var1 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
         int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
         Block var3 = this.worldObj.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
-
-        // if(!hasLeaves)System.out.println(var3);
-        
         
         if (var3 != Blocks.grass && var3 != Blocks.dirt)
         {
@@ -514,27 +512,35 @@ public class WorldGenHighlandsBigTree extends WorldGenAbstractTree
         this.leafDensity = par5;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World world, Random par2Random, int locX, int locY, int locZ)
     {
-        this.worldObj = par1World;
+        this.worldObj = world;
         long var6 = par2Random.nextLong();
         this.rand.setSeed(var6);
-        this.basePos[0] = par3;
-        this.basePos[1] = par4;
-        this.basePos[2] = par5;
+        this.basePos[0] = locX;
+        this.basePos[1] = locY;
+        this.basePos[2] = locZ;
 
         if (this.heightLimit == 0)
         {
             this.heightLimit = 5 + this.rand.nextInt(this.heightLimitLimit);
         }
 
-        if (!this.validTreeLocation())
-        {
+        if(!isLegalTreePosition(world, locX, locY, locZ)) {
         	this.worldObj = null;
-            return false;
+        	return false;
         }
-        else
-        {
+        //if (!isCubeClear(locX, locY+3, locZ, 3, this.heightLimit)){
+        //	this.worldObj = null;
+        //	return false;
+        //}
+         // if (!this.validTreeLocation())
+        //{
+        //	this.worldObj = null;
+        //    return false;
+        //}
+        //else
+        //{
         	try{
 	            this.generateLeafNodeList();
 	            this.generateLeaves();
@@ -548,7 +554,7 @@ public class WorldGenHighlandsBigTree extends WorldGenAbstractTree
         		this.worldObj = null;
         		return false;
         	}
-        }
+        //}
     }
     
 }

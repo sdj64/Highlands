@@ -42,7 +42,7 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
         
@@ -82,7 +82,7 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
 		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
 		h++;
 		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
-		this.world = null;
+		this.worldObj = null;
 		return true;
     }
 }

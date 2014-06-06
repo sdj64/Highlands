@@ -115,7 +115,7 @@ public class GenLayerBiomeHL extends GenLayer
 
                 if (isBiomeOceanic(k1))
                 {
-                	if (k1 == 0 && Highlands.improvedOceans) {
+                	if (k1 == 0 && Highlands.improvedOceans && HighlandsBiomes.ocean2 != null) {
                 		k1 = HighlandsBiomes.ocean2.biomeID;
                 	}
                     aint1[j1 + i1 * par3] = k1;
@@ -181,7 +181,10 @@ public class GenLayerBiomeHL extends GenLayer
      */
     protected static boolean isBiomeOceanic(int biomeID)
     {
-        return biomeID == BiomeGenBase.ocean.biomeID || biomeID == BiomeGenBase.deepOcean.biomeID || biomeID == BiomeGenBase.frozenOcean.biomeID ||  biomeID == HighlandsBiomes.ocean2.biomeID;
+    	if (HighlandsBiomes.ocean2 != null && biomeID == HighlandsBiomes.ocean2.biomeID) {
+    		
+    	}
+        return biomeID == BiomeGenBase.ocean.biomeID || biomeID == BiomeGenBase.deepOcean.biomeID || biomeID == BiomeGenBase.frozenOcean.biomeID;
     }
     
     public static enum Mode

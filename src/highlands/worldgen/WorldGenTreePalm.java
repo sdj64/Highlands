@@ -44,7 +44,7 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
 
@@ -108,7 +108,7 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
                 }
             }
     	}
-    	this.world = null;
+    	this.worldObj = null;
 		return true;
     }
 }

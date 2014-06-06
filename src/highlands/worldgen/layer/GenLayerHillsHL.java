@@ -138,7 +138,7 @@ public class GenLayerHillsHL extends GenLayer
                         i2 = BiomeGenBase.mesa.biomeID;
                     }
                     // update to support multiple ocean and island biomes
-                    else if ( (k1 == BiomeGenBase.deepOcean.biomeID || k1 == HighlandsBiomes.ocean2.biomeID) && this.nextInt(4) == 0) // was 3
+                    else if ( (k1 == BiomeGenBase.deepOcean.biomeID || isHLOcean(k1)) && this.nextInt(4) == 0) // was 3
                     {
                     	//islands                  	
                     	j2 = this.nextInt(islandBiomeIDs.length);
@@ -256,5 +256,12 @@ public class GenLayerHillsHL extends GenLayer
         		counter++;
         	}
         }
+    }
+    
+    private boolean isHLOcean(int biomeID){
+    	if (HighlandsBiomes.ocean2 != null) {
+    		return biomeID == HighlandsBiomes.ocean2.biomeID;
+    	}
+    	return false;
     }
 }

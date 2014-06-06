@@ -1,5 +1,6 @@
 package highlands.block;
 
+import highlands.Highlands;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;
@@ -11,7 +12,7 @@ public class ItemHighlandsBerries extends ItemFood{
 
 	public ItemHighlandsBerries() {
 		super(2, false);//id, 1 whole porkchop (hunger), wolves don't eat it.
-		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setCreativeTab(Highlands.tabHighlands);
 	}
 
 	/**

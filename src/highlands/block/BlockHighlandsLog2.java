@@ -1,5 +1,7 @@
 package highlands.block;
 
+import highlands.Highlands;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -37,6 +39,7 @@ public class BlockHighlandsLog2 extends BlockLog
     {
         super();
         this.treeType = type;
+        this.setCreativeTab(Highlands.tabHighlands);
         //setBurnProperties(this.blockID, 5, 5);
     }
     

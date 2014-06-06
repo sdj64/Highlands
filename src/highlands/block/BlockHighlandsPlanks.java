@@ -2,6 +2,7 @@ package highlands.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import highlands.Highlands;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class BlockHighlandsPlanks extends Block
     public BlockHighlandsPlanks()
     {
     	super(Material.wood);
-        this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setCreativeTab(Highlands.tabHighlands);
     }
     
     /**

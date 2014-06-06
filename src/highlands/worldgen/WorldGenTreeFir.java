@@ -44,7 +44,7 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
     	boolean isWide = (random.nextInt(3) == 0);
@@ -65,7 +65,7 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     		genTree(world, random, locX, locY, locZ+1, treeHeight, isWide);
     		genTree(world, random, locX+1, locY, locZ+1, treeHeight, isWide);
     	}
-    	this.world = null;
+    	this.worldObj = null;
     	return true;
     }
     

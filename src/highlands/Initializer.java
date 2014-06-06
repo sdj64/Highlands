@@ -84,8 +84,11 @@ public class Initializer
 		
 		int a = Config.moreOceans.getInt();
 		for(int i = 0; i < a; i++){
-			if(Highlands.improvedOceans)HighlandsBiomes.biomesForHighlands.add(HighlandsBiomes.ocean2);
-			else HighlandsBiomes.biomesForHighlands.add(BiomeGenBase.ocean);
+			if(Highlands.improvedOceans && HighlandsBiomes.ocean2!= null) HighlandsBiomes.biomesForHighlands.add(HighlandsBiomes.ocean2);
+			else {
+				Highlands.improvedOceans = false;
+				HighlandsBiomes.biomesForHighlands.add(BiomeGenBase.ocean);
+			}
 		}
 		
 		Highlands.mocreaturescomp = Config.mobModCompatibility.getBoolean(false);
@@ -135,10 +138,10 @@ public class Initializer
 				.setStepSound(Block.soundTypeGrass).setBlockName("hl_mangroveSapling");
 		HighlandsBlocks.ashSapling = new BlockHighlandsSapling(13).setHardness(0.0F)
 				.setStepSound(Block.soundTypeGrass).setBlockName("hl_ashSapling");
-		HighlandsBlocks.autumnYellowSapling = new BlockHighlandsSapling(14).setHardness(0.0F)
-				.setStepSound(Block.soundTypeGrass).setBlockName("hl_autumnYellowSapling");
-		HighlandsBlocks.autumnOrangeSapling = new BlockHighlandsSapling(15).setHardness(0.0F)
+		HighlandsBlocks.autumnOrangeSapling = new BlockHighlandsSapling(14).setHardness(0.0F)
 				.setStepSound(Block.soundTypeGrass).setBlockName("hl_autumnOrangeSapling");
+		HighlandsBlocks.autumnYellowSapling = new BlockHighlandsSapling(15).setHardness(0.0F)
+				.setStepSound(Block.soundTypeGrass).setBlockName("hl_autumnYellowSapling");
 		
 		HighlandsBlocks.japaneseMapleSapling = new BlockHighlandsSapling2(1).setHardness(0.0F)
 				.setStepSound(Block.soundTypeGrass).setBlockName("hl_japaneseMapleSapling");

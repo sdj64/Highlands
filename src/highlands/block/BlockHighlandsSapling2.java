@@ -5,6 +5,7 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenAutumnTree;
 import highlands.worldgen.WorldGenHighlandsBigTree;
@@ -63,7 +64,7 @@ public class BlockHighlandsSapling2 extends BlockHighlandsSapling implements IPl
         super(type);
         float var3 = 0.4F;
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
-        this.setCreativeTab(CreativeTabs.tabDecorations);
+        this.setCreativeTab(Highlands.tabHighlands);
         treeType = type;
         
         //System.out.println("Highlands Saplings texture file: " + this.currentTexture);

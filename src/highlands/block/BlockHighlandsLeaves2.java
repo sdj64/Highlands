@@ -1,5 +1,6 @@
 package highlands.block;
 
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class BlockHighlandsLeaves2 extends BlockLeavesBase implements IShearable
         this.setTickRandomly(true);
         this.treeType = type;
         setLightOpacity(1);
-        this.setCreativeTab(CreativeTabs.tabDecorations);
+        this.setCreativeTab(Highlands.tabHighlands);
         //this.setBurnProperties(this.blockID, 30, 60);
     }
 

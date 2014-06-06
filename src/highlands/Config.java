@@ -173,7 +173,8 @@ public class Config
 		LBbiomeSize = config.get(config.CATEGORY_GENERAL, "Large Biomes Biome Size", 6);
 		LBbiomeSize.comment = "Biome size in Highlands LB worlds - 6 is default (same as Large Biomes worldtype)";
 		genDefault = config.get(config.CATEGORY_GENERAL, "Highands biomes in Default worlds", false);
-		genDefault.comment = "Should Highlands generate in the Default and Large Biomes worldtype (for compatibilty with other biome and worldgen mods)";
+		//genDefault.comment = "Should Highlands generate in the Default and Large Biomes worldtype (for compatibilty with other biome and worldgen mods)";
+		genDefault.comment = "Not available in 1.7.x due to vanilla changes, will NOT fix yet.";
 		skyColors = config.get(config.CATEGORY_GENERAL, "Sky Colors", false);
 		skyColors.comment = "Use custom sky colors?";
 		modWoodAndLeaves = config.get(config.CATEGORY_GENERAL, "Highlands Wood and Leaves", true);

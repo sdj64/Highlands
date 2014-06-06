@@ -42,7 +42,7 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
     	
@@ -76,7 +76,7 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     	setBlockInWorld(locX, h, locZ, this.leaves, this.leavesMeta);
     	h++;
     	setBlockInWorld(locX, h, locZ, this.leaves, this.leavesMeta);
-    	this.world = null;
+    	this.worldObj = null;
     	return true;
     }
     

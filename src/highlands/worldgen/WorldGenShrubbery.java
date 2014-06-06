@@ -21,7 +21,7 @@ public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
     //a Shrubbery is a small tree with a 1 block high fence trunk and 2-4 blocks of leaves.
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
 
@@ -43,7 +43,7 @@ public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
     		setBlockInWorld(locX, locY + 1, locZ, this.leaves, this.leavesMeta);
     	}
     	
-    	this.world = null;
+    	this.worldObj = null;
 		return true;
     }
 }

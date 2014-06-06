@@ -192,8 +192,9 @@ public class WorldGenAutumnBigTree extends WorldGenAbstractTree
                 {
                     var11[var9] = var10[var9] + var13;
                     Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
+                    
 
-                    if (var14 != Blocks.air && var14 != leafID)
+                    if (worldObj.isAirBlock(var11[0], var11[1], var11[2]) && var14 != leafID)
                     {
                         ++var13;
                     }

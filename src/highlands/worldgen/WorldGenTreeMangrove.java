@@ -42,7 +42,7 @@ public class WorldGenTreeMangrove extends WorldGenHighlandsTreeBase
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
     	if(locY < 62 && !notifyFlag) locY = 62;
@@ -80,7 +80,7 @@ public class WorldGenTreeMangrove extends WorldGenHighlandsTreeBase
 		generateLeafLayerCircle(world, random, 2.5, locX, locZ, h);
 		h++;
 		generateLeafLayerCircle(world, random, 1, locX, locZ, h);
-		this.world = null;
+		this.worldObj = null;
     	return true;
     }
     

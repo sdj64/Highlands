@@ -1,5 +1,6 @@
 package highlands.block;
 
+import highlands.Highlands;
 import highlands.Logs;
 import highlands.api.HighlandsBlocks;
 
@@ -32,7 +33,7 @@ public class BlockHLPlankSlab extends BlockSlab {
 		super(isDouble, model.getMaterial());
 		//isDoubleSlab = isDouble;
 		modelBlock = model;
-		if (!isDouble) this.setCreativeTab(CreativeTabs.tabBlock);
+		if (!isDouble) this.setCreativeTab(Highlands.tabHighlands);
 		// fix lighting
 		this.setLightOpacity(0);
 	}

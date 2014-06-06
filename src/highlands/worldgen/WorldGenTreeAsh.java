@@ -43,12 +43,18 @@ public class WorldGenTreeAsh extends WorldGenHighlandsTreeBase
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
         
-        if(!isLegalTreePosition(world, locX, locY, locZ))return false;
-        if(!isCubeClear(locX, locY+3, locZ, 3, 15))return false;
+        if(!isLegalTreePosition(world, locX, locY, locZ)){
+        	this.worldObj = null;
+        	return false;
+        }
+        if(!isCubeClear(locX, locY+3, locZ, 3, 15)){
+        	this.worldObj = null;
+        	return false;
+        }
         
       //generates trunk 2*2
     	int treeHeight = minHeight + random.nextInt(maxHeight);
@@ -79,7 +85,7 @@ public class WorldGenTreeAsh extends WorldGenHighlandsTreeBase
     		generateLeafLayerCircleNoise(world, random, 2.5, xyz[0], xyz[2], xyz[1]);
     		generateLeafLayerCircleNoise(world, random, 1.8, xyz[0], xyz[2], xyz[1]+1);
     	}
-    	this.world = null;
+    	this.worldObj = null;
     	return true;
     }
 }

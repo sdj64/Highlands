@@ -1,5 +1,6 @@
 package highlands.block;
 
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 
 import java.util.ArrayList;
@@ -45,8 +46,8 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
 			"Ironwood",
 			"Mangrove",
 			"Ash",
-			"AutumnOrange",
 			"AutumnYellow",
+			"AutumnOrange",
 		};
 
 	
@@ -67,7 +68,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
         this.setTickRandomly(true);
         this.treeType = type;
         setLightOpacity(1);
-        this.setCreativeTab(CreativeTabs.tabDecorations);
+        this.setCreativeTab(Highlands.tabHighlands);
         //this.setBurnProperties(this.blockID, 30, 60);
     }
 

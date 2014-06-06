@@ -9,28 +9,15 @@ import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.common.Loader;
-
-//don't need these imports after testing is over
-
 import highlands.api.*;
-import highlands.biome.*;
-import highlands.block.*;
 import highlands.integration.HighlandsCompatibilityManager;
-import highlands.worldgen.WorldGenUnderground2;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.gen.structure.MapGenStronghold;
-import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.WorldType;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -78,6 +65,8 @@ public class Highlands {
     public static boolean useOreGens = true;
     public static boolean useGenLayers = true;
     
+    public static CreativeTabs tabHighlands = new HighLandsCreativeTab();
+    
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		//new settings set-up
@@ -102,18 +91,6 @@ public class Highlands {
 		//register event manager
 		MinecraftForge.TERRAIN_GEN_BUS.register(new HighlandsEventManager());
 		MinecraftForge.EVENT_BUS.register(new HighlandsEventManager());
-		
-		
-		//set up worldtypes
-//		WorldTypeHighlands.addBiomeList(HL, HighlandsBiomes.biomesForHighlands);
-//		WorldTypeHighlands.addBiomeList(HLLB, HighlandsBiomes.biomesForHighlands);
-//		if(HL.getBiomesForWorldType().length == 0) HL.addNewBiome(BiomeGenBase.icePlains);
-//		if(HLLB.getBiomesForWorldType().length == 0) HLLB.addNewBiome(BiomeGenBase.icePlains);
-//		if(highlandsInDefaultFlag){
-//			WorldTypeHighlands.addBiomeList(WorldType.DEFAULT, HighlandsBiomes.biomesForDefault);
-//			WorldTypeHighlands.addBiomeList(WorldType.LARGE_BIOMES, HighlandsBiomes.biomesForDefault);
-//		}
-//		
 		
 		// allow player spawning in biomes
 		for(BiomeGenBase i : HighlandsBiomes.biomesForDefault){
