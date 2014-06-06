@@ -26,7 +26,7 @@ public class WorldGenShrubbery extends WorldGenHighlandsTreeBase
     	
 
     	//finds top block for the given x,z position (excluding leaves and grass)
-        for (boolean var6 = false; (world.getBlock(locX, locY, locZ) == Blocks.air || world.getBlock(locX, locY, locZ) == Blocks.leaves) && locY > 0; --locY);
+        for (boolean var6 = false; (worldObj.isAirBlock(locX, locY, locZ) || world.getBlock(locX, locY, locZ) == Blocks.leaves) && locY > 0; --locY);
         //locY is now the highest solid terrain block
         
         if(!(world.getBlock(locX, locY, locZ) == Blocks.grass || world.getBlock(locX, locY, locZ) == Blocks.dirt))

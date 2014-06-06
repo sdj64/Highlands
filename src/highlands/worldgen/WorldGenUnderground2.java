@@ -78,7 +78,7 @@ public class WorldGenUnderground2 extends WorldGenerator
                                 if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && (block != null && (block == IDtoReplace || 
                                 		(IDtoReplace == Blocks.dirt && block == Blocks.grass))))
                                 {
-                                	if(par1World.getBlock(var38, var41+1, var44) == Blocks.air && minableBlockId == Blocks.dirt)
+                                	if(par1World.isAirBlock(var38, var41+1, var44) && minableBlockId == Blocks.dirt)
                                 		par1World.setBlock(var38, var41, var44, Blocks.grass, minableBlockMeta, 3);
                                 	else par1World.setBlock(var38, var41, var44, this.minableBlockId, minableBlockMeta, 3);
                                 }

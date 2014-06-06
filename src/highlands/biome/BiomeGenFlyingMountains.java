@@ -70,12 +70,12 @@ public class BiomeGenFlyingMountains extends BiomeGenBaseHighlands
     			if(world.getBiomeGenForCoords(x+i, z+j) == HighlandsBiomes.flyingMountains){
 	    			int topY = 128;
 	    			Block var11;
-	    	        for (boolean var6 = false; ((var11 = world.getBlock(x+i, topY, z+j)) == Blocks.air || var11 == Blocks.leaves) && topY > 0; --topY)
+	    	        for (boolean var6 = false; (world.isAirBlock(x+i, topY, z+j) || world.getBlock(x+i, topY, z+j) == Blocks.leaves) && topY > 0; --topY)
 	    	        {
 	    	            ;
 	    	        }
 	    	        if(topY > 65){
-		    			if(world.getBlock(x+i, topY, z+j) == Blocks.air)topY--;
+		    			if(world.isAirBlock(x+i, topY, z+j))topY--;
 		    			int a = random.nextInt(10);
 		    			if(a == 9 && random.nextInt(10) == 0){
 		    				world.setBlock(x+i, topY, z+j, Blocks.water, 0, 3);

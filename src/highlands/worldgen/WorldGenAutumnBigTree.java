@@ -455,7 +455,7 @@ public class WorldGenAutumnBigTree extends WorldGenAbstractTree
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
                 Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-                if (var16 != Blocks.air && var16 != leafID)
+                if ( !this.worldObj.isAirBlock(var13[0], var13[1], var13[2]) && var16 != leafID)
                 {
                     break;
                 }

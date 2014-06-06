@@ -100,7 +100,7 @@ public class BiomeGenEverglades extends BiomeGenBaseHighlands
     	            ;
     	        }
     			//System.out.println("the top block is id" + par1World.getBlockId(par3+i, topY, par4+j));
-    			if(world.getBlock(x+i, topY, z+j) == Blocks.air)topY--;
+    			if(world.isAirBlock(x+i, topY, z+j))topY--;
     			/*
     			if(world.getBlockId(par3+i, topY, par4+j) == Block.grass.blockID && rand.nextInt(2) == 0){
     				world.setBlock(par3+i, topY, par4+j, Block.grass.blockID);

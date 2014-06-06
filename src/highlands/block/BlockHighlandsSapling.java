@@ -257,7 +257,7 @@ public class BlockHighlandsSapling extends BlockSapling implements IPlantable{
     	*/
     	
     	else if(!isTreeGrowSuccess && replaceSapling){
-    		if(par1World.getBlock(i, j, k) == Blocks.air)par1World.setBlock(i, j, k, this, meta, 2);
+    		if(par1World.isAirBlock(i, j, k)) par1World.setBlock(i, j, k, this, meta, 2);
     	}
 
 	    return isTreeGrowSuccess;

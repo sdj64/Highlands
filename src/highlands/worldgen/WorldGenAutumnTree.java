@@ -81,7 +81,7 @@ public class WorldGenAutumnTree extends WorldGenAbstractTree
                         {
                             Block block = par1World.getBlock(l1, i1, j1);
 
-                            if (block != Blocks.air && 
+                            if (!par1World.isAirBlock(l1, i1, j1) && 
                             		!block.isLeaves(par1World, l1, i1, j1) &&
                             		block != Blocks.grass &&
                             				block != Blocks.dirt &&
@@ -148,7 +148,7 @@ public class WorldGenAutumnTree extends WorldGenAbstractTree
                         Block block = par1World.getBlock(par3, par4 + j1, par5);
 
                         //TODO- removed k1 = 0, right fix?
-                        if (block == Blocks.air || block.isLeaves(par1World, par3, par4 + j1, par5))
+                        if (par1World.isAirBlock(par3, par4 + j1, par5) || block.isLeaves(par1World, par3, par4 + j1, par5))
                         {
                             this.setBlockAndNotifyAdequately(par1World, par3, par4 + j1, par5, this.blockWood, 0);
 
@@ -191,22 +191,22 @@ public class WorldGenAutumnTree extends WorldGenAbstractTree
                                     Block block = par1World.getBlock(j2, j1, k2);
                                     if (block != null && block.isLeaves(par1World, j2, j1, k2))
                                     {
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2 - 1, j1, k2) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 - 1, j1, k2))
                                         {
                                             this.growVines(par1World, j2 - 1, j1, k2, 8);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2 + 1, j1, k2) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 + 1, j1, k2))
                                         {
                                             this.growVines(par1World, j2 + 1, j1, k2, 2);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2, j1, k2 - 1) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 - 1))
                                         {
                                             this.growVines(par1World, j2, j1, k2 - 1, 1);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2, j1, k2 + 1) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 + 1))
                                         {
                                             this.growVines(par1World, j2, j1, k2 + 1, 4);
                                         }
@@ -242,7 +242,7 @@ public class WorldGenAutumnTree extends WorldGenAbstractTree
         {
             --par3;
 
-            if (par1World.getBlock(par2, par3, par4) != Blocks.air || i1 <= 0)
+            if (!par1World.isAirBlock(par2, par3, par4) || i1 <= 0)
             {
                 return;
             }

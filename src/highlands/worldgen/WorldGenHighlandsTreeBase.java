@@ -251,7 +251,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     				//System.out.println(world.getBlockId(i, k, j));
     				//System.out.println(Block.blocksList[world.getBlockId(i, k, j)].isLeaves(world, i, j, k));
     				if (worldObj.getBlock(i, k, j) != null) return false; 
-    				if(!(worldObj.getBlock(i, k, j) == Blocks.air || worldObj.getBlock(i, k, j).isLeaves(worldObj, i, k, j)))return false;
+    				if(!(worldObj.isAirBlock(i, k, j) || worldObj.getBlock(i, k, j).isLeaves(worldObj, i, k, j)))return false;
     			}
     		}
     	}
@@ -262,7 +262,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     //finds top block for the given x,z position (excluding leaves)
     protected int findTopBlock(int x, int z){
     	int y = 256;
-        for (boolean var6 = false; (worldObj.getBlock(x, y, z) == Blocks.air || worldObj.getBlock(x, y, z).isLeaves(worldObj, x, y, z)) && y > 0; --y);
+        for (boolean var6 = false; (worldObj.isAirBlock(x, y, z) || worldObj.getBlock(x, y, z).isLeaves(worldObj, x, y, z)) && y > 0; --y);
         return y;
     }
 }

@@ -184,7 +184,8 @@ public class WorldGenHighlandsBigTree extends WorldGenHighlandsTreeBase
                     var11[var9] = var10[var9] + var13;
                     Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
 
-                    if (var14 != Blocks.air && var14 != Blocks.leaves)
+                    //TODO: check for any type of leaves
+                    if (!this.worldObj.isAirBlock(var11[0], var11[1], var11[2]) && var14 != Blocks.leaves)
                     {
                         ++var13;
                     }
@@ -442,7 +443,7 @@ public class WorldGenHighlandsBigTree extends WorldGenHighlandsTreeBase
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
                 Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-                if (var16 != Blocks.air && var16 != Blocks.leaves)
+                if (this.worldObj.isAirBlock(var13[0], var13[1], var13[2]) && var16 != Blocks.leaves)
                 {
                     break;
                 }

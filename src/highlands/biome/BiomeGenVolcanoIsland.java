@@ -45,12 +45,12 @@ public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
     			if(world.getBiomeGenForCoords(x+i, z+j) == HighlandsBiomes.volcanoIsland){
 	    			int topY = 128;
 	    			Block var11;
-	    	        for (boolean var6 = false; ((var11 = world.getBlock(x+i, topY, z+j)) == Blocks.air || var11 == Blocks.leaves) && topY > 0; --topY)
+	    	        for (boolean var6 = false; (world.isAirBlock(x+i, topY, z+j) || world.getBlock(x+i, topY, z+j) == Blocks.leaves) && topY > 0; --topY)
 	    	        {
 	    	            ;
 	    	        }
 	    	        if(topY > 65){
-		    			if(world.getBlock(x+i, topY, z+j) == Blocks.air)topY--;
+		    			if(world.isAirBlock(x+i, topY, z+j))topY--;
 		    			
 		    			//chance to generate a lava lake on top of the volcano
 		    			if(world.getBiomeGenForCoords(x+i + 8, z+j) == HighlandsBiomes.volcanoIsland &&

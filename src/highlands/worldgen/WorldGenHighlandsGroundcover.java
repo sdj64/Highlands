@@ -26,9 +26,8 @@ public class WorldGenHighlandsGroundcover extends WorldGenerator
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
-        Block var11;
 
-        for (boolean var6 = false; ((var11 = par1World.getBlock(par3, par4, par5)) == Blocks.air || var11 == Blocks.leaves) && par4 > 0; --par4)
+        for (boolean var6 = false; (par1World.getBlock(par3, par4, par5) == Blocks.leaves || par1World.isAirBlock(par3, par4, par5) ) && par4 > 0; --par4)
         {
             ;
         }
