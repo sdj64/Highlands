@@ -304,6 +304,29 @@ public class Initializer
 				
 				HighlandsBlocks.japaneseMapleWood,
 		};
+		
+		HighlandsBlocks.plants = new Block[]{
+			    HighlandsBlocks.blueFlower,
+			    HighlandsBlocks.leafyFern,
+			    HighlandsBlocks.lavender,
+			    HighlandsBlocks.cattail,
+			    HighlandsBlocks.whiteFlower,
+			    HighlandsBlocks.raspberryBush,
+			    HighlandsBlocks.blueberryBush,
+			    HighlandsBlocks.cotton,
+			    HighlandsBlocks.thornbush,
+		};
+		
+		HighlandsBlocks.planks = new Block[]{
+				HighlandsBlocks.hlplanks,
+				HighlandsBlocks.hlplankstairs0,
+				HighlandsBlocks.hlplankstairs1,
+				HighlandsBlocks.hlplankstairs2,
+				HighlandsBlocks.hlplankstairs3,
+				HighlandsBlocks.hlplankhalf,
+				HighlandsBlocks.hlplankhalfdouble,
+		};
+
 	}
 
 	
@@ -928,4 +951,10 @@ public class Initializer
 			((BiomeGenBaseHighlands)parent).subBiomes.add(sub);
 		}
 	}
+	
+	public static void setFireProperties(Block block, int encouragement, int flammability) {
+		if (block != null)
+		Blocks.fire.setFireInfo(block, encouragement, flammability);
+	}
+
 }
