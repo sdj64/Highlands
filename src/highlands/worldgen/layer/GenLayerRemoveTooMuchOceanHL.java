@@ -41,6 +41,7 @@ public class GenLayerRemoveTooMuchOceanHL extends GenLayer
                 this.initChunkSeed((long)(j2 + par1), (long)(i2 + par2));
                 
                 // replaces ocean with plains
+                // Improved ocean added later in GenLayer stack
                 if (k3 == 0 && k2 == 0 && l2 == 0 && i3 == 0 && j3 == 0 && this.nextInt(2) == 0)
                 {
                     aint1[j2 + i2 * par3] = 1;

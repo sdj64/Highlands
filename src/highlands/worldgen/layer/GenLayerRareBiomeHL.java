@@ -1,8 +1,8 @@
 package highlands.worldgen.layer;
 
-import org.apache.logging.log4j.Level;
+//import org.apache.logging.log4j.Level;
 
-import highlands.Logs;
+//import highlands.Logs;
 import highlands.api.HighlandsBiomes;
 import highlands.biome.BiomeGenBaseHighlands;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -42,7 +42,7 @@ public class GenLayerRareBiomeHL extends GenLayer {// partial replacement for Ge
                 
                 //BiomeGenBase biome2 = BiomeGenBase.getBiomeGenArray()[aint1[j1 + i1 * par3]];
                 if (k1 > 255) {
-                	Logs.log(Level.INFO, "[Highlands] GenLayerRareBiomeHL input=" + k1);
+                	//Logs.log(Level.INFO, "[Highlands] GenLayerRareBiomeHL input=" + k1);
                 }
 
                 // nextInt(57)
@@ -58,14 +58,14 @@ public class GenLayerRareBiomeHL extends GenLayer {// partial replacement for Ge
                     	BiomeGenBaseHighlands biome = (BiomeGenBaseHighlands)BiomeGenBase.getBiome(k1);
                     	if(biome.subBiomes.size() > 0){
                     		var10 = biome.subBiomes.get(this.nextInt(biome.subBiomes.size())).biomeID;
-                    		if (var10 > 256) {
-                    			Logs.log(Level.INFO, "[Highlands] GenLayerRareBiomeHL fatal error with subBiome for "+biome);
-                    		}
+                    		//if (var10 > 256) {
+                    		//	Logs.log(Level.INFO, "[Highlands] GenLayerRareBiomeHL fatal error with subBiome for "+biome);
+                    		//}
                     		aint1[j1 + i1 * par3] = var10;
-                    		Logs.log(Level.INFO, "[Highlands] Sub biome parent: " + biome.biomeName + "  sub: " + var10);
+                    		//Logs.log(Level.INFO, "[Highlands] Sub biome parent: " + biome.biomeName + "  sub: " + var10);
                     		//Logs.log(Level.INFO, "[Highlands] Sub biome parent: " + biome.biomeName + "  sub: " + BiomeGenBase.getBiomeGenArray()[var10].biomeName);
                     	}
-                    	else Logs.log(Level.INFO, "[Highlands] " + biome.biomeName + " has no sub-biomes.");
+                    	//else Logs.log(Level.INFO, "[Highlands] " + biome.biomeName + " has no sub-biomes.");
                     }
                     else
                     {

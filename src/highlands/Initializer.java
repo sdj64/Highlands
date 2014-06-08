@@ -507,7 +507,6 @@ public class Initializer
 			HighlandsBiomes.subBiomes.add(HighlandsBiomes.volcanoIsland);
 		}
 		if(Config.snowIslandID > -1) {
-			//TODO- dat 3...
 			HighlandsBiomes.snowIsland = new BiomeGenTaiga(Config.snowIslandID, 3).setBiomeName(biomePrefix+"Snow Island").setHeight(woodIsle).setTemperatureRainfall(0.0F, 0.6F);
 			HighlandsBiomes.subBiomes.add(HighlandsBiomes.snowIsland);
 		}
@@ -532,7 +531,6 @@ public class Initializer
 			HighlandsBiomes.subBiomes.add(HighlandsBiomes.mesa);
 		}
 		if(Config.valleyID > -1) {
-			//TODO- dat 3...
 			HighlandsBiomes.valley = new BiomeGenForest(Config.valleyID, 3).setBiomeName(biomePrefix+"Valley");
 			HighlandsBiomes.subBiomes.add(HighlandsBiomes.valley);
 		}

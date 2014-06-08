@@ -37,8 +37,7 @@ public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
     
 	@Override
 	public void decorate(World world, Random random, int x, int z) {
-		BiomeGenBaseHighlands biome = this;
-		this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
+		this.theBiomeDecorator.decorateChunk(world, random, this, x, z);
     	
     	for(int i = 0; i < 16; i++){
     		for(int j = 0; j < 16; j++){
@@ -52,6 +51,9 @@ public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
 	    	        if(topY > 65){
 		    			if(world.isAirBlock(x+i, topY, z+j))topY--;
 		    			
+		    			//TODO: huge problem with lava lake generation
+		    			// constantly generates chunks
+		    			/**
 		    			//chance to generate a lava lake on top of the volcano
 		    			if(world.getBiomeGenForCoords(x+i + 8, z+j) == HighlandsBiomes.volcanoIsland &&
 		    					world.getBiomeGenForCoords(x+i - 8, z+j) == HighlandsBiomes.volcanoIsland &&
@@ -60,10 +62,11 @@ public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
 		    					random.nextInt(10) == 0){
 		    				new WorldGenLakes(Blocks.lava).generate(world, random, x+i, topY, z+j);
 		    			}
+		    			*/
 		    			
 		    			int a = random.nextInt(10);
 		    			if(a == 9 && random.nextInt(5) == 0){
-		    				world.setBlock(x+i, topY, z+j, Blocks.lava, 0, 3);
+		    				world.setBlock(x+i, topY, z+j, Blocks.flowing_lava, 0, 3);
 		    				world.setBlock(x+i, topY+1, z+j, Blocks.air, 0, 3);
 		    			}
 		    			else if(a == 7 || a == 8) world.setBlock(x+i, topY, z+j, Blocks.cobblestone, 0, 2);

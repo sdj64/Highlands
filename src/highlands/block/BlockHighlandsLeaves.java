@@ -288,8 +288,8 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     	if(treeType == 11)return Item.getItemFromBlock(HighlandsBlocks.ironwoodSapling);
     	if(treeType == 12)return Item.getItemFromBlock(HighlandsBlocks.mangroveSapling);
     	if(treeType == 13)return Item.getItemFromBlock(HighlandsBlocks.ashSapling);
-    	if(treeType == 14)return Item.getItemFromBlock(HighlandsBlocks.autumnOrangeSapling);
-    	if(treeType == 15)return Item.getItemFromBlock(HighlandsBlocks.autumnYellowSapling);
+    	if(treeType == 14)return Item.getItemFromBlock(HighlandsBlocks.autumnYellowSapling);
+    	if(treeType == 15)return Item.getItemFromBlock(HighlandsBlocks.autumnOrangeSapling);
         return Item.getItemFromBlock(Blocks.sapling);//ADD DIFFERENT SAPLINGS
     }
 

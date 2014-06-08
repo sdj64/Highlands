@@ -1,5 +1,7 @@
 package highlands.worldgen.layer;
 
+//TODO: unused perhaps time to delete ?
+
 import highlands.api.HighlandsBiomes;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenJungle;

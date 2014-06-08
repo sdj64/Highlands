@@ -182,7 +182,7 @@ public class GenLayerBiomeHL extends GenLayer
     protected static boolean isBiomeOceanic(int biomeID)
     {
     	if (HighlandsBiomes.ocean2 != null && biomeID == HighlandsBiomes.ocean2.biomeID) {
-    		
+    		return true;
     	}
         return biomeID == BiomeGenBase.ocean.biomeID || biomeID == BiomeGenBase.deepOcean.biomeID || biomeID == BiomeGenBase.frozenOcean.biomeID;
     }

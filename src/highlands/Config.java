@@ -101,54 +101,56 @@ public class Config
 	
 	private static void addBiomeEntries(Configuration config) 
 	{
-		alpsID = config.get(CATEGORY_BIOME_ID, "Alps ID", 150).getInt();
-		autumnForestID = config.get(CATEGORY_BIOME_ID, "Autumn Forest ID", 151).getInt();
-		badlandsID = config.get(CATEGORY_BIOME_ID, "Badlands ID", 152).getInt();
-		birchHillsID = config.get(CATEGORY_BIOME_ID, "Birch Hills ID", 153).getInt();
-		bogID = config.get(CATEGORY_BIOME_ID, "Bog ID", 154).getInt();
-		cliffsID = config.get(CATEGORY_BIOME_ID, "Cliffs ID", 155).getInt();
-		desertMountainsID = config.get(CATEGORY_BIOME_ID, "Desert Mountains ID", 156).getInt();
-		dunesID = config.get(CATEGORY_BIOME_ID, "Dunes ID", 157).getInt();
-		estuaryID = config.get(CATEGORY_BIOME_ID, "Estuary ID", 158).getInt();
-		flyingMountainsID = config.get(CATEGORY_BIOME_ID, "Flying Mountains ID", 159).getInt();
-		glacierID = config.get(CATEGORY_BIOME_ID, "Glacier ID", 160).getInt();
-		highlandsbID = config.get(CATEGORY_BIOME_ID, "Highlands ID", 161).getInt();
-		lowlandsID = config.get(CATEGORY_BIOME_ID, "Lowlands ID", 162).getInt();
-		meadowID = config.get(CATEGORY_BIOME_ID, "Meadow ID", 163).getInt();
-		outbackID = config.get(CATEGORY_BIOME_ID, "Outback ID", 164).getInt();
-		pinelandsID = config.get(CATEGORY_BIOME_ID, "Pinelands ID", 165).getInt();
-		rainforestID = config.get(CATEGORY_BIOME_ID, "Rainforest ID", 166).getInt();
-		redwoodForestID = config.get(CATEGORY_BIOME_ID, "Redwood Forest ID", 167).getInt();
-		rockMountainsID = config.get(CATEGORY_BIOME_ID, "Rock Mountains ID", 168).getInt();
-		sahelID = config.get(CATEGORY_BIOME_ID, "Sahel ID", 169).getInt();
-		savannahID = config.get(CATEGORY_BIOME_ID, "Savannah ID", 170).getInt();
-		steppeID = config.get(CATEGORY_BIOME_ID, "Steppe ID", 171).getInt();
-		snowMountainsID = config.get(CATEGORY_BIOME_ID, "Snow Mountains ID", 172).getInt();
-		tallPineForestID = config.get(CATEGORY_BIOME_ID, "Tall Pine Forest ID", 173).getInt();
-		tropicsID = config.get(CATEGORY_BIOME_ID, "Tropics ID", 174).getInt();
-		tropicalIslandsID = config.get(CATEGORY_BIOME_ID, "Tropical Islands ID", 175).getInt();
-		tundraID = config.get(CATEGORY_BIOME_ID, "Tundra ID", 176).getInt();
-		woodlandsID = config.get(CATEGORY_BIOME_ID, "Woodlands ID", 177).getInt();
-		woodlandMountainsID = config.get(CATEGORY_BIOME_ID, "Woodland Mountains ID", 178).getInt();
+		//FIXME: Biome IDs conflict with other mods/vanilla
 		
-		ocean2ID = config.get(CATEGORY_BIOME_ID, "Improved Oceans ID", 179).getInt();
+		alpsID = config.get(CATEGORY_BIOME_ID, "Alps ID", 200).getInt();
+		autumnForestID = config.get(CATEGORY_BIOME_ID, "Autumn Forest ID", 201).getInt();
+		badlandsID = config.get(CATEGORY_BIOME_ID, "Badlands ID", 202).getInt();
+		birchHillsID = config.get(CATEGORY_BIOME_ID, "Birch Hills ID", 203).getInt();
+		bogID = config.get(CATEGORY_BIOME_ID, "Bog ID", 204).getInt();
+		cliffsID = config.get(CATEGORY_BIOME_ID, "Cliffs ID", 205).getInt();
+		desertMountainsID = config.get(CATEGORY_BIOME_ID, "Desert Mountains ID", 206).getInt();
+		dunesID = config.get(CATEGORY_BIOME_ID, "Dunes ID", 207).getInt();
+		estuaryID = config.get(CATEGORY_BIOME_ID, "Estuary ID", 208).getInt();
+		flyingMountainsID = config.get(CATEGORY_BIOME_ID, "Flying Mountains ID", 209).getInt();
+		glacierID = config.get(CATEGORY_BIOME_ID, "Glacier ID", 210).getInt();
+		highlandsbID = config.get(CATEGORY_BIOME_ID, "Highlands ID", 211).getInt();
+		lowlandsID = config.get(CATEGORY_BIOME_ID, "Lowlands ID", 212).getInt();
+		meadowID = config.get(CATEGORY_BIOME_ID, "Meadow ID", 213).getInt();
+		outbackID = config.get(CATEGORY_BIOME_ID, "Outback ID", 214).getInt();
+		pinelandsID = config.get(CATEGORY_BIOME_ID, "Pinelands ID", 215).getInt();
+		rainforestID = config.get(CATEGORY_BIOME_ID, "Rainforest ID", 216).getInt();
+		redwoodForestID = config.get(CATEGORY_BIOME_ID, "Redwood Forest ID", 217).getInt();
+		rockMountainsID = config.get(CATEGORY_BIOME_ID, "Rock Mountains ID", 218).getInt();
+		sahelID = config.get(CATEGORY_BIOME_ID, "Sahel ID", 219).getInt();
+		savannahID = config.get(CATEGORY_BIOME_ID, "Savannah ID", 220).getInt();
+		steppeID = config.get(CATEGORY_BIOME_ID, "Steppe ID", 221).getInt();
+		snowMountainsID = config.get(CATEGORY_BIOME_ID, "Snow Mountains ID", 222).getInt();
+		tallPineForestID = config.get(CATEGORY_BIOME_ID, "Tall Pine Forest ID", 223).getInt();
+		tropicsID = config.get(CATEGORY_BIOME_ID, "Tropics ID", 224).getInt();
+		tropicalIslandsID = config.get(CATEGORY_BIOME_ID, "Tropical Islands ID", 225).getInt();
+		tundraID = config.get(CATEGORY_BIOME_ID, "Tundra ID", 226).getInt();
+		woodlandsID = config.get(CATEGORY_BIOME_ID, "Woodlands ID", 227).getInt();
+		woodlandMountainsID = config.get(CATEGORY_BIOME_ID, "Woodland Mountains ID", 228).getInt();
+		
+		ocean2ID = config.get(CATEGORY_BIOME_ID, "Improved Oceans ID", 229).getInt();
 		//ocean2Generate = config.get(config.CATEGORY_GENERAL, "Improved Oceans Generate", true);
 		//ocean2Generate.comment = "If this is false you will have regular Minecraft oceans instead.";
 		
-		desertIslandID = config.get(CATEGORY_SUBBIOME_ID, "DesertIsland ID", 180).getInt();
-		forestIslandID = config.get(CATEGORY_SUBBIOME_ID, "Forest Island ID", 181).getInt();
-		jungleIslandID = config.get(CATEGORY_SUBBIOME_ID, "Jungle Island ID", 182).getInt();
-		volcanoIslandID = config.get(CATEGORY_SUBBIOME_ID, "Volcano Island ID", 183).getInt();
-		snowIslandID = config.get(CATEGORY_SUBBIOME_ID, "Snow Island ID", 184).getInt();
-		rockIslandID = config.get(CATEGORY_SUBBIOME_ID, "Rock Island ID", 185).getInt();
-		windyIslandID = config.get(CATEGORY_SUBBIOME_ID, "Windy Island ID", 186).getInt();
-		lakeID = config.get(CATEGORY_SUBBIOME_ID, "Lake ID", 187).getInt();
-		baldHillID = config.get(CATEGORY_SUBBIOME_ID, "Bald Hill ID", 188).getInt();
-		mesaID = config.get(CATEGORY_SUBBIOME_ID, "Mesa ID", 189).getInt();
-		valleyID = config.get(CATEGORY_SUBBIOME_ID, "Valley ID", 190).getInt();
-		oasisID = config.get(CATEGORY_SUBBIOME_ID, "Oasis ID", 191).getInt();
-		canyonID = config.get(CATEGORY_SUBBIOME_ID, "Canyon ID", 192).getInt();
-		shrublandID = config.get(CATEGORY_SUBBIOME_ID, "Shrublands ID", 193).getInt();
+		desertIslandID = config.get(CATEGORY_SUBBIOME_ID, "DesertIsland ID", 230).getInt();
+		forestIslandID = config.get(CATEGORY_SUBBIOME_ID, "Forest Island ID", 231).getInt();
+		jungleIslandID = config.get(CATEGORY_SUBBIOME_ID, "Jungle Island ID", 232).getInt();
+		volcanoIslandID = config.get(CATEGORY_SUBBIOME_ID, "Volcano Island ID", 233).getInt();
+		snowIslandID = config.get(CATEGORY_SUBBIOME_ID, "Snow Island ID", 234).getInt();
+		rockIslandID = config.get(CATEGORY_SUBBIOME_ID, "Rock Island ID", 235).getInt();
+		windyIslandID = config.get(CATEGORY_SUBBIOME_ID, "Windy Island ID", 236).getInt();
+		lakeID = config.get(CATEGORY_SUBBIOME_ID, "Lake ID", 237).getInt();
+		baldHillID = config.get(CATEGORY_SUBBIOME_ID, "Bald Hill ID", 238).getInt();
+		mesaID = config.get(CATEGORY_SUBBIOME_ID, "Mesa ID", 239).getInt();
+		valleyID = config.get(CATEGORY_SUBBIOME_ID, "Valley ID", 240).getInt();
+		oasisID = config.get(CATEGORY_SUBBIOME_ID, "Oasis ID", 241).getInt();
+		canyonID = config.get(CATEGORY_SUBBIOME_ID, "Canyon ID", 242).getInt();
+		shrublandID = config.get(CATEGORY_SUBBIOME_ID, "Shrublands ID", 243).getInt();
 		
 		plainsGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Plains Generate", true);
 		desertGenerate = config.get(CATEGORY_VANILLABIOME_GENERATE, "Desert Generate", true);
@@ -186,6 +188,6 @@ public class Config
 		mobModCompatibility = config.get(config.CATEGORY_GENERAL, "Mob Mod Compatiblity", false);
 		mobModCompatibility.comment = "DOES NOT WORK WITH MO CREATURES.  See Readme for more information.";
 		safeMode = config.get(config.CATEGORY_GENERAL, "Safe Mode", false);
-		safeMode.comment = "Disables sub-biomes, borders, and improved oceans.  See Readme for more information.";
+		safeMode.comment = "Disables sub-biomes, borders, and improved oceans. Untested in 1.7.2.";
 	}
 }

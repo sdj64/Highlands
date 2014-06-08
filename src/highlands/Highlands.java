@@ -11,6 +11,7 @@ import java.util.Random;
 import cpw.mods.fml.common.Loader;
 import highlands.api.*;
 import highlands.integration.HighlandsCompatibilityManager;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -77,13 +78,13 @@ public class Highlands {
 		
 		Initializer.constructBlocks();
 		Initializer.initRecipes();
-		for (Block block:HighlandsBlocks.logs)
+		for (Block block : HighlandsBlocks.logs)
 			Initializer.setFireProperties(block, 5, 5);
-		for (Block block:HighlandsBlocks.leaves)
+		for (Block block : HighlandsBlocks.leaves)
 			Initializer.setFireProperties(block, 30, 60);
-		for (Block block:HighlandsBlocks.plants)
+		for (Block block : HighlandsBlocks.plants)
 			Initializer.setFireProperties(block, 60, 100);
-		for (Block block:HighlandsBlocks.planks)
+		for (Block block : HighlandsBlocks.planks)
 			Initializer.setFireProperties(block, 5, 20);
 	}
 	
