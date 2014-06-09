@@ -1,3 +1,7 @@
+<!-- Creative tabs -->
+itemGroup.Highlands=Highlands
+
+<!-- World Types -->
 generator.Highlands=Highlands
 generator.HighlandsLB=Highlands LB
 
@@ -19,7 +23,8 @@ tile.hl_ironwoodSapling.name=Ironwood Sapling
 tile.hl_mangroveSapling.name=Mangrove Sapling
 tile.hl_ashSapling.name=Ash Sapling
 tile.hl_autumnYellowSapling.name=Yellow Autumn Sapling
-tile.hl_autummnOrangeSapling.name=Orange Autumn Sapling
+tile.hl_autumnOrangeSapling.name=Orange Autumn Sapling
+tile.hl_japaneseMapleSapling.name=Japanese Maple Sapling
 	
 <!-- Logs -->
 tile.hl_acaciaWood.name=Acacia Wood Log
@@ -32,20 +37,21 @@ tile.hl_palmWood.name=Palm Wood Log
 tile.hl_ironwoodWood.name=Ironwood Wood Log
 tile.hl_mangroveWood.name=Mangrove Wood Log
 tile.hl_ashWood.name=Ash Wood Log
+tile.hl_japaneseMapleWood.name=Japanese Maple Log
 
 <!-- Wood -->
-tile.hl_woodPlanks0.name=Yellow Wood Planks
-tile.hl_woodPlanks1.name=White Wood Planks
-tile.hl_woodPlanks2.name=Red Wood Planks
-tile.hl_woodPlanks3.name=Grey Wood Planks
+tile.hl_woodPlanks.Yellow.name=Yellow Wood Planks
+tile.hl_woodPlanks.White.name=White Wood Planks
+tile.hl_woodPlanks.Red.name=Red Wood Planks
+tile.hl_woodPlanks.Grey.name=Grey Wood Planks
 tile.hl_woodStairs0.name=Yellow Wood Stairs
 tile.hl_woodStairs1.name=White Wood Stairs
 tile.hl_woodStairs2.name=Red Wood Stairs
 tile.hl_woodStairs3.name=Grey Wood Stairs
-tile.hl_woodSlab0.name=Yellow Wood Slab
-tile.hl_woodSlab1.name=White Wood Slab
-tile.hl_woodSlab2.name=Red Wood Slab
-tile.hl_woodSlab3.name=Grey Wood Slab
+tile.hl_woodSlab.Yellow.name=Yellow Wood Slab
+tile.hl_woodSlab.White.name=White Wood Slab
+tile.hl_woodSlab.Red.name=Red Wood Slab
+tile.hl_woodSlab.Grey.name=Grey Wood Slab
 tile.hl_woodSlabDouble0.name=Yellow Wood Double Slab
 tile.hl_woodSlabDouble1.name=White Wood Double Slab
 tile.hl_woodSlabDouble2.name=Red Wood Double Slab
@@ -64,6 +70,7 @@ tile.hl_mangroveLeaves.name=Mangrove Leaves
 tile.hl_ashLeaves.name=Ash Leaves
 tile.hl_autumnYellowLeaves.name=Yellow Autumn Leaves
 tile.hl_autumnOrangeLeaves.name=Orange Autumn Leaves
+tile.hl_japaneseMapleLeaves.name=Japanese Maple Leaves
     
 <!-- Plants -->
 tile.hl_blueFlower.name=Blue Flower
