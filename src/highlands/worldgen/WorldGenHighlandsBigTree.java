@@ -443,7 +443,7 @@ public class WorldGenHighlandsBigTree extends WorldGenHighlandsTreeBase
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
                 Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-                if (this.worldObj.isAirBlock(var13[0], var13[1], var13[2]) && var16 != Blocks.leaves)
+                if ( !this.worldObj.isAirBlock(var13[0], var13[1], var13[2]) && var16 != Blocks.leaves)
                 {
                     break;
                 }
@@ -457,7 +457,6 @@ public class WorldGenHighlandsBigTree extends WorldGenHighlandsTreeBase
      * Returns a boolean indicating whether or not the current location for the tree, spanning basePos to to the height
      * limit, is valid.
      */
-    @Deprecated
     boolean validTreeLocation()
     {
         int[] var1 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
@@ -466,7 +465,7 @@ public class WorldGenHighlandsBigTree extends WorldGenHighlandsTreeBase
         
         if (var3 != Blocks.grass && var3 != Blocks.dirt)
         {
-            if(hasLeaves)return false;
+            //if(hasLeaves)return false;
         }
         if(!hasLeaves && var3 == Blocks.water){
         	if((var3 = this.worldObj.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]))
@@ -535,11 +534,11 @@ public class WorldGenHighlandsBigTree extends WorldGenHighlandsTreeBase
         //	this.worldObj = null;
         //	return false;
         //}
-         // if (!this.validTreeLocation())
-        //{
-        //	this.worldObj = null;
-        //    return false;
-        //}
+        if (!this.validTreeLocation())
+        {
+        	this.worldObj = null;
+            return false;
+        }
         //else
         //{
         	try{

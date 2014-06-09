@@ -49,9 +49,13 @@ public class WorldGenTreePalm extends WorldGenHighlandsTreeBase
     	
 
         
-        if(!isLegalTreePosition(world, locX, locY, locZ)
-        		&& world.getBlock(locX, locY-1, locZ) != Blocks.sand)return false;
-        if(!isCubeClear(locX, locY+3, locZ, 1, 4))return false;
+        if(!isLegalTreePosition(world, locX, locY, locZ) && world.getBlock(locX, locY-1, locZ) != Blocks.sand){
+        	this.worldObj = null;
+        	return false;
+        }
+        if(!isCubeClear(locX, locY+3, locZ, 1, 4)){
+        	return false;
+        }
         
         //generates trunk
     	int treeHeight = minHeight + random.nextInt(maxHeight);

@@ -16,10 +16,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class ItemBlockMetadata extends ItemBlock
+public class ItemBlockPlanks extends ItemBlock
 {
 
-    public ItemBlockMetadata(Block par1)
+    public ItemBlockPlanks(Block par1)
     {
         super(par1);
         setHasSubtypes(true);
@@ -38,7 +38,12 @@ public class ItemBlockMetadata extends ItemBlock
 	@Override
     public String getUnlocalizedName(ItemStack par1ItemStack)
     {
-        int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
-        return super.getUnlocalizedName();
+        int metadata = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
+        if (metadata < 0 || metadata >= BlockHighlandsPlanks.woodType.length)
+        {
+            metadata = 0;
+        }
+
+        return super.getUnlocalizedName() + "." + BlockHighlandsPlanks.woodType[metadata];
     }
 }

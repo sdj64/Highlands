@@ -248,14 +248,10 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
     	for(int i = x-radius; i <= x+radius; i++){
     		for(int j = z-radius; j <= z+radius; j++){
     			for(int k = y; k <= y+height; k++){
-    				//System.out.println(world.getBlockId(i, k, j));
-    				//System.out.println(Block.blocksList[world.getBlockId(i, k, j)].isLeaves(world, i, j, k));
-    				if (worldObj.getBlock(i, k, j) != null) return false; 
     				if(!(worldObj.isAirBlock(i, k, j) || worldObj.getBlock(i, k, j).isLeaves(worldObj, i, k, j)))return false;
     			}
     		}
     	}
-    	//System.out.println("end");
     	return true;
     }
     

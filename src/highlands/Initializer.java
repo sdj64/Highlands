@@ -225,7 +225,7 @@ public class Initializer
 		//Planks and stairs
 		HighlandsBlocks.hlplanks = new BlockHighlandsPlanks().setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodPlanks");
-		GameRegistry.registerBlock(HighlandsBlocks.hlplanks, ItemBlockMetadata.class, "hl_woodPlanks");
+		GameRegistry.registerBlock(HighlandsBlocks.hlplanks, ItemBlockPlanks.class, "hl_woodPlanks");
 		
 		HighlandsBlocks.hlplankstairs0 = new BlockHighlandsStairs(HighlandsBlocks.hlplanks, 0).setHardness(2.0F).setResistance(5.0F)
 				.setStepSound(Block.soundTypeWood).setBlockName("hl_woodStairs0");
