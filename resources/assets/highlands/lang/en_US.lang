@@ -52,10 +52,10 @@ tile.hl_woodSlab.Yellow.name=Yellow Wood Slab
 tile.hl_woodSlab.White.name=White Wood Slab
 tile.hl_woodSlab.Red.name=Red Wood Slab
 tile.hl_woodSlab.Grey.name=Grey Wood Slab
-tile.hl_woodSlabDouble0.name=Yellow Wood Double Slab
-tile.hl_woodSlabDouble1.name=White Wood Double Slab
-tile.hl_woodSlabDouble2.name=Red Wood Double Slab
-tile.hl_woodSlabDouble3.name=Grey Wood Double Slab
+tile.hl_woodSlabDouble0.name=Yellow Wood Slab
+tile.hl_woodSlabDouble1.name=White Wood Slab
+tile.hl_woodSlabDouble2.name=Red Wood Slab
+tile.hl_woodSlabDouble3.name=Grey Wood Slab
 	
 <!-- Leaves -->
 tile.hl_acaciaLeaves.name=Acacia Leaves
