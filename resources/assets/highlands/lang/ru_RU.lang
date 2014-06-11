@@ -24,7 +24,7 @@ tile.hl_mangroveSapling.name=Саженец мангрового дерева
 tile.hl_ashSapling.name=Саженец ясеня
 tile.hl_autumnYellowSapling.name=Жёлтый осенний саженец
 tile.hl_autummnOrangeSapling.name=Оранжевый осенний саженец
-tile.hl_japaneseMapleSapling.name=Japanese Maple Sapling
+tile.hl_japaneseMapleSapling.name=Саженец японского клёна
         
 <!-- Logs -->
 tile.hl_acaciaWood.name=Древесина акации
@@ -37,7 +37,7 @@ tile.hl_palmWood.name=Древесина пальмы
 tile.hl_ironwoodWood.name=Древесина железного дерева
 tile.hl_mangroveWood.name=Древесина мангрового дерева
 tile.hl_ashWood.name=Древесина ясеня
-tile.hl_japaneseMapleWood.name=Japanese Maple Log
+tile.hl_japaneseMapleWood.name=Древесина японского клёна
 
 <!-- Wood -->
 tile.hl_woodPlanks.Yellow.name=Жёлтые доски
@@ -52,10 +52,10 @@ tile.hl_woodSlab.Yellow.name=Жёлтая плита
 tile.hl_woodSlab.White.name=Белая плита
 tile.hl_woodSlab.Red.name=Красная плита
 tile.hl_woodSlab.Grey.name=Серая плита
-tile.hl_woodSlabDouble0.name=Жёлтая двойная плита
-tile.hl_woodSlabDouble1.name=Белая двойная плита
-tile.hl_woodSlabDouble2.name=Красная двойная плита
-tile.hl_woodSlabDouble3.name=Серая двойная плита
+tile.hl_woodSlabDouble0.name=Жёлтая плита
+tile.hl_woodSlabDouble1.name=Белая плита
+tile.hl_woodSlabDouble2.name=Красная плита
+tile.hl_woodSlabDouble3.name=Серая плита
         
 <!-- Leaves -->
 tile.hl_acaciaLeaves.name=Листва акации
