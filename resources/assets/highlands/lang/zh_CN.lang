@@ -1,0 +1,89 @@
+<!-- Creative tabs -->
+itemGroup.Highlands=高原
+
+<!-- World Types -->
+generator.Highlands=高原
+generator.HighlandsLB=高原 LB
+
+<!-- Blocks -->
+
+<!-- Saplings -->
+tile.hl_acaciaSapling.name=金合欢树苗
+tile.hl_beechSapling.name=山毛榉树苗
+tile.hl_canopySapling.name=苍穹树树苗
+tile.hl_deadSapling.name=枯木树苗
+tile.hl_greatOakSapling.name=大橡树树苗
+tile.hl_firSapling.name=冷杉树苗
+tile.hl_poplarSapling.name=白杨树苗
+tile.hl_redwoodSapling.name=红杉树苗
+tile.hl_evgBushSapling.name=常青灌木树苗
+tile.hl_decBushSapling.name=落叶灌木树苗
+tile.hl_palmSapling.name=棕榈树苗
+tile.hl_ironwoodSapling.name=铁树树苗
+tile.hl_mangroveSapling.name=红树树苗
+tile.hl_ashSapling.name=蜡树树苗
+tile.hl_autumnYellowSapling.name=黄色秋树树苗
+tile.hl_autumnOrangeSapling.name=橙色秋树树苗
+tile.hl_japaneseMapleSapling.name=日本枫树树苗
+	
+<!-- Logs -->
+tile.hl_acaciaWood.name=金合欢原木
+tile.hl_beechWood.name=山毛榉原木
+tile.hl_canopyWood.name=苍穹原木
+tile.hl_firWood.name=冷杉原木
+tile.hl_poplarWood.name=白杨原木
+tile.hl_redwoodWood.name=红杉原木
+tile.hl_palmWood.name=棕榈原木
+tile.hl_ironwoodWood.name=铁树原木
+tile.hl_mangroveWood.name=红树原木
+tile.hl_ashWood.name=蜡树原木
+tile.hl_japaneseMapleWood.name=日本枫树原木
+
+<!-- Wood -->
+tile.hl_woodPlanks.Yellow.name=黄色木板
+tile.hl_woodPlanks.White.name=白色木板
+tile.hl_woodPlanks.Red.name=红色木板
+tile.hl_woodPlanks.Grey.name=灰色木板
+tile.hl_woodStairs0.name=黄色木楼梯
+tile.hl_woodStairs1.name=白色木楼梯
+tile.hl_woodStairs2.name=红色木楼梯
+tile.hl_woodStairs3.name=灰色木楼梯
+tile.hl_woodSlab.Yellow.name=黄色木台阶
+tile.hl_woodSlab.White.name=白色木台阶
+tile.hl_woodSlab.Red.name=红色木台阶
+tile.hl_woodSlab.Grey.name=灰色木台阶
+tile.hl_woodSlabDouble0.name=黄色木台阶
+tile.hl_woodSlabDouble1.name=白色木台阶
+tile.hl_woodSlabDouble2.name=红色木台阶
+tile.hl_woodSlabDouble3.name=灰色木台阶
+	
+<!-- Leaves -->
+tile.hl_acaciaLeaves.name=金合欢树叶
+tile.hl_beechLeaves.name=山毛榉树叶
+tile.hl_canopyLeaves.name=苍穹树树叶
+tile.hl_firLeaves.name=冷杉树叶
+tile.hl_poplarLeaves.name=白杨树叶
+tile.hl_redwoodLeaves.name=红杉树叶
+tile.hl_palmLeaves.name=棕榈树叶
+tile.hl_ironwoodLeaves.name=铁树树叶
+tile.hl_mangroveLeaves.name=红树树叶
+tile.hl_ashLeaves.name=蜡树树叶
+tile.hl_autumnYellowLeaves.name=黄色秋树树叶
+tile.hl_autumnOrangeLeaves.name=橙色秋树树叶
+tile.hl_japaneseMapleLeaves.name=日本枫树树叶
+    
+<!-- Plants -->
+tile.hl_blueFlower.name=蓝花
+tile.hl_leafyFern.name=叶蕨
+tile.hl_whiteFlower.name=白花
+tile.hl_cattail.name=香蒲
+tile.hl_lavender.name=薰衣草
+tile.hl_raspberryBush.name=树莓灌木
+tile.hl_blueberryBush.name=蓝莓灌木
+tile.hl_thornbush.name=多刺高灌丛
+tile.hl_cotton.name=棉株
+	
+<!-- Other Blocks -->
+	
+<!-- Items -->
+item.hl_berries.name=浆果

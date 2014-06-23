@@ -1,0 +1,88 @@
+<!-- Creative tabs -->
+itemGroup.Highlands=Highlands
+
+<!-- World Types -->
+generator.Highlands=Highlands
+generator.HighlandsLB=Highlands LB
+
+<!-- Blocks -->
+
+<!-- Saplings -->
+tile.hl_acaciaSapling.name=Саженец акации
+tile.hl_beechSapling.name=Саженец бука
+tile.hl_canopySapling.name=Саженец пологого дерева
+tile.hl_deadSapling.name=Саженец мёртвого дерева
+tile.hl_greatOakSapling.name=Саженец великого дуба
+tile.hl_firSapling.name=Саженец пихты
+tile.hl_poplarSapling.name=Саженец тополя
+tile.hl_redwoodSapling.name=Саженец красного дерева
+tile.hl_evgBushSapling.name=Саженец вечнозелёного кустарника
+tile.hl_decBushSapling.name=Саженец лиственного кустарника
+tile.hl_palmSapling.name=Саженец пальмы
+tile.hl_ironwoodSapling.name=Саженец железного дерева
+tile.hl_mangroveSapling.name=Саженец мангрового дерева
+tile.hl_ashSapling.name=Саженец ясеня
+tile.hl_autumnYellowSapling.name=Жёлтый осенний саженец
+tile.hl_autummnOrangeSapling.name=Оранжевый осенний саженец
+tile.hl_japaneseMapleSapling.name=Саженец японского клёна
+        
+<!-- Logs -->
+tile.hl_acaciaWood.name=Древесина акации
+tile.hl_beechWood.name=Древесина бука
+tile.hl_canopyWood.name=Пологая древесина
+tile.hl_firWood.name=Древесина пихты
+tile.hl_poplarWood.name=Древесина тополя
+tile.hl_redwoodWood.name=Древесина красного дерева
+tile.hl_palmWood.name=Древесина пальмы
+tile.hl_ironwoodWood.name=Древесина железного дерева
+tile.hl_mangroveWood.name=Древесина мангрового дерева
+tile.hl_ashWood.name=Древесина ясеня
+tile.hl_japaneseMapleWood.name=Древесина японского клёна
+
+<!-- Wood -->
+tile.hl_woodPlanks.Yellow.name=Жёлтые доски
+tile.hl_woodPlanks.White.name=Белые доски
+tile.hl_woodPlanks.Red.name=Красные доски
+tile.hl_woodPlanks.Grey.name=Серые доски
+tile.hl_woodStairs0.name=Жёлтые ступеньки
+tile.hl_woodStairs1.name=Белые ступеньки
+tile.hl_woodStairs2.name=Красные ступеньки
+tile.hl_woodStairs3.name=Серые ступеньки
+tile.hl_woodSlab.Yellow.name=Жёлтая плита
+tile.hl_woodSlab.White.name=Белая плита
+tile.hl_woodSlab.Red.name=Красная плита
+tile.hl_woodSlab.Grey.name=Серая плита
+tile.hl_woodSlabDouble0.name=Жёлтая плита
+tile.hl_woodSlabDouble1.name=Белая плита
+tile.hl_woodSlabDouble2.name=Красная плита
+tile.hl_woodSlabDouble3.name=Серая плита
+        
+<!-- Leaves -->
+tile.hl_acaciaLeaves.name=Листва акации
+tile.hl_beechLeaves.name=Листва бука
+tile.hl_canopyLeaves.name=Листва пологого дерева
+tile.hl_firLeaves.name=Листва пихты
+tile.hl_poplarLeaves.name=Листва тополя
+tile.hl_redwoodLeaves.name=Листва красного дерева
+tile.hl_palmLeaves.name=Листва пальмы
+tile.hl_ironwoodLeaves.name=Листва железного дерева
+tile.hl_mangroveLeaves.name=Листва мангрового дерева
+tile.hl_ashLeaves.name=Листва ясеня
+tile.hl_autumnYellowLeaves.name=Жёлтая осенняя листва
+tile.hl_autumnOrangeLeaves.name=Оранжевая осеняя листва
+    
+<!-- Plants -->
+tile.hl_blueFlower.name=Синий цветок
+tile.hl_leafyFern.name=Лиственный папоротник
+tile.hl_whiteFlower.name=Белый цветок
+tile.hl_cattail.name=Рогоз
+tile.hl_lavender.name=Лаванда
+tile.hl_raspberryBush.name=Малиновый куст
+tile.hl_blueberryBush.name=Черничный куст
+tile.hl_thornbush.name=Терновый куст
+tile.hl_cotton.name=Хлопковое растение
+        
+<!-- Other Blocks -->
+        
+<!-- Items -->
+item.hl_berries.name=Ягоды
