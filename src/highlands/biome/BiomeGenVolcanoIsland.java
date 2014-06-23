@@ -10,13 +10,12 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import highlands.api.HighlandsBiomes;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 
 public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
 {
 	private static final Height biomeHeight = new Height(1.7F, 1.7F);
-	private BiomeDecoratorHighlands biomedec;
 
 	public BiomeGenVolcanoIsland(int par1)
     {
@@ -25,7 +24,8 @@ public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
         int trees = -100;
 	    int grass = 0;
 	    int flowers = 0;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+	    this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+	    
         this.spawnableCreatureList.clear();
         
         this.topBlock = Blocks.gravel;
@@ -35,50 +35,54 @@ public class BiomeGenVolcanoIsland extends BiomeGenBaseHighlands
         this.rainfall = 0.4F;
     }
     
-    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-    {
-    	biomedec.decorate(par1World, par2Random, biome, par3, par4);
+	@Override
+	public void decorate(World world, Random random, int x, int z) {
+		this.theBiomeDecorator.decorateChunk(world, random, this, x, z);
     	
     	for(int i = 0; i < 16; i++){
     		for(int j = 0; j < 16; j++){
-    			if(par1World.getBiomeGenForCoords(par3+i, par4+j) == HighlandsBiomes.volcanoIsland){
+    			if(world.getBiomeGenForCoords(x+i, z+j) == HighlandsBiomes.volcanoIsland){
 	    			int topY = 128;
 	    			Block var11;
-	    	        for (boolean var6 = false; ((var11 = par1World.getBlock(par3+i, topY, par4+j)) == Blocks.air || var11 == Blocks.leaves) && topY > 0; --topY)
+	    	        for (boolean var6 = false; (world.isAirBlock(x+i, topY, z+j) || world.getBlock(x+i, topY, z+j) == Blocks.leaves) && topY > 0; --topY)
 	    	        {
 	    	            ;
 	    	        }
 	    	        if(topY > 65){
-		    			if(par1World.getBlock(par3+i, topY, par4+j) == Blocks.air)topY--;
+		    			if(world.isAirBlock(x+i, topY, z+j))topY--;
 		    			
+		    			//TODO: huge problem with lava lake generation
+		    			// constantly generates chunks
+		    			/**
 		    			//chance to generate a lava lake on top of the volcano
-		    			if(par1World.getBiomeGenForCoords(par3+i + 8, par4+j) == HighlandsBiomes.volcanoIsland &&
-		    					par1World.getBiomeGenForCoords(par3+i - 8, par4+j) == HighlandsBiomes.volcanoIsland &&
-		    					par1World.getBiomeGenForCoords(par3+i, par4+j + 8) == HighlandsBiomes.volcanoIsland &&
-		    					par1World.getBiomeGenForCoords(par3+i, par4+j - 8) == HighlandsBiomes.volcanoIsland &&
-		    					par2Random.nextInt(10) == 0){
-		    				new WorldGenLakes(Blocks.lava).generate(par1World, par2Random, par3+i, topY, par4+j);
+		    			if(world.getBiomeGenForCoords(x+i + 8, z+j) == HighlandsBiomes.volcanoIsland &&
+		    					world.getBiomeGenForCoords(x+i - 8, z+j) == HighlandsBiomes.volcanoIsland &&
+		    					world.getBiomeGenForCoords(x+i, z+j + 8) == HighlandsBiomes.volcanoIsland &&
+		    					world.getBiomeGenForCoords(x+i, z+j - 8) == HighlandsBiomes.volcanoIsland &&
+		    					random.nextInt(10) == 0){
+		    				new WorldGenLakes(Blocks.lava).generate(world, random, x+i, topY, z+j);
 		    			}
+		    			*/
 		    			
-		    			int a = par2Random.nextInt(10);
-		    			if(a == 9 && par2Random.nextInt(5) == 0){
-		    				par1World.setBlock(par3+i, topY, par4+j, Blocks.lava, 0, 3);
-		    				par1World.setBlock(par3+i, topY+1, par4+j, Blocks.air, 0, 3);
+		    			int a = random.nextInt(10);
+		    			if(a == 9 && random.nextInt(5) == 0){
+		    				world.setBlock(x+i, topY, z+j, Blocks.flowing_lava, 0, 3);
+		    				world.setBlock(x+i, topY+1, z+j, Blocks.air, 0, 3);
 		    			}
-		    			else if(a == 7 || a == 8) par1World.setBlock(par3+i, topY, par4+j, Blocks.cobblestone, 0, 2);
-		    			else if(a == 6) par1World.setBlock(par3+i, topY, par4+j, Blocks.obsidian, 0, 2);
-		    			else if(a == 5 || a == 4) par1World.setBlock(par3+i, topY, par4+j, Blocks.stone, 0, 2);
+		    			else if(a == 7 || a == 8) world.setBlock(x+i, topY, z+j, Blocks.cobblestone, 0, 2);
+		    			else if(a == 6) world.setBlock(x+i, topY, z+j, Blocks.obsidian, 0, 2);
+		    			else if(a == 5 || a == 4) world.setBlock(x+i, topY, z+j, Blocks.stone, 0, 2);
 	    	        }
 	    		}
     		}
     	}
     	
-    	biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.ironGen, 0, 64);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 12, biomedec.redstoneGen, 0, 16);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.lapisGen, 0, 32);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 4, biomedec.goldGen, 0, 32);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.diamondGen, 0, 16);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 12, biomedec.HLlava, 0, 32);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 25, biomedec.HLobsidian, 0, 64);
+    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 20, this.theBiomeDecorator.ironGen, 0, 64);
+    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 12, this.theBiomeDecorator.redstoneGen, 0, 16);
+    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 2, this.theBiomeDecorator.lapisGen, 0, 32);
+    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 4, this.theBiomeDecorator.goldGen, 0, 32);
+    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 2, this.theBiomeDecorator.diamondGen, 0, 16);
+    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 12, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLlava, 0, 32);
+    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 25, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLobsidian, 0, 64);
     }
 }

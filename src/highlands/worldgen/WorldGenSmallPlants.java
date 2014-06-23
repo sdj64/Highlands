@@ -10,21 +10,21 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class WorldGenSmallPlants extends WorldGenerator
 {
     /** Stores ID for WorldGenTallGrass */
-    private Block plantID;
+    private Block plant;
     
     private int genAmount;
     private int radius;
 
     public WorldGenSmallPlants(Block blueberryBush)
     {
-        this.plantID = blueberryBush;
+        this.plant = blueberryBush;
         this.genAmount = 36;
         this.radius = 8;
     }
     
     public WorldGenSmallPlants(Block id, int amt)
     {
-        this.plantID = id;
+        this.plant = id;
         this.genAmount = amt;
         this.radius = 4;
     }
@@ -33,11 +33,11 @@ public class WorldGenSmallPlants extends WorldGenerator
     {
         int l;
 
-        Block block = null;
+        Block block = Blocks.air;
         do 
         {
             block = par1World.getBlock(par3,par4, par5);
-            if (block != null && !block.isLeaves(par1World, par3, par4, par5))
+            if (par1World.isAirBlock(par3, par4, par5) && !block.isLeaves(par1World, par3, par4, par5))
             {
                 break;
             }
@@ -52,7 +52,7 @@ public class WorldGenSmallPlants extends WorldGenerator
 
             if (par1World.isAirBlock(j1, k1, l1) && Blocks.tallgrass.canBlockStay(par1World, j1, k1, l1))
             {
-                par1World.setBlock(j1, k1, l1, this.plantID, 0, 2);
+                par1World.setBlock(j1, k1, l1, this.plant, 0, 2);
             }
         }
 

@@ -1,3 +1,10 @@
+<!-- Creative tabs -->
+itemGroup.Highlands=Highlands
+
+<!-- World Types -->
+generator.Highlands=Highlands
+generator.HighlandsLB=Highlands LB
+
 <!-- Blocks -->
 
 <!-- Saplings -->
@@ -17,8 +24,9 @@ tile.hl_mangroveSapling.name=Mangrovensetzling
 tile.hl_ashSapling.name=Aschholzsetzling
 tile.hl_autumnYellowSapling.name=Gelber Herbstsetzling
 tile.hl_autummnOrangeSapling.name=Oranger Herbstsetzling
+tile.hl_japaneseMapleSapling.name=Japanese Maple Sapling
         
-        <!-- Logs -->
+<!-- Logs -->
 tile.hl_acaciaWood.name=Akazienbaumstamm
 tile.hl_beechWood.name=Buchenstamm
 tile.hl_canopyWood.name=Kronholzstamm
@@ -28,20 +36,21 @@ tile.hl_redwoodWood.name=Mammutbaumstamm
 tile.hl_palmWood.name=Palmenbaumstamm
 tile.hl_ironwoodWood.name=Eisenholzbaumstamm
 tile.hl_mangroveWood.name=Mangrovenbaumstamm
-tile.hl_ashWood.name=Aschholzbaumstamm     
+tile.hl_ashWood.name=Aschholzbaumstamm
+tile.hl_japaneseMapleWood.name=Japanese Maple Log     
 <!-- Wood -->
-tile.hl_woodPlanks0.name=Gelbe Holzplanken
-tile.hl_woodPlanks1.name=Weiße Holzplanken
-tile.hl_woodPlanks2.name=Rote Holzplanken
-tile.hl_woodPlanks3.name=Graue Holzplanken
+tile.hl_woodPlanks.Yellow.name=Gelbe Holzplanken
+tile.hl_woodPlanks.White.name=Weiße Holzplanken
+tile.hl_woodPlanks.Red.name=Rote Holzplanken
+tile.hl_woodPlanks.Grey.name=Graue Holzplanken
 tile.hl_woodStairs0.name=Gelbe Holztreppe
 tile.hl_woodStairs1.name=Weiße Holztreppe
 tile.hl_woodStairs2.name=Rote Holztreppe
 tile.hl_woodStairs3.name=Graue Holztreppe
-tile.hl_woodSlab0.name=Gelbe Holzstufe
-tile.hl_woodSlab1.name=Weiße Holzstufe
-tile.hl_woodSlab2.name=Rote Holzstufe
-tile.hl_woodSlab3.name=Graue Holzstufe
+tile.hl_woodSlab.Yellow.name=Gelbe Holzstufe
+tile.hl_woodSlab.White.name=Weiße Holzstufe
+tile.hl_woodSlab.Red.name=Rote Holzstufe
+tile.hl_woodSlab.Grey.name=Graue Holzstufe
 tile.hl_woodSlabDouble0.name=Gelbe Doppelholzstufe
 tile.hl_woodSlabDouble1.name=Weiße Doppelholzstufe
 tile.hl_woodSlabDouble2.name=Rote Doppelholzstufe
@@ -60,6 +69,7 @@ tile.hl_mangroveLeaves.name=Mangrovenblätter
 tile.hl_ashLeaves.name=Aschholzblätter
 tile.hl_autumnYellowLeaves.name=Gelbe Herbstblätter
 tile.hl_autumnOrangeLeaves.name=Orange Herbstblätter
+tile.hl_japaneseMapleLeaves.name=Japanese Maple Leaves
     
 <!-- Plants -->
 tile.hl_blueFlower.name=Blaue Blume

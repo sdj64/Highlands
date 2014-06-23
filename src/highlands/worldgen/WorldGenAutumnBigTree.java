@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class WorldGenAutumnBigTree extends WorldGenerator
+public class WorldGenAutumnBigTree extends WorldGenAbstractTree
 {
     /**
      * Contains three sets of two values that provide complimentary indices for a given 'major' index - 1 and 2 for 0, 0
@@ -192,8 +192,9 @@ public class WorldGenAutumnBigTree extends WorldGenerator
                 {
                     var11[var9] = var10[var9] + var13;
                     Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
+                    
 
-                    if (var14 != Blocks.air && var14 != leafID)
+                    if (worldObj.isAirBlock(var11[0], var11[1], var11[2]) && var14 != leafID)
                     {
                         ++var13;
                     }
@@ -454,7 +455,7 @@ public class WorldGenAutumnBigTree extends WorldGenerator
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
                 Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-                if (var16 != Blocks.air && var16 != leafID)
+                if ( !this.worldObj.isAirBlock(var13[0], var13[1], var13[2]) && var16 != leafID)
                 {
                     break;
                 }
@@ -530,6 +531,7 @@ public class WorldGenAutumnBigTree extends WorldGenerator
 
         if (!this.validTreeLocation())
         {
+        	this.worldObj = null;
             return false;
         }
         else
@@ -539,10 +541,12 @@ public class WorldGenAutumnBigTree extends WorldGenerator
 	            this.generateLeaves();
 	            this.generateTrunk();
 	            this.generateLeafNodeBases();
+	            this.worldObj = null;
 	            return true;
         	}
         	catch(Exception e){
         		e.printStackTrace();
+        		this.worldObj = null;
         		return false;
         	}
         }

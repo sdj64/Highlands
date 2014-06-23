@@ -1,90 +1,46 @@
 package highlands;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.ArrayList;
+import fabricator77.multiworld.api.IMWWorldType;
+import highlands.overworld.ChunkProviderHLOverworld;
+import highlands.overworld.WorldChunkManagerHL;
+import highlands.worldgen.layer.GenLayerBiomeEdgeHL;
+import highlands.worldgen.layer.GenLayerBiomeHL;
+
+import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.GenLayerZoom;
 
 import com.google.common.collect.Sets;
 
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.ChunkProviderFlat;
-import net.minecraft.world.gen.ChunkProviderGenerate;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldType;
 
-public class WorldTypeHighlands extends WorldType {
+public class WorldTypeHighlands extends WorldType implements IMWWorldType {
 
 	private String name;
 	
-	public WorldTypeHighlands(int par1, String par2Str) {
+	public WorldTypeHighlands(String par2Str) {
 		super(par2Str);
 		name = par2Str;
-		//this.biomesForWorldType = new BiomeGenBase[] {};
 	}
-//
-//	@Override
-//	public String getTranslateName(){
-//		return name;
-//	}
-//	
-//	public BiomeGenBase[] getBiomes(){
-//		return this.biomesForWorldType;
-//	}
-//	
-//	public static void addBiomeList(WorldType w, BiomeGenBase[] b){
-//		for(BiomeGenBase i : b){
-//			w.addNewBiome(i);
-//		}
-//	}
-//	
-//	public static void addBiomeList(WorldType w, ArrayList<BiomeGenBase> b){
-//		for(BiomeGenBase i : b){
-//			w.addNewBiome(i);
-//		}
-//	}
-//	
-//	public void addNewBiome(BiomeGenBase biome){
-//		BiomeGenBase[] newBiomes = new BiomeGenBase[this.biomesForWorldType.length + 1];
-//		int count = 0;
-//		for(BiomeGenBase i : this.biomesForWorldType){
-//			newBiomes[count] = i;
-//			count++;
-//		}
-//		newBiomes[newBiomes.length - 1] = biome;
-//		this.biomesForWorldType = newBiomes;
-//	}
-//	
-//	public static void addBiomeList(WorldTypeHighlands w, BiomeGenBase[] b){
-//		int num = b.length + w.biomesForWorldType.length;
-//		BiomeGenBase[] newBiomes = new BiomeGenBase[num];
-//		int count = 0;
-//		for(BiomeGenBase i : w.biomesForWorldType){
-//			newBiomes[count] = i;
-//			count++;
-//		}
-//		for(BiomeGenBase i : b){
-//			newBiomes[count] = i;
-//			count++;
-//		}
-//		w.biomesForWorldType = newBiomes;
-//	}
-	
-	/*
-	public void addNewBiome(BiomeGenBase biome)
-    {
-        List<BiomeGenBase> newBiomesForWorld = Arrays.asList(biomesForWorldType);
-        newBiomesForWorld.add(biome);
-        biomesForWorldType = newBiomesForWorld.toArray(new BiomeGenBase[0]);
-    }
-    */
-	
-	/*
-	@Override
-	public IChunkProvider getChunkGenerator(World world, String generatorOptions)
-    { 
-        return new ChunkProviderGenerateNoLakes(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
-    }
-    */
+	 @Override
+	 public GenLayer getBiomeLayer(long worldSeed, GenLayer parentLayer)
+	 {
+	     GenLayer ret = new GenLayerBiomeHL(200L, parentLayer, this);
+	     ret = GenLayerZoom.magnify(1000L, ret, 2);
+	     ret = new GenLayerBiomeEdgeHL(1000L, ret);
+	     return ret;
+	 }
+	 
+	 @Override
+	 public WorldChunkManager getChunkManager(World world)
+	 {
+		 return new WorldChunkManagerHL(world);
+	 }
+
+	 @Override
+	 public IChunkProvider getChunkGenerator(World world, String generatorOptions) {
+		 return new ChunkProviderHLOverworld(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
+	 }
 }

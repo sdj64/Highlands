@@ -1,5 +1,6 @@
 package highlands.block;
 
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 
 import java.util.ArrayList;
@@ -45,9 +46,10 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
 			"Ironwood",
 			"Mangrove",
 			"Ash",
-			"AutumnOrange",
 			"AutumnYellow",
+			"AutumnOrange",
 		};
+
 	
 	private int[] saplingRate = {
 			30, 20, 20, 40, 20, 0, 0, 0, 0, 0, 12, 75, 15, 25, 20, 20
@@ -66,7 +68,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
         this.setTickRandomly(true);
         this.treeType = type;
         setLightOpacity(1);
-        this.setCreativeTab(CreativeTabs.tabDecorations);
+        this.setCreativeTab(Highlands.tabHighlands);
         //this.setBurnProperties(this.blockID, 30, 60);
     }
 
@@ -98,6 +100,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    /**
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
         byte b0 = 1;
@@ -122,6 +125,7 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
             }
         }
     }
+    */
     
     /**
      * Ticks the block if it's been scheduled
@@ -263,13 +267,14 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random)
     {
         return par1Random.nextInt(saplingRate[treeType]) == 0 ? 1 : 0;//chance to drop sapling. Change for different trees
     }
 
     /**
-     * Returns the ID of the items to drop on destruction.
+     * Returns the items to drop on destruction.
      */
     @Override
     public Item getItemDropped(int par1, Random par2Random, int par3)
@@ -283,24 +288,49 @@ public class BlockHighlandsLeaves extends BlockLeavesBase implements IShearable
     	if(treeType == 11)return Item.getItemFromBlock(HighlandsBlocks.ironwoodSapling);
     	if(treeType == 12)return Item.getItemFromBlock(HighlandsBlocks.mangroveSapling);
     	if(treeType == 13)return Item.getItemFromBlock(HighlandsBlocks.ashSapling);
-    	if(treeType == 14)return Item.getItemFromBlock(HighlandsBlocks.autumnOrangeSapling);
-    	if(treeType == 15)return Item.getItemFromBlock(HighlandsBlocks.autumnYellowSapling);
+    	if(treeType == 14)return Item.getItemFromBlock(HighlandsBlocks.autumnYellowSapling);
+    	if(treeType == 15)return Item.getItemFromBlock(HighlandsBlocks.autumnOrangeSapling);
         return Item.getItemFromBlock(Blocks.sapling);//ADD DIFFERENT SAPLINGS
     }
 
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
+    public void dropBlockAsItemWithChance(World world, int p_149690_2_, int p_149690_3_, int p_149690_4_, int p_149690_5_, float p_149690_6_, int p_149690_7_)
     {
-    	//TODO- right fix?
-    	if (!par1World.isRemote)
+        if (!world.isRemote)
         {
-            Item item = getItemDropped(par5, par1World.rand, par7);
-            if (par1World.rand.nextFloat() <= par6)
+            int j1 = saplingRate[treeType];
+
+            if (p_149690_7_ > 0)
             {
-                this.dropBlockAsItem(par1World, par2, par3, par4, new ItemStack(item, 1, this.damageDropped(par5)));
+                j1 -= 2 << p_149690_7_;
+
+                if (j1 < 10)
+                {
+                    j1 = 10;
+                }
             }
+
+            if (world.rand.nextInt(j1) == 0)
+            {
+                Item item = this.getItemDropped(p_149690_5_, world.rand, p_149690_7_);
+                this.dropBlockAsItem(world, p_149690_2_, p_149690_3_, p_149690_4_, new ItemStack(item, 1, this.damageDropped(p_149690_5_)));
+            }
+
+            j1 = 200;
+
+            if (p_149690_7_ > 0)
+            {
+                j1 -= 10 << p_149690_7_;
+
+                if (j1 < 40)
+                {
+                    j1 = 40;
+                }
+            }
+
+            //this.func_150124_c(world, p_149690_2_, p_149690_3_, p_149690_4_, p_149690_5_, j1);
         }
     }
     

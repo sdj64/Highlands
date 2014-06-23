@@ -1,40 +1,39 @@
 package highlands.worldgen.layer;
 
-import net.minecraft.world.WorldType;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.GenLayerAddIsland;
-import net.minecraft.world.gen.layer.GenLayerAddMushroomIsland;
-import net.minecraft.world.gen.layer.GenLayerAddSnow;
-import net.minecraft.world.gen.layer.GenLayerBiome;
-import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
-import net.minecraft.world.gen.layer.GenLayerIsland;
-import net.minecraft.world.gen.layer.GenLayerRiver;
-import net.minecraft.world.gen.layer.GenLayerRiverInit;
-import net.minecraft.world.gen.layer.GenLayerRiverMix;
-import net.minecraft.world.gen.layer.GenLayerShore;
-import net.minecraft.world.gen.layer.GenLayerSmooth;
-import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
-import net.minecraft.world.gen.layer.GenLayerZoom;
+import highlands.Logs;
 
+import java.util.concurrent.Callable;
+
+import org.apache.logging.log4j.Level;
+
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.util.ReportedException;
+import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.layer.*;
 import net.minecraftforge.common.*;
 import net.minecraftforge.event.terraingen.*;
 
-public abstract class GenLayerHL
+public class GenLayerHL extends GenLayer
 {
-    /** seed from World#getWorldSeed that is used in the LCG prng */
+    /**
+     * seed from World#getWorldSeed that is used in the LCG prng
+     */
     private long worldGenSeed;
-
-    /** parent GenLayer that was provided via the constructor */
+    /**
+     * parent GenLayer that was provided via the constructor
+     */
     protected GenLayer parent;
-
     /**
      * final part of the LCG prng that uses the chunk X, Z coords along with the other two seeds to generate
      * pseudorandom numbers
      */
     private long chunkSeed;
-
-    /** base seed to the LCG prng provided via the constructor */
-    private long baseSeed;
+    /**
+     * base seed to the LCG prng provided via the constructor
+     */
+    protected long baseSeed;
 
     /**
      * the first array item is a linked list of the bioms, the second is the zoom function, the third is the same as the
@@ -42,72 +41,79 @@ public abstract class GenLayerHL
      */
     public static GenLayer[] initializeAllBiomeGenerators(long par0, WorldType par2WorldType)
     {
-        GenLayerIslandHL var3 = new GenLayerIslandHL(1L);
-        GenLayerFuzzyZoom var9 = new GenLayerFuzzyZoom(2000L, var3);
-        GenLayerAddIsland var10 = new GenLayerAddIsland(1L, var9);
-        GenLayerZoom var11 = new GenLayerZoom(2001L, var10);
-        var10 = new GenLayerAddIsland(2L, var11);
-        GenLayerAddSnow var12 = new GenLayerAddSnow(2L, var10);
-        var11 = new GenLayerZoom(2002L, var12);
-        var10 = new GenLayerAddIsland(3L, var11);
-        var11 = new GenLayerZoom(2003L, var10);
-        var10 = new GenLayerAddIsland(4L, var11);
-        GenLayerAddMushroomIsland var16 = new GenLayerAddMushroomIsland(5L, var10);
-        byte var4 = 4;
+    	//Logs.log(Level.ERROR, "GenLayerHL.initializeAllBiomeGenerators");
+    	
+        boolean flag = false;
+        GenLayerIsland genlayerisland = new GenLayerIsland(1L);
+        GenLayerFuzzyZoom genlayerfuzzyzoom = new GenLayerFuzzyZoom(2000L, genlayerisland);
+        GenLayerAddIsland genlayeraddisland = new GenLayerAddIsland(1L, genlayerfuzzyzoom);
+        GenLayerZoom genlayerzoom = new GenLayerZoom(2001L, genlayeraddisland);
+        genlayeraddisland = new GenLayerAddIsland(2L, genlayerzoom);
+        genlayeraddisland = new GenLayerAddIsland(50L, genlayeraddisland);
+        genlayeraddisland = new GenLayerAddIsland(70L, genlayeraddisland);
+        GenLayerRemoveTooMuchOceanHL genlayerremovetoomuchocean = new GenLayerRemoveTooMuchOceanHL(2L, genlayeraddisland);
+        GenLayerAddSnow genlayeraddsnow = new GenLayerAddSnow(2L, genlayerremovetoomuchocean);
+        genlayeraddisland = new GenLayerAddIsland(3L, genlayeraddsnow);
+        GenLayerEdge genlayeredge = new GenLayerEdge(2L, genlayeraddisland, GenLayerEdge.Mode.COOL_WARM);
+        genlayeredge = new GenLayerEdge(2L, genlayeredge, GenLayerEdge.Mode.HEAT_ICE);
+        genlayeredge = new GenLayerEdge(3L, genlayeredge, GenLayerEdge.Mode.SPECIAL);
+        genlayerzoom = new GenLayerZoom(2002L, genlayeredge);
+        genlayerzoom = new GenLayerZoom(2003L, genlayerzoom);
+        genlayeraddisland = new GenLayerAddIsland(4L, genlayerzoom);
+        GenLayerAddMushroomIsland genlayeraddmushroomisland = new GenLayerAddMushroomIsland(5L, genlayeraddisland);
+        GenLayerDeepOceanHL genlayerdeepocean = new GenLayerDeepOceanHL(4L, genlayeraddmushroomisland);
+        GenLayer genlayer3 = GenLayerZoom.magnify(1000L, genlayerdeepocean, 0);
+        byte b0 = 4;
 
         if (par2WorldType == WorldType.LARGE_BIOMES)
         {
-            var4 = 6;
+            b0 = 6;
         }
-        var4 = getModdedBiomeSize(par2WorldType, var4);
 
-        GenLayer var5 = GenLayerZoom.magnify(1000L, var16, 0);
-        GenLayerRiverInit var13 = new GenLayerRiverInit(100L, var5);
-        var5 = GenLayerZoom.magnify(1000L, var13, var4 + 2);
-        GenLayerRiver var14 = new GenLayerRiver(1L, var5);
-        GenLayerSmooth var15 = new GenLayerSmooth(1000L, var14);
-        GenLayer var6 = GenLayerZoom.magnify(1000L, var16, 0);
-        GenLayerBiomeHL var17 = new GenLayerBiomeHL(200L, var6, par2WorldType);
-        var6 = GenLayerZoom.magnify(1000L, var17, 2);
-        Object var18 = new GenLayerHillsHL(1000L, var6);
-
-        for (int var7 = 0; var7 < var4; ++var7)
+        if (flag)
         {
-            var18 = new GenLayerZoom((long)(1000 + var7), (GenLayer)var18);
+            b0 = 4;
+        }
+        b0 = getModdedBiomeSize(par2WorldType, b0);
 
-            if (var7 == 0)
+        GenLayer genlayer = GenLayerZoom.magnify(1000L, genlayer3, 0);
+        GenLayerRiverInit genlayerriverinit = new GenLayerRiverInit(100L, genlayer);
+        Object object = par2WorldType.getBiomeLayer(par0, genlayer3);
+
+        GenLayer genlayer1 = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
+        GenLayerHillsHL genlayerhills = new GenLayerHillsHL(1000L, (GenLayer)object, genlayer1);
+        genlayer = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
+        genlayer = GenLayerZoom.magnify(1000L, genlayer, b0);
+        GenLayerRiver genlayerriver = new GenLayerRiver(1L, genlayer);
+        GenLayerSmooth genlayersmooth = new GenLayerSmooth(1000L, genlayerriver);
+        object = new GenLayerRareBiome(1001L, genlayerhills);
+
+        for (int j = 0; j < b0; ++j)
+        {
+            object = new GenLayerZoom((long)(1000 + j), (GenLayer)object);
+
+            if (j == 0)
             {
-                var18 = new GenLayerAddIsland(3L, (GenLayer)var18);
+                object = new GenLayerAddIsland(3L, (GenLayer)object);
             }
 
-            if (var7 == 1)
+            if (j == 1)
             {
-                var18 = new GenLayerShoreHL(1000L, (GenLayer)var18);
-            }
-
-            if (var7 == 1)
-            {
-                var18 = new GenLayerRiver(1000L, (GenLayer)var18);
+                object = new GenLayerShore(1000L, (GenLayer)object);
             }
         }
 
-        GenLayerSmooth var19 = new GenLayerSmooth(1000L, (GenLayer)var18);
-        GenLayerRiverMix var20 = new GenLayerRiverMix(100L, var19, var15);
-        GenLayerVoronoiZoom var8 = new GenLayerVoronoiZoom(10L, var20);
-        var20.initWorldGenSeed(par0);
-        var8.initWorldGenSeed(par0);
-        return new GenLayer[] {var20, var8, var20};
+        GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer)object);
+        GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
+        GenLayerVoronoiZoom genlayervoronoizoom = new GenLayerVoronoiZoom(10L, genlayerrivermix);
+        genlayerrivermix.initWorldGenSeed(par0);
+        genlayervoronoizoom.initWorldGenSeed(par0);
+        return new GenLayer[] {genlayerrivermix, genlayervoronoizoom, genlayerrivermix};
     }
-    
+
     public GenLayerHL(long par1)
     {
-        this.baseSeed = par1;
-        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        this.baseSeed += par1;
-        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        this.baseSeed += par1;
-        this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
-        this.baseSeed += par1;
+       super(par1);
     }
 
     /**
@@ -152,23 +158,85 @@ public abstract class GenLayerHL
      */
     protected int nextInt(int par1)
     {
-        int var2 = (int)((this.chunkSeed >> 24) % (long)par1);
+        int j = (int)((this.chunkSeed >> 24) % (long)par1);
 
-        if (var2 < 0)
+        if (j < 0)
         {
-            var2 += par1;
+            j += par1;
         }
 
         this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
         this.chunkSeed += this.worldGenSeed;
-        return var2;
+        return j;
     }
 
     /**
-     * Returns a list of integer values generated by this layer. These may be interpreted as temperatures, rainfall
-     * amounts, or biomeList[] indices based on the particular GenLayer subclass.
+     * returns true if the biomeIDs are equal, or returns the result of the comparison as per BiomeGenBase.isEqualTo
      */
-    public abstract int[] getInts(int var1, int var2, int var3, int var4);
+    protected static boolean compareBiomesById(final int p_151616_0_, final int p_151616_1_)
+    {
+        if (p_151616_0_ == p_151616_1_)
+        {
+            return true;
+        }
+        else if (p_151616_0_ != BiomeGenBase.mesaPlateau_F.biomeID && p_151616_0_ != BiomeGenBase.mesaPlateau.biomeID)
+        {
+            try
+            {
+                return BiomeGenBase.getBiome(p_151616_0_) != null && BiomeGenBase.getBiome(p_151616_1_) != null ? BiomeGenBase.getBiome(p_151616_0_).isEqualTo(BiomeGenBase.getBiome(p_151616_1_)) : false;
+            }
+            catch (Throwable throwable)
+            {
+                CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Comparing biomes");
+                CrashReportCategory crashreportcategory = crashreport.makeCategory("Biomes being compared");
+                crashreportcategory.addCrashSection("Biome A ID", Integer.valueOf(p_151616_0_));
+                crashreportcategory.addCrashSection("Biome B ID", Integer.valueOf(p_151616_1_));
+                crashreportcategory.addCrashSectionCallable("Biome A", new Callable()
+                {
+                    public String call()
+                    {
+                        return String.valueOf(BiomeGenBase.getBiome(p_151616_0_));
+                    }
+                });
+                crashreportcategory.addCrashSectionCallable("Biome B", new Callable()
+                {
+                    public String call()
+                    {
+                        return String.valueOf(BiomeGenBase.getBiome(p_151616_1_));
+                    }
+                });
+                throw new ReportedException(crashreport);
+            }
+        }
+        else
+        {
+            return p_151616_1_ == BiomeGenBase.mesaPlateau_F.biomeID || p_151616_1_ == BiomeGenBase.mesaPlateau.biomeID;
+        }
+    }
+
+    /**
+     * returns true if the biomeId is one of the various ocean biomes.
+     */
+    protected static boolean isBiomeOceanic(int p_151618_0_)
+    {
+        return p_151618_0_ == BiomeGenBase.ocean.biomeID || p_151618_0_ == BiomeGenBase.deepOcean.biomeID || p_151618_0_ == BiomeGenBase.frozenOcean.biomeID;
+    }
+
+    /**
+     * selects a random integer from a set of provided integers
+     */
+    protected int selectRandom(int ... p_151619_1_)
+    {
+        return p_151619_1_[this.nextInt(p_151619_1_.length)];
+    }
+
+    /**
+     * returns the most frequently occurring number of the set, or a random number from those provided
+     */
+    protected int selectModeOrRandom(int p_151617_1_, int p_151617_2_, int p_151617_3_, int p_151617_4_)
+    {
+        return p_151617_2_ == p_151617_3_ && p_151617_3_ == p_151617_4_ ? p_151617_2_ : (p_151617_1_ == p_151617_2_ && p_151617_1_ == p_151617_3_ ? p_151617_1_ : (p_151617_1_ == p_151617_2_ && p_151617_1_ == p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_3_ && p_151617_1_ == p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_2_ && p_151617_3_ != p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_3_ && p_151617_2_ != p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_4_ && p_151617_2_ != p_151617_3_ ? p_151617_1_ : (p_151617_2_ == p_151617_3_ && p_151617_1_ != p_151617_4_ ? p_151617_2_ : (p_151617_2_ == p_151617_4_ && p_151617_1_ != p_151617_3_ ? p_151617_2_ : (p_151617_3_ == p_151617_4_ && p_151617_1_ != p_151617_2_ ? p_151617_3_ : this.selectRandom(new int[] {p_151617_1_, p_151617_2_, p_151617_3_, p_151617_4_}))))))))));
+    }
 
     public static byte getModdedBiomeSize(WorldType worldType, byte original)
     {
@@ -176,4 +244,9 @@ public abstract class GenLayerHL
         MinecraftForge.TERRAIN_GEN_BUS.post(event);
         return event.newSize;
     }
+
+	@Override
+	public int[] getInts(int var1, int var2, int var3, int var4) {
+		return null;
+	}
 }

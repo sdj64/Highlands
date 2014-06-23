@@ -10,7 +10,8 @@ public class HighlandsFuelHandler implements IFuelHandler
 {
 	public int getBurnTime(ItemStack fuel) {
 		
-		//Item id = fuel.getItem();
+		Item item = fuel.getItem();
+		
 		//TODO- all this ItemStack stuff makes me worry...
 		if(fuel == new ItemStack(HighlandsBlocks.firWood))return 300;
 		if(fuel == new ItemStack(HighlandsBlocks.acaciaWood))return 300;

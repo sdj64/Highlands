@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -36,6 +36,10 @@ public class WorldGenMountain extends WorldGenerator
         this.snowrocksand = type;
     }
 
+    //public boolean generate(World world, Random random, int locX, int locY, int locZ)
+    //{
+    //	return true;
+    //}
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
     	this.world = world;
@@ -72,9 +76,9 @@ public class WorldGenMountain extends WorldGenerator
 				}
 			}
 		}
+    	this.world = null;
     	return true;
-    }
-    
+    }   
     
     private void setBlockInWorld(int x, int y, int z, Block sandstone, int meta){
     	try{

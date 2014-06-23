@@ -31,6 +31,7 @@ public class HighlandsBlocks {
     public static Block ashSapling;
     public static Block autumnYellowSapling;
     public static Block autumnOrangeSapling;
+    public static Block japaneseMapleSapling;
 	public static Block[] saplings;
 
     //Woods
@@ -43,6 +44,7 @@ public class HighlandsBlocks {
     public static Block ironWood;
     public static Block mangroveWood;
     public static Block ashWood;
+    public static Block japaneseMapleWood;
 	public static Block[] logs;
     
     //Leaves
@@ -57,6 +59,7 @@ public class HighlandsBlocks {
     public static Block ashLeaves;
     public static Block autumnYellowLeaves;
     public static Block autumnOrangeLeaves;
+    public static Block japaneseMapleLeaves;
 	public static Block[] leaves;
     
     //small plants
@@ -69,6 +72,7 @@ public class HighlandsBlocks {
     public static Block blueberryBush;
     public static Block cotton;
     public static Block thornbush;
+    public static Block[] plants;
     
     //berries
     public static Item berries;
@@ -81,8 +85,10 @@ public class HighlandsBlocks {
     public static Block hlplankstairs3;
     public static Block hlplankhalf;
     public static Block hlplankhalfdouble;
+    public static Block[] planks;
     
     //palm cocoa
     public static Block cocoa2;
-    
+	
+	
 }

@@ -9,14 +9,14 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 
 public class BiomeGenGlacier extends BiomeGenBaseHighlands
 {
-    private BiomeDecoratorHighlands biomedec;
-    private static final Height biomeHeight = new Height(1.7F, 1.7F);
+    private static final Height biomeHeight = new Height(1.0F, 0.7F);
 
 	public BiomeGenGlacier(int par1)
     {
@@ -24,7 +24,8 @@ public class BiomeGenGlacier extends BiomeGenBaseHighlands
         int trees = -999;
 	    int grass = 0;
 	    int flowers = 0;
-	    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+	    this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+	    
         this.spawnableCreatureList.clear();
         this.topBlock = Blocks.snow;
         this.fillerBlock = Blocks.ice;
@@ -35,24 +36,26 @@ public class BiomeGenGlacier extends BiomeGenBaseHighlands
         this.setEnableSnow();
     }
     
-    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+    @Override
+    public WorldGenAbstractTree func_150567_a(Random par1Random)
     {
-        return (WorldGenerator)(new WorldGenHighlandsShrub(1, 1));
+        return (WorldGenAbstractTree)(new WorldGenHighlandsShrub(1, 1));
         
         //par1Random.nextInt(2) == 0 ? new WorldGenHighlandsShrub(1, 1) : new WorldGenTallGrass(Block.tallGrass.blockID, 1)
     }
     
-    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-    {
-        biomedec.decorate(par1World, par2Random, biome, par3, par4);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.HLice, 0, 128);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 20, biomedec.ironGen, 0, 64);
+    @Override
+	public void decorate(World world, Random random, int x, int z) {
+		BiomeGenBaseHighlands biome = this;
+		this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
+		((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 20, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLice, 0, 128);
+		((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 20, this.theBiomeDecorator.ironGen, 0, 64);
     }
     
     @SideOnly(Side.CLIENT)
     public int getSkyColorByTemp(float par1)
     {
-    	if(HighlandsMain.skyColorFlag)return 0xC6E3FF;
+    	if(Highlands.skyColorFlag)return 0xC6E3FF;
     	else return super.getSkyColorByTemp(par1);
     }
 }

@@ -1,6 +1,6 @@
 package highlands.worldgen;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 
 import java.util.Random;
@@ -17,14 +17,14 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     /** Constructor - gets the generator for the correct highlands tree
      * @param lmd leaf meta data
      * @param wmd wood meta data
-     * @param wb wood block id
-     * @param lb leaf block id
+     * @param wb wood block
+     * @param lb leaf block
      * @param minH minimum height of tree trunk
      * @param maxH max possible height above minH the tree trunk could grow
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreeFir(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify, boolean thickTrunk)
+    public WorldGenTreeFir(int lmd, int wmd, Block wb, Block lb, int minH, int maxH, boolean notify, boolean thickTrunk)
     {
         super(lmd, wmd, wb, lb, notify);
         this.minHeight = minH;
@@ -33,18 +33,18 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreeFir(int minH, int maxH, boolean notify, boolean thickTrunk){
-    	this(0, 0, HighlandsBlocks.firWood, (BlockLeaves) HighlandsBlocks.firLeaves, minH, maxH, notify, thickTrunk);
-    	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Blocks.log;
+    	this(0, 0, HighlandsBlocks.firWood, HighlandsBlocks.firLeaves, minH, maxH, notify, thickTrunk);
+    	if(Highlands.vanillaBlocksFlag){
+    		this.wood = Blocks.log;
     		this.woodMeta = 1;
-    		this.leavesID = Blocks.leaves;
+    		this.leaves = Blocks.leaves;
     		this.leavesMeta = 1;
     	}
     }
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
     	boolean isWide = (random.nextInt(3) == 0);
@@ -65,7 +65,7 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     		genTree(world, random, locX, locY, locZ+1, treeHeight, isWide);
     		genTree(world, random, locX+1, locY, locZ+1, treeHeight, isWide);
     	}
-    	
+    	this.worldObj = null;
     	return true;
     }
     
@@ -75,7 +75,7 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
 	private boolean genTree(World world, Random random, int locX, int locY, int locZ, int treeHeight, boolean isWide){
     	//generates the trunk
     	for(int i = 0; i < treeHeight; i++){
-    		setBlockInWorld(locX, locY + i, locZ, this.woodID, this.woodMeta);
+    		setBlockInWorld(locX, locY + i, locZ, this.wood, this.woodMeta);
     	}
     	
     	//generates the leaves
@@ -114,9 +114,9 @@ public class WorldGenTreeFir extends WorldGenHighlandsTreeBase
     	h++;
     	generateLeafLayerCircleNoise(world, random, 1, locX, locZ, h);
     	h++;
-    	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+    	setBlockInWorld(locX, h, locZ, this.leaves, this.leavesMeta);
     	h++;
-    	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+    	setBlockInWorld(locX, h, locZ, this.leaves, this.leavesMeta);
     	return true;
     }
     

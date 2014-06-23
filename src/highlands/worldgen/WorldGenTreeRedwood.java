@@ -1,6 +1,6 @@
 package highlands.worldgen;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 
 import java.util.Random;
@@ -16,14 +16,14 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
     /** Constructor - gets the generator for the correct highlands tree
      * @param lmd leaf meta data
      * @param wmd wood meta data
-     * @param wb wood block id
-     * @param lb leaf block id
+     * @param wb wood block
+     * @param lb leaf block
      * @param minH minimum height of tree trunk
      * @param maxH max possible height above minH the tree trunk could grow
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreeRedwood(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify)
+    public WorldGenTreeRedwood(int lmd, int wmd, Block wb, Block lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
         
@@ -32,17 +32,17 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreeRedwood(int minH, int maxH, boolean notify){
-    	this(0, 0, HighlandsBlocks.redwoodWood, (BlockLeaves) HighlandsBlocks.redwoodLeaves, minH, maxH, notify);
-    	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Blocks.log;
-    		this.leavesID = Blocks.leaves;
+    	this(0, 0, HighlandsBlocks.redwoodWood, HighlandsBlocks.redwoodLeaves, minH, maxH, notify);
+    	if(Highlands.vanillaBlocksFlag){
+    		this.wood = Blocks.log;
+    		this.leaves = Blocks.leaves;
     		this.leavesMeta = 1;
     	}
     }
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
         
@@ -82,6 +82,7 @@ public class WorldGenTreeRedwood extends WorldGenHighlandsTreeBase
 		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
 		h++;
 		generateLeafLayerCircleNoise(world, random, 0, locX, locZ, h);
+		this.worldObj = null;
 		return true;
     }
 }

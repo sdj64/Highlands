@@ -1,9 +1,11 @@
 package highlands.block;
 
+import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 import highlands.worldgen.WorldGenAutumnTree;
 import highlands.worldgen.WorldGenHighlandsBigTree;
@@ -20,7 +22,7 @@ import highlands.worldgen.WorldGenTreePalm;
 import highlands.worldgen.WorldGenTreePoplar;
 import highlands.worldgen.WorldGenTreeRedwood;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -34,7 +36,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
+public class BlockHighlandsSapling extends BlockSapling implements IPlantable{
 
 	private int treeType;
 	
@@ -54,26 +56,30 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
 			"Ironwood",
 			"Mangrove",
 			"Ash",
-			"AutumnYellow",
 			"AutumnOrange",
-			"Hedge",
+			"AutumnYellow",
+			"Hedge",        // not used
+			"JapaneseMaple" // new
 		};
 	
 	private int[] growTimes = {
-			5, 3, 3, 10, 6, 5, 2, 1, 1, 1, 2, 15, 2, 8, 2, 2, 0
+			5, 3, 3, 10, 6, 5, 2, 1, 1, 1, 2, 15, 2, 8, 2, 2
 	};
+	
+	//private IIcon[] textures;
 	
 	
 	/** constructs a Highlands sapling
+	 * @param type 
 	 * 
-	 * @param par1 block id
+	 * @param par1 type id
 	 */
     public BlockHighlandsSapling(int type)
     {	
-        super(type);
+        super();
         float var3 = 0.4F;
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
-        this.setCreativeTab(CreativeTabs.tabDecorations);
+        this.setCreativeTab(Highlands.tabHighlands);
         treeType = type;
         
         //System.out.println("Highlands Saplings texture file: " + this.currentTexture);
@@ -84,7 +90,41 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     public void registerBlockIcons(IIconRegister par1IconRegister)
     {
     	this.blockIcon = par1IconRegister.registerIcon("Highlands:sapling" + treeNames[treeType]);
+    	
+    	/**
+    	textures = new IIcon[treeNames.length];
+
+		for (int i = 0; i < treeNames.length; ++i) {
+			textures[i] = par1IconRegister.registerIcon("Highlands:sapling" + treeNames[i]);
+		}
+		*/
     }
+    
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return this.blockIcon;
+		/**
+		if (meta < 0 || meta >= treeNames.length) {
+			meta = 0;
+		}
+
+		return textures[meta];
+		*/
+	}
+	
+	@Override
+	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) 
+	{
+		list.add(new ItemStack(block, 1, treeType));
+		/**
+		for (int i = 0; i < treeNames.length; ++i) 
+		{
+			list.add(new ItemStack(block, 1, i));
+		}
+		*/
+	}
     
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
@@ -203,7 +243,6 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     	if(treeType == 13)isTreeGrowSuccess = new WorldGenTreeAsh(16, 8, false).generate(par1World, r, i, j, k);
     	if(treeType == 14)isTreeGrowSuccess = new WorldGenAutumnTree(true, 4, Blocks.log, HighlandsBlocks.autumnOrangeLeaves).generate(par1World, r, i, j, k);
     	if(treeType == 15)isTreeGrowSuccess = new WorldGenAutumnTree(true, 4, Blocks.log, HighlandsBlocks.autumnYellowLeaves).generate(par1World, r, i, j, k);
-    	if(treeType == 16)isTreeGrowSuccess = new WorldGenShrubbery(true).generate(par1World, r, i, j, k);
     	
     	/*
     	if(growWideTree && !isTreeGrowSuccess){
@@ -218,7 +257,7 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     	*/
     	
     	else if(!isTreeGrowSuccess && replaceSapling){
-    		if(par1World.getBlock(i, j, k) == Blocks.air)par1World.setBlock(i, j, k, this, meta, 2);
+    		if(par1World.isAirBlock(i, j, k)) par1World.setBlock(i, j, k, this, meta, 2);
     	}
 
 	    return isTreeGrowSuccess;
@@ -273,10 +312,10 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
-    {
-        return 1;
-    }
+    //public int getRenderType()
+    //{
+    //    return 1;
+    //}
     
     public EnumPlantType getPlantType(World world, int x, int y, int z)
     {
@@ -289,9 +328,9 @@ public class BlockHighlandsSapling extends BlockFlower implements IPlantable{
         return world.getBlockMetadata(x, y, z);
     }
     
-    public int damageDropped(int par1)
+    public int damageDropped(int metadata)
     {
-        return 0;
+        return metadata;
     }
 
     //TODO- MFR is not 1.7.x yet

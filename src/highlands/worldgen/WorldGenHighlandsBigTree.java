@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class WorldGenHighlandsBigTree extends WorldGenerator
+public class WorldGenHighlandsBigTree extends WorldGenHighlandsTreeBase
 {
     /**
      * Contains three sets of two values that provide complimentary indices for a given 'major' index - 1 and 2 for 0, 0
@@ -20,7 +20,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
     Random rand = new Random();
 
     /** Reference to the World object. */
-    World worldObj;
+    //World worldObj;
     int[] basePos = new int[] {0, 0, 0};
     int heightLimit = 0;
     int height;
@@ -54,7 +54,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
 
     public WorldGenHighlandsBigTree(boolean par1, boolean placeLeaves, int wmd, int lmd, int trunkDiameter, int treeHeightLim)
     {
-        super(par1);
+    	super(lmd, wmd, Blocks.log, Blocks.leaves, false); // last 3 are dummy data for now
         hasLeaves = placeLeaves;
         leafMeta = lmd;
         woodMeta = wmd;
@@ -184,7 +184,8 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
                     var11[var9] = var10[var9] + var13;
                     Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
 
-                    if (var14 != Blocks.air && var14 != Blocks.leaves)
+                    //TODO: check for any type of leaves
+                    if (!this.worldObj.isAirBlock(var11[0], var11[1], var11[2]) && var14 != Blocks.leaves)
                     {
                         ++var13;
                     }
@@ -442,7 +443,7 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
                 Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-                if (var16 != Blocks.air && var16 != Blocks.leaves)
+                if ( !this.worldObj.isAirBlock(var13[0], var13[1], var13[2]) && var16 != Blocks.leaves)
                 {
                     break;
                 }
@@ -461,13 +462,10 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         int[] var1 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
         int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
         Block var3 = this.worldObj.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
-
-        if(!hasLeaves)System.out.println(var3);
-        
         
         if (var3 != Blocks.grass && var3 != Blocks.dirt)
         {
-            if(hasLeaves)return false;
+            //if(hasLeaves)return false;
         }
         if(!hasLeaves && var3 == Blocks.water){
         	if((var3 = this.worldObj.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]))
@@ -514,38 +512,49 @@ public class WorldGenHighlandsBigTree extends WorldGenerator
         this.leafDensity = par5;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World world, Random par2Random, int locX, int locY, int locZ)
     {
-        this.worldObj = par1World;
+        this.worldObj = world;
         long var6 = par2Random.nextLong();
         this.rand.setSeed(var6);
-        this.basePos[0] = par3;
-        this.basePos[1] = par4;
-        this.basePos[2] = par5;
+        this.basePos[0] = locX;
+        this.basePos[1] = locY;
+        this.basePos[2] = locZ;
 
         if (this.heightLimit == 0)
         {
             this.heightLimit = 5 + this.rand.nextInt(this.heightLimitLimit);
         }
 
+        if(!isLegalTreePosition(world, locX, locY, locZ)) {
+        	this.worldObj = null;
+        	return false;
+        }
+        //if (!isCubeClear(locX, locY+3, locZ, 3, this.heightLimit)){
+        //	this.worldObj = null;
+        //	return false;
+        //}
         if (!this.validTreeLocation())
         {
+        	this.worldObj = null;
             return false;
         }
-        else
-        {
+        //else
+        //{
         	try{
 	            this.generateLeafNodeList();
 	            this.generateLeaves();
 	            this.generateTrunk();
 	            this.generateLeafNodeBases();
+	            this.worldObj = null;
 	            return true;
         	}
         	catch(Exception e){
         		e.printStackTrace();
+        		this.worldObj = null;
         		return false;
         	}
-        }
+        //}
     }
     
 }

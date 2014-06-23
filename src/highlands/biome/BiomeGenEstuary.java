@@ -12,15 +12,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.worldgen.WorldGenHighlandsShrub;
 import highlands.worldgen.WorldGenTreeMangrove;
 
 public class BiomeGenEstuary extends BiomeGenBaseHighlands
 {
-	private BiomeDecoratorHighlands biomedec;
 	private static final Height biomeHeight = new Height(-0.28F, 0.1F);
 
 	public BiomeGenEstuary(int par1){
@@ -28,7 +28,8 @@ public class BiomeGenEstuary extends BiomeGenBaseHighlands
 			int trees = 10;
 		    int grass = 0;
 		    int flowers = 0;
-		    this.biomedec = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+		    this.theBiomeDecorator = new BiomeDecoratorHighlands(this, trees, grass, flowers);
+		    
 	        this.topBlock = Blocks.sand;
 	        this.fillerBlock = Blocks.dirt;
 	        this.setHeight(biomeHeight);
@@ -45,19 +46,21 @@ public class BiomeGenEstuary extends BiomeGenBaseHighlands
 	        return new WorldGenTallGrass(Blocks.tallgrass, 1);
 	    }
 	    
-	    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+	    @Override
+	    public WorldGenAbstractTree func_150567_a(Random par1Random)
 	    {
-	        return (WorldGenerator)new WorldGenTreeMangrove(4, 2, false);
+	        return (WorldGenAbstractTree)new WorldGenTreeMangrove(4, 2, false);
 	    }
 
-	    public void decorate(World par1World, Random par2Random, BiomeGenBaseHighlands biome, int par3, int par4)
-	    {
-	    	if(par2Random.nextBoolean())biomedec.treesPerChunk = 0;
-	    	else biomedec.treesPerChunk = 10;
+	    @Override
+		public void decorate(World world, Random random, int x, int z) {
+			BiomeGenBaseHighlands biome = this;
+	    	if(random.nextBoolean())this.theBiomeDecorator.treesPerChunk = 0;
+	    	else this.theBiomeDecorator.treesPerChunk = 10;
 	    	
-	        biomedec.decorate(par1World, par2Random, biome, par3, par4);
-	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 1, biomedec.diamondGen, 0, 16);
-	        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 15, biomedec.HLsand, 0, 64);
+	    	this.theBiomeDecorator.decorateChunk(world, random, biome, x, z);
+	    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 1, this.theBiomeDecorator.diamondGen, 0, 16);
+	    	((BiomeDecoratorHighlands)this.theBiomeDecorator).genOreHighlands(world, random, x, z, 15, ((BiomeDecoratorHighlands)this.theBiomeDecorator).HLsand, 0, 64);
 	    }
 	    
 }

@@ -2,16 +2,16 @@ package highlands.worldgen;
 
 import java.util.Random;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class WorldGenAutumnTree extends WorldGenerator
+public class WorldGenAutumnTree extends WorldGenAbstractTree
 {
     /** The minimum height of a generated tree. */
     private final int minTreeHeight;
@@ -19,10 +19,10 @@ public class WorldGenAutumnTree extends WorldGenerator
     /** True if this tree should grow Vines. */
     private final boolean vinesGrow;
 
-    /** The blockID of the wood to use in tree generation. */
+    /** The block of the wood to use in tree generation. */
     private Block blockWood;
 
-    /** The blockID of the leaves to use in tree generation. */
+    /** The block of the leaves to use in tree generation. */
     private Block blockLeaves;
 
     public WorldGenAutumnTree(boolean par1, int par2, Block log, Block autumnYellowLeaves)
@@ -33,7 +33,7 @@ public class WorldGenAutumnTree extends WorldGenerator
         this.blockLeaves = autumnYellowLeaves;
         this.vinesGrow = false;
         
-        if(HighlandsMain.vanillaBlocksFlag){
+        if(Highlands.vanillaBlocksFlag){
         	blockWood = Blocks.log;
         	blockLeaves = Blocks.leaves;
         }
@@ -81,7 +81,7 @@ public class WorldGenAutumnTree extends WorldGenerator
                         {
                             Block block = par1World.getBlock(l1, i1, j1);
 
-                            if (block != Blocks.air && 
+                            if (!par1World.isAirBlock(l1, i1, j1) && 
                             		!block.isLeaves(par1World, l1, i1, j1) &&
                             		block != Blocks.grass &&
                             				block != Blocks.dirt &&
@@ -148,7 +148,7 @@ public class WorldGenAutumnTree extends WorldGenerator
                         Block block = par1World.getBlock(par3, par4 + j1, par5);
 
                         //TODO- removed k1 = 0, right fix?
-                        if (block == null || block.isLeaves(par1World, par3, par4 + j1, par5))
+                        if (par1World.isAirBlock(par3, par4 + j1, par5) || block.isLeaves(par1World, par3, par4 + j1, par5))
                         {
                             this.setBlockAndNotifyAdequately(par1World, par3, par4 + j1, par5, this.blockWood, 0);
 
@@ -191,22 +191,22 @@ public class WorldGenAutumnTree extends WorldGenerator
                                     Block block = par1World.getBlock(j2, j1, k2);
                                     if (block != null && block.isLeaves(par1World, j2, j1, k2))
                                     {
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2 - 1, j1, k2) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 - 1, j1, k2))
                                         {
                                             this.growVines(par1World, j2 - 1, j1, k2, 8);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2 + 1, j1, k2) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 + 1, j1, k2))
                                         {
                                             this.growVines(par1World, j2 + 1, j1, k2, 2);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2, j1, k2 - 1) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 - 1))
                                         {
                                             this.growVines(par1World, j2, j1, k2 - 1, 1);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlock(j2, j1, k2 + 1) == Blocks.air)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 + 1))
                                         {
                                             this.growVines(par1World, j2, j1, k2 + 1, 4);
                                         }
@@ -242,7 +242,7 @@ public class WorldGenAutumnTree extends WorldGenerator
         {
             --par3;
 
-            if (par1World.getBlock(par2, par3, par4) != Blocks.air || i1 <= 0)
+            if (!par1World.isAirBlock(par2, par3, par4) || i1 <= 0)
             {
                 return;
             }

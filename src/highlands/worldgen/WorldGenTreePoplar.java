@@ -1,6 +1,6 @@
 package highlands.worldgen;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 
 import java.util.Random;
@@ -16,14 +16,14 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     /** Constructor - gets the generator for the correct highlands tree
      * @param lmd leaf meta data
      * @param wmd wood meta data
-     * @param wb wood block id
-     * @param lb leaf block id
+     * @param wb wood block
+     * @param lb leaf block
      * @param minH minimum height of tree trunk
      * @param maxH max possible height above minH the tree trunk could grow
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreePoplar(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify)
+    public WorldGenTreePoplar(int lmd, int wmd, Block wb, Block lb, int minH, int maxH, boolean notify)
     {
         super(lmd, wmd, wb, lb, notify);
         this.minHeight = minH;
@@ -31,18 +31,18 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreePoplar(int minH, int maxH, boolean notify){
-    	this(0, 0, HighlandsBlocks.poplarWood, (BlockLeaves) HighlandsBlocks.poplarLeaves, minH, maxH, notify);
-    	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Blocks.log;
+    	this(0, 0, HighlandsBlocks.poplarWood, HighlandsBlocks.poplarLeaves, minH, maxH, notify);
+    	if(Highlands.vanillaBlocksFlag){
+    		this.wood = Blocks.log;
     		this.woodMeta = 2;
-    		this.leavesID = Blocks.leaves;
+    		this.leaves = Blocks.leaves;
     		this.leavesMeta = 2;
     	}
     }
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
     	
@@ -53,7 +53,7 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
         //generates the trunk
     	int treeHeight = minHeight + random.nextInt(maxHeight);
     	for(int i = 0; i < treeHeight; i++){
-    		setBlockInWorld(locX, locY + i, locZ, this.woodID, this.woodMeta);
+    		setBlockInWorld(locX, locY + i, locZ, this.wood, this.woodMeta);
     	}
     	
     	//generates the leaves.
@@ -73,9 +73,10 @@ public class WorldGenTreePoplar extends WorldGenHighlandsTreeBase
     	h++;
     	generateLeafLayerCircleNoise(world, random, 1, locX, locZ, h);
     	h++;
-    	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+    	setBlockInWorld(locX, h, locZ, this.leaves, this.leavesMeta);
     	h++;
-    	setBlockInWorld(locX, h, locZ, this.leavesID, this.leavesMeta);
+    	setBlockInWorld(locX, h, locZ, this.leaves, this.leavesMeta);
+    	this.worldObj = null;
     	return true;
     }
     

@@ -1,37 +1,18 @@
+[
 {
-  
-"modinfoversion": 2,
-
-"modlist": 
-[{
-    
 "modid": "Highlands",
-    
 "name": "Highlands",
-
 "description": "Highlands is a mod that adds more biomes to Minecraft.  Over 40 new biomes, new trees, mountains, and biome-specific ore gen.",
-
-"version": "2.2.0pre1",
-    
+"version": "2.2.0pre4",
 "mcversion": "1.7.2",
-    
 "url": "http://www.minecraftforum.net/topic/1602064-147146-forge-highlands-new-biomes-trees-and-more/",
-    "updateUrl": "",
-"authors": [ "sdj64" ],
-
-"credits": "Sadris, zombiepig333, VeryBigBro, Mpenver, Vexatos",
-
-"logoFile": "/logo.png",
-
+"updateUrl": "",
+"authorList": [ "fabricator77" ],
+"credits": "sdj64, Sadris, zombiepig333, VeryBigBro, Mpenver, Vexatos",
+"logoFile": "logo.png",
 "screenshots": [],
-    "parent": "",
-    
-"requiredMods": [ "Forge" ],
-    
-"dependencies": [ "Forestry", "Buildcraft", "Thaumcraft", "MineFactory" ],
-    
-"dependants": [ ],
-    "useDependencyInformation": "false"
-  
-}]
+"parent": "",
+"requiredMods": [ "mod_MinecraftForge" ],
+"dependencies": [ "Forestry", "Buildcraft", "Thaumcraft", "MineFactory" ]
 }
+]

@@ -1,3 +1,10 @@
+<!-- Creative tabs -->
+itemGroup.Highlands=Highlands
+
+<!-- World Types -->
+generator.Highlands=Highlands
+generator.HighlandsLB=Highlands LB
+
 <!-- Blocks -->
 
 <!-- Saplings -->
@@ -17,6 +24,7 @@ tile.hl_mangroveSapling.name=Саженец мангрового дерева
 tile.hl_ashSapling.name=Саженец ясеня
 tile.hl_autumnYellowSapling.name=Жёлтый осенний саженец
 tile.hl_autummnOrangeSapling.name=Оранжевый осенний саженец
+tile.hl_japaneseMapleSapling.name=Саженец японского клёна
         
 <!-- Logs -->
 tile.hl_acaciaWood.name=Древесина акации
@@ -29,24 +37,25 @@ tile.hl_palmWood.name=Древесина пальмы
 tile.hl_ironwoodWood.name=Древесина железного дерева
 tile.hl_mangroveWood.name=Древесина мангрового дерева
 tile.hl_ashWood.name=Древесина ясеня
+tile.hl_japaneseMapleWood.name=Древесина японского клёна
 
 <!-- Wood -->
-tile.hl_woodPlanks0.name=Жёлтые доски
-tile.hl_woodPlanks1.name=Белые доски
-tile.hl_woodPlanks2.name=Красные доски
-tile.hl_woodPlanks3.name=Серые доски
+tile.hl_woodPlanks.Yellow.name=Жёлтые доски
+tile.hl_woodPlanks.White.name=Белые доски
+tile.hl_woodPlanks.Red.name=Красные доски
+tile.hl_woodPlanks.Grey.name=Серые доски
 tile.hl_woodStairs0.name=Жёлтые ступеньки
 tile.hl_woodStairs1.name=Белые ступеньки
 tile.hl_woodStairs2.name=Красные ступеньки
 tile.hl_woodStairs3.name=Серые ступеньки
-tile.hl_woodSlab0.name=Жёлтая плита
-tile.hl_woodSlab1.name=Белая плита
-tile.hl_woodSlab2.name=Красная плита
-tile.hl_woodSlab3.name=Серая плита
-tile.hl_woodSlabDouble0.name=Жёлтая двойная плита
-tile.hl_woodSlabDouble1.name=Белая двойная плита
-tile.hl_woodSlabDouble2.name=Красная двойная плита
-tile.hl_woodSlabDouble3.name=Серая двойная плита
+tile.hl_woodSlab.Yellow.name=Жёлтая плита
+tile.hl_woodSlab.White.name=Белая плита
+tile.hl_woodSlab.Red.name=Красная плита
+tile.hl_woodSlab.Grey.name=Серая плита
+tile.hl_woodSlabDouble0.name=Жёлтая плита
+tile.hl_woodSlabDouble1.name=Белая плита
+tile.hl_woodSlabDouble2.name=Красная плита
+tile.hl_woodSlabDouble3.name=Серая плита
         
 <!-- Leaves -->
 tile.hl_acaciaLeaves.name=Листва акации

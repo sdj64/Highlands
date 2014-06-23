@@ -8,14 +8,16 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
+public abstract class WorldGenHighlandsTreeBase extends WorldGenAbstractTree
 {
-	protected Block woodID;
-	protected BlockLeaves leavesID;
+	protected Block wood;
+	protected Block leaves;
     protected int woodMeta;
     protected int leavesMeta;
     protected int type;
@@ -25,7 +27,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     
     protected boolean notifyFlag;
     
-    protected World world;
+    protected World worldObj;
     protected Random random;
     
     //this array is the 8 directions of x and y, used for palm trees.
@@ -34,17 +36,18 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     /** Constructor - sets up tree variables
      * @param lmd leaf meta data
      * @param wmd wood meta data
-     * @param fence wood block id
-     * @param leaves leaf block id
+     * @param log wood block
+     * @param leaves leaf block
      * @param minH minimum height of tree trunk
      * @param maxH max possible height above minH the tree trunk could grow
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenHighlandsTreeBase(int lmd, int wmd, Block fence, BlockLeaves leaves, boolean notify)
+    public WorldGenHighlandsTreeBase(int lmd, int wmd, Block log, Block leaves, boolean notify)
     {
-        this.woodID = fence;
-        this.leavesID = leaves;
+    	super(true);
+        this.wood = log;
+        this.leaves = leaves;
         this.woodMeta = wmd;
         this.leavesMeta = lmd;
         this.notifyFlag = notify;
@@ -81,7 +84,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
 				double zfr = x- xo;
 				
 				if(xfr * xfr + zfr * zfr <= radius * radius){
-					setBlockInWorld(x, h, z, this.leavesID, this.leavesMeta);
+					setBlockInWorld(x, h, z, this.leaves, this.leavesMeta);
 				}
 			}
 		}
@@ -97,7 +100,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
 				
 				if(xfr * xfr + zfr * zfr <= radius * radius){
 					if(xfr * xfr + zfr * zfr <= (radius - 1) * (radius - 1) || random.nextInt(2) == 0){
-						setBlockInWorld(x, h, z, this.leavesID, this.leavesMeta);
+						setBlockInWorld(x, h, z, this.leaves, this.leavesMeta);
 					}
 				}
 			}
@@ -112,7 +115,7 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
 				double zfr = x- xo;
 				
 				if(xfr * xfr + zfr * zfr <= radius * radius){
-					setBlockInWorld(x, h, z, this.woodID, this.woodMeta);
+					setBlockInWorld(x, h, z, this.wood, this.woodMeta);
 				}
 			}
 		}
@@ -128,13 +131,13 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     	if(dir % 2 == 0){
     		//generates branch
     		for(int i = 1; i <= length; i++){
-	    		setBlockInWorld(locX + i*direction, locY+i, locZ, this.woodID, this.woodMeta+4);
+	    		setBlockInWorld(locX + i*direction, locY+i, locZ, this.wood, this.woodMeta+4);
     		}
     		return new int[]{locX+length*direction, locY+length, locZ};
     	}
     	else{
     		for(int i = 1; i <= length; i++){
-	    		setBlockInWorld(locX, locY+i, locZ + i*direction, this.woodID, this.woodMeta+8);
+	    		setBlockInWorld(locX, locY+i, locZ + i*direction, this.wood, this.woodMeta+8);
     		}
     		return new int[]{locX, locY+length, locZ+length*direction};
     	}
@@ -148,13 +151,13 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     	if(dir % 2 == 0){
     		//generates branch
     		for(int i = 1; i <= length; i++){
-    			setBlockInWorld(locX + i*direction, locY+i, locZ, this.woodID, this.woodMeta+4);
+    			setBlockInWorld(locX + i*direction, locY+i, locZ, this.wood, this.woodMeta+4);
     		}
     		return new int[]{locX+length*direction, locY-length, locZ};
     	}
     	else{
     		for(int i = 1; i <= length; i++){
-    			setBlockInWorld(locX, locY+i, locZ + i*direction, this.woodID, this.woodMeta+8);
+    			setBlockInWorld(locX, locY+i, locZ + i*direction, this.wood, this.woodMeta+8);
     		}
     		return new int[]{locX, locY-length, locZ+length*direction};
     	}
@@ -164,28 +167,28 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
 		for(int i = 0; i < length; i++){
 			int j = i - 3;
 			//east
-			setBlockInWorld(xo+i, h, zo, this.woodID, this.woodMeta+4);
+			setBlockInWorld(xo+i, h, zo, this.wood, this.woodMeta+4);
 			if(length > 3 && j > 0 && i < length - 1){
-				setBlockInWorld(xo+i, h, zo+j, this.woodID, this.woodMeta+8);
-				setBlockInWorld(xo+i, h, zo-j, this.woodID, this.woodMeta+8);
+				setBlockInWorld(xo+i, h, zo+j, this.wood, this.woodMeta+8);
+				setBlockInWorld(xo+i, h, zo-j, this.wood, this.woodMeta+8);
 			}
 			//north
-			setBlockInWorld(xo, h, zo+i, this.woodID, this.woodMeta+8);
+			setBlockInWorld(xo, h, zo+i, this.wood, this.woodMeta+8);
 			if(length > 3 && j > 0 && i < length - 1){
-				setBlockInWorld(xo+j, h, zo+i, this.woodID, this.woodMeta+4);
-				setBlockInWorld(xo-j, h, zo+i, this.woodID, this.woodMeta+4);
+				setBlockInWorld(xo+j, h, zo+i, this.wood, this.woodMeta+4);
+				setBlockInWorld(xo-j, h, zo+i, this.wood, this.woodMeta+4);
 			}
 			//west
-			setBlockInWorld(xo-i, h, zo, this.woodID, this.woodMeta+4);
+			setBlockInWorld(xo-i, h, zo, this.wood, this.woodMeta+4);
 			if(length > 3 && j > 0 && i < length - 1){
-				setBlockInWorld(xo-i, h, zo+j, this.woodID, this.woodMeta+8);
-				setBlockInWorld(xo-i, h, zo-j, this.woodID, this.woodMeta+8);
+				setBlockInWorld(xo-i, h, zo+j, this.wood, this.woodMeta+8);
+				setBlockInWorld(xo-i, h, zo-j, this.wood, this.woodMeta+8);
 			}
 			//south
-			setBlockInWorld(xo, h, zo-i, this.woodID, this.woodMeta+8);
+			setBlockInWorld(xo, h, zo-i, this.wood, this.woodMeta+8);
 			if(length > 3 && j > 0 && i < length - 1){
-				setBlockInWorld(xo+j, h, zo-i, this.woodID, this.woodMeta+4);
-				setBlockInWorld(xo-j, h, zo-i, this.woodID, this.woodMeta+4);
+				setBlockInWorld(xo+j, h, zo-i, this.wood, this.woodMeta+4);
+				setBlockInWorld(xo-j, h, zo-i, this.wood, this.woodMeta+4);
 			}
 			
 			//generate leaves for branches
@@ -216,17 +219,20 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     
     protected void setBlockInWorld(int x, int y, int z, Block block, int meta){
     	try{
-    		Block bl = world.getBlock(x, y, z);
+    		Block bl = worldObj.getBlock(x, y, z);
     		//TODO- right fix? might be crashy...
-			if(block == this.woodID && (world.isAirBlock(x,y,z) || bl.isReplaceable(world, x, y, z) ||
-					bl.isLeaves(world, x, y, z) || bl instanceof BlockHighlandsSapling)){
-				if(notifyFlag) world.setBlock(x, y, z, block, meta, 3);
-		    	else world.setBlock(x, y, z, block, meta, 2);
+			//if(block == this.wood && (world.isAirBlock(x,y,z) || bl.isReplaceable(world, x, y, z) ||
+			//		bl.isLeaves(world, x, y, z) || bl instanceof BlockHighlandsSapling)){
+            if (bl.isFoliage(worldObj, x, y, z) || worldObj.isAirBlock(x, y, z) || bl instanceof BlockLiquid ||
+            		bl instanceof BlockHighlandsSapling ||
+            		bl.getMaterial() == Material.plants || bl.getMaterial() == Material.vine) {
+				if(notifyFlag) worldObj.setBlock(x, y, z, block, meta, 3);
+		    	else worldObj.setBlock(x, y, z, block, meta, 2);
 			}
-			else if(block == this.leavesID && world.isAirBlock(x,y,z)){
-				if(notifyFlag) world.setBlock(x, y, z, block, meta, 3);
-		    	else world.setBlock(x, y, z, block, meta, 2);
-			}
+			//else if(block == this.leaves && world.isAirBlock(x,y,z)){
+			//	if(notifyFlag) world.setBlock(x, y, z, block, meta, 3);
+		    //	else world.setBlock(x, y, z, block, meta, 2);
+			//}
     	}
     	catch(RuntimeException e){
     		if(e.getMessage().equals("Already decorating!!")){
@@ -242,20 +248,17 @@ public abstract class WorldGenHighlandsTreeBase extends WorldGenerator
     	for(int i = x-radius; i <= x+radius; i++){
     		for(int j = z-radius; j <= z+radius; j++){
     			for(int k = y; k <= y+height; k++){
-    				//System.out.println(world.getBlockId(i, k, j));
-    				//System.out.println(Block.blocksList[world.getBlockId(i, k, j)].isLeaves(world, i, j, k));
-    				if(!(world.getBlock(i, k, j) == Blocks.air || world.getBlock(i, k, j).isLeaves(world, i, k, j)))return false;
+    				if(!(worldObj.isAirBlock(i, k, j) || worldObj.getBlock(i, k, j).isLeaves(worldObj, i, k, j)))return false;
     			}
     		}
     	}
-    	//System.out.println("end");
     	return true;
     }
     
     //finds top block for the given x,z position (excluding leaves)
     protected int findTopBlock(int x, int z){
     	int y = 256;
-        for (boolean var6 = false; (world.getBlock(x, y, z) == Blocks.air || world.getBlock(x, y, z).isLeaves(world, x, y, z)) && y > 0; --y);
+        for (boolean var6 = false; (worldObj.isAirBlock(x, y, z) || worldObj.getBlock(x, y, z).isLeaves(worldObj, x, y, z)) && y > 0; --y);
         return y;
     }
 }

@@ -1,6 +1,6 @@
 package highlands.worldgen;
 
-import highlands.HighlandsMain;
+import highlands.Highlands;
 import highlands.api.HighlandsBlocks;
 
 import java.util.Random;
@@ -16,14 +16,14 @@ public class WorldGenTreeAcacia extends WorldGenHighlandsTreeBase
     /** Constructor - gets the generator for the correct highlands tree
      * @param lmd leaf meta data
      * @param wmd wood meta data
-     * @param wb wood block id
-     * @param lb leaf block id
+     * @param wb wood block
+     * @param lb leaf block
      * @param minH minimum height of tree trunk
      * @param maxH max possible height above minH the tree trunk could grow
      * @param notify whether or not to notify blocks of the tree being grown.
      *  Generally false for world generation, true for saplings.
      */
-    public WorldGenTreeAcacia(int lmd, int wmd, Block wb, BlockLeaves lb, int minH, int maxH, boolean notify)
+    public WorldGenTreeAcacia(int lmd, int wmd, Block wb, Block lb, int minH, int maxH, boolean notify)
     {
     	super(lmd, wmd, wb, lb, notify);
         
@@ -32,16 +32,16 @@ public class WorldGenTreeAcacia extends WorldGenHighlandsTreeBase
     }
     
     public WorldGenTreeAcacia(int minH, int maxH, boolean notify){
-    	this(0, 0, HighlandsBlocks.acaciaWood, (BlockLeaves) HighlandsBlocks.acaciaLeaves, minH, maxH, notify);
-    	if(HighlandsMain.vanillaBlocksFlag){
-    		this.woodID = Blocks.log;
-    		this.leavesID = Blocks.leaves;
+    	this(0, 0, HighlandsBlocks.acaciaWood, HighlandsBlocks.acaciaLeaves, minH, maxH, notify);
+    	if(Highlands.vanillaBlocksFlag){
+    		this.wood = Blocks.log;
+    		this.leaves = Blocks.leaves;
     	}
     }
 
     public boolean generate(World world, Random random, int locX, int locY, int locZ)
     {
-    	this.world = world;
+    	this.worldObj = world;
     	this.random = random;
     	
 
@@ -53,7 +53,7 @@ public class WorldGenTreeAcacia extends WorldGenHighlandsTreeBase
     	//generates the trunk
     	int treeHeight = minHeight + random.nextInt(maxHeight);
     	for(int i = 0; i < treeHeight; i++){
-    		setBlockInWorld(locX, locY + i, locZ, this.woodID, this.woodMeta);
+    		setBlockInWorld(locX, locY + i, locZ, this.wood, this.woodMeta);
     	}
     	
     	int h = locY + treeHeight - 1;
@@ -67,6 +67,7 @@ public class WorldGenTreeAcacia extends WorldGenHighlandsTreeBase
 		int[] xyz = generateStraightBranch(world, random, 4, locX, h, locZ, random.nextInt(4));
 		generateLeafLayerCircle(world, random, 4.5, xyz[0], xyz[2], xyz[1]);
 		generateLeafLayerCircle(world, random, 3.5, xyz[0], xyz[2], xyz[1]+1);
+		this.worldObj = null;
 		return true;
     }
 }
