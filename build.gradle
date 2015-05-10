@@ -5,28 +5,32 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
     }
 }
 
 apply plugin: 'forge'
 
-version = "2.1.5"
-group= "highlands"
-archivesBaseName = "Highlands"
-
 minecraft {
-	version = "1.6.4-9.11.1.964"
-	assetDir = 'run/assets'
+    version = "1.7.2-10.12.0.1024"
+    assetDir = "eclipse/assets"
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDir 'resources'
-        }
+version = "2.2.0pre4"
+archivesBaseName = "Highlands"
+
+sourceSets.main{
+    java{
+        srcDirs 'src'//set the source folder as the /src subfolder
+    }
+    resources{
+        srcDirs 'resources'//set the resources folder as the /resources subfolder
     }
 }
 
@@ -34,7 +38,7 @@ processResources
 {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod/info'
+        include 'mcmod.info'
                 
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
