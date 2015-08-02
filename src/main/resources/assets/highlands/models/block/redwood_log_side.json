@@ -1,0 +1,7 @@
+{
+    "parent": "block/column_side",
+    "textures": {
+        "end": "highlands:blocks/log_redwood_top",
+        "side": "highlands:blocks/log_redwood"
+    }
+}

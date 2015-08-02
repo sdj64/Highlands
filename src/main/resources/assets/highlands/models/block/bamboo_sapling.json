@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "highlands:blocks/sapling_bamboo"
+    }
+}

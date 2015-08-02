@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "highlands:palm_log" },
+        "axis=z":   { "model": "highlands:palm_log_side" },
+        "axis=x":   { "model": "highlands:palm_log_side", "y": 90 },
+        "axis=none": { "model": "highlands:palm_bark" }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "highlands:blocks/log_palm_top",
+        "side": "highlands:blocks/log_palm"
+    }
+}

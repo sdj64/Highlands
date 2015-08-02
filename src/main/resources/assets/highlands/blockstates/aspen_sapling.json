@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "stage=0": { "model": "highlands:aspen_sapling" },
+        "stage=1": { "model": "highlands:aspen_sapling" },
+        "stage=2": { "model": "highlands:aspen_sapling" },
+        "stage=3": { "model": "highlands:aspen_sapling" },
+        "stage=4": { "model": "highlands:aspen_sapling" }
+    }
+}

@@ -1,79 +1,52 @@
 <!-- Blocks -->
 
 <!-- Saplings -->
-tile.hl_acaciaSapling.name=Acacia Sapling
-tile.hl_beechSapling.name=Beech Sapling
-tile.hl_canopySapling.name=Canopy Tree Sapling
-tile.hl_deadSapling.name=Dead Tree Sapling
-tile.hl_greatOakSapling.name=Great Oak Sapling
-tile.hl_firSapling.name=Fir Sapling
-tile.hl_poplarSapling.name=Poplar Sapling
-tile.hl_redwoodSapling.name=Redwood Sapling
-tile.hl_evgBushSapling.name=Evergreen Bush Sapling
-tile.hl_decBushSapling.name=Deciduous Bush Sapling
-tile.hl_palmSapling.name=Palm Sapling
-tile.hl_ironwoodSapling.name=Ironwood Sapling
-tile.hl_mangroveSapling.name=Mangrove Sapling
-tile.hl_ashSapling.name=Ash Sapling
-tile.hl_autumnYellowSapling.name=Yellow Autumn Sapling
-tile.hl_autummnOrangeSapling.name=Orange Autumn Sapling
+tile.highlands_eucalyptus_sapling.name=Eucalyptus Sapling
+tile.highlands_fir_sapling.name=Fir Sapling
+tile.highlands_poplar_sapling.name=Poplar Sapling
+tile.highlands_redwood_sapling.name=Redwood Sapling
+tile.highlands_evg_bush_sapling.name=Evergreen Bush Sapling
+tile.highlands_dec_bush_sapling.name=Deciduous Bush Sapling
+tile.highlands_palm_sapling.name=Palm Sapling
+tile.highlands_aspen_sapling.name=Aspen Sapling
+tile.highlands_bamboo_sapling.name=Bamboo Sapling
 	
 <!-- Logs -->
-tile.hl_acaciaWood.name=Acacia Wood Log
-tile.hl_beechWood.name=Beech Wood Log
-tile.hl_canopyWood.name=Canopy Wood Log
-tile.hl_firWood.name=Fir Wood Log
-tile.hl_poplarWood.name=Poplar Wood Log
-tile.hl_redwoodWood.name=Redwood Wood Log
-tile.hl_palmWood.name=Palm Wood Log
-tile.hl_ironwoodWood.name=Ironwood Wood Log
-tile.hl_mangroveWood.name=Mangrove Wood Log
-tile.hl_ashWood.name=Ash Wood Log
+tile.highlands_eucalyptus_log.name=Eucalyptus Log
+tile.highlands_fir_log.name=Fir Log
+tile.highlands_poplar_log.name=Poplar Log
+tile.highlands_redwood_log.name=Redwood Log
+tile.highlands_palm_log.name=Palm Log
+tile.highlands_aspen_log.name=Aspen Log
+tile.highlands_bamboo_log.name=Bamboo Stem
 
-<!-- Wood -->
-tile.hl_woodPlanks0.name=Yellow Wood Planks
-tile.hl_woodPlanks1.name=White Wood Planks
-tile.hl_woodPlanks2.name=Red Wood Planks
-tile.hl_woodPlanks3.name=Grey Wood Planks
-tile.hl_woodStairs0.name=Yellow Wood Stairs
-tile.hl_woodStairs1.name=White Wood Stairs
-tile.hl_woodStairs2.name=Red Wood Stairs
-tile.hl_woodStairs3.name=Grey Wood Stairs
-tile.hl_woodSlab0.name=Yellow Wood Slab
-tile.hl_woodSlab1.name=White Wood Slab
-tile.hl_woodSlab2.name=Red Wood Slab
-tile.hl_woodSlab3.name=Grey Wood Slab
-tile.hl_woodSlabDouble0.name=Yellow Wood Double Slab
-tile.hl_woodSlabDouble1.name=White Wood Double Slab
-tile.hl_woodSlabDouble2.name=Red Wood Double Slab
-tile.hl_woodSlabDouble3.name=Grey Wood Double Slab
+<!-- Planks -->
+tile.highlands_eucalyptus_planks.name=Eucalyptus Wood Planks
+tile.highlands_fir_planks.name=Fir Wood Planks
+tile.highlands_poplar_planks.name=Poplar Wood Planks
+tile.highlands_redwood_planks.name=Redwood Wood Planks
+tile.highlands_palm_planks.name=Palm Wood Planks
+tile.highlands_aspen_planks.name=Aspen Wood Planks
+tile.highlands_bamboo_planks.name=Bamboo Planks
 	
 <!-- Leaves -->
-tile.hl_acaciaLeaves.name=Acacia Leaves
-tile.hl_beechLeaves.name=Beech Leaves
-tile.hl_canopyLeaves.name=Canopy Tree Leaves
-tile.hl_firLeaves.name=Fir Leaves
-tile.hl_poplarLeaves.name=Poplar Leaves
-tile.hl_redwoodLeaves.name=Redwood Leaves
-tile.hl_palmLeaves.name=Palm Leaves
-tile.hl_ironwoodLeaves.name=Ironwood Leaves
-tile.hl_mangroveLeaves.name=Mangrove Leaves
-tile.hl_ashLeaves.name=Ash Leaves
-tile.hl_autumnYellowLeaves.name=Yellow Autumn Leaves
-tile.hl_autumnOrangeLeaves.name=Orange Autumn Leaves
-    
+tile.highlands_eucalyptus_leaves.name=Eucalyptus Leaves
+tile.highlands_fir_leaves.name=Fir Leaves
+tile.highlands_poplar_leaves.name=Poplar Leaves
+tile.highlands_redwood_leaves.name=Redwood Leaves
+tile.highlands_palm_leaves.name=Palm Leaves
+tile.highlands_aspen_leaves.name=Aspen Leaves
+tile.highlands_bamboo_leaves.name=Bamboo Leaves
+
 <!-- Plants -->
-tile.hl_blueFlower.name=Blue Flower
-tile.hl_leafyFern.name=Leafy Fern
-tile.hl_whiteFlower.name=White Flower
-tile.hl_cattail.name=Cattail
-tile.hl_lavender.name=Lavender
-tile.hl_raspberryBush.name=Raspberry Bush
-tile.hl_blueberryBush.name=Blueberry Bush
-tile.hl_thornbush.name=Thornbush
-tile.hl_cotton.name=Cotton Plant
-	
-<!-- Other Blocks -->
-	
-<!-- Items -->
-item.hl_berries.name=Berries
+tile.highlands_blue_flower.name=Waterflower
+tile.highlands_cattail.name=Cattail
+tile.highlands_cotton.name=Cotton Bush
+tile.highlands_raspberry_bush.name=Raspberry Bush
+tile.highlands_blueberry_bush.name=Blueberry Bush
+tile.highlands_thorn_bush.name=Thornbush
+tile.highlands_lavender.name=Lavender
+tile.highlands_green_leaf.name=Tropical Leaf Fern
+
+
+

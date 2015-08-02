@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "highlands:fir_log" },
+        "axis=z":   { "model": "highlands:fir_log_side" },
+        "axis=x":   { "model": "highlands:fir_log_side", "y": 90 },
+        "axis=none": { "model": "highlands:fir_bark" }
+    }
+}

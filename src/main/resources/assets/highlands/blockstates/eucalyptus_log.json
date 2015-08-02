@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "highlands:eucalyptus_log" },
+        "axis=z":   { "model": "highlands:eucalyptus_log_side" },
+        "axis=x":   { "model": "highlands:eucalyptus_log_side", "y": 90 },
+        "axis=none": { "model": "highlands:eucalyptus_bark" }
+    }
+}

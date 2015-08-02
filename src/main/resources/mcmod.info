@@ -1,0 +1,16 @@
+[
+{
+  "modid": "highlands",
+  "name": "Highlands",
+  "description": "Adds more biomes and trees to Minecraft.",
+  "version": "3.02a",
+  "mcversion": "1.8",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["sdj64"],
+  "credits": "TimelessModding team",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
