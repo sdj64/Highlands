@@ -64,7 +64,7 @@ public class ChunkProviderHighlands implements IChunkProvider{
 	private void ModifySettingsForHighlands(){
 		ChunkProviderSettings.Factory fact = new ChunkProviderSettings.Factory();
 		// custom realistic
-		/*
+		
 		fact.coordinateScale = 450;
 		fact.heightScale = 1;
 		fact.lowerLimitScale = 1450;
@@ -86,9 +86,10 @@ public class ChunkProviderHighlands implements IChunkProvider{
 		fact.useLavaLakes = false;
 		fact.useWaterLakes = false;
 		fact.riverSize = 6;
-		*/
+	
 		
 		
+		/*
 		// Mountains o Many modification
 		fact.coordinateScale = 300;
 		fact.heightScale = 200F;
@@ -111,9 +112,10 @@ public class ChunkProviderHighlands implements IChunkProvider{
 		fact.useLavaLakes = false;
 		fact.useWaterLakes = true;
 		fact.riverSize = 6;
-		
+		*/
 		
 		this.settings = fact.func_177864_b();
+		
 	}
 	
 	

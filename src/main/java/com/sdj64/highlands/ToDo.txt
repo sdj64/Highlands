@@ -1,0 +1,17 @@
+
+
+Highlands To-Do:
+
+Next release:
+-foothills (mountain biome copies, min and max half height) -Done
+-dune grass -Done
+-Dunes biome -Done
+-fix leaf decay again -Done
+-furnace recipes -Done
+
+Long term:
+-wooden stuff
+-wooden stuff recipes
+-new icy biome? Fir Forest?
+-Sand Mountains biome
+-village tree

@@ -1,5 +1,6 @@
 package com.sdj64.highlands.biome;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class HighlandsBiomes {
     public static BiomeGenBase dryForest;
     public static BiomeGenBase adirondack;
     public static BiomeGenBase bambooForest;
+    public static BiomeGenBase dunes;
     
     //Sub Biomes
     public static BiomeGenBase lake;
@@ -58,6 +60,9 @@ public class HighlandsBiomes {
     //ArrayList of sub-biomes, controls which Highlands biomes generate as sub-biomes (currently used for Lake and Bald Hill)
     public static ArrayList<BiomeGenBase> subBiomes = new ArrayList<BiomeGenBase>();
     
+    //ArrayList of biomes that have foothills, not that are foothills.
+    public static ArrayList<BiomeGenBase> foothillsBiomes = new ArrayList<BiomeGenBase>();
+    
     
 private static String biomePrefix = "";
 	
@@ -72,11 +77,13 @@ private static String biomePrefix = "";
 		{
 			alps = new BiomeGenAlps(Config.alpsID.getInt()).setBiomeName(biomePrefix+"Alps");
 			biomesForHighlands.add(alps);
+			createFoothills(alps);
 		}
 		if(Config.badlandsGenerate.getBoolean(true))
 		{
 			badlands = new BiomeGenBadlands(Config.badlandsID.getInt()).setBiomeName(biomePrefix+"Badlands");
 			biomesForHighlands.add(badlands);
+			createFoothills(badlands);
 		}
 		if(Config.poplarHillsGenerate.getBoolean(true))
 		{
@@ -117,6 +124,7 @@ private static String biomePrefix = "";
 		{
 			greyMtns = new BiomeGenGreyMountains(Config.greyMtnsID.getInt()).setBiomeName(biomePrefix+"Grey Mountains");
 			biomesForHighlands.add(greyMtns);
+			createFoothills(greyMtns);
 		}
 		if(Config.tropHillsGenerate.getBoolean(true))
 		{
@@ -132,11 +140,17 @@ private static String biomePrefix = "";
 		{
 			adirondack = new BiomeGenAdirondacks(Config.adirondackID.getInt()).setBiomeName(biomePrefix+"Adirondacks");
 			biomesForHighlands.add(adirondack);
+			createFoothills(adirondack);
 		}
 		if(Config.bambooForestGenerate.getBoolean(true))
 		{
 			bambooForest = new BiomeGenBambooForest(Config.bambooForestID.getInt()).setBiomeName(biomePrefix+"Bamboo Forest");
 			biomesForHighlands.add(bambooForest);
+		}
+		if(Config.dunesGenerate.getBoolean(true))
+		{
+			dunes = new BiomeGenDunes(Config.dunesID.getInt()).setBiomeName(biomePrefix+"Dunes");
+			biomesForHighlands.add(dunes);
 		}
 		
 		
@@ -214,7 +228,9 @@ private static String biomePrefix = "";
 			}
 			
 		}
-		BiomeManager.addVillageBiome(BiomeGenBase.icePlains, true);
+		if(HighlandsSettings.vanillaBiomeChanges)
+			BiomeManager.addVillageBiome(BiomeGenBase.icePlains, true);
+		
 		BiomeManager.addBiome(BiomeType.DESERT, new BiomeEntry(BiomeGenBase.desert, 10));
 		BiomeManager.addBiome(BiomeType.DESERT, new BiomeEntry(BiomeGenBase.savanna, 10));
 		BiomeManager.addBiome(BiomeType.DESERT, new BiomeEntry(BiomeGenBase.mesaPlateau, 5));
@@ -229,14 +245,46 @@ private static String biomePrefix = "";
 	
 	public static void modifyVanillaBiomes(){
 		
-		BiomeGenBase.extremeHills.minHeight = 1.0F;
-		BiomeGenBase.swampland.minHeight = -0.1F;
-		BiomeGenBase.savannaPlateau.minHeight = 1.0F;
-		BiomeGenBase.stoneBeach.maxHeight = 0.5F;
-		BiomeGenBase.river.minHeight = -0.8F;
-		BiomeGenBase.river.maxHeight = 0.0F;
+		if(HighlandsSettings.vanillaBiomeChanges){
+		
+			BiomeGenBase.extremeHills.minHeight = 1.0F;
+			BiomeGenBase.swampland.minHeight = -0.1F;
+			BiomeGenBase.savannaPlateau.minHeight = 1.0F;
+			BiomeGenBase.stoneBeach.maxHeight = 0.5F;
+			BiomeGenBase.river.minHeight = -0.8F;
+			BiomeGenBase.river.maxHeight = 0.0F;
+		}
 	}
     
+	/**
+	 * Creates a foothills biome, which has half the height of its parent mountain biome.
+	 * @param b1 the mountain biome to create foothills for
+	 * @return
+	 */
+	public static BiomeGenBase createFoothills(BiomeGenBase b1){
+		Class<? extends BiomeGenBase> biomeClass = b1.getBiomeClass();
+		if(b1.biomeID > 127){
+			System.out.println("Error generating foothills biome- parent ID " + b1.biomeID + " is over 127.");
+			return null;
+		}
+		else if(BiomeGenBase.getBiome(b1.biomeID + 128) != null){
+			System.out.println("Error generating foothills biome- foothills ID " + (b1.biomeID+128) + " is taken.");
+			return null;
+		}
+		BiomeGenBase fh = null;
+		try{
+			Constructor<?> biomeCons = biomeClass.getConstructor(int.class);
+			fh = (BiomeGenBase) biomeCons.newInstance(b1.biomeID + 128);
+			fh.maxHeight = b1.maxHeight /2;
+			fh.minHeight = b1.minHeight /2;
+			fh.setBiomeName(b1.biomeName + " foothills");
+			foothillsBiomes.add(b1);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return fh;
+	}
 }
 
 

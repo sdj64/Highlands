@@ -39,8 +39,8 @@ public class BiomeGenGreyMountains extends BiomeGenBaseHighlands
         
         this.fillerBlock = Blocks.stone.getDefaultState();
         
-        this.minHeight = 2.5F;
-        this.maxHeight = 1.2F;
+        this.minHeight = 1.8F;
+        this.maxHeight = 1.0F;
         this.temperature = 0.6F;
         this.rainfall = 0.1F;
         

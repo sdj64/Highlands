@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.sdj64.highlands.HighlandsSettings;
 import com.sdj64.highlands.generator.WorldGenPlants;
 
 import net.minecraft.block.state.IBlockState;
@@ -44,6 +45,7 @@ public abstract class BiomeGenBaseHighlands extends BiomeGenBase
 	 */
     protected void genStandardOre(int blobsPerChunk, WorldGenerator oreGenerator, int minHeight, int maxHeight, World world, Random rng, BlockPos pos)
     {
+    	if(!HighlandsSettings.useOreGens)return;
         int l;
 
         if (maxHeight < minHeight)

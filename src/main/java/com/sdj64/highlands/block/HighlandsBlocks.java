@@ -18,7 +18,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class HighlandsBlocks {
 
 	public static final int NUM_TREE_TYPES = 7;
-	public static final int NUM_PLANTS = 8;
+	public static final int NUM_PLANTS = 9;
 	
 	public static final CreativeTabs tabHighlands = new CreativeTabs("Highlands")
     {
@@ -64,6 +64,7 @@ public class HighlandsBlocks {
 		EnumTypePlant.THORNBUSH.setMetaLookup();
 		EnumTypePlant.LAVENDER.setMetaLookup();
 		EnumTypePlant.GREENLEAF.setMetaLookup();
+		EnumTypePlant.DUNEGRASS.setMetaLookup();
 		
 		//initialize arrays
 		planks = new Block[NUM_TREE_TYPES];
@@ -200,7 +201,8 @@ public class HighlandsBlocks {
         BLUEBERRYBUSH(4, "blueberry_bush"),
         THORNBUSH(5, "thorn_bush"),
         LAVENDER(6, "lavender"),
-        GREENLEAF(7, "green_leaf");
+        GREENLEAF(7, "green_leaf"),
+		DUNEGRASS(8, "dune_grass");
         private static final EnumTypePlant[] META_LOOKUP = new EnumTypePlant[values().length];
         private final int meta;
         private final String name;

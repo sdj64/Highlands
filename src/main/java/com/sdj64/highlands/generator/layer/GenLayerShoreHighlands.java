@@ -1,5 +1,8 @@
 package com.sdj64.highlands.generator.layer;
 
+import com.sdj64.highlands.biome.BiomeGenBaseHighlands;
+import com.sdj64.highlands.biome.HighlandsBiomes;
+
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenJungle;
 import net.minecraft.world.biome.BiomeGenMesa;
@@ -60,7 +63,7 @@ public class GenLayerShoreHighlands extends GenLayer
                     j2 = aint[j1 + 1 - 1 + (i1 + 1) * (areaWidth + 2)];
                     k2 = aint[j1 + 1 + (i1 + 1 + 1) * (areaWidth + 2)];
 
-                    if (this.func_151631_c(l1) && this.func_151631_c(i2) && this.func_151631_c(j2) && this.func_151631_c(k2))
+                    if (this.isJungleOrOcean(l1) && this.isJungleOrOcean(i2) && this.isJungleOrOcean(j2) && this.isJungleOrOcean(k2))
                     {
                         if (!isBiomeOceanic(l1) && !isBiomeOceanic(i2) && !isBiomeOceanic(j2) && !isBiomeOceanic(k2))
                         {
@@ -74,6 +77,29 @@ public class GenLayerShoreHighlands extends GenLayer
                     else
                     {
                         aint1[j1 + i1 * areaWidth] = BiomeGenBase.jungleEdge.biomeID;
+                    }
+                }
+                else if (biomegenbase != null && HighlandsBiomes.foothillsBiomes.contains(biomegenbase))
+                {
+                    l1 = aint[j1 + 1 + (i1 + 1 - 1) * (areaWidth + 2)];
+                    i2 = aint[j1 + 1 + 1 + (i1 + 1) * (areaWidth + 2)];
+                    j2 = aint[j1 + 1 - 1 + (i1 + 1) * (areaWidth + 2)];
+                    k2 = aint[j1 + 1 + (i1 + 1 + 1) * (areaWidth + 2)];
+
+                    if (this.isEdgeNotApplied(l1, k1) && this.isEdgeNotApplied(i2, k1) && this.isEdgeNotApplied(j2, k1) && this.isEdgeNotApplied(k2, k1))
+                    {
+                        if (!isBiomeOceanic(l1) && !isBiomeOceanic(i2) && !isBiomeOceanic(j2) && !isBiomeOceanic(k2))
+                        {
+                            aint1[j1 + i1 * areaWidth] = k1;
+                        }
+                        else
+                        {
+                            aint1[j1 + i1 * areaWidth] = BiomeGenBase.beach.biomeID;
+                        }
+                    }
+                    else
+                    {
+                        aint1[j1 + i1 * areaWidth] = biomegenbase.biomeID + 128;
                     }
                 }
                 else if (BiomeGenBase.getBiomeGenArray()[k1].minHeight + BiomeGenBase.getBiomeGenArray()[k1].maxHeight < 1.3)
@@ -93,7 +119,7 @@ public class GenLayerShoreHighlands extends GenLayer
 
                             if (!isBiomeOceanic(l1) && !isBiomeOceanic(i2) && !isBiomeOceanic(j2) && !isBiomeOceanic(k2))
                             {
-                                aint1[j1 + i1 * areaWidth] = k1;
+                            	aint1[j1 + i1 * areaWidth] = k1;
                             }
                             else
                             {
@@ -102,7 +128,7 @@ public class GenLayerShoreHighlands extends GenLayer
                         }
                         else
                         {
-                            aint1[j1 + i1 * areaWidth] = k1;
+                        	aint1[j1 + i1 * areaWidth] = k1;
                         }
                     }
                     else
@@ -114,7 +140,7 @@ public class GenLayerShoreHighlands extends GenLayer
 
                         if (!isBiomeOceanic(l1) && !isBiomeOceanic(i2) && !isBiomeOceanic(j2) && !isBiomeOceanic(k2))
                         {
-                            if (this.func_151633_d(l1) && this.func_151633_d(i2) && this.func_151633_d(j2) && this.func_151633_d(k2))
+                            if (this.isMesa(l1) && this.isMesa(i2) && this.isMesa(j2) && this.isMesa(k2))
                             {
                                 aint1[j1 + i1 * areaWidth] = k1;
                             }
@@ -163,12 +189,17 @@ public class GenLayerShoreHighlands extends GenLayer
         }
     }
 
-    private boolean func_151631_c(int p_151631_1_)
+    private boolean isJungleOrOcean(int id1)
     {
-        return BiomeGenBase.getBiome(p_151631_1_) != null && BiomeGenBase.getBiome(p_151631_1_).getBiomeClass() == BiomeGenJungle.class ? true : p_151631_1_ == BiomeGenBase.jungleEdge.biomeID || p_151631_1_ == BiomeGenBase.jungle.biomeID || p_151631_1_ == BiomeGenBase.jungleHills.biomeID || p_151631_1_ == BiomeGenBase.forest.biomeID || p_151631_1_ == BiomeGenBase.taiga.biomeID || isBiomeOceanic(p_151631_1_);
+        return BiomeGenBase.getBiome(id1) != null && BiomeGenBase.getBiome(id1).getBiomeClass() == BiomeGenJungle.class ? true : id1 == BiomeGenBase.jungleEdge.biomeID || id1 == BiomeGenBase.jungle.biomeID || id1 == BiomeGenBase.jungleHills.biomeID || id1 == BiomeGenBase.forest.biomeID || id1 == BiomeGenBase.taiga.biomeID || isBiomeOceanic(id1);
+    }
+    
+    private boolean isEdgeNotApplied(int id1, int target)
+    {
+        return id1 == target;
     }
 
-    private boolean func_151633_d(int p_151633_1_)
+    private boolean isMesa(int p_151633_1_)
     {
         return BiomeGenBase.getBiome(p_151633_1_) instanceof BiomeGenMesa;
     }

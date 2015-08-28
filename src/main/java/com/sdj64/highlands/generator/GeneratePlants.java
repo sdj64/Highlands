@@ -11,6 +11,7 @@ import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenMegaPineTree;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+import com.sdj64.highlands.HighlandsSettings;
 import com.sdj64.highlands.biome.BiomeGenBaseHighlands;
 import com.sdj64.highlands.biome.HighlandsBiomes;
 
@@ -37,14 +38,15 @@ public class GeneratePlants implements IWorldGenerator
 				}
 			}
 			
-			if(biome.equals(BiomeGenBase.swampland) && random.nextInt(32) == 1){
-				HighlandsGenerators.cattail.generate(world, random, pos2);
-			}
-			if(biome.equals(BiomeGenBase.mesaPlateau_F) && random.nextInt(45) == 1){
-				HighlandsGenerators.mcOTulip.generate(world, random, pos2);
-			}
+			if (HighlandsSettings.vanillaBiomeChanges){
+				if(biome.equals(BiomeGenBase.swampland) && random.nextInt(32) == 1){
+					HighlandsGenerators.cattail.generate(world, random, pos2);
+				}
+				if(biome.equals(BiomeGenBase.mesaPlateau_F) && random.nextInt(45) == 1){
+					HighlandsGenerators.mcOTulip.generate(world, random, pos2);
+				}
 			
-			
+			}
 		}
 	}
 

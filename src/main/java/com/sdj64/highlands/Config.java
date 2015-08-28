@@ -32,6 +32,7 @@ public class Config
     public static Property dryForestID;
     public static Property adirondackID;
     public static Property bambooForestID;
+    public static Property dunesID;
     
     //Biome Generate Properties
 	public static Property highlandsbGenerate;
@@ -51,13 +52,15 @@ public class Config
 	public static Property dryForestGenerate;
 	public static Property adirondackGenerate;
     public static Property bambooForestGenerate;
+    public static Property dunesGenerate;
 	
 	//Settings Properties
 	public static Property biomePrefix;
 	public static Property biomeSize;
 	public static Property LBbiomeSize;
 	//public static Property genDefault;
-	//public static Property genOre;
+	public static Property genOre;
+	public static Property vanillaBiomeChanges;
 	
 	
 	
@@ -105,6 +108,8 @@ public class Config
 		adirondackGenerate = config.get(CATEGORY_BIOME_GENERATE, "Adirondacks Generate", true);
 		bambooForestID = config.get(CATEGORY_BIOME_ID, "Bamboo Forest ID", 66);
 		bambooForestGenerate = config.get(CATEGORY_BIOME_GENERATE, "Bamboo Forest Generate", true);
+		dunesID = config.get(CATEGORY_BIOME_ID, "Dunes ID", 67);
+		dunesGenerate = config.get(CATEGORY_BIOME_GENERATE, "Dunes Generate", true);
 	}
 
 	
@@ -118,7 +123,9 @@ public class Config
 		LBbiomeSize.comment = "Biome size in Highlands LB(Large Biome) worlds - 6 is default (same as Large Biomes worldtype)";
 		//genDefault = config.get(config.CATEGORY_GENERAL, "Highands biomes in Default worlds", false);
 		//genDefault.comment = "Should Highlands biomes generate in the Default and Large Biomes worldtype (for compatibilty with other biome and worldgen mods)";
-		//genOre = config.get(config.CATEGORY_GENERAL, "Generate Biome-specific Ores", true);
-		//genOre.comment = "Set to false to disable extra ores of different types in different biomes.";
+		genOre = config.get(config.CATEGORY_GENERAL, "Generate Biome-specific Ores", true);
+		genOre.comment = "Set to false to disable extra ores of different types in different biomes.";
+		vanillaBiomeChanges = config.get(config.CATEGORY_GENERAL, "Add modifications to vanilla biomes", true);
+		vanillaBiomeChanges.comment = "Set to false to disable Highlands trees and small plants in vanilla biomes.";
 	}
 }

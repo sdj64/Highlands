@@ -52,6 +52,8 @@ public class HighlandsGenerators {
 	 * lavender: purple bush
 	 * cotton: bushes with white tufts
 	 * thornbush: bushes with brown thorns that hurt when you walk through
+	 * duneGrass: yellow and green grass
+	 * empty: for when you want nothing to generate...
 	 * mcOrchid: Minecraft's blue orchid
 	 * mcAllium: Minecraft's purple allium
 	 * mcBluet: Minecraft's Azure Bluet (white colored, not blue)
@@ -68,6 +70,9 @@ public class HighlandsGenerators {
 	public static final WorldGenPlants thornbush = new WorldGenPlants(HighlandsBlocks.plants[5].getDefaultState(), 14);
 	public static final WorldGenPlants lavender = new WorldGenPlants(HighlandsBlocks.plants[6].getDefaultState(), 8);
 	public static final WorldGenPlants greenLeaf = new WorldGenPlants(HighlandsBlocks.plants[7].getDefaultState(), 18);
+	public static final WorldGenPlants duneGrass = new WorldGenPlants(HighlandsBlocks.plants[8].getDefaultState(), 32);
+	public static final WorldGenPlants empty = new WorldGenPlants(Blocks.air.getDefaultState(), 0);
+	
 	
 	public static final WorldGenPlants mcOrchid = new WorldGenPlants(Blocks.red_flower.getStateFromMeta(1), 8);
 	public static final WorldGenPlants mcAllium = new WorldGenPlants(Blocks.red_flower.getStateFromMeta(2), 8);

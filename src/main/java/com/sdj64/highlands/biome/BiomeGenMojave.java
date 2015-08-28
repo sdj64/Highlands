@@ -45,6 +45,7 @@ public class BiomeGenMojave extends BiomeGenBaseHighlands
         
         plants.add(HighlandsGenerators.thornbush);
         plants.add(HighlandsGenerators.mcBluet);
+        plants.add(HighlandsGenerators.duneGrass);
     }
 
     

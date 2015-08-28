@@ -21,7 +21,7 @@ public class BiomeGenPoplarHills extends BiomeGenBaseHighlands
     {
         super(par1);
         
-        theBiomeDecorator.treesPerChunk = 3;
+        theBiomeDecorator.treesPerChunk = 6;
         theBiomeDecorator.grassPerChunk = 10;
         theBiomeDecorator.flowersPerChunk = 4;
         
