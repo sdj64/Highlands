@@ -128,7 +128,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
                     if (state.getBlock().isAir(this.world, blockpos1) || state.getBlock().isLeaves(this.world, blockpos1))
                     {
 //                        this.func_175905_a(this.world, blockpos1, leafBlock, leafMeta);
-                        this.setBlockAndNotifyAdequately(this.world, blockpos1, leafBlock.getStateById(leafMeta));
+                        this.setBlockAndNotifyAdequately(this.world, blockpos1, leafBlock.getStateFromMeta(leafMeta));
                     }
                 }
             }
