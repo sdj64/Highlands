@@ -49,5 +49,8 @@ tile.highlands_lavender.name=Lavender
 tile.highlands_green_leaf.name=Tropical Leaf Fern
 tile.highlands_dune_grass.name=Dune Grass
 
+<!-- Other -->
+itemGroup.highlands=Highlands
+
 
 
