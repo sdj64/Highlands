@@ -52,7 +52,7 @@ public class BiomeGenTropicalIslands extends BiomeGenBaseHighlands
         
         int i = random.nextInt(16) + 8;
         int j = random.nextInt(16) + 8;
-        int height = world.getHorizon(pos.add(i, 0, j)).getY() * 2; // could == 0, which crashes nextInt
+        int height = world.getHeight(pos.add(i, 0, j)).getY() * 2; // could == 0, which crashes nextInt
         if (height < 1) height = 1;
         int k = random.nextInt(height);
         (new WorldGenMelon()).generate(world, random, pos.add(i, k, j));

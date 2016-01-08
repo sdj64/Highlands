@@ -73,7 +73,7 @@ public class BiomeGenGreyMountains extends BiomeGenBaseHighlands
         {
             k = random.nextInt(16) + 8;
             l = random.nextInt(16) + 8;
-            BlockPos blockpos1 = world.getHorizon(pos.add(k, 0, l));
+            BlockPos blockpos1 = world.getHeight(pos.add(k, 0, l));
             blockBlob.generate(world, random, blockpos1);
         }
         
@@ -82,7 +82,7 @@ public class BiomeGenGreyMountains extends BiomeGenBaseHighlands
 	        	int x = random.nextInt(16) + 8;
 	            int z = random.nextInt(16) + 8;
 	            
-	            BlockPos treepos = world.getHorizon(pos.add(x, 0, z));
+	            BlockPos treepos = world.getHeight(pos.add(x, 0, z));
 	            
 	            if(random.nextInt(3) == 0){
 	            	HighlandsGenerators.deadTreeGen.generate(world, random, treepos);

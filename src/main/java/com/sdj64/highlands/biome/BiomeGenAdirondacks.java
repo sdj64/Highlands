@@ -59,7 +59,7 @@ public class BiomeGenAdirondacks extends BiomeGenBaseHighlands
 	        	int x = random.nextInt(16) + 8;
 	            int z = random.nextInt(16) + 8;
 	            
-	            BlockPos treepos = world.getHorizon(pos.add(x, 0, z));
+	            BlockPos treepos = world.getHeight(pos.add(x, 0, z));
 	            
 	            //generate birch or fir tree
 	            if(random.nextInt(3) == 0){
@@ -77,7 +77,7 @@ public class BiomeGenAdirondacks extends BiomeGenBaseHighlands
 	        	int x = random.nextInt(16) + 8;
 	            int z = random.nextInt(16) + 8;
 	            
-	            BlockPos treepos = world.getHorizon(pos.add(x, 0, z));
+	            BlockPos treepos = world.getHeight(pos.add(x, 0, z));
 	            
 	            //generate birch or fir tree
 	            if(random.nextInt(3) == 0){
