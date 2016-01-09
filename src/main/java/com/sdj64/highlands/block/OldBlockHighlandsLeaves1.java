@@ -26,7 +26,6 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", OldBlockHighlandsPlanks.EnumType.class, new Predicate()
     {
-        private static final String __OBFID = "CL_00002085";
         public boolean apply(OldBlockHighlandsPlanks.EnumType type)
         {
             return type.getMetadata() < 4;
