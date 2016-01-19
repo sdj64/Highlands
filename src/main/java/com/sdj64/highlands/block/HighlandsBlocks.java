@@ -20,7 +20,7 @@ public class HighlandsBlocks {
 	public static final int NUM_TREE_TYPES = 7;
 	public static final int NUM_PLANTS = 9;
 	
-	public static final CreativeTabs tabHighlands = new CreativeTabs("Highlands")
+	public static final CreativeTabs tabHighlands = new CreativeTabs("highlands")
     {
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem()

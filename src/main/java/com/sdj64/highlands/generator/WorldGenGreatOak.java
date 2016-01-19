@@ -127,7 +127,8 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
 
                     if (state.getBlock().isAir(this.world, blockpos1) || state.getBlock().isLeaves(this.world, blockpos1))
                     {
-                        this.func_175905_a(this.world, blockpos1, leafBlock, leafMeta);
+//                        this.func_175905_a(this.world, blockpos1, leafBlock, leafMeta);
+                        this.setBlockAndNotifyAdequately(this.world, blockpos1, leafBlock.getStateFromMeta(leafMeta));
                     }
                 }
             }
@@ -187,7 +188,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
         {
             BlockPos blockpos3 = p_175937_1_.add((double)(0.5F + (float)j * f), (double)(0.5F + (float)j * f1), (double)(0.5F + (float)j * f2));
             BlockLog.EnumAxis enumaxis = this.func_175938_b(p_175937_1_, blockpos3);
-            this.func_175903_a(this.world, blockpos3, woodBlock.getStateFromMeta(woodMeta).withProperty(BlockLog.LOG_AXIS, enumaxis));
+            this.setBlockAndNotifyAdequately(this.world, blockpos3, woodBlock.getStateFromMeta(woodMeta).withProperty(BlockLog.LOG_AXIS, enumaxis));
         }
     }
 

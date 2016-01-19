@@ -54,7 +54,7 @@ public abstract class GenLayerHighlands
 
         if (p_180781_2_ == WorldType.CUSTOMIZED && p_180781_3_.length() > 0)
         {
-            chunkprovidersettings = ChunkProviderSettings.Factory.func_177865_a(p_180781_3_).func_177864_b();
+            chunkprovidersettings = ChunkProviderSettings.Factory.jsonToFactory(p_180781_3_).func_177864_b();
             j = chunkprovidersettings.biomeSize;
             k = chunkprovidersettings.riverSize;
         }

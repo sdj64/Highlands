@@ -26,7 +26,6 @@ public class WorldGenMinable2 extends WorldGenerator
     /** The number of blocks to generate. */
     private final int numberOfBlocks;
     private final Predicate field_175919_c;
-    private static final String __OBFID = "CL_00000426";
     
     private boolean genInStone;
     private IBlockState BSGin;
