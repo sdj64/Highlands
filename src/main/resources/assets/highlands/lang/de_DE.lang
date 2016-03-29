@@ -1,0 +1,53 @@
+<!-- Blocks -->
+
+<!--setzlings -->
+tile.highlands_eucalyptus_sapling.name=Eukalyptussetzling
+tile.highlands_fir_sapling.name=Tannensetzling
+tile.highlands_poplar_sapling.name=Pappelsetzling
+tile.highlands_redwood_sapling.name=Redwoodsetzling
+tile.highlands_evg_bush_sapling.name=Immergrüner Buschsetzling
+tile.highlands_dec_bush_sapling.name=Laubbuschsetzling
+tile.highlands_palm_sapling.name=Palmsetzling
+tile.highlands_aspen_sapling.name=Espensetzling
+tile.highlands_bamboo_sapling.name=Bambussetzling
+	
+<!--holzs -->
+tile.highlands_eucalyptus_log.name=Eukalyptusholz
+tile.highlands_fir_log.name=Tannenholz
+tile.highlands_poplar_log.name=Pappelholz
+tile.highlands_redwood_log.name=Redwoodholz
+tile.highlands_palm_log.name=Palmholz
+tile.highlands_aspen_log.name=Espenholz
+tile.highlands_bamboo_log.name=Bambusstamm
+
+<!-- Planks -->
+tile.highlands_eucalyptus_planks.name=Eukalyptusbretter
+tile.highlands_fir_planks.name=Tannenbretter
+tile.highlands_poplar_planks.name=Pappelbretter
+tile.highlands_redwood_planks.name=Redwoodbretter
+tile.highlands_palm_planks.name=Palmbretter
+tile.highlands_aspen_planks.name=Espenbretter
+tile.highlands_bamboo_planks.name=Bambusbretter
+	
+<!--laub -->
+tile.highlands_eucalyptus_leaves.name=Eukalyptuslaub
+tile.highlands_fir_leaves.name=Tannenlaub
+tile.highlands_poplar_leaves.name=Pappellaub
+tile.highlands_redwood_leaves.name=Redwoodlaub
+tile.highlands_palm_leaves.name=Palmlaub
+tile.highlands_aspen_leaves.name=Espenlaub
+tile.highlands_bamboo_leaves.name=Bambuslaub
+
+<!-- Plants -->
+tile.highlands_blue_flower.name=Wasserblume
+tile.highlands_cattail.name=Rohrkolben
+tile.highlands_cotton.name=Baumwollbusch
+tile.highlands_raspberry_bush.name=Himbeerbusch
+tile.highlands_blueberry_bush.name=Blaubeerbusch
+tile.highlands_thorn_bush.name=Dornbusch
+tile.highlands_lavender.name=Lavendel
+tile.highlands_green_leaf.name=Tropischer Blattfarn
+tile.highlands_dune_grass.name=Dünengraß
+
+<!-- Other -->
+itemGroup.highlands=Highlands
